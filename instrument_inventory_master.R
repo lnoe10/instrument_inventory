@@ -1,9 +1,9 @@
-#### An attempt to get all surveys accessed automatically ####
+#### ALL SURVEY INSTRUMENT INVENTORY ####
 library(httr)
 library(jsonlite)
 library(tidyverse)
 
-#### MICS ####
+#### MICS - UNICEF ####
 # https://mics.unicef.org/surveys
 # Also 
 # API https://mics.unicef.org/api/survey
@@ -56,7 +56,7 @@ mics <- mics_raw %>%
   distinct(iso3c, year, .keep_all = TRUE) %>%
   select(country = country_clean, iso3c, year, status, instrument_name, instrument_type, source, country_original = country)
 
-# DHS
+#### DHS - USAID ####
 # https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 # Completed and ongoing DHS. Was short of one, Guatemala in 2022
 # API https://api.dhsprogram.com/rest/dhs/surveys?surveyStatus=all&f=html
@@ -73,7 +73,7 @@ dhs <- fromJSON(content(GET("https://api.dhsprogram.com/rest/dhs/surveys?surveyS
   select(country = country_clean, iso3c, year, status, instrument_name = survey_type, instrument_type, source, country_original = country)
 
 
-# LSMS
+#### LSMS - World Bank ####
 # https://microdata.worldbank.org/index.php/catalog/lsms
 # https://microdata.worldbank.org/index.php/api/catalog/search?ps=10000
 #^ filter for LSMS from there.
@@ -107,7 +107,7 @@ lsms <- lsms_raw %>%
 
 # With IHSN
 
-# ILO LFS
+#### LFS - ILO ####
 # https://ilostat.ilo.org/data/national-sources-catalogue/
 # https://www.ilo.org/ilostat-files/Documents/sources_en.csv
 lfs <- read_csv("https://www.ilo.org/ilostat-files/Documents/sources_en.csv") %>%
@@ -138,7 +138,7 @@ lfs <- read_csv("https://www.ilo.org/ilostat-files/Documents/sources_en.csv") %>
 # Then if there's a trend in every year, then check NSO site
 # Kieran's spreadsheet, follow up
 
-# AG Surveys and Censuses
+#### AG Surveys and Censuses - FAO ####
 # fam: https://microdata.fao.org/index.php/catalog
 # https://microdata.fao.org/index.php/catalog/export/csv?ps=5000&sort_by=popularity&sort_order=desc&collection[]=agriculture-census-surveys&view=s&from=1985&to=2021
 # World Census of Agriculture http://www.fao.org/world-census-agriculture/wcarounds/wca2020/countries2020/en/
@@ -161,15 +161,15 @@ agri_survey <- fromJSON(content(GET("https://microdata.fao.org/index.php/api/cat
 # List of LSMS-AG
 # Make sure they capture people, not production
 
-# Supplemental
+#### Supplemental survey - IHSN ####
 # IHSN https://catalog.ihsn.org/catalog
 # https://catalog.ihsn.org/catalog/export/csv?ps=10000&collection[]=central
 ihsn <- fromJSON(content(GET("https://catalog.ihsn.org/index.php/api/catalog/search?ps=10000&from=2000&to=2021"), "text"), flatten = TRUE)$result$rows
 
-# Time use
+#### Time use - UNSD ####
 # https://unstats.un.org/unsd/gender/timeuse
 
-# Census
+#### Census - UNSD ####
 # See scraping census dates file
 # Census dates scrape.R
 census <- df %>%
@@ -185,15 +185,13 @@ census <- df %>%
          source = "https://unstats.un.org/unsd/demographic-social/census/censusdates/") %>%
   select(country, iso3c, year, status = planned, instrument_name, instrument_type, source)
   
-# CRVS
+#### CRVS - UNICEF via World Bank ####
 # https://data.worldbank.org/indicator/SP.REG.BRTH.ZS
 # https://data.worldbank.org/indicator/SP.REG.BRTH.MA.ZS
 # https://data.worldbank.org/indicator/SP.REG.BRTH.FE.ZS
 # https://data.worldbank.org/indicator/SP.REG.BRTH.UR.ZS
 # https://data.worldbank.org/indicator/SP.REG.BRTH.RU.ZS
 
-# HMIS
-# ODIN
+#### HMIS - ODIN ####
 
-# EMIS
-# ODIN
+#### EMIS - ODIN ####
