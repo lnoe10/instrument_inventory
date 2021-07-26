@@ -164,7 +164,18 @@ agri_survey <- fromJSON(content(GET("https://microdata.fao.org/index.php/api/cat
 #### Supplemental survey - IHSN ####
 # IHSN https://catalog.ihsn.org/catalog
 # https://catalog.ihsn.org/catalog/export/csv?ps=10000&collection[]=central
-ihsn <- fromJSON(content(GET("https://catalog.ihsn.org/index.php/api/catalog/search?ps=10000&from=2000&to=2021"), "text"), flatten = TRUE)$result$rows
+ihsn <- fromJSON(content(GET("https://catalog.ihsn.org/index.php/api/catalog/search?ps=10000&from=2000&to=2021"), "text"), flatten = TRUE)$result$rows %>%
+  as_tibble() %>%
+  mutate(iso3c = countrycode::countrycode(nation, "country.name", "iso3c"),
+         iso3c = case_when(
+           nation == "Kosovo" ~ "XKX",
+           nation == "Sénégal" ~ "SEN",
+           TRUE ~ iso3c
+         ),
+         status = "Completed", source = "https://catalog.ihsn.org/catalog") %>%
+  # Keep only 2010 onwards, keep only countries with country codes, drop all censuses
+  filter(year_end >= 2010, !is.na(iso3c), !str_detect(title, "(C|c)ensus")) %>%
+  select(country = nation, iso3c, year = year_end, instrument_name = title, instrument_type = repositoryid, status, source)
 
 #### Time use - UNSD ####
 # https://unstats.un.org/unsd/gender/timeuse
