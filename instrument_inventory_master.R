@@ -213,7 +213,24 @@ census <- df %>%
          instrument_type = "Census",
          source = "https://unstats.un.org/unsd/demographic-social/census/censusdates/") %>%
   select(country, iso3c, year, status = planned, instrument_name, instrument_type, source)
-  
+
+#### COMBINE SURVEY INSTRUMENTS ####
+all_surveys <- dhs %>%
+  bind_rows(mics) %>%
+  bind_rows(lsms) %>%
+  bind_rows(lfs) %>%
+  bind_rows(agri_survey) %>%
+  bind_rows(tus) %>%
+  bind_rows(census) %>%
+  bind_rows(ihsn)
+
+# Mock timeline test
+all_surveys %>% 
+  filter(iso3c == "GHA", year>=2010) %>% 
+  ggplot(aes(x = year)) + 
+  geom_dotplot()
+
+#### Administrative Instruments - TO BE DEVELOPED, BUT NOT FOR TIMELINE FEATURE ####
 #### CRVS - UNICEF via World Bank ####
 # https://data.worldbank.org/indicator/SP.REG.BRTH.ZS
 # https://data.worldbank.org/indicator/SP.REG.BRTH.MA.ZS
