@@ -230,6 +230,21 @@ all_surveys %>%
   ggplot(aes(x = year)) + 
   geom_dotplot()
 
+# Adding instrument labels to points
+all_surveys %>% 
+  arrange(iso3c, year) %>% 
+  group_by(iso3c, year) %>% 
+  # Create y coordinate for instrument
+  mutate(n = row_number(year)) %>% 
+  ungroup() %>%
+  # Filter for country
+  filter(iso3c == "BGD", year>=2010) %>% 
+  ggplot(aes(x = year, y = n, label = instrument_name)) + 
+  geom_point() + 
+  ggrepel::geom_text_repel() +
+  scale_x_continuous(breaks = c(2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023)) 
+  
+
 #### Administrative Instruments - TO BE DEVELOPED, BUT NOT FOR TIMELINE FEATURE ####
 #### CRVS - UNICEF via World Bank ####
 # https://data.worldbank.org/indicator/SP.REG.BRTH.ZS
