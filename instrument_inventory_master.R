@@ -164,6 +164,7 @@ agri_survey <- fromJSON(content(GET("https://microdata.fao.org/index.php/api/cat
 #### Supplemental survey - IHSN ####
 # IHSN https://catalog.ihsn.org/catalog
 # https://catalog.ihsn.org/catalog/export/csv?ps=10000&collection[]=central
+# Import all surveys
 ihsn <- fromJSON(content(GET("https://catalog.ihsn.org/index.php/api/catalog/search?ps=10000&from=2000&to=2021"), "text"), flatten = TRUE)$result$rows %>%
   as_tibble() %>%
   mutate(iso3c = countrycode::countrycode(nation, "country.name", "iso3c"),
@@ -172,10 +173,48 @@ ihsn <- fromJSON(content(GET("https://catalog.ihsn.org/index.php/api/catalog/sea
            nation == "Sénégal" ~ "SEN",
            TRUE ~ iso3c
          ),
-         status = "Completed", source = "https://catalog.ihsn.org/catalog") %>%
-  # Keep only 2010 onwards, keep only countries with country codes, drop all censuses
-  filter(year_end >= 2010, !is.na(iso3c), !str_detect(title, "(C|c)ensus")) %>%
-  select(country = nation, iso3c, year = year_end, instrument_name = title, instrument_type = repositoryid, status, source)
+         status = "Completed", source = "https://catalog.ihsn.org/catalog")
+  # select(country = nation, iso3c, year = year_end, instrument_name = title, instrument_type = repositoryid, status, source)
+
+### To acquire more metadata with which to filter data, we loop individual survey API calls for their metadata
+
+# Initialize empty dataset
+all_study_metadata <- tibble()
+
+# Set up progress bar
+n_iter <- length(ihsn$id)
+pb <- txtProgressBar(min = 1,      # Minimum value of the progress bar
+                     max = n_iter, # Maximum value of the progress bar
+                     style = 3,    # Progress bar style (also available style = 1 and style = 2)
+                     width = 50,   # Progress bar width. Defaults to getOption("width")
+                     char = "=")   # Character used to create the bar
+
+# Loop
+for (i in 1:length(ihsn$id)){
+  # Create a tibble consisting of the id no of the study in IHSN and the field value for "study type"
+  # To acount for where info on metadata is elsewhere other than nested API call,
+  # we first determine whether API call is valid and then proceed.
+  # As of 2 August 2021, this worked for 6727 out of 7277. Other calls
+  # need to be made for the remaining 550
+  study <- tibble(id = ihsn$id[i])
+  study <- study %>%
+    mutate(study_type = ifelse(
+      is_empty(fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", ihsn$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name), NA_character_,
+      fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", ihsn$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name
+    ))
+  # Append to dataset
+  all_study_metadata <- all_study_metadata %>%
+    bind_rows(study)
+  # Insert brief pause in code to not look like a robot to the API
+  Sys.sleep(sample(seq(0,0.3,by=0.001),1))
+  # Increment progress bar
+  setTxtProgressBar(pb, i)
+}
+
+close(pb) # Close the connection
+
+ihsn_desc <- ihsn %>%
+  left_join(all_study_metadata)
 
 #### Time use - UNSD ####
 # https://unstats.un.org/unsd/gender/timeuse and manual ODW check of NSO websites
