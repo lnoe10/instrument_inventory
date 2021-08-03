@@ -213,8 +213,53 @@ for (i in 1:length(ihsn$id)){
 
 close(pb) # Close the connection
 
-ihsn_desc <- ihsn %>%
-  left_join(all_study_metadata)
+# Missing 550 entries for study type because metadata does not have this field
+# 'Data kind' is closest equivalent for many of them. Repeat calls and acquire these
+
+# Filter to where we are missing study_type. Also, id study 8478 shows up in listing but has no information. Probably a duplicate.
+# its title is the same as another entry https://catalog.ihsn.org/catalog/8512
+# Also create url entry as variable so it's easier to read in API call
+all_study_missing <- all_study_metadata %>%
+  filter(is.na(study_type), id != 8478) %>%
+  mutate(url_list = str_c("https://catalog.ihsn.org/index.php/api/catalog/", id, "?id_format=id"))
+
+# Initialize empty dataset
+all_missing_metadata <- tibble()
+
+# Set up progress bar
+n_iter <- length(all_study_missing$id)
+pb <- txtProgressBar(min = 1,      # Minimum value of the progress bar
+                     max = n_iter, # Maximum value of the progress bar
+                     style = 3,    # Progress bar style (also available style = 1 and style = 2)
+                     width = 50,   # Progress bar width. Defaults to getOption("width")
+                     char = "=")   # Character used to create the bar
+
+for (i in 1:length(all_study_missing$id)){
+  study <- tibble(id = all_study_missing$id[i])
+  study <- study %>%
+    mutate(study_type = ifelse(
+      is_empty(fromJSON(content(GET(all_study_missing$url_list[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$data_kind), NA_character_,
+      fromJSON(content(GET(all_study_missing$url_list[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$data_kind
+      ))
+  # Append to dataset
+  all_missing_metadata <- all_missing_metadata %>%
+    bind_rows(study)
+  # Insert brief pause in code to not look like a robot to the API
+  Sys.sleep(sample(seq(0,0.3,by=0.001),1))
+  # Increment progress bar
+  setTxtProgressBar(pb, i)
+}
+
+close(pb) # Close the connection
+
+# Merge with other df of metadata tags
+study_description <- all_study_metadata %>%
+  filter(!is.na(study_type)) %>%
+  mutate(meta_data_field = "Study Type") %>%
+  bind_rows(all_missing_metadata %>% mutate(meta_data_field = "Data Kind"))
+
+# To Do: merge back with main IHSN and filter appropriately. Discuss with Tawheeda
+# ABout 64  remaining with no relevant field. Will have to filter on other metadata.
 
 #### Time use - UNSD ####
 # https://unstats.un.org/unsd/gender/timeuse and manual ODW check of NSO websites
