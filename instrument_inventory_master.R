@@ -11,7 +11,22 @@ library(tidyverse)
 # Download raw file, convert to tibble, and restrict to relevant variables
 mics_raw <- fromJSON(content(GET("https://mics.unicef.org/api/survey"), "text"), flatten = TRUE) %>%
   as_tibble() %>%
-  select(country, year, status, notes = round) 
+  select(country_in_filter, country, year, status, notes = round) 
+
+# There are sub-national surveys that we need to separate from
+# national surveys, which is what we count as producing data that can be used
+# for national monitoring of gender data.
+# The variable country_in_filter describes the country name in case the variable
+# country only describes a sub-set of the country
+# To get the national surveys we want, we filter as follows:
+# Where country_in_filter == country
+# Exceptions:
+#   Nepal (Six Cycles) was a national survey
+#   Kosovo is mislabelled for 1996 and 2000 in country_in_filter. 
+#     It describes FR Yugoslavia, which was Serbia and Montenegro.
+#     These two will be added manually.
+#   Sudan (including current South Sudan) was an additional note but this
+#     was pre=independence so it's just Sudan
 
 # Create clean dataframe
 mics <- mics_raw %>%
@@ -24,21 +39,24 @@ mics <- mics_raw %>%
               mutate(country = case_when(
                 id == 1 ~ "Serbia",
                 TRUE ~ "Montenegro"
-              )) %>%
+              ),
+              country_in_filter = country) %>%
               select(-id)) %>%
-  mutate(iso3c = countrycode::countrycode(country, "country.name", "iso3c"),
+  # Correct country variable names where country_in_filter clash but it's actually
+  # a national survey
+  mutate(country = case_when(
+    str_detect(country, "Six Cycles") ~ "Nepal",
+    str_detect(country, "including current South Sudan") ~ "Sudan",
+    TRUE ~ country
+  )) %>%
+  # Filter where agreement between country_in_filter and country that
+  # this was a national survey, which is what we want.
+  filter(country_in_filter == country) %>%
+  # Additional cleaning, creating necessary identifiers
+  mutate(
+    iso3c = countrycode::countrycode(country, "country.name", "iso3c"),
          iso3c = case_when(
-           # Papua is a province of Indonesia != Papua New Guinea country
-           str_detect(country, "Papua Selected Districts") ~ "IDN",
            str_detect(country, "Kosovo") ~ "XKX",
-           country == "Lebanon (Palestinians)" ~ "LBN",
-           # This version of MICS was done in the South of Sudan in the regions
-           # That now define the present-day country, however, at the time, it was not an independent country
-           country == "Sudan (South)" ~ "SDN",
-           str_detect(country, "Syrian Arab Republic") ~ "SYR",
-           # This version of MICS was done in Sudan, which at the time had part of
-           # South Sudan as part of the geographic coverage.
-           str_detect(country, "including current South Sudan") ~ "SDN",
            TRUE ~ iso3c
          ),
          # Create clean country column
@@ -51,9 +69,7 @@ mics <- mics_raw %>%
          )),
          source = "https://mics.unicef.org/surveys", instrument_name = "MICS",
          instrument_type = "Household health survey") %>%
-  # Keep 1 instance of all the cases where multiple surveys were conducted per year
-  # in a country. Mostly sub-regions vs overall, or several sub-regions, which we're crediting to the whole country
-  distinct(iso3c, year, .keep_all = TRUE) %>%
+  # Choosing final list of instruments
   select(country = country_clean, iso3c, year, status, instrument_name, instrument_type, source, country_original = country)
 
 #### DHS - USAID ####
