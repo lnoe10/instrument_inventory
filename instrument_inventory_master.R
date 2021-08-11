@@ -98,9 +98,46 @@ dhs <- fromJSON(content(GET("https://api.dhsprogram.com/rest/dhs/surveys?surveyS
 # https://microdata.worldbank.org/index.php/api/catalog/search?ps=10000
 #^ filter for LSMS from there.
 lsms_raw <- fromJSON(content(GET("https://microdata.worldbank.org/index.php/api/catalog/search?ps=10000"), "text"))$result$rows %>%
-  as_tibble() %>%
-  filter(repositoryid == "lsms")
+  as_tibble()
+  
+### To acquire more metadata with which to filter data, we loop individual survey API calls for their metadata
+  
+# Initialize empty dataset
+all_wb_metadata <- tibble()
 
+# Set up progress bar
+n_iter <- length(lsms_raw$id)
+pb <- txtProgressBar(min = 1,      # Minimum value of the progress bar
+                     max = n_iter, # Maximum value of the progress bar
+                     style = 3,    # Progress bar style (also available style = 1 and style = 2)
+                     width = 50,   # Progress bar width. Defaults to getOption("width")
+                     char = "=")   # Character used to create the bar
+
+# Loop
+for (i in 1:length(lsms_raw$id)){
+  # Create a tibble consisting of the id no of the study in IHSN and the field value for "study type"
+  # To acount for where info on metadata is elsewhere other than nested API call,
+  # we first determine whether API call is valid and then proceed.
+  # As of 11 August 2021, this worked for 2927 out of 3466. Other calls
+  # need to be made for the remaining 539.
+  study <- tibble(id = lsms_raw$id[i])
+  study <- study %>%
+    mutate(study_type = ifelse(
+      is_empty(fromJSON(content(GET(str_c("https://microdata.worldbank.org/index.php/api/catalog/", lsms_raw$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name), NA_character_,
+      fromJSON(content(GET(str_c("https://microdata.worldbank.org/index.php/api/catalog/", lsms_raw$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name
+    ))
+  # Append to dataset
+  all_wb_metadata <- all_wb_metadata %>%
+    bind_rows(study)
+  # Insert brief pause in code to not look like a robot to the API
+  Sys.sleep(sample(seq(0,0.3,by=0.001),1))
+  # Increment progress bar
+  setTxtProgressBar(pb, i)
+}
+
+close(pb) # Close the connection
+
+#### TO BE FIXED
 lsms <- lsms_raw %>%
   filter(nation != "Serbia and Montenegro") %>%
   bind_rows(
