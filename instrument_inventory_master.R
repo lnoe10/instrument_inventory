@@ -98,10 +98,11 @@ dhs <- fromJSON(content(GET("https://api.dhsprogram.com/rest/dhs/surveys?surveyS
 # https://microdata.worldbank.org/index.php/api/catalog/search?ps=10000
 #^ filter for LSMS from there.
 lsms_raw <- fromJSON(content(GET("https://microdata.worldbank.org/index.php/api/catalog/search?ps=10000"), "text"))$result$rows %>%
-  as_tibble()
-  
-### To acquire more metadata with which to filter data, we loop individual survey API calls for their metadata
-  
+  as_tibble() %>%
+  mutate(api_call = str_c("https://microdata.worldbank.org/index.php/api/catalog/", id, "?id_format=id"))
+
+# First acquire more information on surveytypes from metadata  
+
 # Initialize empty dataset
 all_wb_metadata <- tibble()
 
@@ -115,51 +116,18 @@ pb <- txtProgressBar(min = 1,      # Minimum value of the progress bar
 
 # Loop
 for (i in 1:length(lsms_raw$id)){
-  # Create a tibble consisting of the id no of the study in IHSN and the field value for "study type"
-  # To acount for where info on metadata is elsewhere other than nested API call,
-  # we first determine whether API call is valid and then proceed.
-  # As of 11 August 2021, this worked for 2927 out of 3466. Other calls
-  # need to be made for the remaining 539.
-  study <- tibble(id = lsms_raw$id[i])
-  study <- study %>%
-    mutate(study_type = ifelse(
-      is_empty(fromJSON(content(GET(str_c("https://microdata.worldbank.org/index.php/api/catalog/", lsms_raw$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name), NA_character_,
-      fromJSON(content(GET(str_c("https://microdata.worldbank.org/index.php/api/catalog/", lsms_raw$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name
-    ))
-  # Append to dataset
-  all_wb_metadata <- all_wb_metadata %>%
-    bind_rows(study)
-  # Insert brief pause in code to not look like a robot to the API
-  Sys.sleep(sample(seq(0,0.3,by=0.001),1))
-  # Increment progress bar
-  setTxtProgressBar(pb, i)
-}
-
-close(pb) # Close the connection
-
-# Sub_sample
-lsms_raw <- fromJSON(content(GET("https://microdata.worldbank.org/index.php/api/catalog/search?ps=10000"), "text"))$result$rows %>%
-  as_tibble() %>%
-  mutate(api_call = str_c("https://microdata.worldbank.org/index.php/api/catalog/", id, "?id_format=id"))
-
-all_wb_metadata <- tibble()
-
-# Set up progress bar
-n_iter <- length(lsms_raw$id)
-pb <- txtProgressBar(min = 1,      # Minimum value of the progress bar
-                     max = n_iter, # Maximum value of the progress bar
-                     style = 3,    # Progress bar style (also available style = 1 and style = 2)
-                     width = 50,   # Progress bar width. Defaults to getOption("width")
-                     char = "=")   # Character used to create the bar
-
-for (i in 1:length(lsms_raw$id)){
+  # Set up tibble with basic info
   study <- tibble(id = lsms_raw$id[i], study_type = NA_character_)
+  # Determine length of list generated from API call to filter out
+  # Where we hit error otherwise of subscript being out of bounds
   study <- study %>%
     mutate(length = case_when(
       !is_empty(fromJSON(content(GET(lsms_raw$api_call[i]), "text"), flatten = TRUE)) ~ vec_depth(fromJSON(content(GET(lsms_raw$api_call[i]), "text"), flatten = TRUE)),
       TRUE ~ NA_integer_))
+  # If list is deep enough, proceed to extract data
   if(study$length > 3){
     study <- study %>%
+      # Test first whether response is valid based on tunneling into list
       mutate(study_type = ifelse(
         is_empty(fromJSON(content(GET(lsms_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name), NA_character_,
         fromJSON(content(GET(lsms_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name
