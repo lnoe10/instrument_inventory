@@ -137,6 +137,51 @@ for (i in 1:length(lsms_raw$id)){
 
 close(pb) # Close the connection
 
+# Sub_sample
+lsms_raw <- fromJSON(content(GET("https://microdata.worldbank.org/index.php/api/catalog/search?ps=10000"), "text"))$result$rows %>%
+  as_tibble() %>%
+  mutate(api_call = str_c("https://microdata.worldbank.org/index.php/api/catalog/", id, "?id_format=id"))
+
+all_wb_metadata <- tibble()
+
+# Set up progress bar
+n_iter <- length(lsms_raw$id)
+pb <- txtProgressBar(min = 1,      # Minimum value of the progress bar
+                     max = n_iter, # Maximum value of the progress bar
+                     style = 3,    # Progress bar style (also available style = 1 and style = 2)
+                     width = 50,   # Progress bar width. Defaults to getOption("width")
+                     char = "=")   # Character used to create the bar
+
+for (i in 1:length(lsms_raw$id)){
+  study <- tibble(id = lsms_raw$id[i], study_type = NA_character_)
+  study <- study %>%
+    mutate(length = case_when(
+      !is_empty(fromJSON(content(GET(lsms_raw$api_call[i]), "text"), flatten = TRUE)) ~ vec_depth(fromJSON(content(GET(lsms_raw$api_call[i]), "text"), flatten = TRUE)),
+      TRUE ~ NA_integer_))
+  if(study$length > 3){
+    study <- study %>%
+      mutate(study_type = ifelse(
+        is_empty(fromJSON(content(GET(lsms_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name), NA_character_,
+        fromJSON(content(GET(lsms_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name
+      ))
+  }
+  # Append to dataset
+  all_wb_metadata <- all_wb_metadata %>%
+    bind_rows(study)
+  # Insert brief pause in code to not look like a robot to the API
+  Sys.sleep(sample(seq(0,0.3,by=0.001),1))
+  # Increment progress bar
+  setTxtProgressBar(pb, i)
+}
+
+close(pb) # Close the connection
+
+
+
+
+
+
+
 #### TO BE FIXED
 lsms <- lsms_raw %>%
   filter(nation != "Serbia and Montenegro") %>%
