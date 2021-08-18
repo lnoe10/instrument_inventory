@@ -201,14 +201,11 @@ wb_study_description <- all_wb_metadata %>%
   bind_rows(addl_wb_metadata %>% mutate(meta_data_field = "Data Kind")) %>%
   select(-length)
 
-# To Do: merge back with main LSMS and filter appropriately. Discuss with Tawheeda
 # ABout 92  remaining with no relevant field. Will have to filter on other metadata.
 
-
-
-
-#### TO BE FIXED
+# Set up final list of LSMS/HIES
 lsms <- lsms_raw %>%
+  # Duplicate Serbia and Montenegro and assign to Serbia and Montenegro respectively
   filter(nation != "Serbia and Montenegro") %>%
   bind_rows(
     lsms_raw %>% 
@@ -222,13 +219,19 @@ lsms <- lsms_raw %>%
   ) %>%
   mutate(year = as.numeric(str_extract(idno, "[0-9]{4}")),
          year = case_when(nation == "Malawi" & year == 2010 ~ as.numeric(year_end), TRUE ~ year),
+         # Create iso3 code variable.
+         # A lot of warnings will pop up for some surveys done in multiple countries.
+         # Ok to keep, we'll filter on study_type and then only merge IDA countries anyway conducted in that country only
          iso3c = countrycode::countrycode(nation, "country.name", "iso3c"),
          iso3c = case_when(nation == "Kosovo" ~ "XKX", TRUE ~ iso3c),
          instrument_type = "HIES",
          status = "completed",
          source = "https://microdata.worldbank.org/index.php/catalog/lsms") %>%
-  # Keep only one survey per year to count.
-  distinct(iso3c, year, .keep_all = TRUE) %>%
+  # Merge in study type description
+  left_join(wb_study_description) %>%
+  # Filter for correct repository (lsms) and addl survey types
+  filter() %>%
+  # Keep relevant variables
   select(country = nation, iso3c, year, instrument_name = title, instrument_type, status, source)
 
 
