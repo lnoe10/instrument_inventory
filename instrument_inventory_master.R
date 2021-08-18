@@ -179,8 +179,8 @@ for (i in 1:length(all_wb_missing$id)){
     study <- study %>%
       # Test first whether response is valid based on tunneling into list
       mutate(study_type = ifelse(
-        is_empty(fromJSON(content(GET(all_wb_missing$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name), NA_character_,
-        fromJSON(content(GET(all_wb_missing$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name
+        is_empty(fromJSON(content(GET(all_wb_missing$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$data_kind), NA_character_,
+        fromJSON(content(GET(all_wb_missing$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$data_kind
       ))
   }
   # Append to dataset
@@ -194,6 +194,15 @@ for (i in 1:length(all_wb_missing$id)){
 
 close(pb) # Close the connection
 
+# Merge with other df of metadata tags
+wb_study_description <- all_wb_metadata %>%
+  filter(!is.na(study_type)) %>%
+  mutate(meta_data_field = "Study Type") %>%
+  bind_rows(addl_wb_metadata %>% mutate(meta_data_field = "Data Kind")) %>%
+  select(-length)
+
+# To Do: merge back with main LSMS and filter appropriately. Discuss with Tawheeda
+# ABout 92  remaining with no relevant field. Will have to filter on other metadata.
 
 
 
