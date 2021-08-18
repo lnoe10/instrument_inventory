@@ -272,26 +272,11 @@ lfs <- read_csv("https://www.ilo.org/ilostat-files/Documents/sources_en.csv") %>
 # fam: https://microdata.fao.org/index.php/catalog
 # https://microdata.fao.org/index.php/catalog/export/csv?ps=5000&sort_by=popularity&sort_order=desc&collection[]=agriculture-census-surveys&view=s&from=1985&to=2021
 # World Census of Agriculture http://www.fao.org/world-census-agriculture/wcarounds/wca2020/countries2020/en/
-agri_survey <- fromJSON(content(GET("https://microdata.fao.org/index.php/api/catalog/search?ps=10000"), "text"), flatten = TRUE)$result$rows %>%
-  as_tibble() %>%
-  filter(repositoryid == "agriculture-census-surveys", str_detect(title, "gricul"), !str_detect(title, "mpact|roduction")) %>%
-  mutate(year = as.numeric(str_extract(idno, "[0-9]{4}")),
-         iso3c = countrycode::countrycode(nation, "country.name", "iso3c"),
-         instrument_type = "Agricultural Survey/Census",
-         status = "completed",
-         source = "https://microdata.fao.org/index.php/catalog") %>%
-  filter((nation!="Philippines")) %>%
-  # ^ THIS DROPS ALL OF Philippines, because both surveys/census are only production or too sub-regional
-  # Check if Philippines has other surveys/censuses that would qualify
-  distinct(nation, year, .keep_all = TRUE) %>%
-  select(country = nation, iso3c, year, instrument_name = title, instrument_type, status, source)
 
-
+# First acquire more information on surveytypes from metadata
 agri_survey_raw <- fromJSON(content(GET("https://microdata.fao.org/index.php/api/catalog/search?ps=10000"), "text"), flatten = TRUE)$result$rows %>%
   as_tibble() %>%
   mutate(api_call = str_c("https://microdata.fao.org/index.php/api/catalog/", id, "?id_format=id"))
-
-# First acquire more information on surveytypes from metadata  
 
 # Initialize empty dataset
 all_fao_metadata <- tibble()
@@ -369,8 +354,8 @@ for (i in 1:length(all_fao_missing$id)){
     study <- study %>%
       # Test first whether response is valid based on tunneling into list
       mutate(study_type = ifelse(
-        is_empty(fromJSON(content(GET(all_fao_missing$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name), NA_character_,
-        fromJSON(content(GET(all_fao_missing$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name
+        is_empty(fromJSON(content(GET(all_fao_missing$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$data_kind), NA_character_,
+        fromJSON(content(GET(all_fao_missing$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$data_kind
       ))
   }
   # Append to dataset
@@ -383,6 +368,27 @@ for (i in 1:length(all_fao_missing$id)){
 }
 
 close(pb) # Close the connection
+
+# Combine two metadata sets
+fao_study_description <- all_fao_metadata %>%
+  filter(!is.na(study_type)) %>%
+  mutate(meta_data_field = "Study Type") %>%
+  bind_rows(addl_fao_metadata %>% mutate(meta_data_field = "Data Kind")) %>%
+  select(-length)
+
+# Set up final list of Agri Surveys
+agri_survey <- fromJSON(content(GET("https://microdata.fao.org/index.php/api/catalog/search?ps=10000"), "text"), flatten = TRUE)$result$rows %>%
+  as_tibble() %>%
+  left_join(fao_study_description) %>%
+  mutate(year = as.numeric(str_extract(idno, "[0-9]{4}")),
+         iso3c = countrycode::countrycode(nation, "country.name", "iso3c"),
+         instrument_type = "Agricultural Survey/Census",
+         status = "completed",
+         source = "https://microdata.fao.org/index.php/catalog") %>%
+  # Filter for study type and repositories
+  # Add AGRIS info from Tawheeda and LSMS+ Ag modules
+  filter(repositoryid == "agriculture-census-surveys", str_detect(title, "gricul"), !str_detect(title, "mpact|roduction")) %>%
+  select(country = nation, iso3c, year, instrument_name = title, instrument_type, status, source)
 
 
 # IHSN + NSO Survey
