@@ -390,10 +390,11 @@ agri_survey <- fromJSON(content(GET("https://microdata.fao.org/index.php/api/cat
   # Add AGRIS info from Tawheeda and LSMS+ Ag modules
   # manually add AGRIS surveys that are missing
   bind_rows(tribble(
-    ~title, ~nation, ~iso3c, ~year, ~instrument_type, ~status, ~source, ~study_type, ~repositoryid,
+    ~title, ~nation, ~iso3c, ~year_end, ~instrument_type, ~status, ~source, ~study_type, ~repositoryid,
     "Encuesta Nacional Agropecuaria", "Costa Rica", "CRI", 2019, "Agricultural Survey/Census", "Completed", "http://www.fao.org/documents/card/en/c/cb3976en", "Agriculture Integrated Survey[AGRISurvey]", "agriculture-census-surveys",
     "AGRISurvey Nation-wide", "Nepal", "NPL", 2020, "Agricultural Survey/Census", "Completed", "http://www.fao.org/in-action/agrisurvey/country-work/nepal/en/", "Agriculture Integrated Survey[AGRISurvey]", "agriculture-census-surveys",
-    "Annual Agricultural Survey 2019-2020", "Senegal", "SEN", 2020, "Agricultural Survey/Census", "Completed", "http://www.fao.org/in-action/agrisurvey/country-work/senegal/en/", "Agriculture Integrated Survey[AGRISurvey]", "agriculture-census-surveys"
+    "Annual Agricultural Survey 2019-2020", "Senegal", "SEN", 2020, "Agricultural Survey/Census", "Completed", "http://www.fao.org/in-action/agrisurvey/country-work/senegal/en/", "Agriculture Integrated Survey[AGRISurvey]", "agriculture-census-surveys",
+    "National Panel Survey, 2019-2020", "Uganda", "UGA", 2020, "Agricultural Survey/Census", "Completed", "https://www.worldbank.org/en/programs/lsms/initiatives/lsms-ISA#46", "Living Standards Measurement Study [hh/lsms]", "agriculture-census-surveys"
   ))
   filter(repositoryid == "agriculture-census-surveys", str_detect(title, "gricul"), !str_detect(title, "mpact|roduction")) %>%
   select(country = nation, iso3c, year, instrument_name = title, instrument_type, status, source)
