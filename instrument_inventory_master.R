@@ -82,9 +82,10 @@ dhs <- fromJSON(content(GET("https://api.dhsprogram.com/rest/dhs/surveys?surveyS
           CountryName = "Guatemala", SubregionName = "Central America", SurveyStatus = "Ongoing", RegionName = "Latin America & Caribbean") %>%
   janitor::clean_names() %>%
   # Filtering out Other surveys, Service Provision Assessments (SPA) and Special DHS, as the latter is mostly conducted at the sub-national level
-  # Need to dig a little deeper into Other Surveys, as there are some that definitely don't fit, like
-  # MICS duplicates, but others might, such as Egypt 2015
-  filter(survey_type %in% c("AIS", "DHS", "MIS"))
+  # Assessed 35 other surveys, of which 10 were from after 2010 and were deemed gender-relevant and without double-counting MICS, for example.
+  filter(survey_type %in% c("AIS", "DHS", "MIS") | (survey_type == "OTH" & survey_id %in% c("AF2010OTH","EG2015OTH","GH2017OTH","GN2016OTH","HT2013OTH",
+                                                                                            "ID2012OTH","ID2017OTH","ML2010OTH","PK2019OTH","RW2011OTH"
+  ))) %>%
   select(country = country_name, year = survey_year, survey_type, status = survey_status) %>%
   mutate(instrument_type = "Household health survey", source = "https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#",
          iso3c = countrycode::countrycode(country, "country.name", "iso3c"),
