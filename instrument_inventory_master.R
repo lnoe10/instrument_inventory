@@ -462,7 +462,7 @@ ag_census <- read_csv("C:/Users/lnoe/Documents/GitHub/instrument_inventory/Input
 # IHSN https://catalog.ihsn.org/catalog
 # https://catalog.ihsn.org/catalog/export/csv?ps=10000&collection[]=central
 # Import all surveys
-ihsn <- fromJSON(content(GET("https://catalog.ihsn.org/index.php/api/catalog/search?ps=10000&from=2000&to=2021"), "text"), flatten = TRUE)$result$rows %>%
+ihsn_raw <- fromJSON(content(GET("https://catalog.ihsn.org/index.php/api/catalog/search?ps=10000&from=2000&to=2021"), "text"), flatten = TRUE)$result$rows %>%
   as_tibble() %>%
   mutate(iso3c = countrycode::countrycode(nation, "country.name", "iso3c"),
          iso3c = case_when(
@@ -471,7 +471,6 @@ ihsn <- fromJSON(content(GET("https://catalog.ihsn.org/index.php/api/catalog/sea
            TRUE ~ iso3c
          ),
          status = "Completed", source = "https://catalog.ihsn.org/catalog")
-  # select(country = nation, iso3c, year = year_end, instrument_name = title, instrument_type = repositoryid, status, source)
 
 ### To acquire more metadata with which to filter data, we loop individual survey API calls for their metadata
 
@@ -479,7 +478,7 @@ ihsn <- fromJSON(content(GET("https://catalog.ihsn.org/index.php/api/catalog/sea
 all_study_metadata <- tibble()
 
 # Set up progress bar
-n_iter <- length(ihsn$id)
+n_iter <- length(ihsn_raw$id)
 pb <- txtProgressBar(min = 1,      # Minimum value of the progress bar
                      max = n_iter, # Maximum value of the progress bar
                      style = 3,    # Progress bar style (also available style = 1 and style = 2)
@@ -487,17 +486,17 @@ pb <- txtProgressBar(min = 1,      # Minimum value of the progress bar
                      char = "=")   # Character used to create the bar
 
 # Loop
-for (i in 1:length(ihsn$id)){
+for (i in 1:length(ihsn_raw$id)){
   # Create a tibble consisting of the id no of the study in IHSN and the field value for "study type"
   # To acount for where info on metadata is elsewhere other than nested API call,
   # we first determine whether API call is valid and then proceed.
   # As of 2 August 2021, this worked for 6727 out of 7277. Other calls
   # need to be made for the remaining 550
-  study <- tibble(id = ihsn$id[i])
+  study <- tibble(id = ihsn_raw$id[i])
   study <- study %>%
     mutate(study_type = ifelse(
-      is_empty(fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", ihsn$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name), NA_character_,
-      fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", ihsn$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name
+      is_empty(fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", ihsn_raw$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name), NA_character_,
+      fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", ihsn_raw$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name
     ))
   # Append to dataset
   all_study_metadata <- all_study_metadata %>%
@@ -555,9 +554,52 @@ study_description <- all_study_metadata %>%
   mutate(meta_data_field = "Study Type") %>%
   bind_rows(all_missing_metadata %>% mutate(meta_data_field = "Data Kind"))
 
-# To Do: merge back with main IHSN and filter appropriately. Discuss with Tawheeda
-# ABout 64  remaining with no relevant field. Will have to filter on other metadata.
-
+# Final list of IHSN, to be used to supplement other survey groups as appropriate
+ihsn <- ihsn_raw %>%
+  left_join(study_description) %>%
+  # drop entirely irrelevant surveys
+  filter(!study_type %in% c("Registros administrativos, otros (ad/oth]",
+                            "Independent Performance Evaluation",
+                            "Impact Evaluation Study",
+                            "Public Opinion Survey [ind/pos]",
+                            "Public Opinion Survey",
+                            "Public Opinion Survey [po]]",
+                            "Impact Evaluation",
+                            "Impact Evaluation Survey",
+                            "Independent Impact Evaluation",
+                            "Administrative Records, Education (ad/edu]",
+                            "Industrial Statistics",
+                            "Impact Evaluation Study [ie/ies]",
+                            "Administrative Records, Other (ad/oth]",
+                            "Enterprise Survey",
+                            "Price Survey [hh/prc]",
+                            "Encuesta de empresas [en/oth]",
+                            "Encuesta de Buenas Prácticas Ambientales",
+                            "Données administrative, santé [ad/hea]",
+                            "Enquête sur les entreprises [en/oth]",
+                            "Estadística de precios",
+                            "Estadística del Sector Eléctrico",
+                            "Encuesta",
+                            "Establishment Census [en/census]",
+                            "Registros Administrativos",
+                            "Administrative, Trade",
+                            "Administrative Records, Other (ad/oth]- import and export documents",
+                            "Administrative Records, Other [ad/oth]",
+                            "Country Opinion Survey",
+                            "Pay For Performance (P4P) - Tanzania",
+                            "Service Provision Assessments",
+                            "Performance Evaluation",
+                            "Service Delivery Indicators Survey (SDI)",
+                            "Other Enterprise Survey",
+                            "Country Opnion Survey",
+                            "Administrative records data [adm]",
+                            "Clinical data [cli]",
+                            "Process-produced data [pro]",
+                            "Event/Transaction data [evn]",
+                            "Other",
+                            "Sample survey data [ssd], Administrative records data [adm], other",
+                            "Event/transaction data [evn]"
+  ))
 
 # Time Use Surveys - UNSD -------------------------------------------------
 
