@@ -1,9 +1,18 @@
-#### ALL SURVEY INSTRUMENT INVENTORY ####
+#' ---
+#' title: Gender-relevant instrument inventory
+#' author: Lorenz Noe
+#' ---
+
 library(httr)
 library(jsonlite)
 library(tidyverse)
 
-#### MICS - UNICEF ####
+# Household Health Surveys ------------------------------------------------
+# MICS
+# DHS
+
+# * MICS - UNICEF -----------------------------------------------------------
+
 # https://mics.unicef.org/surveys
 # Also 
 # API https://mics.unicef.org/api/survey
@@ -72,7 +81,8 @@ mics <- mics_raw %>%
   # Choosing final list of instruments
   select(country = country_clean, iso3c, year, status, instrument_name, instrument_type, source, country_original = country)
 
-#### DHS - USAID ####
+# * DHS - USAID -------------------------------------------------------------
+
 # https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 # Completed and ongoing DHS. Was short of one, Guatemala in 2022
 # API https://api.dhsprogram.com/rest/dhs/surveys?surveyStatus=all&f=html
@@ -94,7 +104,11 @@ dhs <- fromJSON(content(GET("https://api.dhsprogram.com/rest/dhs/surveys?surveyS
   select(country = country_clean, iso3c, year, status, instrument_name = survey_type, instrument_type, source, country_original = country)
 
 
-#### LSMS - World Bank ####
+# Household Income/Expenditure Surveys (HIES) -----------------------------
+
+
+# * LSMS - WORLD BANK -----------------------------------------------------
+
 # https://microdata.worldbank.org/index.php/catalog/lsms
 # https://microdata.worldbank.org/index.php/api/catalog/search?ps=10000
 #^ filter for LSMS from there.
@@ -238,7 +252,12 @@ lsms <- lsms_raw %>%
 
 # With IHSN
 
-#### LFS - ILO ####
+
+# Labor Force Surveys -----------------------------------------------------
+
+
+# * LFS - ILO -------------------------------------------------------------
+
 # https://ilostat.ilo.org/data/national-sources-catalogue/
 # https://www.ilo.org/ilostat-files/Documents/sources_en.csv
 lfs <- read_csv("https://www.ilo.org/ilostat-files/Documents/sources_en.csv") %>%
@@ -269,7 +288,12 @@ lfs <- read_csv("https://www.ilo.org/ilostat-files/Documents/sources_en.csv") %>
 # Then if there's a trend in every year, then check NSO site
 # Kieran's spreadsheet, follow up
 
-#### AG Surveys and Censuses - FAO ####
+
+# Agriculture Surveys and Censuses ----------------------------------------
+
+
+# * Ag Surveys - FAO ------------------------------------------------------
+
 # fam: https://microdata.fao.org/index.php/catalog
 # https://microdata.fao.org/index.php/catalog/export/csv?ps=5000&sort_by=popularity&sort_order=desc&collection[]=agriculture-census-surveys&view=s&from=1985&to=2021
 # World Census of Agriculture http://www.fao.org/world-census-agriculture/wcarounds/wca2020/countries2020/en/
@@ -399,6 +423,9 @@ agri_survey <- fromJSON(content(GET("https://microdata.fao.org/index.php/api/cat
   filter(repositoryid == "agriculture-census-surveys", str_detect(title, "gricul"), !str_detect(title, "mpact|roduction")) %>%
   select(country = nation, iso3c, year, instrument_name = title, instrument_type, status, source)
 
+
+# * Ag Censuses - FAO -----------------------------------------------------
+
 # Upload and clean list of 2020 and 2010 round of ag census. Merge with Ag survey set
 ag_census <- read_csv("C:/Users/lnoe/Documents/GitHub/instrument_inventory/Input/wca_2020_2010_notes.csv") %>%
   janitor::clean_names() %>%
@@ -424,7 +451,10 @@ ag_census <- read_csv("C:/Users/lnoe/Documents/GitHub/instrument_inventory/Input
 # List of LSMS-AG
 # Make sure they capture people, not production
 
-#### Supplemental survey - IHSN ####
+
+# Supplemental surveys - IHSN ---------------------------------------------
+
+
 # IHSN https://catalog.ihsn.org/catalog
 # https://catalog.ihsn.org/catalog/export/csv?ps=10000&collection[]=central
 # Import all surveys
@@ -524,7 +554,9 @@ study_description <- all_study_metadata %>%
 # To Do: merge back with main IHSN and filter appropriately. Discuss with Tawheeda
 # ABout 64  remaining with no relevant field. Will have to filter on other metadata.
 
-#### Time use - UNSD ####
+
+# Time Use Surveys - UNSD -------------------------------------------------
+
 # https://unstats.un.org/unsd/gender/timeuse and manual ODW check of NSO websites
 tus <- read_csv("C:/Users/lnoe/Documents/GitHub/instrument_inventory/Input/time_use_surveys_sgdf_inventory_2020.csv") %>%
   janitor::clean_names() %>%
@@ -545,7 +577,10 @@ tus <- read_csv("C:/Users/lnoe/Documents/GitHub/instrument_inventory/Input/time_
   select(country, iso3c = iso, year, instrument_name = time_use_survey, 
          instrument_type, source, status)
 
-#### Census - UNSD ####
+
+# Census - UNSD -----------------------------------------------------------
+
+
 # See scraping census dates file
 # Census dates scrape.R
 census <- df %>%
@@ -561,7 +596,9 @@ census <- df %>%
          source = "https://unstats.un.org/unsd/demographic-social/census/censusdates/") %>%
   select(country, iso3c, year, status = planned, instrument_name, instrument_type, source)
 
-#### COMBINE SURVEY INSTRUMENTS ####
+
+# Combine -----------------------------------------------------------------
+
 all_surveys <- dhs %>%
   bind_rows(mics) %>%
   bind_rows(lsms) %>%
@@ -592,14 +629,16 @@ all_surveys %>%
   scale_x_continuous(breaks = c(2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023)) 
   
 
-#### Administrative Instruments - TO BE DEVELOPED, BUT NOT FOR TIMELINE FEATURE ####
-#### CRVS - UNICEF via World Bank ####
+# Administrative Instruments ----------------------------------------------
+
+#### Administrative Instruments - TO BE DEVELOPED, BUT NOT FOR TIMELINE FEATURE
+#### CRVS - UNICEF via World Bank
 # https://data.worldbank.org/indicator/SP.REG.BRTH.ZS
 # https://data.worldbank.org/indicator/SP.REG.BRTH.MA.ZS
 # https://data.worldbank.org/indicator/SP.REG.BRTH.FE.ZS
 # https://data.worldbank.org/indicator/SP.REG.BRTH.UR.ZS
 # https://data.worldbank.org/indicator/SP.REG.BRTH.RU.ZS
 
-#### HMIS - ODIN ####
+#### HMIS - ODIN
 
-#### EMIS - ODIN ####
+#### EMIS - ODIN
