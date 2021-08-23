@@ -408,7 +408,7 @@ fao_study_description <- all_fao_metadata %>%
 agri_survey <- fromJSON(content(GET("https://microdata.fao.org/index.php/api/catalog/search?ps=10000"), "text"), flatten = TRUE)$result$rows %>%
   as_tibble() %>%
   left_join(fao_study_description) %>%
-  mutate(year = as.numeric(str_extract(idno, "[0-9]{4}")),
+  mutate(year_end = as.numeric(year_end),
          iso3c = countrycode::countrycode(nation, "country.name", "iso3c"),
          instrument_type = "Agricultural Survey/Census",
          status = "completed",
@@ -424,7 +424,7 @@ agri_survey <- fromJSON(content(GET("https://microdata.fao.org/index.php/api/cat
     "National Panel Survey, 2019-2020", "Uganda", "UGA", 2020, "Agricultural Survey/Census", "Completed", "https://www.worldbank.org/en/programs/lsms/initiatives/lsms-ISA#46", "Living Standards Measurement Study [hh/lsms]", "agriculture-census-surveys"
   ))
   filter(repositoryid == "agriculture-census-surveys", str_detect(title, "gricul"), !str_detect(title, "mpact|roduction")) %>%
-  select(country = nation, iso3c, year, instrument_name = title, instrument_type, status, source)
+  select(country = nation, iso3c, year = year_end, instrument_name = title, instrument_type, status, source)
 
 
 # * Ag Censuses - FAO -----------------------------------------------------
