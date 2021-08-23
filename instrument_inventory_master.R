@@ -404,7 +404,7 @@ fao_study_description <- all_fao_metadata %>%
   bind_rows(addl_fao_metadata %>% mutate(meta_data_field = "Data Kind")) %>%
   select(-length)
 
-# Set up final list of Agri Surveys
+# Set up final list of Agricultural Surveys
 agri_survey <- fromJSON(content(GET("https://microdata.fao.org/index.php/api/catalog/search?ps=10000"), "text"), flatten = TRUE)$result$rows %>%
   as_tibble() %>%
   left_join(fao_study_description) %>%
@@ -414,16 +414,17 @@ agri_survey <- fromJSON(content(GET("https://microdata.fao.org/index.php/api/cat
          status = "completed",
          source = "https://microdata.fao.org/index.php/catalog") %>%
   # Filter for study type and repositories
-  # Add AGRIS info from Tawheeda and LSMS+ Ag modules
-  # manually add AGRIS surveys that are missing
+  # Add AGRISurvey info from Tawheeda and LSMS+ Ag modules
   bind_rows(tribble(
     ~title, ~nation, ~iso3c, ~year_end, ~instrument_type, ~status, ~source, ~study_type, ~repositoryid,
     "Encuesta Nacional Agropecuaria", "Costa Rica", "CRI", 2019, "Agricultural Survey/Census", "Completed", "http://www.fao.org/documents/card/en/c/cb3976en", "Agriculture Integrated Survey[AGRISurvey]", "agriculture-census-surveys",
     "AGRISurvey Nation-wide", "Nepal", "NPL", 2020, "Agricultural Survey/Census", "Completed", "http://www.fao.org/in-action/agrisurvey/country-work/nepal/en/", "Agriculture Integrated Survey[AGRISurvey]", "agriculture-census-surveys",
     "Annual Agricultural Survey 2019-2020", "Senegal", "SEN", 2020, "Agricultural Survey/Census", "Completed", "http://www.fao.org/in-action/agrisurvey/country-work/senegal/en/", "Agriculture Integrated Survey[AGRISurvey]", "agriculture-census-surveys",
     "National Panel Survey, 2019-2020", "Uganda", "UGA", 2020, "Agricultural Survey/Census", "Completed", "https://www.worldbank.org/en/programs/lsms/initiatives/lsms-ISA#46", "Living Standards Measurement Study [hh/lsms]", "agriculture-census-surveys"
-  ))
-  filter(repositoryid == "agriculture-census-surveys", str_detect(title, "gricul"), !str_detect(title, "mpact|roduction")) %>%
+  )) %>%
+  filter(repositoryid == "agriculture-census-surveys", 
+         !study_type %in% c("Administrative Records", "Agricultural Census [ag/census]", "Enterprise Census [en/census]", "Population and Housing Census [hh/popcen]"), 
+         !str_detect(title, "mpact|roduction")) %>%
   select(country = nation, iso3c, year = year_end, instrument_name = title, instrument_type, status, source)
 
 
