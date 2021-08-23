@@ -244,8 +244,11 @@ lsms <- lsms_raw %>%
          source = "https://microdata.worldbank.org/index.php/catalog/lsms") %>%
   # Merge in study type description
   left_join(wb_study_description) %>%
-  # Filter for correct repository (lsms) and addl survey types
-  filter() %>%
+  # Filter for correct repository (lsms, hfps) and addl survey types
+  filter(repositoryid %in% c("lsms", "hfps") | study_type %in% c("Income/Expenditure/Household Survey [hh/ies]",
+                                                                           "Living Standards Measurement Study",
+                                                                           "Living Standards Measurement Study [hh/lsms]",
+                                                                           "Socio-Economic/Monitoring Survey [hh/sems]")) %>%
   # Keep relevant variables
   select(country = nation, iso3c, year, instrument_name = title, instrument_type, status, source)
 
