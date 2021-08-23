@@ -399,6 +399,26 @@ agri_survey <- fromJSON(content(GET("https://microdata.fao.org/index.php/api/cat
   filter(repositoryid == "agriculture-census-surveys", str_detect(title, "gricul"), !str_detect(title, "mpact|roduction")) %>%
   select(country = nation, iso3c, year, instrument_name = title, instrument_type, status, source)
 
+# Upload and clean list of 2020 and 2010 round of ag census. Merge with Ag survey set
+ag_census <- read_csv("C:/Users/lnoe/Documents/GitHub/instrument_inventory/Input/wca_2020_2010_notes.csv") %>%
+  janitor::clean_names() %>%
+  mutate(year_clean = case_when(
+    str_detect(census_year, "-[0-9]{2}$") ~ str_c("20", str_extract(census_year, "[0-9]{2}$")),
+    census_year == "-" ~ NA_character_,
+    census_year == "AGRIS since 2018" ~ NA_character_,
+    str_detect(census_year, "[0-9]{4}$") ~ str_extract(census_year, "[0-9]{4}$"),
+    str_detect(census_year, "\\/[0-9]{2}$") ~ str_c("20", str_extract(census_year, "[0-9]{2}$")),
+    TRUE ~ census_year
+  ),
+  year_clean = as.numeric(year_clean),
+  iso3c = countrycode::countrycode(country_link_to_national_census_organisation, "country.name", "iso3c"),
+  iso3c = case_when(country_link_to_national_census_organisation == "Netherland" ~ "NLD", TRUE ~ iso3c),
+  instrument_name = "Agriculture Census",
+  instrument_type = "Agricultural Survey/Census",
+  status = "completed",
+  source = "http://www.fao.org/world-census-agriculture/wcarounds/en/") %>%
+  filter(!is.na(iso3c), !is.na(year_clean), !(census_round == "WCA2020" & iso3c == "MOZ")) %>%
+  select(country = starts_with("country"), iso3c, year = year_clean, instrument_name, instrument_type, status, source)
 
 # IHSN + NSO Survey
 # List of LSMS-AG
