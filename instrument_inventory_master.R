@@ -313,103 +313,109 @@ agri_survey_raw <- fromJSON(content(GET("https://microdata.fao.org/index.php/api
   as_tibble() %>%
   mutate(api_call = str_c("https://microdata.fao.org/index.php/api/catalog/", id, "?id_format=id"))
 
-# Initialize empty dataset
-all_fao_metadata <- tibble()
+## Initialize empty dataset
+#all_fao_metadata <- tibble()
+#
+## Set up progress bar
+#n_iter <- length(agri_survey_raw$id)
+#pb <- txtProgressBar(min = 1,      # Minimum value of the progress bar
+#                     max = n_iter, # Maximum value of the progress bar
+#                     style = 3,    # Progress bar style (also available style = 1 and style = 2)
+#                     width = 50,   # Progress bar width. Defaults to getOption("width")
+#                     char = "=")   # Character used to create the bar
+#
+## Loop
+#for (i in 1:length(agri_survey_raw$id)){
+#  # Set up tibble with basic info
+#  study <- tibble(id = agri_survey_raw$id[i], study_type = NA_character_)
+#  # Determine length of list generated from API call to filter out
+#  # Where we hit error otherwise of subscript being out of bounds
+#  study <- study %>%
+#    mutate(length = case_when(
+#      !is_empty(fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)) ~ vec_depth(fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)),
+#      TRUE ~ NA_integer_))
+#  # If list is deep enough, proceed to extract data
+#  if(study$length > 3){
+#    study <- study %>%
+#      # Test first whether response is valid based on tunneling into list
+#      mutate(study_type = ifelse(
+#        is_empty(fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name), NA_character_,
+#        fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name
+#      ))
+#  }
+#  # Append to dataset
+#  all_fao_metadata <- all_fao_metadata %>%
+#    bind_rows(study)
+#  # Insert brief pause in code to not look like a robot to the API
+#  Sys.sleep(sample(seq(0,0.3,by=0.001),1))
+#  # Increment progress bar
+#  setTxtProgressBar(pb, i)
+#}
+#
+#close(pb) # Close the connection
+#
+## Missing XXX entries for study type because metadata does not have this field
+## 'Data kind' is closest equivalent for many of them. Repeat calls and acquire these
+#
+## Filter to where we are missing study_type.
+## Also create url entry as variable so it's easier to read in API call
+#all_fao_missing <- all_fao_metadata %>%
+#  filter(is.na(study_type)) %>%
+#  mutate(api_call = str_c("https://microdata.fao.org/index.php/api/catalog/", id, "?id_format=id"))
+#
+## Initialize empty dataset
+#addl_fao_metadata <- tibble()
+#
+## Set up progress bar
+#n_iter <- length(all_fao_missing$id)
+#pb <- txtProgressBar(min = 1,      # Minimum value of the progress bar
+#                     max = n_iter, # Maximum value of the progress bar
+#                     style = 3,    # Progress bar style (also available style = 1 and style = 2)
+#                     width = 50,   # Progress bar width. Defaults to getOption("width")
+#                     char = "=")   # Character used to create the bar
+#
+## Loop
+#for (i in 1:length(all_fao_missing$id)){
+#  # Set up tibble with basic info
+#  study <- tibble(id = all_fao_missing$id[i], study_type = NA_character_)
+#  # Determine length of list generated from API call to filter out
+#  # Where we hit error otherwise of subscript being out of bounds
+#  study <- study %>%
+#    mutate(length = case_when(
+#      !is_empty(fromJSON(content(GET(all_fao_missing$api_call[i]), "text"), flatten = TRUE)) ~ vec_depth(fromJSON(content(GET(all_fao_missing$api_call[i]), "text"), flatten = TRUE)),
+#      TRUE ~ NA_integer_))
+#  # If list is deep enough, proceed to extract data
+#  if(study$length > 3){
+#    study <- study %>%
+#      # Test first whether response is valid based on tunneling into list
+#      mutate(study_type = ifelse(
+#        is_empty(fromJSON(content(GET(all_fao_missing$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$data_kind), NA_character_,
+#        fromJSON(content(GET(all_fao_missing$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$data_kind
+#      ))
+#  }
+#  # Append to dataset
+#  addl_fao_metadata <- addl_fao_metadata %>%
+#    bind_rows(study)
+#  # Insert brief pause in code to not look like a robot to the API
+#  Sys.sleep(sample(seq(0,0.3,by=0.001),1))
+#  # Increment progress bar
+#  setTxtProgressBar(pb, i)
+#}
+#
+#close(pb) # Close the connection
+#
+## Combine two metadata sets
+#fao_study_description <- all_fao_metadata %>%
+#  filter(!is.na(study_type)) %>%
+#  mutate(meta_data_field = "Study Type") %>%
+#  bind_rows(addl_fao_metadata %>% mutate(meta_data_field = "Data Kind")) %>%
+#  select(-length)
+#
+## Save copy of FAO study descriptions so we don't have to rerun all entries, just new ones
+#saveRDS(fao_study_description, file = "Input/fao_microdata_study_description.rds")
 
-# Set up progress bar
-n_iter <- length(agri_survey_raw$id)
-pb <- txtProgressBar(min = 1,      # Minimum value of the progress bar
-                     max = n_iter, # Maximum value of the progress bar
-                     style = 3,    # Progress bar style (also available style = 1 and style = 2)
-                     width = 50,   # Progress bar width. Defaults to getOption("width")
-                     char = "=")   # Character used to create the bar
-
-# Loop
-for (i in 1:length(agri_survey_raw$id)){
-  # Set up tibble with basic info
-  study <- tibble(id = agri_survey_raw$id[i], study_type = NA_character_)
-  # Determine length of list generated from API call to filter out
-  # Where we hit error otherwise of subscript being out of bounds
-  study <- study %>%
-    mutate(length = case_when(
-      !is_empty(fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)) ~ vec_depth(fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)),
-      TRUE ~ NA_integer_))
-  # If list is deep enough, proceed to extract data
-  if(study$length > 3){
-    study <- study %>%
-      # Test first whether response is valid based on tunneling into list
-      mutate(study_type = ifelse(
-        is_empty(fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name), NA_character_,
-        fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name
-      ))
-  }
-  # Append to dataset
-  all_fao_metadata <- all_fao_metadata %>%
-    bind_rows(study)
-  # Insert brief pause in code to not look like a robot to the API
-  Sys.sleep(sample(seq(0,0.3,by=0.001),1))
-  # Increment progress bar
-  setTxtProgressBar(pb, i)
-}
-
-close(pb) # Close the connection
-
-# Missing XXX entries for study type because metadata does not have this field
-# 'Data kind' is closest equivalent for many of them. Repeat calls and acquire these
-
-# Filter to where we are missing study_type.
-# Also create url entry as variable so it's easier to read in API call
-all_fao_missing <- all_fao_metadata %>%
-  filter(is.na(study_type)) %>%
-  mutate(api_call = str_c("https://microdata.fao.org/index.php/api/catalog/", id, "?id_format=id"))
-
-# Initialize empty dataset
-addl_fao_metadata <- tibble()
-
-# Set up progress bar
-n_iter <- length(all_fao_missing$id)
-pb <- txtProgressBar(min = 1,      # Minimum value of the progress bar
-                     max = n_iter, # Maximum value of the progress bar
-                     style = 3,    # Progress bar style (also available style = 1 and style = 2)
-                     width = 50,   # Progress bar width. Defaults to getOption("width")
-                     char = "=")   # Character used to create the bar
-
-# Loop
-for (i in 1:length(all_fao_missing$id)){
-  # Set up tibble with basic info
-  study <- tibble(id = all_fao_missing$id[i], study_type = NA_character_)
-  # Determine length of list generated from API call to filter out
-  # Where we hit error otherwise of subscript being out of bounds
-  study <- study %>%
-    mutate(length = case_when(
-      !is_empty(fromJSON(content(GET(all_fao_missing$api_call[i]), "text"), flatten = TRUE)) ~ vec_depth(fromJSON(content(GET(all_fao_missing$api_call[i]), "text"), flatten = TRUE)),
-      TRUE ~ NA_integer_))
-  # If list is deep enough, proceed to extract data
-  if(study$length > 3){
-    study <- study %>%
-      # Test first whether response is valid based on tunneling into list
-      mutate(study_type = ifelse(
-        is_empty(fromJSON(content(GET(all_fao_missing$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$data_kind), NA_character_,
-        fromJSON(content(GET(all_fao_missing$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$data_kind
-      ))
-  }
-  # Append to dataset
-  addl_fao_metadata <- addl_fao_metadata %>%
-    bind_rows(study)
-  # Insert brief pause in code to not look like a robot to the API
-  Sys.sleep(sample(seq(0,0.3,by=0.001),1))
-  # Increment progress bar
-  setTxtProgressBar(pb, i)
-}
-
-close(pb) # Close the connection
-
-# Combine two metadata sets
-fao_study_description <- all_fao_metadata %>%
-  filter(!is.na(study_type)) %>%
-  mutate(meta_data_field = "Study Type") %>%
-  bind_rows(addl_fao_metadata %>% mutate(meta_data_field = "Data Kind")) %>%
-  select(-length)
+# Load study descriptions from saved file
+fao_study_description <- readRDS("Input/fao_microdata_study_description.rds")
 
 # Set up final list of Agricultural Surveys
 agri_survey <- fromJSON(content(GET("https://microdata.fao.org/index.php/api/catalog/search?ps=10000"), "text"), flatten = TRUE)$result$rows %>%
@@ -479,91 +485,97 @@ ihsn_raw <- fromJSON(content(GET("https://catalog.ihsn.org/index.php/api/catalog
          ),
          status = "Completed", source = "https://catalog.ihsn.org/catalog")
 
-### To acquire more metadata with which to filter data, we loop individual survey API calls for their metadata
-
-# Initialize empty dataset
-all_study_metadata <- tibble()
-
-# Set up progress bar
-n_iter <- length(ihsn_raw$id)
-pb <- txtProgressBar(min = 1,      # Minimum value of the progress bar
-                     max = n_iter, # Maximum value of the progress bar
-                     style = 3,    # Progress bar style (also available style = 1 and style = 2)
-                     width = 50,   # Progress bar width. Defaults to getOption("width")
-                     char = "=")   # Character used to create the bar
-
-# Loop
-for (i in 1:length(ihsn_raw$id)){
-  # Create a tibble consisting of the id no of the study in IHSN and the field value for "study type"
-  # To acount for where info on metadata is elsewhere other than nested API call,
-  # we first determine whether API call is valid and then proceed.
-  # As of 2 August 2021, this worked for 6727 out of 7277. Other calls
-  # need to be made for the remaining 550
-  study <- tibble(id = ihsn_raw$id[i])
-  study <- study %>%
-    mutate(study_type = ifelse(
-      is_empty(fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", ihsn_raw$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name), NA_character_,
-      fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", ihsn_raw$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name
-    ))
-  # Append to dataset
-  all_study_metadata <- all_study_metadata %>%
-    bind_rows(study)
-  # Insert brief pause in code to not look like a robot to the API
-  Sys.sleep(sample(seq(0,0.3,by=0.001),1))
-  # Increment progress bar
-  setTxtProgressBar(pb, i)
-}
-
-close(pb) # Close the connection
-
-# Missing 550 entries for study type because metadata does not have this field
-# 'Data kind' is closest equivalent for many of them. Repeat calls and acquire these
-
-# Filter to where we are missing study_type. Also, id study 8478 shows up in listing but has no information. Probably a duplicate.
-# its title is the same as another entry https://catalog.ihsn.org/catalog/8512
-# Also create url entry as variable so it's easier to read in API call
-all_study_missing <- all_study_metadata %>%
-  filter(is.na(study_type), id != 8478) %>%
-  mutate(url_list = str_c("https://catalog.ihsn.org/index.php/api/catalog/", id, "?id_format=id"))
-
-# Initialize empty dataset
-all_missing_metadata <- tibble()
-
-# Set up progress bar
-n_iter <- length(all_study_missing$id)
-pb <- txtProgressBar(min = 1,      # Minimum value of the progress bar
-                     max = n_iter, # Maximum value of the progress bar
-                     style = 3,    # Progress bar style (also available style = 1 and style = 2)
-                     width = 50,   # Progress bar width. Defaults to getOption("width")
-                     char = "=")   # Character used to create the bar
-
-for (i in 1:length(all_study_missing$id)){
-  study <- tibble(id = all_study_missing$id[i])
-  study <- study %>%
-    mutate(study_type = ifelse(
-      is_empty(fromJSON(content(GET(all_study_missing$url_list[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$data_kind), NA_character_,
-      fromJSON(content(GET(all_study_missing$url_list[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$data_kind
-      ))
-  # Append to dataset
-  all_missing_metadata <- all_missing_metadata %>%
-    bind_rows(study)
-  # Insert brief pause in code to not look like a robot to the API
-  Sys.sleep(sample(seq(0,0.3,by=0.001),1))
-  # Increment progress bar
-  setTxtProgressBar(pb, i)
-}
-
-close(pb) # Close the connection
-
-# Merge with other df of metadata tags
-study_description <- all_study_metadata %>%
-  filter(!is.na(study_type)) %>%
-  mutate(meta_data_field = "Study Type") %>%
-  bind_rows(all_missing_metadata %>% mutate(meta_data_field = "Data Kind"))
+#### To acquire more metadata with which to filter data, we loop individual survey API calls for their metadata
+#
+## Initialize empty dataset
+#all_study_metadata <- tibble()
+#
+## Set up progress bar
+#n_iter <- length(ihsn_raw$id)
+#pb <- txtProgressBar(min = 1,      # Minimum value of the progress bar
+#                     max = n_iter, # Maximum value of the progress bar
+#                     style = 3,    # Progress bar style (also available style = 1 and style = 2)
+#                     width = 50,   # Progress bar width. Defaults to getOption("width")
+#                     char = "=")   # Character used to create the bar
+#
+## Loop
+#for (i in 1:length(ihsn_raw$id)){
+#  # Create a tibble consisting of the id no of the study in IHSN and the field value for "study type"
+#  # To acount for where info on metadata is elsewhere other than nested API call,
+#  # we first determine whether API call is valid and then proceed.
+#  # As of 2 August 2021, this worked for 6727 out of 7277. Other calls
+#  # need to be made for the remaining 550
+#  study <- tibble(id = ihsn_raw$id[i])
+#  study <- study %>%
+#    mutate(study_type = ifelse(
+#      is_empty(fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", ihsn_raw$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name), NA_character_,
+#      fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", ihsn_raw$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name
+#    ))
+#  # Append to dataset
+#  all_study_metadata <- all_study_metadata %>%
+#    bind_rows(study)
+#  # Insert brief pause in code to not look like a robot to the API
+#  Sys.sleep(sample(seq(0,0.3,by=0.001),1))
+#  # Increment progress bar
+#  setTxtProgressBar(pb, i)
+#}
+#
+#close(pb) # Close the connection
+#
+## Missing 550 entries for study type because metadata does not have this field
+## 'Data kind' is closest equivalent for many of them. Repeat calls and acquire these
+#
+## Filter to where we are missing study_type. Also, id study 8478 shows up in listing but has no information. Probably a duplicate.
+## its title is the same as another entry https://catalog.ihsn.org/catalog/8512
+## Also create url entry as variable so it's easier to read in API call
+#all_study_missing <- all_study_metadata %>%
+#  filter(is.na(study_type), id != 8478) %>%
+#  mutate(url_list = str_c("https://catalog.ihsn.org/index.php/api/catalog/", id, "?id_format=id"))
+#
+## Initialize empty dataset
+#all_missing_metadata <- tibble()
+#
+## Set up progress bar
+#n_iter <- length(all_study_missing$id)
+#pb <- txtProgressBar(min = 1,      # Minimum value of the progress bar
+#                     max = n_iter, # Maximum value of the progress bar
+#                     style = 3,    # Progress bar style (also available style = 1 and style = 2)
+#                     width = 50,   # Progress bar width. Defaults to getOption("width")
+#                     char = "=")   # Character used to create the bar
+#
+#for (i in 1:length(all_study_missing$id)){
+#  study <- tibble(id = all_study_missing$id[i])
+#  study <- study %>%
+#    mutate(study_type = ifelse(
+#      is_empty(fromJSON(content(GET(all_study_missing$url_list[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$data_kind), NA_character_,
+#      fromJSON(content(GET(all_study_missing$url_list[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$data_kind
+#      ))
+#  # Append to dataset
+#  all_missing_metadata <- all_missing_metadata %>%
+#    bind_rows(study)
+#  # Insert brief pause in code to not look like a robot to the API
+#  Sys.sleep(sample(seq(0,0.3,by=0.001),1))
+#  # Increment progress bar
+#  setTxtProgressBar(pb, i)
+#}
+#
+#close(pb) # Close the connection
+#
+## Merge with other df of metadata tags
+#study_description <- all_study_metadata %>%
+#  filter(!is.na(study_type)) %>%
+#  mutate(meta_data_field = "Study Type") %>%
+#  bind_rows(all_missing_metadata %>% mutate(meta_data_field = "Data Kind"))
+#
+## Save copy of WB study descriptions so we don't have to rerun all entries, just new ones
+#saveRDS(study_description, file = "Input/ihsn_microdata_study_description.rds")
+#
+## Load study descriptions from saved file
+#ihsn_study_description <- readRDS("Input/ihsn_microdata_study_description.rds")
 
 # Final list of IHSN, to be used to supplement other survey groups as appropriate
 ihsn <- ihsn_raw %>%
-  left_join(study_description) %>%
+  left_join(ihsn_study_description) %>%
   # drop entirely irrelevant surveys
   filter(!study_type %in% c("Registros administrativos, otros (ad/oth]",
                             "Independent Performance Evaluation",
