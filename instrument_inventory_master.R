@@ -2,6 +2,7 @@
 #' title: Gender-relevant instrument inventory
 #' author: Lorenz Noe
 #' ---
+setwd("C:/Users/lnoe/Documents/GitHub/instrument_inventory/")
 
 library(httr)
 library(jsonlite)
@@ -219,10 +220,10 @@ lsms_raw <- fromJSON(content(GET("https://microdata.worldbank.org/index.php/api/
 ## ABout 92  remaining with no relevant field. Will have to filter on other metadata.
 #
 ## Save copy of WB study descriptions so we don't have to rerun all entries, just new ones
-#saveRDS(wb_study_description, file = "C:/Users/lnoe/Documents/GitHub/instrument_inventory/Input/wb_microdata_study_description.rds")
+#saveRDS(wb_study_description, file = "Input/wb_microdata_study_description.rds")
 
 # Load study descriptions from saved file
-wb_study_description <- readRDS("C:/Users/lnoe/Documents/GitHub/instrument_inventory/Input/wb_microdata_study_description.rds")
+wb_study_description <- readRDS("Input/wb_microdata_study_description.rds")
 
 # Set up final list of LSMS/HIES
 lsms <- lsms_raw %>%
@@ -437,7 +438,7 @@ agri_survey <- fromJSON(content(GET("https://microdata.fao.org/index.php/api/cat
 # * Ag Censuses - FAO -----------------------------------------------------
 
 # Upload and clean list of 2020 and 2010 round of ag census. Merge with Ag survey set
-ag_census <- read_csv("C:/Users/lnoe/Documents/GitHub/instrument_inventory/Input/wca_2020_2010_notes.csv") %>%
+ag_census <- read_csv("Input/wca_2020_2010_notes.csv") %>%
   janitor::clean_names() %>%
   mutate(year_clean = case_when(
     str_detect(census_year, "-[0-9]{2}$") ~ str_c("20", str_extract(census_year, "[0-9]{2}$")),
@@ -610,7 +611,7 @@ ihsn <- ihsn_raw %>%
 # Time Use Surveys - UNSD -------------------------------------------------
 
 # https://unstats.un.org/unsd/gender/timeuse and manual ODW check of NSO websites
-tus <- read_csv("C:/Users/lnoe/Documents/GitHub/instrument_inventory/Input/time_use_surveys_sgdf_inventory_2020.csv") %>%
+tus <- read_csv("Input/time_use_surveys_sgdf_inventory_2020.csv") %>%
   janitor::clean_names() %>%
   # Clean year column
   separate(tus_years_available, into = c("year1", "year2"), sep = ", ") %>%
