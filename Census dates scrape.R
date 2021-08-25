@@ -1,12 +1,13 @@
 library(rvest)
 library(tidyverse)
 
-setwd("C:/Users/lnoe/Documents/R")
+setwd("C:/Users/lnoe/Documents/GitHub/instrument_inventory/")
 
+# Define url
 census <- "https://unstats.un.org/unsd/demographic-social/census/censusdates/"
 
 # Import ODW income and region groups groups. From https://datahelpdesk.worldbank.org/knowledgebase/articles/906519-world-bank-country-and-lending-groups
-odw_master_codes <- read_csv("Data/Input Data/2021 ODW Country and Region Codes.csv") %>% 
+odw_master_codes <- read_csv("Input/2021 ODW Country and Region Codes.csv") %>% 
   janitor::clean_names() %>% 
   # Clear out extra lines at the bottom that just contain notes
   filter(!is.na(country_name)) %>%
@@ -145,49 +146,52 @@ df <- df %>%
   # Merge in region and income groups
   left_join(odw_master_codes)
 
-# Create df of years since last census
-last_census <- df %>%
-  # Keep only last year of actual census
-  filter(planned == 0) %>%
-  group_by(iso3c) %>%
-  filter(year == max(year, na.rm = TRUE)) %>%
-  ungroup() %>%
-  # Append using planned censuses
-  rbind(df %>% filter(planned == 1)) %>%
-  # For countries with multiple censuses in one year, only keep one
-  distinct(iso3c, year, .keep_all = TRUE) %>%
-  arrange(iso3c, year) %>%
-  # Reshape into one obs per country
-  select(countryname, iso3c, year, planned, wbregion, incgroup, lendingcat) %>%
-  pivot_wider(names_from = planned, names_prefix = "year", values_from = year) %>%
-  # Years since last census
-  # Whether or not a census is planned for 2020 round.
-    # 1 means yes, it's planned
-    # 0 means none is planned
-    # Blank means none is planned but the last census was in the 2020 round
-    # and therefore we don't know about plans for the 2030 round yet.
-  mutate(time_since_last = 2020 - year0,
-         planned = case_when(
-           !is.na(year1) ~ 1,
-           is.na(year1) & year0 >= 2015 ~ NA_real_,
-           TRUE ~ 0
-         )) %>%
-  rename(last_census = year0, planned_census = year1)
+# Save copy of census scrape to load into main instrument inventory
+saveRDS(df, file = "Input/census_dates_df.rds")
+
+## Create df of years since last census
+#last_census <- df %>%
+#  # Keep only last year of actual census
+#  filter(planned == 0) %>%
+#  group_by(iso3c) %>%
+#  filter(year == max(year, na.rm = TRUE)) %>%
+#  ungroup() %>%
+#  # Append using planned censuses
+#  rbind(df %>% filter(planned == 1)) %>%
+#  # For countries with multiple censuses in one year, only keep one
+#  distinct(iso3c, year, .keep_all = TRUE) %>%
+#  arrange(iso3c, year) %>%
+#  # Reshape into one obs per country
+#  select(countryname, iso3c, year, planned, wbregion, incgroup, lendingcat) %>%
+#  pivot_wider(names_from = planned, names_prefix = "year", values_from = year) %>%
+#  # Years since last census
+#  # Whether or not a census is planned for 2020 round.
+#    # 1 means yes, it's planned
+#    # 0 means none is planned
+#    # Blank means none is planned but the last census was in the 2020 round
+#    # and therefore we don't know about plans for the 2030 round yet.
+#  mutate(time_since_last = 2020 - year0,
+#         planned = case_when(
+#           !is.na(year1) ~ 1,
+#           is.na(year1) & year0 >= 2015 ~ NA_real_,
+#           TRUE ~ 0
+#         )) %>%
+#  rename(last_census = year0, planned_census = year1)
 
 
-# Export to CSV and share with Eric
-df %>%
-  # Add a space in front of dates so Excel doesn't auto-format
-  mutate(date = str_c(" ", date),
-         # Add a plus in front of future dates (2020) for example
-         # So excel doesn't think it's a minus (accounting format)
-         date = case_when(
-           str_detect(date, "\\([0-9]{4}\\)") ~ str_c("+", date),
-           TRUE ~ date
-         )) %>%
-  select(countryname, iso3c, wbregion, incgroup, lending_cat, census_round, date, year, planned, notes) %>%
-  arrange(iso3c, year) %>%
-  write_csv("Data/Output Data/full census dataset_2Feb.csv", na = "")
-last_census %>%
-  arrange(iso3c) %>%
-  write_csv("Data/Output Data/last census.csv", na = "")
+## Export to CSV and share with Eric
+#df %>%
+#  # Add a space in front of dates so Excel doesn't auto-format
+#  mutate(date = str_c(" ", date),
+#         # Add a plus in front of future dates (2020) for example
+#         # So excel doesn't think it's a minus (accounting format)
+#         date = case_when(
+#           str_detect(date, "\\([0-9]{4}\\)") ~ str_c("+", date),
+#           TRUE ~ date
+#         )) %>%
+#  select(countryname, iso3c, wbregion, incgroup, lending_cat, census_round, date, year, planned, notes) %>%
+#  arrange(iso3c, year) %>%
+#  write_csv("Data/Output Data/full census dataset_2Feb.csv", na = "")
+#last_census %>%
+#  arrange(iso3c) %>%
+#  write_csv("Data/Output Data/last census.csv", na = "")
