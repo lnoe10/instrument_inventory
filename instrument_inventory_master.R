@@ -664,31 +664,46 @@ census <- readRDS("Input/census_dates_df.rds") %>%
 
 # Combine -----------------------------------------------------------------
 
-all_surveys <- dhs %>%
-  bind_rows(mics) %>%
+all_surveys_census <- dhs %>%
+  select(-country_original) %>%
+  bind_rows(mics %>% select(-country_original)) %>%
   bind_rows(lsms) %>%
   bind_rows(lfs) %>%
   bind_rows(agri_survey) %>%
+  bind_rows(ag_census) %>%
   bind_rows(tus) %>%
-  bind_rows(census) %>%
-  bind_rows(ihsn)
+  bind_rows(census)
+# Can add IHSN to each of the above to further add surveys
+
+# Export
+all_surveys_census %>%
+  filter(year>=2010, year<=2020) %>%
+  select(-country) %>%
+  mutate(country = countrycode::countrycode(iso3c, "iso3c", "country.name"),
+         country = case_when(
+           iso3c == "ANT" ~ "Netherland Antilles",
+           iso3c == "XKX" ~ "Kosovo",
+           TRUE ~ country
+         ), .before = iso3c) %>%
+  arrange(iso3c, year, instrument_type) %>%
+  write_csv("Output/instrument_inventory.csv", na = "")
 
 # Mock timeline test
-all_surveys %>% 
+all_surveys_census %>% 
   filter(iso3c == "GHA", year>=2010) %>% 
   ggplot(aes(x = year)) + 
   geom_dotplot()
 
 # Adding instrument labels to points
-all_surveys %>% 
+all_surveys_census %>% 
   arrange(iso3c, year) %>% 
   group_by(iso3c, year) %>% 
   # Create y coordinate for instrument
   mutate(n = row_number(year)) %>% 
   ungroup() %>%
   # Filter for country
-  filter(iso3c == "BGD", year>=2010) %>% 
-  ggplot(aes(x = year, y = n, label = instrument_name)) + 
+  filter(iso3c == "GHA", year>=2010) %>% 
+  ggplot(aes(x = year, y = n, label = instrument_type)) + 
   geom_point() + 
   ggrepel::geom_text_repel() +
   scale_x_continuous(breaks = c(2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023)) 
