@@ -648,7 +648,7 @@ tus <- read_csv("Input/time_use_surveys_sgdf_inventory_2020.csv") %>%
 
 # See scraping census dates file
 # Census dates scrape.R
-census <- df %>%
+census <- readRDS("Input/census_dates_df.rds") %>%
   # Filter out where we only have housing census
   filter(notes!="Housing census only."|is.na(notes)) %>%
   mutate(planned = as.character(planned),
