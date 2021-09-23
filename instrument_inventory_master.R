@@ -2,7 +2,7 @@
 #' title: Gender-relevant instrument inventory
 #' author: Lorenz Noe
 #' ---
-setwd("C:/Users/lnoe/Documents/GitHub/instrument_inventory/")
+setwd("C:/Users/loren/Documents/GitHub/instrument_inventory/")
 
 library(httr)
 library(jsonlite)
