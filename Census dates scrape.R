@@ -1,23 +1,21 @@
 library(rvest)
 library(tidyverse)
 
-setwd("C:/Users/lnoe/Documents/GitHub/instrument_inventory/")
+setwd("C:/Users/loren/Documents/GitHub/instrument_inventory/")
 
 # Define url
 census <- "https://unstats.un.org/unsd/demographic-social/census/censusdates/"
 
-# Import ODW income and region groups groups. From https://datahelpdesk.worldbank.org/knowledgebase/articles/906519-world-bank-country-and-lending-groups
-odw_master_codes <- read_csv("Input/2021 ODW Country and Region Codes.csv") %>% 
-  janitor::clean_names() %>% 
-  # Clear out extra lines at the bottom that just contain notes
-  filter(!is.na(country_name)) %>%
-  # Clear out duplicate Faroe Islands
-  distinct(iso_3_code, .keep_all = TRUE) %>%
-  select(iso3c = iso_3_code, country = country_name, odw_region_name, un_code = un_m49_code,
-         incgroup = world_bank_income_group_name, lending_cat = world_bank_lending_code_july_2020,
-         wbregion = world_bank_all_income_region_names) %>%
-  mutate(un_code = as.numeric(un_code), 
-         incgroup = fct_relevel(incgroup, "Low income", "Lower middle income", "Upper middle income", "High income"))
+# Import WB income and region groups groups. From https://datahelpdesk.worldbank.org/knowledgebase/articles/906519-world-bank-country-and-lending-groups
+wb_codes <- read_csv("Input/wb_countries_fy22.csv") %>% 
+  janitor::clean_names() %>%
+  filter(!is.na(region)) %>%
+  # Venezuela is not classified in FY2022. Manually assign to last year's income classification "UM"
+  mutate(income_group = case_when(
+    str_detect(economy, "Venezuela") ~ "Upper middle income",
+    TRUE ~ income_group
+  ),
+  income_group = fct_relevel(income_group, "Low income", "Lower middle income", "Upper middle income", "High income"))
 
 
 #####
@@ -131,11 +129,11 @@ df <- df %>%
   countryname = str_remove(countryname, "\\(3\\)|\\(4\\)"),
   # Create iso code. Netherlands Antilles will be without code (no longer exists)
   # And therefore will not have any info on lending groups and regions
-  iso3c = countrycode::countrycode(countryname, "country.name", "iso3c"),
-  iso3c = case_when(
+  code = countrycode::countrycode(countryname, "country.name", "iso3c"),
+  code = case_when(
     countryname == "Eswatini" ~ "SWZ",
     countryname == "Saint-Martin" ~ "MAF",
-    TRUE ~ iso3c
+    TRUE ~ code
   )) %>%
   # Drop years where there was no census (census == NA)
   # This drops Afghanistan 2010 obs, where census is incomplete
@@ -144,7 +142,7 @@ df <- df %>%
   # but who only have info that "Population figures compiled from administrative registers."
   filter(!is.na(year)) %>%
   # Merge in region and income groups
-  left_join(odw_master_codes)
+  left_join(wb_codes)
 
 # Save copy of census scrape to load into main instrument inventory
 saveRDS(df, file = "Input/census_dates_df.rds")
