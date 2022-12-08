@@ -85,12 +85,12 @@ mics <- mics_raw %>%
 # * DHS - USAID -------------------------------------------------------------
 
 # https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
-# Completed and ongoing DHS. Was short of one, Guatemala in 2022
+# Completed and ongoing DHS. Was short of one, Zambia in 2023
 # API https://api.dhsprogram.com/rest/dhs/surveys?surveyStatus=all&f=html
 dhs <- fromJSON(content(GET("https://api.dhsprogram.com/rest/dhs/surveys?surveyStatus=all"), "text"))$Data %>%
   as_tibble() %>%
-  add_row(SurveyType = "DHS", SurveyYearLabel = "2022", SurveyYear = "2022", DHS_CountryCode = "GU",
-          CountryName = "Guatemala", SubregionName = "Central America", SurveyStatus = "Ongoing", RegionName = "Latin America & Caribbean") %>%
+  add_row(SurveyType = "DHS", SurveyYearLabel = "2023", SurveyYear = "2023", DHS_CountryCode = "ZM",
+          CountryName = "Zambia", SubregionName = "Eastern Africa", SurveyStatus = "Ongoing", RegionName = "Sub-Saharan Africa") %>%
   janitor::clean_names() %>%
   # Filtering out Other surveys, Service Provision Assessments (SPA) and Special DHS, as the latter is mostly conducted at the sub-national level
   # Assessed 35 other surveys, of which 10 were from after 2010 and were deemed gender-relevant and without double-counting MICS, for example.
@@ -480,7 +480,7 @@ ihsn_raw <- fromJSON(content(GET("https://catalog.ihsn.org/index.php/api/catalog
   mutate(iso3c = countrycode::countrycode(nation, "country.name", "iso3c"),
          iso3c = case_when(
            nation == "Kosovo" ~ "XKX",
-           nation == "Sénégal" ~ "SEN",
+           nation == "S?n?gal" ~ "SEN",
            TRUE ~ iso3c
          ),
          status = "Completed", source = "https://catalog.ihsn.org/catalog")
@@ -593,11 +593,11 @@ ihsn <- ihsn_raw %>%
                             "Enterprise Survey",
                             "Price Survey [hh/prc]",
                             "Encuesta de empresas [en/oth]",
-                            "Encuesta de Buenas Prácticas Ambientales",
-                            "Données administrative, santé [ad/hea]",
-                            "Enquête sur les entreprises [en/oth]",
-                            "Estadística de precios",
-                            "Estadística del Sector Eléctrico",
+                            "Encuesta de Buenas Pr?cticas Ambientales",
+                            "Donn?es administrative, sant? [ad/hea]",
+                            "Enqu?te sur les entreprises [en/oth]",
+                            "Estad?stica de precios",
+                            "Estad?stica del Sector El?ctrico",
                             "Encuesta",
                             "Establishment Census [en/census]",
                             "Registros Administrativos",
