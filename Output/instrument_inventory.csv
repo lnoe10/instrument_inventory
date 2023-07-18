@@ -5,9 +5,7 @@ Aruba,ABW,2020,Complete,Population Census,Census,https://unstats.un.org/unsd/dem
 Afghanistan,AFG,2010,Completed,OTH,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Afghanistan,AFG,2011,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Afghanistan,AFG,2015,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
-Afghanistan,AFG,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Afghanistan,AFG,2020,Completed,TUS 2020 (https://www2.unwomen.org/-/media/field%20office%20eseasia/docs/publications/2020/05/timeusesurveymay2020.pdf?la=en&vs=3719),Time Use Survey,https://unstats.un.org/unsd/gender/timeuse and manual ODW check of NSO websites
-Angola,AGO,2010,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Angola,AGO,2011,Completed,MIS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Angola,AGO,2014,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Angola,AGO,2015,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
@@ -19,14 +17,14 @@ Albania,ALB,2017,Completed,DHS,Household health survey,https://dhsprogram.com/Me
 Andorra,AND,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Netherland Antilles,ANT,2013,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 United Arab Emirates,ARE,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-United Arab Emirates,ARE,2019,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Argentina,ARG,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Argentina,ARG,2012,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Argentina,ARG,2017,completed,Livelihoods Programme Monitoring Beneficiary Survey in 2017,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
+Argentina,ARG,2019,completed,"Pastoralists-driven Data Management System in Argentina, 2018-2019.",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Argentina,ARG,2019,completed,"Good Growth Plan, 2014-2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Argentina,ARG,2019,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
-Argentina,ARG,2020,Data processing / analysis,MICS,Household health survey,https://mics.unicef.org/surveys
-Argentina,ARG,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
+Argentina,ARG,2020,completed,COVID-19 High Frequency Phone Surveys 2020,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
+Argentina,ARG,2020,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Armenia,ARM,2010,completed,Integrated Living Conditions Survey 2010,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Armenia,ARM,2010,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Armenia,ARM,2011,completed,Integrated Living Conditions Survey 2011,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
@@ -42,8 +40,7 @@ Armenia,ARM,2016,completed,Integrated Living Conditions Survey 2016,Agricultural
 Armenia,ARM,2016,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Armenia,ARM,2017,completed,Integrated Living Conditions Survey 2017,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Armenia,ARM,2018,completed,Integrated Living Conditions Survey 2018,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
-Armenia,ARM,2019,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
-Armenia,ARM,2020,completed,"COVID-19 High Frequency Survey of Households and Children 2020, Wave 1, Surveys I & II",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
+Armenia,ARM,2020,completed,"COVID-19 High Frequency Survey of Households and Children 2020-2021, Waves 1 and 2",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 American Samoa,ASM,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 American Samoa,ASM,2020,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Antigua & Barbuda,ATG,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
@@ -52,29 +49,24 @@ Australia,AUS,2011,Complete,Population Census,Census,https://unstats.un.org/unsd
 Australia,AUS,2016,completed,"Good Growth Plan, 2014-2016",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Australia,AUS,2016,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Australia,AUS,2016,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Australia,AUS,2016,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
+Australia,AUS,2018,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Austria,AUT,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Austria,AUT,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Austria,AUT,2012,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Austria,AUT,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
-Austria,AUT,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Azerbaijan,AZE,2015,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Azerbaijan,AZE,2019,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Azerbaijan,AZE,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Burundi,BDI,2010,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Burundi,BDI,2012,Completed,MIS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Burundi,BDI,2016,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Belgium,BEL,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Belgium,BEL,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Belgium,BEL,2012,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Belgium,BEL,2017,completed,"Good Growth Plan, 2014-2017",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
-Belgium,BEL,2019,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Belgium,BEL,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Benin,BEN,2012,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Benin,BEN,2013,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Benin,BEN,2014,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Benin,BEN,2017,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
-Benin,BEN,2018,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
+Benin,BEN,2018,completed,Enquête Harmonisée sur le Conditions de Vie des Ménages 2018-2019,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Benin,BEN,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Burkina Faso,BFA,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Burkina Faso,BFA,2010,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
@@ -83,10 +75,11 @@ Burkina Faso,BFA,2014,Completed,MIS,Household health survey,https://dhsprogram.c
 Burkina Faso,BFA,2015,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Burkina Faso,BFA,2017,completed,Livelihoods Programme Monitoring Beneficiary Survey in 2017,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Burkina Faso,BFA,2017,Completed,MIS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
+Burkina Faso,BFA,2018,completed,Enquête Harmonisée sur le Conditions de Vie des Ménages 2018-2019,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Burkina Faso,BFA,2019,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Burkina Faso,BFA,2019,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Burkina Faso,BFA,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
-Burkina Faso,BFA,2020,completed,COVID-19 High Frequency Phone Survey 2020,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
+Burkina Faso,BFA,2020,completed,High Frequency Phone Survey 2020-2023,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Bangladesh,BGD,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Bangladesh,BGD,2011,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Bangladesh,BGD,2012,Completed,Time use pilot survey 2012,Time Use Survey,https://unstats.un.org/unsd/gender/timeuse and manual ODW check of NSO websites
@@ -96,13 +89,14 @@ Bangladesh,BGD,2016,completed,"Poverty and Groundwater Salinity Survey, 2016",Ag
 Bangladesh,BGD,2016,completed,"Smallholder Household Survey - CGAP, 2016",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Bangladesh,BGD,2017,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Bangladesh,BGD,2017,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
+Bangladesh,BGD,2019,completed,"Multi Sector Needs Assessment: Cox’s Bazar, Rohingya Refugee Response – June 2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Bangladesh,BGD,2019,completed,"Good Growth Plan, 2014-2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Bangladesh,BGD,2019,completed,"Chattogram Low Income Area Gender, Inclusion, and Poverty Survey 2019",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Bangladesh,BGD,2019,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Bangladesh,BGD,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
+Bangladesh,BGD,2020,completed,"Cox’s Bazar Panel Survey, High-Frequency Tracking Survey 2020-2021",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Bulgaria,BGR,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Bulgaria,BGR,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Bulgaria,BGR,2012,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Bulgaria,BGR,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Bahrain,BHR,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Bahrain,BHR,2015,Completed,Official estimate,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
@@ -111,30 +105,24 @@ Bahamas,BHS,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/d
 Bahamas,BHS,2018,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Bosnia & Herzegovina,BIH,2012,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Bosnia & Herzegovina,BIH,2013,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Bosnia & Herzegovina,BIH,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 St. Barthélemy,BLM,2015,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Belarus,BLR,2012,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Belarus,BLR,2015,Completed,Official estimate,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Belarus,BLR,2019,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Belarus,BLR,2019,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Belarus,BLR,2019,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
-Belarus,BLR,2019,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Belize,BLZ,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Belize,BLZ,2011,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Belize,BLZ,2011,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Belize,BLZ,2016,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Belize,BLZ,2019,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
-Belize,BLZ,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Bermuda,BMU,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Bermuda,BMU,2014,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Bermuda,BMU,2016,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Bolivia,BOL,2012,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Bolivia,BOL,2013,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
-Bolivia,BOL,2018,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
-Bolivia,BOL,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
+Bolivia,BOL,2020,completed,COVID-19 High Frequency Phone Surveys 2020,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Brazil,BRA,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Brazil,BRA,2015,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
-Brazil,BRA,2015,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Brazil,BRA,2017,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Brazil,BRA,2019,completed,"Good Growth Plan, 2014-2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Barbados,BRB,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
@@ -142,12 +130,10 @@ Barbados,BRB,2012,Completed,MICS,Household health survey,https://mics.unicef.org
 Barbados,BRB,2019,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Brunei,BRN,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Brunei,BRN,2011,Completed,Official estimate,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
-Brunei,BRN,2019,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Bhutan,BTN,2010,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Bhutan,BTN,2010,Completed,Gross National Happiness Survey 2010,Time Use Survey,https://unstats.un.org/unsd/gender/timeuse and manual ODW check of NSO websites
 Bhutan,BTN,2017,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Bhutan,BTN,2019,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
-Bhutan,BTN,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Botswana,BWA,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Botswana,BWA,2013,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Botswana,BWA,2015,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
@@ -161,10 +147,9 @@ Canada,CAN,2016,Complete,Population Census,Census,https://unstats.un.org/unsd/de
 Switzerland,CHE,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Switzerland,CHE,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Switzerland,CHE,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
-Switzerland,CHE,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Chile,CHL,2012,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Chile,CHL,2017,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Chile,CHL,2020,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
+Chile,CHL,2020,completed,COVID-19 High Frequency Phone Surveys 2020,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 China,CHN,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 China,CHN,2016,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 China,CHN,2019,completed,"Good Growth Plan, 2014-2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
@@ -177,9 +162,12 @@ Côte d’Ivoire,CIV,2016,completed,Agriculture Census,Agricultural Survey/Censu
 Côte d’Ivoire,CIV,2016,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Côte d’Ivoire,CIV,2016,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Côte d’Ivoire,CIV,2017,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
+Côte d’Ivoire,CIV,2018,completed,Enquête Harmonisée sur le Conditions de Vie des Ménages 2018-2019,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
+Côte d’Ivoire,CIV,2019,completed,Harmonized Survey on Households Living Standards 2018-2019,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Côte d’Ivoire,CIV,2019,completed,"Good Growth Plan, 2014-2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Côte d’Ivoire,CIV,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Cameroon,CMR,2011,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
+Cameroon,CMR,2013,completed,"General Livestock and Aquaculture Census, 2013",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Cameroon,CMR,2014,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Cameroon,CMR,2014,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Cameroon,CMR,2018,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
@@ -193,29 +181,29 @@ Congo - Brazzaville,COG,2012,Completed,Labour force survey,Labor Force Survey,ht
 Congo - Brazzaville,COG,2015,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Congo - Brazzaville,COG,2015,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Congo - Brazzaville,COG,2015,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
-Congo - Brazzaville,COG,2015,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Cook Islands,COK,2011,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Cook Islands,COK,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Cook Islands,COK,2016,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Cook Islands,COK,2019,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Colombia,COL,2010,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
+Colombia,COL,2013,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Colombia,COL,2014,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Colombia,COL,2015,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Colombia,COL,2018,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Colombia,COL,2019,completed,"Good Growth Plan, 2014-2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
+Colombia,COL,2020,completed,COVID-19 High Frequency Phone Surveys 2020,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Comoros,COM,2012,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
-Comoros,COM,2014,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Comoros,COM,2017,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Cape Verde,CPV,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Cape Verde,CPV,2015,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
-Cape Verde,CPV,2019,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
+Cape Verde,CPV,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Costa Rica,CRI,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Costa Rica,CRI,2011,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Costa Rica,CRI,2014,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Costa Rica,CRI,2016,completed,"Good Growth Plan, 2014-2016",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Costa Rica,CRI,2018,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Costa Rica,CRI,2019,Completed,Encuesta Nacional Agropecuaria,Agricultural Survey/Census,http://www.fao.org/documents/card/en/c/cb3976en
-Costa Rica,CRI,2019,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
+Costa Rica,CRI,2020,completed,COVID-19 High Frequency Phone Surveys 2020,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Cuba,CUB,2011,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Cuba,CUB,2012,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Cuba,CUB,2014,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
@@ -226,54 +214,48 @@ Cayman Islands,CYM,2010,Complete,Population Census,Census,https://unstats.un.org
 Cayman Islands,CYM,2015,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Cyprus,CYP,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Cyprus,CYP,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Cyprus,CYP,2012,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Czechia,CZE,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Czechia,CZE,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Czechia,CZE,2012,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
-Czechia,CZE,2019,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Czechia,CZE,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Germany,DEU,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Germany,DEU,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Germany,DEU,2012,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Germany,DEU,2015,completed,"Good Growth Plan, 2015",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
-Germany,DEU,2018,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Germany,DEU,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Djibouti,DJI,2012,Completed,Time-Use Supplement of the Djibouti Household Expenditure Survey 2012,Time Use Survey,https://unstats.un.org/unsd/gender/timeuse and manual ODW check of NSO websites
 Djibouti,DJI,2017,completed,Enquête Djiboutienne Auprès des Ménages pour les Indicateurs Sociaux 2017 - Données pour utilisation publique,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Djibouti,DJI,2017,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Djibouti,DJI,2020,completed,"COVID-19 National Panel Phone Survey - Wave 1, 2020",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
+Djibouti,DJI,2020,completed,"COVID-19 National Panel Phone Survey 2020, Wave 2",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Djibouti,DJI,2020,completed,"COVID-19 National Panel Phone Survey 2020, Wave 1",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Djibouti,DJI,2020,completed,"COVID-19 National Panel Phone Survey 2020, Wave 2",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Djibouti,DJI,2020,completed,"COVID-19 National Panel Phone Survey 2020, Wave 3",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
+Djibouti,DJI,2020,completed,"COVID-19 National Panel Phone Survey 2020, Wave 3 - Refugee Sample",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Dominica,DMA,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Denmark,DNK,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Denmark,DNK,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Denmark,DNK,2012,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Denmark,DNK,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Dominican Republic,DOM,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Dominican Republic,DOM,2013,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Dominican Republic,DOM,2014,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
-Dominican Republic,DOM,2019,Data processing / analysis,MICS,Household health survey,https://mics.unicef.org/surveys
-Dominican Republic,DOM,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
+Dominican Republic,DOM,2019,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
+Dominican Republic,DOM,2020,completed,COVID-19 High Frequency Phone Surveys 2020,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Algeria,DZA,2013,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Algeria,DZA,2017,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Algeria,DZA,2019,completed,"Good Growth Plan, 2014-2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Algeria,DZA,2019,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Ecuador,ECU,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Ecuador,ECU,2019,completed,"Good Growth Plan, 2014-2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
+Ecuador,ECU,2020,completed,COVID-19 High Frequency Phone Surveys 2020,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Egypt,EGY,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Egypt,EGY,2014,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Egypt,EGY,2015,Completed,OTH,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Egypt,EGY,2017,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Egypt,EGY,2019,completed,"Good Growth Plan, 2014-2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
-Egypt,EGY,2019,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Spain,ESP,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Spain,ESP,2012,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Spain,ESP,2019,completed,"Good Growth Plan, 2014-2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Spain,ESP,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Estonia,EST,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Estonia,EST,2012,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Estonia,EST,2012,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Estonia,EST,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Ethiopia,ETH,2011,completed,Rural Socioeconomic Survey 2011-2012,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Ethiopia,ETH,2011,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
@@ -282,7 +264,6 @@ Ethiopia,ETH,2012,Completed,"Ethiopian Time Use Survey 2012, Ethiopian Time Use 
 Ethiopia,ETH,2013,completed,Land and Soil Experimental Research 2013,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Ethiopia,ETH,2013,completed,Land and Soil Experimental Research 2013,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Ethiopia,ETH,2013,completed,Socioeconomic Survey 2013-2014,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
-Ethiopia,ETH,2013,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Ethiopia,ETH,2013,Completed,"Ethiopian Time Use Survey 2012, Ethiopian Time Use Survey 2013",Time Use Survey,https://unstats.un.org/unsd/gender/timeuse and manual ODW check of NSO websites
 Ethiopia,ETH,2014,completed,Ethiopian Socioeconomic Survey 2013-2014,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Ethiopia,ETH,2015,completed,"Socioeconomic Survey 2015-2016, Wave 3",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
@@ -293,10 +274,11 @@ Ethiopia,ETH,2018,completed,Socioeconomic Survey 2018-2019,HIES,https://microdat
 Ethiopia,ETH,2019,completed,"Socioeconomic Survey, 2018-2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Ethiopia,ETH,2019,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Ethiopia,ETH,2020,completed,COVID-19 High Frequency Phone Survey of Households 2020,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
-Ethiopia,ETH,2020,completed,COVID-19 High Frequency Phone Survey of Households 2020,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
+Ethiopia,ETH,2020,completed,High Frequency Phone Survey 2020-2023,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
+Ethiopia,ETH,2020,completed,Monitoring COVID-19 Impact on Refugees in Ethiopia: High-Frequency Phone Survey of Refugees 2020,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
+Ethiopia,ETH,2020,completed,COVID-19 High Frequency Phone Survey of Households 2020 - World Bank LSMS Harmonized Dataset,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Finland,FIN,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Finland,FIN,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Finland,FIN,2012,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Finland,FIN,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Fiji,FJI,2016,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Fiji,FJI,2017,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
@@ -305,11 +287,9 @@ Falkland Islands,FLK,2012,Complete,Population Census,Census,https://unstats.un.o
 Falkland Islands,FLK,2016,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 France,FRA,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 France,FRA,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-France,FRA,2012,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 France,FRA,2016,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 France,FRA,2019,completed,"Good Growth Plan, 2014-2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 France,FRA,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
-France,FRA,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Faroe Islands,FRO,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Faroe Islands,FRO,2013,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Micronesia (Federated States of),FSM,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
@@ -317,11 +297,10 @@ Micronesia (Federated States of),FSM,2017,completed,Agriculture Census,Agricultu
 Gabon,GAB,2010,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Gabon,GAB,2012,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Gabon,GAB,2013,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Gabon,GAB,2019,Ongoing,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
+Gabon,GAB,2019,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Gabon,GAB,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 United Kingdom,GBR,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 United Kingdom,GBR,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-United Kingdom,GBR,2012,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 United Kingdom,GBR,2017,completed,"Good Growth Plan, 2015-2017",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 United Kingdom,GBR,2018,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Georgia,GEO,2012,completed,Agribusiness Development 2008-2012,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
@@ -329,9 +308,8 @@ Georgia,GEO,2014,completed,Agriculture Census,Agricultural Survey/Census,http://
 Georgia,GEO,2014,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Georgia,GEO,2016,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Georgia,GEO,2018,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
-Georgia,GEO,2020,completed,COVID-19 High Frequency Survey 2020-2021,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
+Georgia,GEO,2020,completed,COVID-19 High Frequency Survey 2020-2022,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Georgia,GEO,2020,completed,"Covid-19 Monitor 2020, Waves 1-6",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
-Georgia,GEO,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Guernsey,GGY,2015,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Guernsey,GGY,2016,Completed,Other administrative records and related sources,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Ghana,GHA,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
@@ -344,6 +322,10 @@ Ghana,GHA,2016,Completed,MIS,Household health survey,https://dhsprogram.com/Meth
 Ghana,GHA,2017,completed,Living Standard Survey 2017,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Ghana,GHA,2017,completed,Livelihoods Programme Monitoring Beneficiary Survey in 2017,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Ghana,GHA,2017,Completed,OTH,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
+Ghana,GHA,2018,completed,"Agricultural Integrated Survey (AGRIS) - Pilot - MEA module, Ghana Pilot Survey 2018",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
+Ghana,GHA,2018,completed,"Agricultural Integrated Survey (AGRIS) - Pilot - PME module, Ghana Pilot Survey 2018",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
+Ghana,GHA,2018,completed,"Agricultural Integrated Survey (AGRIS), Pilot - ECO module, Ghana Pilot Survey 2018",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
+Ghana,GHA,2018,completed,"Agricultural Integrated Survey (AGRIS), Pilot - LABOUR module, Ghana Pilot Survey 2018",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Ghana,GHA,2018,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Ghana,GHA,2019,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Ghana,GHA,2019,Completed,MIS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
@@ -365,11 +347,14 @@ Gambia,GMB,2011,completed,Integrated Household Survey 2010-2011,Agricultural Sur
 Gambia,GMB,2012,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Gambia,GMB,2013,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Gambia,GMB,2013,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
+Gambia,GMB,2016,completed,Integrated Household Survey 2015,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Gambia,GMB,2018,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Gambia,GMB,2018,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Gambia,GMB,2019,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
+Gambia,GMB,2020,completed,High Frequency Phone Survey 2020-2021,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Guinea-Bissau,GNB,2010,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Guinea-Bissau,GNB,2014,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
+Guinea-Bissau,GNB,2018,completed,Inquérito Harmonizado sobre as Condiçöes de vide dos Agreagados Familiares 2018-2019,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Guinea-Bissau,GNB,2019,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Guinea-Bissau,GNB,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Equatorial Guinea,GNQ,2011,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
@@ -377,7 +362,6 @@ Equatorial Guinea,GNQ,2015,completed,Agriculture Census,Agricultural Survey/Cens
 Equatorial Guinea,GNQ,2015,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Greece,GRC,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Greece,GRC,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Greece,GRC,2012,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Grenada,GRD,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Grenada,GRD,2012,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Grenada,GRD,2015,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
@@ -386,7 +370,8 @@ Greenland,GRL,2015,Completed,Other administrative records and related sources,La
 Guatemala,GTM,2015,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Guatemala,GTM,2018,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Guatemala,GTM,2019,completed,"Good Growth Plan, 2014-2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
-Guatemala,GTM,2019,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
+Guatemala,GTM,2020,completed,COVID-19 High Frequency Phone Surveys 2020,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
+French Guiana,GUF,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 French Guiana,GUF,2016,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 French Guiana,GUF,2016,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 French Guiana,GUF,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
@@ -394,21 +379,20 @@ Guam,GUM,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demo
 Guam,GUM,2016,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Guam,GUM,2018,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Guam,GUM,2020,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Guyana,GUY,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Guyana,GUY,2012,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Guyana,GUY,2014,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
-Guyana,GUY,2018,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
-Guyana,GUY,2020,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
+Guyana,GUY,2019,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
+Guyana,GUY,2020,Data processing / analysis,MICS,Household health survey,https://mics.unicef.org/surveys
 Hong Kong SAR China,HKG,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Hong Kong SAR China,HKG,2016,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Hong Kong SAR China,HKG,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Honduras,HND,2011,completed,Farmer Training and Development 2008-2011,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Honduras,HND,2011,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Honduras,HND,2011,Completed,Time-use Module in Permanent Multipurpose Household Survey 2011,Time Use Survey,https://unstats.un.org/unsd/gender/timeuse and manual ODW check of NSO websites
 Honduras,HND,2013,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Honduras,HND,2017,completed,"Good Growth Plan, 2014-2017",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
-Honduras,HND,2019,Data processing / analysis,MICS,Household health survey,https://mics.unicef.org/surveys
-Honduras,HND,2019,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
+Honduras,HND,2019,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
+Honduras,HND,2020,completed,COVID-19 High Frequency Phone Surveys 2020,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
+Honduras,HND,2020,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Croatia,HRV,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Croatia,HRV,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Croatia,HRV,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
@@ -418,7 +402,6 @@ Haiti,HTI,2013,Completed,OTH,Household health survey,https://dhsprogram.com/Meth
 Haiti,HTI,2016,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Hungary,HUN,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Hungary,HUN,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Hungary,HUN,2012,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Hungary,HUN,2019,completed,"Good Growth Plan, 2014-2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Hungary,HUN,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Indonesia,IDN,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
@@ -429,7 +412,7 @@ Indonesia,IDN,2017,Completed,OTH,Household health survey,https://dhsprogram.com/
 Indonesia,IDN,2017,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Indonesia,IDN,2019,completed,"Good Growth Plan, 2014-2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Indonesia,IDN,2020,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Indonesia,IDN,2020,completed,High-Frequency Monitoring of COVID-19 Impacts 2020,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
+Indonesia,IDN,2020,completed,"High-Frequency Monitoring of COVID-19 Impacts Rounds 1-8, 2020-2023",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Isle of Man,IMN,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Isle of Man,IMN,2016,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 India,IND,2011,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
@@ -442,38 +425,32 @@ India,IND,2013,completed,"Situation Assessment Survey (Visit 2), 2013",Agricultu
 India,IND,2015,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 India,IND,2016,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 India,IND,2019,completed,"Good Growth Plan, 2014-2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
-India,IND,2019,Ongoing,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
-India,IND,2019,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 India,IND,2020,completed,COVID-19 Related Shocks Survey (CRSS) in Rural India 2020,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 India,IND,2020,completed,COVID-19 Related Shocks Survey in Rural India 2020,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 India,IND,2020,completed,"COVID-19 Related Shocks Survey in Rural India 2020, Round 1",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 India,IND,2020,completed,"COVID-19-Related Shocks in Rural India 2020, Round 2",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 India,IND,2020,completed,"COVID-19-Related Shocks in Rural India 2020, Rounds 1-3",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
+India,IND,2020,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Ireland,IRL,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Ireland,IRL,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Ireland,IRL,2016,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Ireland,IRL,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
-Ireland,IRL,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Iran,IRN,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Iran,IRN,2015,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Iran,IRN,2016,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Iran,IRN,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Iraq,IRQ,2011,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Iraq,IRQ,2012,completed,"Household Socio-Economic Survey 2012, Second Round",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Iraq,IRQ,2013,completed,Household Socio-Economic Survey 2012,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Iraq,IRQ,2017,completed,Rapid Welfare Monitoring Survey 2017,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Iraq,IRQ,2018,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
+Iraq,IRQ,2020,completed,High Frequency Phone Survey - Internally Displaced Persons (IDP) and Returnees Sample 2020,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Iraq,IRQ,2020,completed,"High Frequency Phone Survey 2020, Assessment of the Impact of COVID-19 on Firms",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
-Iraq,IRQ,2020,completed,High Frequency Phone Survey 2020-2021,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Iceland,ISL,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Iceland,ISL,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Iceland,ISL,2012,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Iceland,ISL,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
-Iceland,ISL,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Israel,ISR,2017,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Italy,ITA,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Italy,ITA,2012,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Italy,ITA,2012,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Italy,ITA,2019,completed,"Good Growth Plan, 2014-2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Jamaica,JAM,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Jamaica,JAM,2011,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
@@ -486,7 +463,6 @@ Jordan,JOR,2015,Completed,Other household survey,Labor Force Survey,https://ilos
 Jordan,JOR,2017,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Jordan,JOR,2017,completed,Livelihoods Programme Monitoring Beneficiary Survey 2017,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Jordan,JOR,2017,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
-Jordan,JOR,2019,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Japan,JPN,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Japan,JPN,2015,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Japan,JPN,2015,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
@@ -505,14 +481,13 @@ Kenya,KEN,2017,completed,Livelihoods Programme Monitoring Beneficiary Survey 201
 Kenya,KEN,2019,completed,"Good Growth Plan, 2014-2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Kenya,KEN,2019,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Kenya,KEN,2020,completed,"COVID-19 Rapid Response Phone Survey, 2020",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
-Kenya,KEN,2020,completed,"COVID-19 Rapid Response Phone Survey Households 2020-2021, Panel",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
-Kenya,KEN,2020,Ongoing,MIS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
+Kenya,KEN,2020,completed,"COVID-19 Rapid Response Phone Survey with Households 2020-2022, Panel",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
+Kenya,KEN,2020,Completed,MIS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Kyrgyzstan,KGZ,2010,Completed,"Time Use Survey 2010, 2015",Time Use Survey,https://unstats.un.org/unsd/gender/timeuse and manual ODW check of NSO websites
 Kyrgyzstan,KGZ,2012,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Kyrgyzstan,KGZ,2014,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Kyrgyzstan,KGZ,2015,Completed,"Time Use Survey 2010, 2015",Time Use Survey,https://unstats.un.org/unsd/gender/timeuse and manual ODW check of NSO websites
 Kyrgyzstan,KGZ,2018,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
-Kyrgyzstan,KGZ,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Cambodia,KHM,2010,completed,Cambodia Socio-Economic Survey 2010,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Cambodia,KHM,2010,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Cambodia,KHM,2011,completed,Cambodia Socio-Economic Survey 2011,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
@@ -523,9 +498,10 @@ Cambodia,KHM,2014,completed,Cambodia Socio-Economic Survey 2014,Agricultural Sur
 Cambodia,KHM,2014,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Cambodia,KHM,2019,completed,Cambodia Inter-Censal Agriculture Survey 2019,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Cambodia,KHM,2019,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
+Cambodia,KHM,2019,completed,Living Standards Measurement Study - Plus 2019-2020,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Cambodia,KHM,2019,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
-Cambodia,KHM,2020,completed,"COVID-19 High Frequency Phone Survey of Households 2020, IDPoor",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
-Cambodia,KHM,2020,completed,"COVID-19 High Frequency Phone Survey of Households 2020-2021, Living Standards Measurement Study Plus",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
+Cambodia,KHM,2020,completed,COVID-19 High Frequency Phone Survey of Households 2020-2022,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
+Cambodia,KHM,2020,completed,"COVID-19 High Frequency Phone Survey of Households 2020-2022, CSES",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Kiribati,KIR,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Kiribati,KIR,2015,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Kiribati,KIR,2019,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
@@ -534,7 +510,6 @@ Kiribati,KIR,2020,completed,Agriculture Census,Agricultural Survey/Census,http:/
 St. Kitts & Nevis,KNA,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 South Korea,KOR,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 South Korea,KOR,2015,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-South Korea,KOR,2018,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 South Korea,KOR,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 South Korea,KOR,2020,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Kuwait,KWT,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
@@ -544,11 +519,9 @@ Laos,LAO,2011,completed,Agriculture Census,Agricultural Survey/Census,http://www
 Laos,LAO,2012,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Laos,LAO,2015,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Laos,LAO,2017,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
-Laos,LAO,2017,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Laos,LAO,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Lebanon,LBN,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Lebanon,LBN,2019,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
-Liberia,LBR,2010,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Liberia,LBR,2011,Completed,MIS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Liberia,LBR,2013,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Liberia,LBR,2014,completed,Household Income and Expenditure Survey 2014-2015,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
@@ -556,12 +529,12 @@ Liberia,LBR,2014,Completed,Other household survey,Labor Force Survey,https://ilo
 Liberia,LBR,2016,completed,Household Income and Expenditure Survey 2016,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Liberia,LBR,2016,Completed,MIS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Liberia,LBR,2017,completed,Household Income and Expenditure Survey 2016-2017,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
+Liberia,LBR,2017,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Liberia,LBR,2018,completed,National Household Forest Survey 2018-2019,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Liberia,LBR,2019,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Libya,LBY,2012,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 St. Lucia,LCA,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 St. Lucia,LCA,2012,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
-St. Lucia,LCA,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Liechtenstein,LIE,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Liechtenstein,LIE,2015,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Liechtenstein,LIE,2017,Completed,Population register,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
@@ -569,7 +542,6 @@ Sri Lanka,LKA,2012,completed,"Livelihoods, Basic Services, Social Protection and
 Sri Lanka,LKA,2012,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Sri Lanka,LKA,2014,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Sri Lanka,LKA,2016,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
-Sri Lanka,LKA,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Lesotho,LSO,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Lesotho,LSO,2013,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Lesotho,LSO,2014,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
@@ -577,30 +549,26 @@ Lesotho,LSO,2016,Complete,Population Census,Census,https://unstats.un.org/unsd/d
 Lesotho,LSO,2018,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Lithuania,LTU,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Lithuania,LTU,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Lithuania,LTU,2012,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
-Lithuania,LTU,2018,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Lithuania,LTU,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
+Lithuania,LTU,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Luxembourg,LUX,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Luxembourg,LUX,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Luxembourg,LUX,2012,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Luxembourg,LUX,2017,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Luxembourg,LUX,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Latvia,LVA,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Latvia,LVA,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Latvia,LVA,2012,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Latvia,LVA,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
-Macau SAR China,MAC,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Macau SAR China,MAC,2016,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
+Macao SAR China,MAC,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
+Macao SAR China,MAC,2016,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Saint Martin (French part),MAF,2015,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Morocco,MAR,2014,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Morocco,MAR,2016,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Morocco,MAR,2019,completed,"Good Growth Plan, 2014-2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
-Morocco,MAR,2019,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Monaco,MCO,2016,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Moldova,MDA,2011,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Moldova,MDA,2012,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
+Moldova,MDA,2013,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Moldova,MDA,2014,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Moldova,MDA,2015,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Madagascar,MDG,2011,Completed,MIS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Madagascar,MDG,2013,Completed,MIS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Madagascar,MDG,2015,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
@@ -618,28 +586,26 @@ Mexico,MEX,2015,Completed,MICS,Household health survey,https://mics.unicef.org/s
 Mexico,MEX,2017,completed,National Agricultural Survey 2017,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Mexico,MEX,2019,completed,"Good Growth Plan, 2014-2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Mexico,MEX,2020,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
+Mexico,MEX,2020,completed,COVID-19 High Frequency Phone Surveys 2020,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Marshall Islands,MHL,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Macedonia,MKD,2011,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
-Macedonia,MKD,2019,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
-Macedonia,MKD,2019,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
-Macedonia,MKD,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
+North Macedonia,MKD,2011,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
+North Macedonia,MKD,2019,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Mali,MLI,2010,Completed,OTH,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Mali,MLI,2010,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Mali,MLI,2012,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Mali,MLI,2014,completed,Integrated Agricultural Survey 2014,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Mali,MLI,2014,completed,Enquête Agricole de Conjoncture Intégrée 2014,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
-Mali,MLI,2014,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Mali,MLI,2015,Completed,MIS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Mali,MLI,2015,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Mali,MLI,2017,completed,Enquête Agricole de Conjoncture Intégrée aux Conditions de Vie des Ménages 2017,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Mali,MLI,2018,completed,Integrated Agricultural Survey 2017-2018,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
+Mali,MLI,2018,completed,Enquête Harmonisée sur le Conditions de Vie des Ménages 2018-2019,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Mali,MLI,2018,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
-Mali,MLI,2018,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Mali,MLI,2020,completed,"COVID-19 Panel Phone Survey of Households, 2020",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Mali,MLI,2020,completed,COVID-19 Panel Phone Survey of Households 2020,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
+Mali,MLI,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Malta,MLT,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Malta,MLT,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Malta,MLT,2012,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Malta,MLT,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Myanmar (Burma),MMR,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Myanmar (Burma),MMR,2010,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
@@ -652,15 +618,14 @@ Montenegro,MNE,2010,completed,Agriculture Census,Agricultural Survey/Census,http
 Montenegro,MNE,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Montenegro,MNE,2013,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Montenegro,MNE,2018,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
-Montenegro,MNE,2018,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Montenegro,MNE,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Mongolia,MNG,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Mongolia,MNG,2010,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Mongolia,MNG,2011,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Mongolia,MNG,2014,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Mongolia,MNG,2018,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
+Mongolia,MNG,2019,completed,"Pastoralists-driven Data Management System in Mongolia, 2018-2019.",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Mongolia,MNG,2020,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Mongolia,MNG,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Northern Mariana Islands,MNP,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Northern Mariana Islands,MNP,2018,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Northern Mariana Islands,MNP,2020,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
@@ -677,7 +642,7 @@ Mauritania,MRT,2013,Complete,Population Census,Census,https://unstats.un.org/uns
 Mauritania,MRT,2015,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Mauritania,MRT,2017,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Mauritania,MRT,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
-Mauritania,MRT,2020,Ongoing,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
+Mauritania,MRT,2020,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Montserrat,MSR,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Montserrat,MSR,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Martinique,MTQ,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
@@ -686,7 +651,6 @@ Martinique,MTQ,2016,Completed,Labour force survey,Labor Force Survey,https://ilo
 Martinique,MTQ,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Mauritius,MUS,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Mauritius,MUS,2014,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
-Mauritius,MUS,2019,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Malawi,MWI,2010,completed,"Biometric and Financial Innovations in Rural Malawi, 2009-2010",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Malawi,MWI,2010,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Malawi,MWI,2011,completed,Integrated Household Living Conditions Survey 2010-2011,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
@@ -717,8 +681,9 @@ Malawi,MWI,2019,completed,"Integrated Household Panel Survey, 2010-2019",Agricul
 Malawi,MWI,2019,completed,Fifth Integrated Household Survey 2019-2020,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Malawi,MWI,2019,completed,"Integrated Household Panel Survey 2010-2013-2016-2019 (Long-Term Panel, 102 EAs)",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Malawi,MWI,2020,completed,"Fifth Integrated Household Survey, 2019-2020",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
-Malawi,MWI,2020,completed,High-Frequency Phone Survey on COVID-19,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
-Malawi,MWI,2020,Data processing / analysis,MICS,Household health survey,https://mics.unicef.org/surveys
+Malawi,MWI,2020,completed,High-Frequency Phone Survey 2020-2023,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
+Malawi,MWI,2020,completed,High-Frequency Phone Survey on COVID-19 - World Bank LSMS Harmonized Dataset,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
+Malawi,MWI,2020,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Malaysia,MYS,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Malaysia,MYS,2019,completed,"Good Growth Plan, 2014-2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Malaysia,MYS,2020,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
@@ -732,6 +697,7 @@ Namibia,NAM,2018,completed,Post Harvest Losses - Pilot Survey 2018,Agricultural 
 Namibia,NAM,2018,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 New Caledonia,NCL,2014,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 New Caledonia,NCL,2019,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
+New Caledonia,NCL,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Niger,NER,2011,completed,National Survey on Household Living Conditions and Agriculture 2011,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Niger,NER,2012,completed,National Survey on Household Living Conditions and Agriculture 2011,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Niger,NER,2012,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
@@ -739,9 +705,11 @@ Niger,NER,2012,Completed,DHS,Household health survey,https://dhsprogram.com/Meth
 Niger,NER,2014,completed,"National Survey on Household Living Conditions and Agriculture 2014, Wave 2 Panel Data",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Niger,NER,2015,completed,"National Survey on Household Living Conditions and Agriculture - Wave 2, 2014 - 2015",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Niger,NER,2017,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
+Niger,NER,2018,completed,Enquête Harmonisée sur le Conditions de Vie des Ménages 2018-2019,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Norfolk Island,NFK,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Norfolk Island,NFK,2016,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Nigeria,NGA,2010,completed,"General  Household Survey, 2009",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
+Nigeria,NGA,2010,completed,General Household Survey 2010-2019,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Nigeria,NGA,2010,completed,"General Household Survey, Panel 2010-2011, Wave 1",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Nigeria,NGA,2010,Completed,MIS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Nigeria,NGA,2011,completed,General Household Survey-Panel 2010-2011 (PostHarvest),Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
@@ -767,7 +735,7 @@ Nigeria,NGA,2019,completed,"General Household Survey, Panel 2018-2019",Agricultu
 Nigeria,NGA,2019,completed,"Good Growth Plan, 2018-2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Nigeria,NGA,2019,completed,"Living Standards Survey, 2018-2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Nigeria,NGA,2020,completed,"National Longitudinal Phone Survey (COVID-19), 2020",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
-Nigeria,NGA,2020,completed,COVID-19 National Longitudinal Phone Survey 2020,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
+Nigeria,NGA,2020,completed,COVID-19 National Longitudinal Phone Survey 2020-2021,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Nigeria,NGA,2020,completed,COVID-19 National Longitudinal Phone Survey 2020 – World Bank LSMS Harmonized Dataset,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Nicaragua,NIC,2011,completed,Rice and Banana Farmers 2010-2011,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Nicaragua,NIC,2011,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
@@ -776,13 +744,10 @@ Niue,NIU,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demo
 Niue,NIU,2017,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Netherlands,NLD,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Netherlands,NLD,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Netherlands,NLD,2012,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Netherlands,NLD,2019,completed,"Good Growth Plan, 2014-2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Netherlands,NLD,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
-Netherlands,NLD,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Norway,NOR,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Norway,NOR,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Norway,NOR,2012,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Norway,NOR,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Nepal,NPL,2010,completed,"Living Standards Survey 2010-2011, Third Round",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Nepal,NPL,2011,completed,"Living Standards Survey, Wave 3, 2010-2011",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
@@ -793,10 +758,13 @@ Nepal,NPL,2012,completed,"Livelihoods, Basic Services, Social Protection and Per
 Nepal,NPL,2012,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Nepal,NPL,2013,completed,"The Role of Information and Cash Transfers on Early Childhood Development 2013-2014, Evidence from Nepal",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Nepal,NPL,2014,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
+Nepal,NPL,2016,completed,Fishery Survey 2015,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Nepal,NPL,2016,completed,"Household Risk and Vulnerability Survey, Full Panel 2016-2018",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Nepal,NPL,2016,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
+Nepal,NPL,2017,completed,Survey of Migration and Women's Empowerment in Agriculture,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Nepal,NPL,2017,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Nepal,NPL,2018,completed,Household Risk and Vulnerability Survey 2016-2018,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
+Nepal,NPL,2019,completed,"Pilot Agriculture Integrated Survey, 2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Nepal,NPL,2019,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Nepal,NPL,2020,Completed,AGRISurvey Nation-wide,Agricultural Survey/Census,http://www.fao.org/in-action/agrisurvey/country-work/nepal/en/
 Nauru,NRU,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
@@ -806,10 +774,8 @@ New Zealand,NZL,2017,completed,Agriculture Census,Agricultural Survey/Census,htt
 New Zealand,NZL,2018,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Oman,OMN,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Oman,OMN,2013,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
-Oman,OMN,2013,Completed,Population register,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Oman,OMN,2014,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Oman,OMN,2020,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Oman,OMN,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Pakistan,PAK,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Pakistan,PAK,2012,completed,"Livelihoods, Basic Services, Social Protection and Perceptions of the State in Conflict-affected Situations Household Survey 2012",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Pakistan,PAK,2012,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
@@ -817,12 +783,10 @@ Pakistan,PAK,2015,completed,CGAP Financial Diaries with Smallholder Households 2
 Pakistan,PAK,2017,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Pakistan,PAK,2017,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Pakistan,PAK,2018,completed,"Good Growth Plan, 2014-2018",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
-Pakistan,PAK,2018,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Pakistan,PAK,2019,Completed,OTH,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Panama,PAN,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Panama,PAN,2011,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Panama,PAN,2013,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
-Panama,PAN,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Pitcairn Islands,PCN,2015,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Peru,PER,2010,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Peru,PER,2010,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
@@ -838,7 +802,7 @@ Peru,PER,2017,completed,National Agricultural Survey 2017,Agricultural Survey/Ce
 Peru,PER,2017,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Peru,PER,2018,completed,National Agricultural Survey 2018,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Peru,PER,2019,completed,"Good Growth Plan, 2014-2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
-Peru,PER,2020,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
+Peru,PER,2020,completed,COVID-19 High Frequency Phone Surveys 2020,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Philippines,PHL,2010,completed,Monthly Palay and Corn Situation Reporting System 2010,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Philippines,PHL,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Philippines,PHL,2012,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
@@ -854,10 +818,12 @@ Philippines,PHL,2016,completed,Quarterly Aquaculture Survey 2016,Agricultural Su
 Philippines,PHL,2016,completed,Quarterly Commercial Fisheries Survey 2016,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Philippines,PHL,2016,completed,Quarterly Municipal Fisheries Survey 2016,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Philippines,PHL,2017,completed,Commercial Livestock and Poultry Survey - Layer 2017,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
+Philippines,PHL,2017,completed,Palay and Corn Stocks Survey 2017,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Philippines,PHL,2017,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
+Philippines,PHL,2018,completed,Palay and Corn Stocks Survey 2018,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Philippines,PHL,2019,completed,"Good Growth Plan, 2014-2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Philippines,PHL,2020,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Philippines,PHL,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
+Philippines,PHL,2020,completed,COVID-19 Households Survey 2020-2021,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Palau,PLW,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Palau,PLW,2012,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Palau,PLW,2015,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
@@ -872,31 +838,28 @@ Poland,POL,2020,completed,Agriculture Census,Agricultural Survey/Census,http://w
 Puerto Rico,PRI,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Puerto Rico,PRI,2018,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Puerto Rico,PRI,2018,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
-Puerto Rico,PRI,2019,Completed,Official estimate,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Puerto Rico,PRI,2020,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 North Korea,PRK,2017,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 North Korea,PRK,2019,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Portugal,PRT,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Portugal,PRT,2012,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Portugal,PRT,2019,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
-Portugal,PRT,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Paraguay,PRY,2012,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Paraguay,PRY,2016,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Paraguay,PRY,2017,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Paraguay,PRY,2019,completed,"Good Growth Plan, 2014-2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
+Paraguay,PRY,2020,completed,COVID-19 High Frequency Phone Surveys 2020,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Palestinian Territories,PSE,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Palestinian Territories,PSE,2010,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Palestinian Territories,PSE,2014,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
+Palestinian Territories,PSE,2015,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Palestinian Territories,PSE,2017,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Palestinian Territories,PSE,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Palestinian Territories,PSE,2020,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
-Palestinian Territories,PSE,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 French Polynesia,PYF,2012,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 French Polynesia,PYF,2017,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Qatar,QAT,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Qatar,QAT,2012,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Qatar,QAT,2015,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Qatar,QAT,2019,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Qatar,QAT,2020,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Réunion,REU,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Réunion,REU,2016,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
@@ -904,7 +867,6 @@ Réunion,REU,2016,Completed,Labour force survey,Labor Force Survey,https://ilost
 Réunion,REU,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Romania,ROU,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Romania,ROU,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Romania,ROU,2012,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Russia,RUS,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Russia,RUS,2015,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Russia,RUS,2016,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
@@ -929,15 +891,15 @@ Rwanda,RWA,2017,completed,Rwanda Seasonal Agriculture Survey 2017,Agricultural S
 Rwanda,RWA,2017,Completed,MIS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Rwanda,RWA,2018,completed,Rwanda Seasonal Agriculture Survey 2018,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Rwanda,RWA,2019,completed,Rwanda Seasonal Agriculture Survey 2019,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
-Rwanda,RWA,2019,Ongoing,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
-Rwanda,RWA,2019,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
+Rwanda,RWA,2019,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
+Rwanda,RWA,2020,completed,Rwanda Seasonal Agriculture Survey 2020,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Saudi Arabia,SAU,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Saudi Arabia,SAU,2015,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
-Saudi Arabia,SAU,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Sudan,SDN,2010,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Sudan,SDN,2011,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Sudan,SDN,2014,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Sudan,SDN,2019,completed,"Good Growth Plan, 2018-2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
+Sudan,SDN,2020,completed,"High Frequency Phone Survey COVID-19, 2020-2022",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Senegal,SEN,2010,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Senegal,SEN,2011,completed,Annual Agricultural Survey 2011-2012,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Senegal,SEN,2012,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
@@ -949,15 +911,19 @@ Senegal,SEN,2016,Completed,DHS,Household health survey,https://dhsprogram.com/Me
 Senegal,SEN,2017,completed,Annual Agricultural Survey 2017-2018,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Senegal,SEN,2017,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Senegal,SEN,2018,completed,"Good Growth Plan, 2018",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
+Senegal,SEN,2018,completed,Rural Youth Migration and Women’s Empowerment in Agriculture,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
+Senegal,SEN,2018,completed,Enquête Harmonisée sur le Conditions de Vie des Ménages 2018-2019,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Senegal,SEN,2018,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
+Senegal,SEN,2019,completed,Building Resilience and Adaptation to Climate Extremes and Disasters 2019,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
+Senegal,SEN,2019,completed,Essential Need Assessment 2019,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Senegal,SEN,2019,completed,Annual Agricultural Survey 2018-2019,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Senegal,SEN,2019,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Senegal,SEN,2019,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
+Senegal,SEN,2020,completed,Annual Agricultural Survey 2019-2020,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Senegal,SEN,2020,Completed,Annual Agricultural Survey 2019-2020,Agricultural Survey/Census,http://www.fao.org/in-action/agrisurvey/country-work/senegal/en/
-Senegal,SEN,2020,Ongoing,MIS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
+Senegal,SEN,2020,Completed,MIS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Singapore,SGP,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Singapore,SGP,2020,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Singapore,SGP,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 St. Helena,SHN,2010,Completed,Official estimate,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 St. Helena,SHN,2016,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Svalbard & Jan Mayen,SJM,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
@@ -976,17 +942,17 @@ Sierra Leone,SLE,2017,Completed,MICS,Household health survey,https://mics.unicef
 Sierra Leone,SLE,2019,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Sierra Leone,SLE,2020,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 El Salvador,SLV,2014,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
-El Salvador,SLV,2020,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
+El Salvador,SLV,2020,completed,COVID-19 High Frequency Phone Surveys 2020,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 San Marino,SMR,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-San Marino,SMR,2019,Completed,Official estimate,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Somalia,SOM,2017,completed,Livelihoods Programme Monitoring Beneficiary Survey 2017,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
+Somalia,SOM,2019,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
+Somalia,SOM,2020,completed,COVID-19 Somali High-Frequency Phone Survey 2020-2021,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 St. Pierre & Miquelon,SPM,2015,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Serbia,SRB,2010,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Serbia,SRB,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Serbia,SRB,2012,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Serbia,SRB,2014,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Serbia,SRB,2019,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
-Serbia,SRB,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 South Sudan,SSD,2010,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 São Tomé & Príncipe,STP,2012,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 São Tomé & Príncipe,STP,2014,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
@@ -998,29 +964,25 @@ Suriname,SUR,2017,Completed,Labour force survey,Labor Force Survey,https://ilost
 Suriname,SUR,2018,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Slovakia,SVK,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Slovakia,SVK,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Slovakia,SVK,2012,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Slovakia,SVK,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Slovenia,SVN,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Slovenia,SVN,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Slovenia,SVN,2012,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Slovenia,SVN,2015,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Slovenia,SVN,2018,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Slovenia,SVN,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Sweden,SWE,2010,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Sweden,SWE,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Sweden,SWE,2012,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Sweden,SWE,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
-Swaziland,SWZ,2010,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
-Swaziland,SWZ,2013,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
-Swaziland,SWZ,2014,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
-Swaziland,SWZ,2016,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
-Swaziland,SWZ,2017,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
+Eswatini,SWZ,2010,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
+Eswatini,SWZ,2013,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
+Eswatini,SWZ,2014,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
+Eswatini,SWZ,2017,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Seychelles,SYC,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Seychelles,SYC,2011,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Seychelles,SYC,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Syria,SYR,2011,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Turks & Caicos Islands,TCA,2012,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Turks & Caicos Islands,TCA,2020,Data processing / analysis,MICS,Household health survey,https://mics.unicef.org/surveys
+Turks & Caicos Islands,TCA,2020,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Chad,TCD,2010,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Chad,TCD,2014,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Chad,TCD,2017,completed,Livelihoods Programme Monitoring Beneficiary Survey in 2017,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
@@ -1034,13 +996,13 @@ Togo,TGO,2014,Completed,Other household survey,Labor Force Survey,https://ilosta
 Togo,TGO,2017,Completed,MIS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Togo,TGO,2017,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Togo,TGO,2017,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
+Togo,TGO,2018,completed,Enquête Harmonisée sur le Conditions de Vie des Ménages 2018-2019,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Thailand,THA,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Thailand,THA,2013,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Thailand,THA,2013,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Thailand,THA,2016,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Thailand,THA,2019,completed,"Good Growth Plan, 2014-2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Thailand,THA,2019,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
-Thailand,THA,2019,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Tajikistan,TJK,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Tajikistan,TJK,2012,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Tajikistan,TJK,2013,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
@@ -1055,7 +1017,6 @@ Turkmenistan,TKM,2019,Completed,MICS,Household health survey,https://mics.unicef
 Timor-Leste,TLS,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Timor-Leste,TLS,2015,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Timor-Leste,TLS,2016,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
-Timor-Leste,TLS,2016,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Timor-Leste,TLS,2019,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Tonga,TON,2015,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Tonga,TON,2016,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
@@ -1063,12 +1024,12 @@ Tonga,TON,2018,Completed,Labour force survey,Labor Force Survey,https://ilostat.
 Tonga,TON,2019,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Trinidad & Tobago,TTO,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Trinidad & Tobago,TTO,2011,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
-Trinidad & Tobago,TTO,2017,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Tunisia,TUN,2012,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
-Tunisia,TUN,2013,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Tunisia,TUN,2014,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
+Tunisia,TUN,2014,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Tunisia,TUN,2018,completed,"Good Growth Plan, 2018",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Tunisia,TUN,2018,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
+Tunisia,TUN,2020,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Tunisia,TUN,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Turkey,TUR,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Turkey,TUR,2013,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
@@ -1076,7 +1037,7 @@ Turkey,TUR,2018,Completed,DHS,Household health survey,https://dhsprogram.com/Met
 Turkey,TUR,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Tuvalu,TUV,2012,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Tuvalu,TUV,2017,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
-Tuvalu,TUV,2020,Data processing / analysis,MICS,Household health survey,https://mics.unicef.org/surveys
+Tuvalu,TUV,2020,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Tanzania,TZA,2010,completed,Kagera Health and Development Survey 2010,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Tanzania,TZA,2010,completed,"Kagera Health and Development Survey 2010, Wave 6",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Tanzania,TZA,2010,completed,"National Panel Survey 2010-2011, Wave 2",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
@@ -1089,21 +1050,22 @@ Tanzania,TZA,2013,completed,National Panel Survey 2012-2013,Agricultural Survey/
 Tanzania,TZA,2013,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Tanzania,TZA,2014,completed,"Measuring Living Standards within Cities, Dar es Salaam 2014-2015",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Tanzania,TZA,2014,completed,"National Panel Survey 2014-2015, Wave 4",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
-Tanzania,TZA,2014,completed,"National Panel Survey 2014-2015, Wave 4 - Extended Panel",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
+Tanzania,TZA,2014,completed,National Panel Survey 2014-2015,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Tanzania,TZA,2014,Completed,Integrated Labour Force Survey - Time Use Survey Module 2014,Time Use Survey,https://unstats.un.org/unsd/gender/timeuse and manual ODW check of NSO websites
 Tanzania,TZA,2015,completed,CGAP Financial Diaries with Smallholder Households 2014-2015,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Tanzania,TZA,2015,completed,"National Panel Survey- Universal Panel Questionnaire,  2008-2015",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Tanzania,TZA,2015,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
-Tanzania,TZA,2015,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
+Tanzania,TZA,2016,completed,Annual Agricultural Sample Survey 2014-2015,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Tanzania,TZA,2016,completed,National Panel Survey Wave 4 - Feed the Future Interim Supplemental Survey 2016,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Tanzania,TZA,2016,completed,"Smallholder Household Survey - CGAP, 2016",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Tanzania,TZA,2016,completed,National Panel Survey 2014-2016,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
-Tanzania,TZA,2016,completed,Annual Agricultural Sample Survey 2014-2015,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Tanzania,TZA,2016,completed,National Panel Survey Wave 4 - Feed the Future Interim Supplemental Survey 2016,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Tanzania,TZA,2017,Completed,MIS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Tanzania,TZA,2019,completed,"Good Growth Plan, 2015-2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Tanzania,TZA,2019,completed,National Panel Survey 2019-2020 - Extended Panel with Sex Disaggregated Data,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Tanzania,TZA,2020,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
+Tanzania,TZA,2020,completed,"National Panel Survey 2020-21, Wave 5",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
+Tanzania,TZA,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Uganda,UGA,2010,completed,National Panel Survey 2005-2010,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Uganda,UGA,2010,completed,National Panel Survey 2010-2011,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Uganda,UGA,2010,Completed,Time use module in Uganda National Household Survey 2009/2010,Time Use Survey,https://unstats.un.org/unsd/gender/timeuse and manual ODW check of NSO websites
@@ -1123,7 +1085,6 @@ Uganda,UGA,2015,Completed,Other household survey,Labor Force Survey,https://ilos
 Uganda,UGA,2016,completed,"Gender Indicators in Agricultural Statistics: Uganda pilot study, 2016",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Uganda,UGA,2016,completed,National Panel Survey 2015-2016,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Uganda,UGA,2016,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
-Uganda,UGA,2017,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Uganda,UGA,2018,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Uganda,UGA,2018,completed,Refugee and Host Communities Household Survey 2018,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Uganda,UGA,2018,completed,Uganda National Panel Survey 2018-2019,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
@@ -1132,24 +1093,24 @@ Uganda,UGA,2019,completed,"Annual Agricultural Survey, 2018-2019 (Second Season)
 Uganda,UGA,2019,completed,"National Panel Survey, 2018-2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Uganda,UGA,2019,completed,National Panel Survey 2019-2020,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Uganda,UGA,2020,completed,"High-Frequency Phone Survey on COVID-19, 2020-2021",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
+Uganda,UGA,2020,completed,National Panel Survey 2019-2020,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Uganda,UGA,2020,Completed,"National Panel Survey, 2019-2020",Agricultural Survey/Census,https://www.worldbank.org/en/programs/lsms/initiatives/lsms-ISA#46
-Uganda,UGA,2020,completed,High-Frequency Phone Survey on COVID-19 2020-2021,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
+Uganda,UGA,2020,completed,High-Frequency Phone Survey on COVID-19 2020-2021 - World Bank LSMS Harmonized Dataset,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Ukraine,UKR,2012,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Ukraine,UKR,2015,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Ukraine,UKR,2019,completed,"Good Growth Plan, 2014-2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
-Ukraine,UKR,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Uruguay,URY,2011,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Uruguay,URY,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Uruguay,URY,2013,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
-Uruguay,URY,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 United States,USA,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 United States,USA,2012,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 United States,USA,2017,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 United States,USA,2020,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Uzbekistan,UZB,2019,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
+Uzbekistan,UZB,2020,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
+Uzbekistan,UZB,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 St. Vincent & Grenadines,VCT,2012,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Venezuela,VEN,2011,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
-Venezuela,VEN,2017,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
+Venezuela,VEN,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 British Virgin Islands,VGB,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 U.S. Virgin Islands,VIR,2010,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 U.S. Virgin Islands,VIR,2018,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
@@ -1157,10 +1118,13 @@ U.S. Virgin Islands,VIR,2020,Complete,Population Census,Census,https://unstats.u
 Vietnam,VNM,2011,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Vietnam,VNM,2011,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Vietnam,VNM,2014,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
+Vietnam,VNM,2015,Completed,Other household survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Vietnam,VNM,2016,completed,Agriculture Census,Agricultural Survey/Census,http://www.fao.org/world-census-agriculture/wcarounds/en/
 Vietnam,VNM,2019,completed,"Good Growth Plan, 2014-2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Vietnam,VNM,2019,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Vietnam,VNM,2020,completed,"COVID-19 High Frequency Phone Survey of Households 2020, Round 1",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
+Vietnam,VNM,2020,completed,"COVID-19 High Frequency Phone Survey of Households 2020, Round 2",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
+Vietnam,VNM,2020,completed,"COVID-19 High Frequency Phone Survey of Households 2020, Round 3",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Vanuatu,VUT,2016,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Vanuatu,VUT,2020,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
 Wallis & Futuna,WLF,2013,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
@@ -1172,7 +1136,6 @@ Samoa,WSM,2020,completed,Agriculture Census,Agricultural Survey/Census,http://ww
 Samoa,WSM,2020,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Kosovo,XKX,2014,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
 Kosovo,XKX,2020,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
-Kosovo,XKX,2020,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Yemen,YEM,2013,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Yemen,YEM,2014,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 South Africa,ZAF,2010,completed,National Income Dynamics Study 2008-2011,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
@@ -1198,7 +1161,6 @@ Zambia,ZMB,2014,Completed,Other household survey,Labor Force Survey,https://ilos
 Zambia,ZMB,2017,completed,Livelihoods Programme Monitoring Beneficiary Survey 2017,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Zambia,ZMB,2018,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Zambia,ZMB,2019,completed,"Good Growth Plan, 2014-2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
-Zambia,ZMB,2019,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
 Zambia,ZMB,2020,completed,"COVID-19 Household Monitoring Phone Survey 2020, Round 1",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Zimbabwe,ZWE,2010,Completed,DHS,Household health survey,https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#
 Zimbabwe,ZWE,2012,Complete,Population Census,Census,https://unstats.un.org/unsd/demographic-social/census/censusdates/
@@ -1207,9 +1169,9 @@ Zimbabwe,ZWE,2015,Completed,DHS,Household health survey,https://dhsprogram.com/M
 Zimbabwe,ZWE,2017,completed,Livelihoods Programme Monitoring Beneficiary Survey 2017,HIES,https://microdata.worldbank.org/index.php/catalog/lsms
 Zimbabwe,ZWE,2019,completed,"Good Growth Plan, 2016-2019",Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
 Zimbabwe,ZWE,2019,Completed,MICS,Household health survey,https://mics.unicef.org/surveys
-Zimbabwe,ZWE,2019,Completed,Labour force survey,Labor Force Survey,https://ilostat.ilo.org/data/national-sources-catalogue/
-,,2010,completed,"European Social Survey 2010, Round 5",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
-,,2012,completed,"European Social Survey 2012, Round 6",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
-,,2014,completed,"European Social Survey 2014, Round 7",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
-,,2016,completed,"European Social Survey 2016, Round 8",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
-,,2017,completed,"Rapid Emergency Response Survey 2017, Pilot Project",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
+"Austria, Belgium, Bulgaria...and 25 more",,2010,completed,"European Social Survey 2010, Round 5",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
+"Albania, Belgium, Bulgaria...and 26 more",,2012,completed,"European Social Survey 2012, Round 6",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
+"Austria, Belgium, Switzerland...and 19 more",,2014,completed,"European Social Survey 2014, Round 7",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
+"Austria, Belgium, Switzerland...and 20 more",,2016,completed,"European Social Survey 2016, Round 8",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
+"Somalia, South Sudan, Yemen, Rep.",,2017,completed,"Rapid Emergency Response Survey 2017, Pilot Project",HIES,https://microdata.worldbank.org/index.php/catalog/lsms
+Pacific Region,,2020,completed,Pacific Nutrient DataBase 2020,Agricultural Survey/Census,https://microdata.fao.org/index.php/catalog
