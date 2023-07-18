@@ -685,16 +685,40 @@ all_surveys_census <- list(dhs, mics, lsms, lfs, agri_survey, ag_census, tus, ce
   map(~select(., country, iso3c, year, status, instrument_name, instrument_type, source)) |> 
   map_dfr(bind_rows)
   
+##### FILTER FOR OGDI YEARS #####
+# 2013-2022 / 2012/13-2021/22 for non-calendar years
+dhs_clean <- dhs |> filter(year>=2013 & year<=2022)
+mics_clean <- mics |> filter(year>=2013 & year<=2022)
+lsms_clean <- lsms |> filter(year>=2013 & year<=2022)
+lfs_clean <- lfs |> filter(year>=2013 & year<=2022)
+agri_survey_clean <- agri_survey |> filter(year>=2013 & year<=2022)
+tus_clean <- tus |> filter(year>=2013 & year<=2022)
+dhs_clean <- dhs |> filter(year>=2013 & year<=2022)
+ihsn_clean <- ihsn |> filter((year_start == 2012 & year_end >=2013) | year_start>=2013) |> 
+  mutate(year = case_when(year_start==year_end ~ as.character(year_start),
+                          year_start!=year_end & year_end-year_start==1 ~ paste0(year_start, "/", str_extract(year_end, "\\d{2}$")),
+                          year_start!=year_end & year_end-year_start>1 ~ paste0(year_start, "-", year_end)))
+
+# filter for census years
+ag_census_clean <- ag_census |> 
+  mutate(census_round = str_remove(census_round, "WCA")) |> 
+  filter(census_round==2010|census_round==2020)
+
+# years based on https://unstats.un.org/unsd/demographic-social/census/censusdates/
+census_clean <- census |> 
+  mutate(census_round = str_remove(census_round, "round")) |> 
+  filter(census_round==2010|census_round==2020)
+
 ###### EXPORT CSVS OF EACH CLEANED SURVEY INSTRUMENT DATA ######
-# write.csv(dhs, "Output/dhs.csv")
-# write.csv(mics, "Output/mics.csv")
-# write.csv(lsms, "Output/lsms.csv")
-# write.csv(lfs, "Output/lfs.csv")
-# write.csv(agri_survey, "Output/agri_survey.csv")
-# write.csv(ag_census, "Output/ag_census.csv")
-# write.csv(tus, "Output/tus.csv")
-# write.csv(census, "Output/census.csv")
-# write.csv(ihsn, "Output/ihsn.csv")
+write.csv(dhs_clean, "Output/dhs.csv")
+write.csv(mics_clean, "Output/mics.csv")
+write.csv(lsms_clean, "Output/lsms.csv")
+write.csv(lfs_clean, "Output/lfs.csv")
+write.csv(agri_survey_clean, "Output/agri_survey.csv")
+write.csv(ag_census_clean, "Output/ag_census.csv")
+write.csv(tus_clean, "Output/tus.csv")
+write.csv(census_clean, "Output/census.csv")
+write.csv(ihsn_clean, "Output/ihsn.csv")
 
 ### trying to compute proportion of surveys completed
 # all_surveys_census |> 
