@@ -2,7 +2,7 @@
 #' title: Gender-relevant instrument inventory
 #' author: Lorenz Noe
 #' ---
-setwd("C:/Users/loren/Documents/GitHub/instrument_inventory/")
+# setwd("C:/Users/loren/Documents/GitHub/instrument_inventory/")
 
 library(httr)
 library(jsonlite)
@@ -79,8 +79,12 @@ mics <- mics_raw %>%
          )),
          source = "https://mics.unicef.org/surveys", instrument_name = "MICS",
          instrument_type = "Household health survey") %>%
-  # Choosing final list of instruments
-  select(country = country_clean, iso3c, year, status, instrument_name, instrument_type, source, country_original = country)
+  rename(country = country_clean,
+         country_original = country) |>
+  # dropping this one because it's the same as country_original
+  select(-country_in_filter)
+  # Choosing final list of instruments - commenting this out to maintain metadata, just renaming same variables
+  #select(country = country_clean, iso3c, year, status, instrument_name, instrument_type, source, country_original = country)
 
 # * DHS - USAID -------------------------------------------------------------
 
@@ -97,11 +101,13 @@ dhs <- fromJSON(content(GET("https://api.dhsprogram.com/rest/dhs/surveys?surveyS
   filter(survey_type %in% c("AIS", "DHS", "MIS") | (survey_type == "OTH" & survey_id %in% c("AF2010OTH","EG2015OTH","GH2017OTH","GN2016OTH","HT2013OTH",
                                                                                             "ID2012OTH","ID2017OTH","ML2010OTH","PK2019OTH","RW2011OTH"
   ))) %>%
+  ### NOTE - THIS STEP MEANS A LOT OF VARIABLES ARE BEING DROPPED - not sure if they are valuable for our purposes though so leaving it as-is
   select(country = country_name, year = survey_year, survey_type, status = survey_status) %>%
   mutate(instrument_type = "Household health survey", source = "https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#",
          iso3c = countrycode::countrycode(country, "country.name", "iso3c"),
          year = as.numeric(year),
          country_clean = countrycode::countrycode(iso3c, "iso3c", "country.name")) %>%
+  # leaving this because it includes all variables anyway
   select(country = country_clean, iso3c, year, status, instrument_name = survey_type, instrument_type, source, country_original = country)
 
 
@@ -257,10 +263,7 @@ lsms <- lsms_raw %>%
                                                                            "Living Standards Measurement Study [hh/lsms]",
                                                                            "Socio-Economic/Monitoring Survey [hh/sems]")) %>%
   # Keep relevant variables
-  select(country = nation, iso3c, year, instrument_name = title, instrument_type, status, source)
-
-
-# With IHSN
+  select(country = nation, iso3c, year, instrument_name = title, instrument_type, status, source, study_type, authoring_entity)
 
 
 # Labor Force Surveys -----------------------------------------------------
@@ -287,11 +290,12 @@ lfs <- read_csv("https://www.ilo.org/ilostat-files/Documents/sources_en.csv") %>
            year2 - year1 == 1 ~ NA_real_,
            TRUE ~ year1
          )) %>%
-  select(country, iso3c, source_type, year1, year2) %>%
+  ### Adding two additional variables, which might be of value?
+  select(country, iso3c, source_type, year1, year2, international_classifications, topics_covered) %>%
   pivot_longer(year1:year2, names_to = "period", values_to = "year") %>%
   filter(!is.na(year)) %>%
   mutate(source = "https://ilostat.ilo.org/data/national-sources-catalogue/", status = "Completed", instrument_type = "Labor Force Survey") %>%
-  select(country, iso3c, year, instrument_name = source_type, instrument_type, status, source)
+  select(country, iso3c, year, instrument_name = source_type, instrument_type, status, source, international_classifications, topics_covered)
   
   
 # with IHSN
@@ -438,7 +442,7 @@ agri_survey <- fromJSON(content(GET("https://microdata.fao.org/index.php/api/cat
   filter(repositoryid == "agriculture-census-surveys", 
          !study_type %in% c("Administrative Records", "Agricultural Census [ag/census]", "Enterprise Census [en/census]", "Population and Housing Census [hh/popcen]"), 
          !str_detect(title, "mpact|roduction")) %>%
-  select(country = nation, iso3c, year = year_end, instrument_name = title, instrument_type, status, source)
+  select(country = nation, iso3c, year = year_end, instrument_name = title, instrument_type, status, source, authoring_entity, study_type)
 
 
 # * Ag Censuses - FAO -----------------------------------------------------
@@ -462,7 +466,7 @@ ag_census <- read_csv("Input/wca_2020_2010_notes.csv") %>%
   status = "completed",
   source = "http://www.fao.org/world-census-agriculture/wcarounds/en/") %>%
   filter(!is.na(iso3c), !is.na(year_clean), !(census_round == "WCA2020" & iso3c == "MOZ")) %>%
-  select(country = starts_with("country"), iso3c, year = year_clean, instrument_name, instrument_type, status, source)
+  select(country = starts_with("country"), iso3c, year = year_clean, instrument_name, instrument_type, status, source, census_round)
 
 # IHSN + NSO Survey
 # List of LSMS-AG
@@ -571,7 +575,7 @@ ihsn_raw <- fromJSON(content(GET("https://catalog.ihsn.org/index.php/api/catalog
 #saveRDS(study_description, file = "Input/ihsn_microdata_study_description.rds")
 #
 ## Load study descriptions from saved file
-#ihsn_study_description <- readRDS("Input/ihsn_microdata_study_description.rds")
+ihsn_study_description <- readRDS("Input/ihsn_microdata_study_description.rds")
 
 # Final list of IHSN, to be used to supplement other survey groups as appropriate
 ihsn <- ihsn_raw %>%
@@ -659,33 +663,64 @@ census <- readRDS("Input/census_dates_df.rds") %>%
          instrument_name = "Population Census",
          instrument_type = "Census",
          source = "https://unstats.un.org/unsd/demographic-social/census/censusdates/") %>%
-  select(country, iso3c, year, status = planned, instrument_name, instrument_type, source)
+  select(country, iso3c, year, status = planned, instrument_name, instrument_type, source, census_round)
 
 
 # Combine -----------------------------------------------------------------
 
-all_surveys_census <- dhs %>%
-  select(-country_original) %>%
-  bind_rows(mics %>% select(-country_original)) %>%
-  bind_rows(lsms) %>%
-  bind_rows(lfs) %>%
-  bind_rows(agri_survey) %>%
-  bind_rows(ag_census) %>%
-  bind_rows(tus) %>%
-  bind_rows(census)
+### old code - only works if we have the same variables for each tibble we're binding together
+# all_surveys_census <- dhs %>%
+#   select(country, iso3c, year, status, instrument_name, instrument_type, source) %>%
+#   bind_rows(mics %>% select(-country_original)) %>%
+#   bind_rows(lsms) %>%
+#   bind_rows(lfs) %>%
+#   bind_rows(agri_survey) %>%
+#   bind_rows(ag_census) %>%
+#   bind_rows(tus) %>%
+#   bind_rows(census)
 # Can add IHSN to each of the above to further add surveys
 
+### New code - select the same variables across list of all data frames, and bind rows
+all_surveys_census <- list(dhs, mics, lsms, lfs, agri_survey, ag_census, tus, census) |> 
+  map(~select(., country, iso3c, year, status, instrument_name, instrument_type, source)) |> 
+  map_dfr(bind_rows)
+  
+###### EXPORT CSVS OF EACH CLEANED SURVEY INSTRUMENT DATA ######
+# write.csv(dhs, "Output/dhs.csv")
+# write.csv(mics, "Output/mics.csv")
+# write.csv(lsms, "Output/lsms.csv")
+# write.csv(lfs, "Output/lfs.csv")
+# write.csv(agri_survey, "Output/agri_survey.csv")
+# write.csv(ag_census, "Output/ag_census.csv")
+# write.csv(tus, "Output/tus.csv")
+# write.csv(census, "Output/census.csv")
+# write.csv(ihsn, "Output/ihsn.csv")
+
+### trying to compute proportion of surveys completed
+# all_surveys_census |> 
+#   filter(year<=2015 | year>=2019) |> 
+#   group_by(instrument_type, status) |> 
+#   summarise(n_expected = n()) |> 
+#   filter(status=="Completed") |> 
+#   select(-source) |> 
+#   summarise(n_completed = n(),
+#             n_expected) |> 
+#   summarise(prop_complete = 100*(n_completed/n_expected))
+
 # Export
+### NOTE - I am modifying this code with an if-else to allow country names that do not have an iso3c code to be maintained (there are 6 such rows)
+### original code meant they were lost (5 of 6 impacted rows are attributed to multiple countries, and 1 attributed to "Pacific Region")
 all_surveys_census %>%
   filter(year>=2010, year<=2020) %>%
-  select(-country) %>%
-  mutate(country = countrycode::countrycode(iso3c, "iso3c", "country.name"),
+  rename(country_orig = country) %>%
+  mutate(country = ifelse(!is.na(iso3c), countrycode::countrycode(iso3c, "iso3c", "country.name"), country_orig),
          country = case_when(
            iso3c == "ANT" ~ "Netherland Antilles",
            iso3c == "XKX" ~ "Kosovo",
            TRUE ~ country
          ), .before = iso3c) %>%
   arrange(iso3c, year, instrument_type) %>%
+  select(-country_orig) |> 
   write_csv("Output/instrument_inventory.csv", na = "")
 
 # Mock timeline test
