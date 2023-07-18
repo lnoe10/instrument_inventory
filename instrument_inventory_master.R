@@ -709,6 +709,21 @@ census_clean <- census |>
   mutate(census_round = str_remove(census_round, "round")) |> 
   filter(census_round==2010|census_round==2020)
 
+# try to flag agricultural census/survey rows where we need further investigation
+# to determine if they capture human level-data
+agri_survey_clean <- agri_survey_clean |> 
+  mutate(household_flag = ifelse(str_detect(instrument_name, "Household|Living|Socio|Gender|Women"), TRUE, FALSE))
+
+### Combining all the FILTERED datasets, with census round variable
+all_surveys_census_filtered <- list(dhs_clean, mics_clean, lsms_clean, lfs_clean, 
+                                    agri_survey_clean, tus_clean) |> 
+  map(~select(., country, iso3c, year, status, instrument_name, instrument_type, source)) |> 
+  map_dfr(bind_rows) |> 
+  bind_rows(census_clean |> select(country, iso3c, year, status, instrument_name, instrument_type, source, census_round)) |>
+  bind_rows(ag_census_clean |> select(country, iso3c, year, status, instrument_name, instrument_type, source, census_round))
+
+write.csv(all_surveys_census_filtered, "Output/instrument_inventory_filtered.csv")
+
 ###### EXPORT CSVS OF EACH CLEANED SURVEY INSTRUMENT DATA ######
 write.csv(dhs_clean, "Output/dhs.csv")
 write.csv(mics_clean, "Output/mics.csv")
