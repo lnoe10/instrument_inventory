@@ -263,7 +263,7 @@ lsms <- lsms_raw %>%
                                                                            "Living Standards Measurement Study [hh/lsms]",
                                                                            "Socio-Economic/Monitoring Survey [hh/sems]")) %>%
   # Keep relevant variables
-  select(country = nation, iso3c, year, instrument_name = title, instrument_type, status, source, study_type, authoring_entity)
+  select(country = nation, iso3c, year, instrument_name = title, instrument_type, status, source, study_type, authoring_entity, repositoryid)
 
 
 # Labor Force Surveys -----------------------------------------------------
@@ -712,7 +712,11 @@ census_clean <- census |>
 # try to flag agricultural census/survey rows where we need further investigation
 # to determine if they capture human level-data
 agri_survey_clean <- agri_survey_clean |> 
-  mutate(household_flag = ifelse(str_detect(instrument_name, "Household|Living|Socio|Gender|Women"), TRUE, FALSE))
+  mutate(household_flag = ifelse(str_detect(instrument_name, "Household|Living|Socio|Gender|Women"), TRUE, FALSE)) |> 
+  # filter out rows where authoring entity is Syngenta. Need explicitly to keep those that are missing as well
+  # doesn't appear that government agencies are involved in these
+  filter(authoring_entity!="Syngenta" | is.na(authoring_entity))
+  
 
 ### Combining all the FILTERED datasets, with census round variable
 all_surveys_census_filtered <- list(dhs_clean, mics_clean, lsms_clean, lfs_clean, 
@@ -734,6 +738,25 @@ xlsx::write.xlsx(ag_census_clean, "Output/ag_census.xlsx")
 xlsx::write.xlsx(tus_clean, "Output/tus.xlsx")
 xlsx::write.xlsx(census_clean, "Output/census.xlsx")
 xlsx::write.xlsx(ihsn_clean, "Output/ihsn.xlsx")
+
+### Looking at how many rows have only one authoring entity, and it is an IGO like hte UNHCR or World Bank
+# distinct authoring entities that are only an IGO
+ihsn_clean |> select(authoring_entity) |> distinct() |> 
+  filter(!str_detect(authoring_entity, ",") 
+         & str_detect(authoring_entity, "UN|United Nations|FAO|World Bank"))
+
+lsms_clean |> select(authoring_entity) |> distinct() |> 
+  filter(!str_detect(authoring_entity, ",") 
+         & str_detect(authoring_entity, "UN|United Nations|FAO|World Bank"))
+
+# number of rows
+ihsn_clean |> filter(!str_detect(authoring_entity, ",") 
+                     & str_detect(authoring_entity, "UN|United Nations|FAO|World Bank")) |> 
+  nrow()
+
+lsms_clean |> filter(!str_detect(authoring_entity, ",") 
+                     & str_detect(authoring_entity, "UN|United Nations|FAO|World Bank")) |> 
+  nrow()
 
 ### trying to compute proportion of surveys completed
 # all_surveys_census |> 
