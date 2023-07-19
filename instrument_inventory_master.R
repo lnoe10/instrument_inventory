@@ -722,18 +722,18 @@ all_surveys_census_filtered <- list(dhs_clean, mics_clean, lsms_clean, lfs_clean
   bind_rows(census_clean |> select(country, iso3c, year, status, instrument_name, instrument_type, source, census_round)) |>
   bind_rows(ag_census_clean |> select(country, iso3c, year, status, instrument_name, instrument_type, source, census_round))
 
-write.csv(all_surveys_census_filtered, "Output/instrument_inventory_filtered.csv")
+xlsx::write.xlsx(all_surveys_census_filtered, "Output/instrument_inventory_filtered.xlsx")
 
-###### EXPORT CSVS OF EACH CLEANED SURVEY INSTRUMENT DATA ######
-write.csv(dhs_clean, "Output/dhs.csv")
-write.csv(mics_clean, "Output/mics.csv")
-write.csv(lsms_clean, "Output/lsms.csv")
-write.csv(lfs_clean, "Output/lfs.csv")
-write.csv(agri_survey_clean, "Output/agri_survey.csv")
-write.csv(ag_census_clean, "Output/ag_census.csv")
-write.csv(tus_clean, "Output/tus.csv")
-write.csv(census_clean, "Output/census.csv")
-write.csv(ihsn_clean, "Output/ihsn.csv")
+###### EXPORT XLSX FILES OF EACH CLEANED SURVEY INSTRUMENT DATA ######
+xlsx::write.xlsx(dhs_clean, "Output/dhs.xlsx")
+xlsx::write.xlsx(mics_clean, "Output/mics.xlsx")
+xlsx::write.xlsx(lsms_clean, "Output/lsms.xlsx")
+xlsx::write.xlsx(lfs_clean, "Output/lfs.xlsx")
+xlsx::write.xlsx(agri_survey_clean, "Output/agri_survey.xlsx")
+xlsx::write.xlsx(ag_census_clean, "Output/ag_census.xlsx")
+xlsx::write.xlsx(tus_clean, "Output/tus.xlsx")
+xlsx::write.xlsx(census_clean, "Output/census.xlsx")
+xlsx::write.xlsx(ihsn_clean, "Output/ihsn.xlsx")
 
 ### trying to compute proportion of surveys completed
 # all_surveys_census |> 
@@ -760,7 +760,7 @@ all_surveys_census %>%
          ), .before = iso3c) %>%
   arrange(iso3c, year, instrument_type) %>%
   select(-country_orig) |> 
-  write_csv("Output/instrument_inventory.csv", na = "")
+  xlsx::write.xlsx("Output/instrument_inventory.xlsx")
 
 # Mock timeline test
 all_surveys_census %>% 
