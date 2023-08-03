@@ -9,7 +9,7 @@ dhs_raw <- fromJSON(content(GET("https://api.dhsprogram.com/rest/dhs/surveys?sur
   as_tibble() 
 
 # clean data
-dhs_all_metadata <- dhs_raw |> 
+dhs <- dhs_raw |> 
   add_row(SurveyType = "DHS", SurveyYearLabel = "2023", SurveyYear = "2023", DHS_CountryCode = "ZM",
           CountryName = "Zambia", SubregionName = "Eastern Africa", SurveyStatus = "Ongoing", RegionName = "Sub-Saharan Africa") %>%
   janitor::clean_names() %>%
@@ -28,7 +28,12 @@ dhs_all_metadata <- dhs_raw |>
   rename(country = country_clean, 
          country_original = country)
 
-# select only core variabes of interest
-dhs_clean <- dhs_all_metadata |> select(country = country_clean, iso3c, year, status, instrument_name = survey_type, instrument_type, source, country_original = country)
+# select only core variables of interest
+dhs <- dhs |> select(country = country_clean, iso3c, year, status, instrument_name = survey_type, instrument_type, source, country_original = country)
 
+# filter for OGDI years of interest
+# dhs_clean <- dhs |> filter(year>=2013 & year<=2022)
 
+# export filtered and full datasets
+#xlsx::write.xlsx(dhs_clean, "Output/dhs_ogdi_yrs.xlsx")
+xlsx::write.xlsx(dhs, "Output/dhs.xlsx")

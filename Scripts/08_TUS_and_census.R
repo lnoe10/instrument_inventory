@@ -34,12 +34,7 @@ tus_new <- read_csv("Input/tus_unsd_data.csv", show_col_types = F) |>
          source = "https://unstats.un.org/unsd/demographic-social/time-use/",
          status = "Completed")
 
-tus_new |> group_by(country) |> summarise(n=n()) |> arrange(desc(n))
-
-
-
 # Census - UNSD -----------------------------------------------------------
-
 
 # See scraping census dates file
 # Census dates scrape.R

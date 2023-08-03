@@ -123,71 +123,95 @@ lsms_raw <- fromJSON(content(GET("https://microdata.worldbank.org/index.php/api/
   as_tibble() %>%
   mutate(api_call = str_c("https://microdata.worldbank.org/index.php/api/catalog/", id, "?id_format=id"))
 
-## First acquire more information on surveytypes from metadata  
-#
-## Initialize empty dataset
-#all_wb_metadata <- tibble()
-#
-## Set up progress bar
-#n_iter <- length(lsms_raw$id)
-#pb <- txtProgressBar(min = 1,      # Minimum value of the progress bar
-#                     max = n_iter, # Maximum value of the progress bar
-#                     style = 3,    # Progress bar style (also available style = 1 and style = 2)
-#                     width = 50,   # Progress bar width. Defaults to getOption("width")
-#                     char = "=")   # Character used to create the bar
-#
-## Loop
-#for (i in 1:length(lsms_raw$id)){
-#  # Set up tibble with basic info
-#  study <- tibble(id = lsms_raw$id[i], study_type = NA_character_)
-#  # Determine length of list generated from API call to filter out
-#  # Where we hit error otherwise of subscript being out of bounds
-#  study <- study %>%
-#    mutate(length = case_when(
-#      !is_empty(fromJSON(content(GET(lsms_raw$api_call[i]), "text"), flatten = TRUE)) ~ vec_depth(fromJSON(content(GET(lsms_raw$api_call[i]), "text"), flatten = TRUE)),
-#      TRUE ~ NA_integer_))
-#  # If list is deep enough, proceed to extract data
-#  if(study$length > 3){
-#    study <- study %>%
-#      # Test first whether response is valid based on tunneling into list
-#      mutate(study_type = ifelse(
-#        is_empty(fromJSON(content(GET(lsms_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name), NA_character_,
-#        fromJSON(content(GET(lsms_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name
-#      ))
-#  }
-#  # Append to dataset
-#  all_wb_metadata <- all_wb_metadata %>%
-#    bind_rows(study)
-#  # Insert brief pause in code to not look like a robot to the API
-#  Sys.sleep(sample(seq(0,0.3,by=0.001),1))
-#  # Increment progress bar
-#  setTxtProgressBar(pb, i)
-#}
-#
-#close(pb) # Close the connection
-#
-## Missing 539 entries for study type because metadata does not have this field
-## 'Data kind' is closest equivalent for many of them. Repeat calls and acquire these
-#
-## Filter to where we are missing study_type.
-## Also create url entry as variable so it's easier to read in API call
-#all_wb_missing <- all_wb_metadata %>%
+# First acquire more information on surveytypes from metadata
+
+# Initialize empty dataset
+all_wb_metadata <- tibble()
+
+# Set up progress bar
+n_iter <- length(lsms_raw$id)
+pb <- txtProgressBar(min = 1,      # Minimum value of the progress bar
+                    max = n_iter, # Maximum value of the progress bar
+                    style = 3,    # Progress bar style (also available style = 1 and style = 2)
+                    width = 50,   # Progress bar width. Defaults to getOption("width")
+                    char = "=")   # Character used to create the bar
+
+# Loop
+for (i in 1:length(lsms_raw$id)){
+ # Set up tibble with basic info
+ study <- tibble(id = lsms_raw$id[i], study_type = NA_character_)
+ # Determine length of list generated from API call to filter out
+ # Where we hit error otherwise of subscript being out of bounds
+ study <- study %>%
+   mutate(length = case_when(
+     !is_empty(fromJSON(content(GET(lsms_raw$api_call[i]), "text"), flatten = TRUE)) ~ vec_depth(fromJSON(content(GET(lsms_raw$api_call[i]), "text"), flatten = TRUE)),
+     TRUE ~ NA_integer_))
+ # If list is deep enough, proceed to extract data
+ if(study$length > 3){
+   study <- study %>%
+     # Test first whether response is valid based on tunneling into list
+     mutate(study_type = ifelse(
+       is_empty(fromJSON(content(GET(lsms_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name), NA_character_,
+       fromJSON(content(GET(lsms_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name
+     ))
+ }
+ # Append to dataset
+ all_wb_metadata <- all_wb_metadata %>%
+   bind_rows(study)
+ # Insert brief pause in code to not look like a robot to the API
+ Sys.sleep(sample(seq(0,0.3,by=0.001),1))
+ # Increment progress bar
+ setTxtProgressBar(pb, i)
+}
+
+close(pb) # Close the connection
+
+##### ADDITIONAL METADATA
+# Authoring Entity Metadata
+fromJSON(content(GET(str_c("https://microdata.worldbank.org/index.php/api/catalog/", lsms_raw$id[10], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$authoring_entity |> 
+  as_tibble() %>%
+  # need to use magrittr pipe for the period syntax to work
+  mutate(across(everything(), ~str_squish(.)))  %>%
+  mutate(authoring_entity = ifelse("affiliation" %in% names(.), paste0(name, " (", affiliation, ")"), name)) |> 
+  summarise(authoring_entity = paste0(authoring_entity, collapse = ", ")) |> 
+  pull()
+
+# Unit of Analysis Metadata
+fromJSON(content(GET(str_c("https://microdata.worldbank.org/index.php/api/catalog/", lsms_raw$id[10], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$analysis_unit
+
+# Data Kind
+fromJSON(content(GET(str_c("https://microdata.worldbank.org/index.php/api/catalog//", lsms_raw$id[10], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$data_kind
+
+# Keywords
+fromJSON(content(GET(str_c("https://microdata.worldbank.org/index.php/api/catalog//", lsms_raw$id[10], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$keywords |> 
+  as_tibble() |> select(keyword) |> summarise(keywords = paste0(keyword, collapse=", ")) |> pull()
+
+# Universe
+fromJSON(content(GET(str_c("https://microdata.worldbank.org/index.php/api/catalog//", lsms_raw$id[10], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$universe
+####
+
+# # Missing 539 entries for study type because metadata does not have this field
+# # 'Data kind' is closest equivalent for many of them. Repeat calls and acquire these
+# 
+# # Filter to where we are missing study_type.
+# # Also create url entry as variable so it's easier to read in API call
+# all_wb_missing <- all_wb_metadata %>%
 #  filter(is.na(study_type)) %>%
 #  mutate(api_call = str_c("https://microdata.worldbank.org/index.php/api/catalog/", id, "?id_format=id"))
-#
-## Initialize empty dataset
-#addl_wb_metadata <- tibble()
-#
-## Set up progress bar
-#n_iter <- length(all_wb_missing$id)
-#pb <- txtProgressBar(min = 1,      # Minimum value of the progress bar
+# 
+# # Initialize empty dataset
+# addl_wb_metadata <- tibble()
+# 
+# # Set up progress bar
+# n_iter <- length(all_wb_missing$id)
+# pb <- txtProgressBar(min = 1,      # Minimum value of the progress bar
 #                     max = n_iter, # Maximum value of the progress bar
 #                     style = 3,    # Progress bar style (also available style = 1 and style = 2)
 #                     width = 50,   # Progress bar width. Defaults to getOption("width")
 #                     char = "=")   # Character used to create the bar
-#
-## Loop
-#for (i in 1:length(all_wb_missing$id)){
+# 
+# # Loop
+# for (i in 1:length(all_wb_missing$id)){
 #  # Set up tibble with basic info
 #  study <- tibble(id = all_wb_missing$id[i], study_type = NA_character_)
 #  # Determine length of list generated from API call to filter out
@@ -212,21 +236,21 @@ lsms_raw <- fromJSON(content(GET("https://microdata.worldbank.org/index.php/api/
 #  Sys.sleep(sample(seq(0,0.3,by=0.001),1))
 #  # Increment progress bar
 #  setTxtProgressBar(pb, i)
-#}
-#
-#close(pb) # Close the connection
-#
-## Merge with other df of metadata tags
-#wb_study_description <- all_wb_metadata %>%
+# }
+# 
+# close(pb) # Close the connection
+
+# # Merge with other df of metadata tags
+# wb_study_description <- all_wb_metadata %>%
 #  filter(!is.na(study_type)) %>%
 #  mutate(meta_data_field = "Study Type") %>%
 #  bind_rows(addl_wb_metadata %>% mutate(meta_data_field = "Data Kind")) %>%
 #  select(-length)
-#
+
 ## ABout 92  remaining with no relevant field. Will have to filter on other metadata.
 #
 ## Save copy of WB study descriptions so we don't have to rerun all entries, just new ones
-#saveRDS(wb_study_description, file = "Input/wb_microdata_study_description.rds")
+# saveRDS(wb_study_description, file = "Input/wb_microdata_study_description.rds")
 
 # Load study descriptions from saved file
 wb_study_description <- readRDS("Input/wb_microdata_study_description.rds")
@@ -257,14 +281,74 @@ lsms <- lsms_raw %>%
          source = "https://microdata.worldbank.org/index.php/catalog/lsms") %>%
   # Merge in study type description
   left_join(wb_study_description) %>%
-  # Filter for correct repository (lsms, hfps) and addl survey types
-  filter(repositoryid %in% c("lsms", "hfps") | study_type %in% c("Income/Expenditure/Household Survey [hh/ies]",
-                                                                           "Living Standards Measurement Study",
-                                                                           "Living Standards Measurement Study [hh/lsms]",
-                                                                           "Socio-Economic/Monitoring Survey [hh/sems]")) %>%
+  # Filter for correct repository (lsms) and add survey types
+  filter(repositoryid %in% c("lsms") | study_type %in% c("Income/Expenditure/Household Survey [hh/ies]",
+                                                         "Living Standards Measurement Study",
+                                                         "Living Standards Measurement Study [hh/lsms]",
+                                                         "Socio-Economic/Monitoring Survey [hh/sems]",
+                                                         "Income/Expenditure/Household Survey",
+                                                         "Socio-Economic/Monitoring Survey",
+                                                         "Core Welfare Indicators Questionnaire [hh/cwiq]")) %>%
   # Keep relevant variables
-  select(country = nation, iso3c, year, instrument_name = title, instrument_type, status, source, study_type, authoring_entity, repositoryid)
+  select(idno, country = nation, iso3c, year, instrument_name = title, instrument_type, status, source, study_type, authoring_entity, repositoryid)
 
+
+####### ILO HIES data to compare to World Bank microdata we used above
+
+### for some reason this query gets some from the central repo, e.g. Consumer Expenditure Survey - should I remove those (filter repo title = Household income and expenditure survey)?
+ilo_hies <- fromJSON(content(GET("https://www.ilo.org/surveyLib/index.php/api/catalog",
+                     query = list(ps=10000, repo="HIES")), "text"))$result$rows |>
+  as_tibble() |> 
+  mutate(year = as.numeric(str_extract(idno, "\\d{4}")),
+         iso3c = countrycode::countrycode(nation, "country.name", "iso3c"),
+         iso3c = case_when(nation == "Kosovo" ~ "XKX", TRUE ~ iso3c),
+         status="completed",
+         source="https://www.ilo.org/surveyLib/index.php/api/catalog")
+
+# look at distinct titles without years for filtering
+ilo_hies |> select(title) |> mutate(title2 = str_remove(title, " \\d{4}$| \\d{4}-\\d{4}$")) |> select(title2)|> distinct() |> View()
+
+# extract beginning of IDNO for both to merge on
+lsms <- lsms |> mutate(short_idno = str_extract(idno, ".+?(?=_(v|V)\\d)"))
+ilo_hies <- ilo_hies |> mutate(short_idno = str_extract(idno, ".+(?=_(v|V)\\d)"))
+
+# look at overlap by short id
+lsms |> select(short_idno, title=instrument_name, nation=country, year) |> left_join(ilo_hies |> select(id, title, nation, short_idno), by="short_idno") |> filter(!is.na(id))
+
+# look at overlap by title, year, nation matching
+left_join(lsms |> select(title=instrument_name, nation=country, year, idno_wb = idno),
+          ilo_hies |> select(title, nation, year, idno_ilo = idno), by=c("title", "nation", "year")) |> 
+  filter(!is.na(idno_ilo) & !is.na(idno_wb))
+
+### less matches this way because of discrepancies in titles (ex ALB_2002_LSMS, LSMS has "Wave 1 Panel" in title but ILO data doesn't)
+### also due to diff. in nation spelling (e.g. Bosnia-Herzegovina vs Bosnia and Herzegovina)
+
+### note - also checked ID variable and found they are not the same across surveys. Example:
+lsms_raw |> filter(str_detect(idno, "ALB_2012_LSMS")) |> pull(id) == ilo_hies |> filter(str_detect(idno, "ALB_2012_LSMS")) |> pull(id)
+
+##### ADDITIONAL METADATA
+# Authoring Entity Metadata
+fromJSON(content(GET(str_c("https://www.ilo.org/surveyLib/index.php/api/catalog//", ilo_hies$id[10], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$authoring_entity |> 
+  as_tibble() %>%
+  # need to use magrittr pipe for the period syntax to work
+  mutate(across(everything(), ~str_squish(.)))  %>%
+  mutate(authoring_entity = ifelse("affiliation" %in% names(.), paste0(name, " (", affiliation, ")"), name)) |> 
+  summarise(authoring_entity = paste0(authoring_entity, collapse = ", ")) |> 
+  pull()
+
+# Unit of Analysis Metadata
+fromJSON(content(GET(str_c("https://www.ilo.org/surveyLib/index.php/api/catalog//", ilo_hies[10], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$analysis_unit
+
+# Data Kind
+fromJSON(content(GET(str_c("https://www.ilo.org/surveyLib/index.php/api/catalog//", ilo_hies$id[10], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$data_kind
+
+# Keywords
+fromJSON(content(GET(str_c("https://www.ilo.org/surveyLib/index.php/api/catalog//", ilo_hies$id[10], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$keywords |> 
+  as_tibble() |> select(keyword) |> summarise(keywords = paste0(keyword, collapse=", ")) |> pull()
+
+# Universe
+fromJSON(content(GET(str_c("https://www.ilo.org/surveyLib/index.php/api/catalog//", ilo_hies$id[10], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$universe
+####
 
 # Labor Force Surveys -----------------------------------------------------
 
@@ -273,35 +357,62 @@ lsms <- lsms_raw %>%
 
 # https://ilostat.ilo.org/data/national-sources-catalogue/
 # https://www.ilo.org/ilostat-files/Documents/sources_en.csv
-lfs <- read_csv("https://www.ilo.org/ilostat-files/Documents/sources_en.csv") %>%
-  janitor::clean_names() %>%
-  # Filter for where instruments yield information on the labor force
-  # But don't include MICS, DHS, or HIES
-  filter(str_detect(topics_covered, "Labour force"), !str_detect(source, "Multiple Indicator"),
-         !str_detect(source, "Demographic and Health Survey"), !str_detect(source_type, "Household income/expenditure survey"),
-         !str_detect(source_type, "Population census")) %>%
-  # Clean latest period available variable by splitting into years
-  # then only keeping years.
-  separate(latest_period_available, into = c("year1", "year2", "year3"), sep = ", ", fill = "right") %>%
-  mutate(across(year1:year3, ~as.numeric(str_extract(.x, "^[0-9]{4}"))),
-         iso3c = countrycode::countrycode(country, "country.name", "iso3c"),
-         iso3c = case_when(country == "Kosovo" ~ "XKX", country == "Netherlands Antilles" ~ "ANT", TRUE ~ iso3c),
-         year1 = case_when(
-           year2 - year1 == 1 ~ NA_real_,
-           TRUE ~ year1
-         )) %>%
-  ### Adding two additional variables, which might be of value?
-  select(country, iso3c, source_type, year1, year2, international_classifications, topics_covered) %>%
-  pivot_longer(year1:year2, names_to = "period", values_to = "year") %>%
-  filter(!is.na(year)) %>%
-  mutate(source = "https://ilostat.ilo.org/data/national-sources-catalogue/", status = "Completed", instrument_type = "Labor Force Survey") %>%
-  select(country, iso3c, year, instrument_name = source_type, instrument_type, status, source, international_classifications, topics_covered)
-  
-  
-# with IHSN
-# Then if there's a trend in every year, then check NSO site
-# Kieran's spreadsheet, follow up
+# lfs <- read_csv("https://www.ilo.org/ilostat-files/Documents/sources_en.csv") %>%
+#   janitor::clean_names() %>%
+#   # Filter for where instruments yield information on the labor force
+#   # But don't include MICS, DHS, or HIES
+#   filter(str_detect(topics_covered, "Labour force"), !str_detect(source, "Multiple Indicator"),
+#          !str_detect(source, "Demographic and Health Survey"), !str_detect(source_type, "Household income/expenditure survey"),
+#          !str_detect(source_type, "Population census")) %>%
+#   # Clean latest period available variable by splitting into years
+#   # then only keeping years.
+#   separate(latest_period_available, into = c("year1", "year2", "year3"), sep = ", ", fill = "right") %>%
+#   mutate(across(year1:year3, ~as.numeric(str_extract(.x, "^[0-9]{4}"))),
+#          iso3c = countrycode::countrycode(country, "country.name", "iso3c"),
+#          iso3c = case_when(country == "Kosovo" ~ "XKX", country == "Netherlands Antilles" ~ "ANT", TRUE ~ iso3c),
+#          year1 = case_when(
+#            year2 - year1 == 1 ~ NA_real_,
+#            TRUE ~ year1
+#          )) %>%
+#   ### Adding two additional variables, which might be of value?
+#   select(country, iso3c, source_type, year1, year2, international_classifications, topics_covered) %>%
+#   pivot_longer(year1:year2, names_to = "period", values_to = "year") %>%
+#   filter(!is.na(year)) %>%
+#   mutate(source = "https://ilostat.ilo.org/data/national-sources-catalogue/", status = "Completed", instrument_type = "Labor Force Survey") %>%
+#   select(country, iso3c, year, instrument_name = source_type, instrument_type, status, source, international_classifications, topics_covered)
 
+#### NEW APPROACH USING API ####
+# get country codes
+lfs <- fromJSON(content(GET("https://www.ilo.org/surveyLib/index.php/api/catalog/search", 
+                     query=list(from=2012, ps=10000)), "text"))$result$rows |> 
+  as_tibble() |> 
+  filter(repo_title=="Labour force surveys" & year_end >= 2013) |> 
+  rename(country = nation,
+         instrument_type = repo_title,
+         instrument_name = title,
+         source = url) |> 
+  mutate(status = "Completed",
+         year = ifelse(year_start==year_end, year_end, paste0(year_start, "-", year_end)),
+         country = ifelse(country=="TÃ¼rkiye", "Turkey", country),
+         country = ifelse(country=="CÃ´te d'Ivoire", "Côte d'Ivoire", country),
+         iso3c = countrycode::countrycode(country, "country.name", "iso3c"),
+         iso3c = case_when(country == "Kosovo" ~ "XKX", country == "Netherlands Antilles" ~ "ANT", TRUE ~ iso3c)) |> 
+  select(country, iso3c, year, instrument_name, instrument_type, authoring_entity, status, source, id, type, idno)
+
+####
+
+#### comparing above to data from https://ilostat.ilo.org/data/national-sources-catalogue/ ####
+sources_en <- read_csv("~/Documents/ODW/sources_en.csv", show_col_types = F) |> filter(`Source type`=="Labour force survey")
+
+# separating rows on years b/c a number have multiple years
+sources_en <- sources_en |> select(country = Country, source = Source, year = `Latest period available`) |> 
+  separate_rows(year, sep=", ") |> 
+  mutate(year = str_extract(year, "^\\d{4}"))
+
+# left join, filter where there is a match, export to xlsx
+lfs |> select(country, year, instrument_name) |> left_join(sources_en, by=c("year", "country")) |> filter(!is.na(source)) |> 
+  rename(source_catalog_name = source) |> 
+  arrange(country) |> View()
 
 # Agriculture Surveys and Censuses ----------------------------------------
 
@@ -317,69 +428,89 @@ agri_survey_raw <- fromJSON(content(GET("https://microdata.fao.org/index.php/api
   as_tibble() %>%
   mutate(api_call = str_c("https://microdata.fao.org/index.php/api/catalog/", id, "?id_format=id"))
 
-## Initialize empty dataset
-#all_fao_metadata <- tibble()
-#
-## Set up progress bar
-#n_iter <- length(agri_survey_raw$id)
-#pb <- txtProgressBar(min = 1,      # Minimum value of the progress bar
-#                     max = n_iter, # Maximum value of the progress bar
-#                     style = 3,    # Progress bar style (also available style = 1 and style = 2)
-#                     width = 50,   # Progress bar width. Defaults to getOption("width")
-#                     char = "=")   # Character used to create the bar
-#
-## Loop
-#for (i in 1:length(agri_survey_raw$id)){
-#  # Set up tibble with basic info
-#  study <- tibble(id = agri_survey_raw$id[i], study_type = NA_character_)
-#  # Determine length of list generated from API call to filter out
-#  # Where we hit error otherwise of subscript being out of bounds
-#  study <- study %>%
-#    mutate(length = case_when(
-#      !is_empty(fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)) ~ vec_depth(fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)),
-#      TRUE ~ NA_integer_))
-#  # If list is deep enough, proceed to extract data
-#  if(study$length > 3){
-#    study <- study %>%
-#      # Test first whether response is valid based on tunneling into list
-#      mutate(study_type = ifelse(
-#        is_empty(fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name), NA_character_,
-#        fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name
-#      ))
-#  }
-#  # Append to dataset
-#  all_fao_metadata <- all_fao_metadata %>%
-#    bind_rows(study)
-#  # Insert brief pause in code to not look like a robot to the API
-#  Sys.sleep(sample(seq(0,0.3,by=0.001),1))
-#  # Increment progress bar
-#  setTxtProgressBar(pb, i)
-#}
-#
-#close(pb) # Close the connection
-#
-## Missing XXX entries for study type because metadata does not have this field
-## 'Data kind' is closest equivalent for many of them. Repeat calls and acquire these
-#
-## Filter to where we are missing study_type.
-## Also create url entry as variable so it's easier to read in API call
-#all_fao_missing <- all_fao_metadata %>%
+# Initialize empty dataset
+all_fao_metadata <- tibble()
+
+# Set up progress bar
+n_iter <- length(agri_survey_raw$id)
+pb <- txtProgressBar(min = 1,      # Minimum value of the progress bar
+                    max = n_iter, # Maximum value of the progress bar
+                    style = 3,    # Progress bar style (also available style = 1 and style = 2)
+                    width = 50,   # Progress bar width. Defaults to getOption("width")
+                    char = "=")   # Character used to create the bar
+
+# Loop
+for (i in 1:length(agri_survey_raw$id)){
+ # Set up tibble with basic info
+ study <- tibble(id = agri_survey_raw$id[i], study_type = NA_character_)
+ # Determine length of list generated from API call to filter out
+ # Where we hit error otherwise of subscript being out of bounds
+ study <- study %>%
+   mutate(length = case_when(
+     !is_empty(fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)) ~ vec_depth(fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)),
+     TRUE ~ NA_integer_))
+ # If list is deep enough, proceed to extract data
+ if(study$length > 3){
+   study <- study %>%
+     # Test first whether response is valid based on tunneling into list
+     mutate(study_type = ifelse(is_empty(fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name), NA_character_,
+                                fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name),
+            analysis_unit = ifelse(is_empty(fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$analysis_unit), NA_character_,
+                            fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$analysis_unit),
+            data_kind = ifelse(is_empty(fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$data_kind), NA_character_,
+                         fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$data_kind),
+            universe = ifelse(is_empty(fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$universe), NA_character_,
+                       fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$universe))
+ }
+ 
+ # Append to dataset
+ all_fao_metadata <- all_fao_metadata %>%
+   bind_rows(study)
+ # Insert brief pause in code to not look like a robot to the API
+ Sys.sleep(sample(seq(0,0.3,by=0.001),1))
+ # Increment progress bar
+ setTxtProgressBar(pb, i)
+}
+
+close(pb) # Close the connection
+
+##### ADDITIONAL METADATA
+# Authoring Entity Metadata
+fromJSON(content(GET(str_c("https://microdata.fao.org/index.php/api/catalog//", agri_survey_raw$id[366], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$authoring_entity |> 
+  as_tibble() %>%
+  # need to use magrittr pipe for the period syntax to work
+  mutate(across(everything(), ~str_squish(.)))  %>%
+  mutate(authoring_entity = ifelse("affiliation" %in% names(.), paste0(name, " (", affiliation, ")"), name)) |> 
+  summarise(authoring_entity = paste0(authoring_entity, collapse = ", ")) |> 
+  pull()
+
+# Keywords
+fromJSON(content(GET(str_c("https://microdata.fao.org/index.php/api/catalog//", agri_survey_raw$id[10], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$keywords |> 
+  as_tibble() |> select(keyword) |> summarise(keywords = paste0(keyword, collapse=", ")) |> pull()
+####
+
+# Missing XXX entries for study type because metadata does not have this field
+# 'Data kind' is closest equivalent for many of them. Repeat calls and acquire these
+
+# Filter to where we are missing study_type.
+# Also create url entry as variable so it's easier to read in API call
+# all_fao_missing <- all_fao_metadata %>%
 #  filter(is.na(study_type)) %>%
 #  mutate(api_call = str_c("https://microdata.fao.org/index.php/api/catalog/", id, "?id_format=id"))
-#
-## Initialize empty dataset
-#addl_fao_metadata <- tibble()
-#
-## Set up progress bar
-#n_iter <- length(all_fao_missing$id)
-#pb <- txtProgressBar(min = 1,      # Minimum value of the progress bar
+# 
+# # Initialize empty dataset
+# addl_fao_metadata <- tibble()
+# 
+# # Set up progress bar
+# n_iter <- length(all_fao_missing$id)
+# pb <- txtProgressBar(min = 1,      # Minimum value of the progress bar
 #                     max = n_iter, # Maximum value of the progress bar
 #                     style = 3,    # Progress bar style (also available style = 1 and style = 2)
 #                     width = 50,   # Progress bar width. Defaults to getOption("width")
 #                     char = "=")   # Character used to create the bar
-#
-## Loop
-#for (i in 1:length(all_fao_missing$id)){
+# 
+# # Loop
+# for (i in 1:length(all_fao_missing$id)){
 #  # Set up tibble with basic info
 #  study <- tibble(id = all_fao_missing$id[i], study_type = NA_character_)
 #  # Determine length of list generated from API call to filter out
@@ -390,12 +521,17 @@ agri_survey_raw <- fromJSON(content(GET("https://microdata.fao.org/index.php/api
 #      TRUE ~ NA_integer_))
 #  # If list is deep enough, proceed to extract data
 #  if(study$length > 3){
+#    ### adding two other queries
 #    study <- study %>%
 #      # Test first whether response is valid based on tunneling into list
-#      mutate(study_type = ifelse(
-#        is_empty(fromJSON(content(GET(all_fao_missing$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$data_kind), NA_character_,
-#        fromJSON(content(GET(all_fao_missing$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$data_kind
-#      ))
+#      mutate(
+#        analysis_unit = ifelse(is_empty(fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$analysis_unit), NA_character_,
+#                               fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$analysis_unit),
+#        study_type = ifelse(is_empty(fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$data_kind), NA_character_,
+#                           fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$data_kind),
+#        universe = ifelse(is_empty(fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$universe), NA_character_,
+#                          fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$universe)
+#        )
 #  }
 #  # Append to dataset
 #  addl_fao_metadata <- addl_fao_metadata %>%
@@ -404,27 +540,34 @@ agri_survey_raw <- fromJSON(content(GET("https://microdata.fao.org/index.php/api
 #  Sys.sleep(sample(seq(0,0.3,by=0.001),1))
 #  # Increment progress bar
 #  setTxtProgressBar(pb, i)
-#}
-#
-#close(pb) # Close the connection
-#
-## Combine two metadata sets
-#fao_study_description <- all_fao_metadata %>%
+# }
+# 
+# close(pb) # Close the connection
+
+# # Combine two metadata sets
+# fao_study_description <- all_fao_metadata %>%
 #  filter(!is.na(study_type)) %>%
 #  mutate(meta_data_field = "Study Type") %>%
 #  bind_rows(addl_fao_metadata %>% mutate(meta_data_field = "Data Kind")) %>%
 #  select(-length)
-#
-## Save copy of FAO study descriptions so we don't have to rerun all entries, just new ones
-#saveRDS(fao_study_description, file = "Input/fao_microdata_study_description.rds")
+
+# Save copy of FAO study descriptions so we don't have to rerun all entries, just new ones
+# saveRDS(fao_study_description, file = "Input/fao_microdata_study_description.rds")
+
+
+# Save copy of FAO metadata so we don't have to rerun all entries, just new ones
+saveRDS(all_fao_metadata, file = "Input/fao_ag_survey_metadata.rds")
 
 # Load study descriptions from saved file
-fao_study_description <- readRDS("Input/fao_microdata_study_description.rds")
+# fao_study_description <- readRDS("Input/fao_microdata_study_description.rds")
+
+all_fao_metadata <- readRDS("Input/fao_ag_survey_metadata.rds")
 
 # Set up final list of Agricultural Surveys
 agri_survey <- fromJSON(content(GET("https://microdata.fao.org/index.php/api/catalog/search?ps=10000"), "text"), flatten = TRUE)$result$rows %>%
   as_tibble() %>%
-  left_join(fao_study_description) %>%
+  #left_join(fao_study_description) %>%
+  left_join(all_fao_metadata, by="id") |> 
   mutate(year_end = as.numeric(year_end),
          iso3c = countrycode::countrycode(nation, "country.name", "iso3c"),
          instrument_type = "Agricultural Survey/Census",
@@ -442,7 +585,7 @@ agri_survey <- fromJSON(content(GET("https://microdata.fao.org/index.php/api/cat
   filter(repositoryid == "agriculture-census-surveys", 
          !study_type %in% c("Administrative Records", "Agricultural Census [ag/census]", "Enterprise Census [en/census]", "Population and Housing Census [hh/popcen]"), 
          !str_detect(title, "mpact|roduction")) %>%
-  select(country = nation, iso3c, year = year_end, instrument_name = title, instrument_type, status, source, authoring_entity, study_type)
+  select(country = nation, iso3c, year = year_end, instrument_name = title, instrument_type, status, source, authoring_entity, study_type, analysis_unit, data_kind, universe)
 
 
 # * Ag Censuses - FAO -----------------------------------------------------
@@ -489,43 +632,60 @@ ihsn_raw <- fromJSON(content(GET("https://catalog.ihsn.org/index.php/api/catalog
          ),
          status = "Completed", source = "https://catalog.ihsn.org/catalog")
 
-#### To acquire more metadata with which to filter data, we loop individual survey API calls for their metadata
-#
-## Initialize empty dataset
-#all_study_metadata <- tibble()
-#
-## Set up progress bar
-#n_iter <- length(ihsn_raw$id)
-#pb <- txtProgressBar(min = 1,      # Minimum value of the progress bar
-#                     max = n_iter, # Maximum value of the progress bar
-#                     style = 3,    # Progress bar style (also available style = 1 and style = 2)
-#                     width = 50,   # Progress bar width. Defaults to getOption("width")
-#                     char = "=")   # Character used to create the bar
-#
-## Loop
-#for (i in 1:length(ihsn_raw$id)){
-#  # Create a tibble consisting of the id no of the study in IHSN and the field value for "study type"
-#  # To acount for where info on metadata is elsewhere other than nested API call,
-#  # we first determine whether API call is valid and then proceed.
-#  # As of 2 August 2021, this worked for 6727 out of 7277. Other calls
-#  # need to be made for the remaining 550
-#  study <- tibble(id = ihsn_raw$id[i])
-#  study <- study %>%
-#    mutate(study_type = ifelse(
-#      is_empty(fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", ihsn_raw$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name), NA_character_,
-#      fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", ihsn_raw$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name
-#    ))
-#  # Append to dataset
-#  all_study_metadata <- all_study_metadata %>%
-#    bind_rows(study)
-#  # Insert brief pause in code to not look like a robot to the API
-#  Sys.sleep(sample(seq(0,0.3,by=0.001),1))
-#  # Increment progress bar
-#  setTxtProgressBar(pb, i)
-#}
-#
-#close(pb) # Close the connection
-#
+### To acquire more metadata with which to filter data, we loop individual survey API calls for their metadata
+
+# Initialize empty dataset
+all_study_metadata <- tibble()
+
+# Set up progress bar
+n_iter <- length(ihsn_raw$id)
+pb <- txtProgressBar(min = 1,      # Minimum value of the progress bar
+                    max = n_iter, # Maximum value of the progress bar
+                    style = 3,    # Progress bar style (also available style = 1 and style = 2)
+                    width = 50,   # Progress bar width. Defaults to getOption("width")
+                    char = "=")   # Character used to create the bar
+
+# Loop
+for (i in 1:length(ihsn_raw$id)){
+ # Create a tibble consisting of the id no of the study in IHSN and the field value for "study type"
+ # To acount for where info on metadata is elsewhere other than nested API call,
+ # we first determine whether API call is valid and then proceed.
+ # As of 2 August 2021, this worked for 6727 out of 7277. Other calls
+ # need to be made for the remaining 550
+ study <- tibble(id = ihsn_raw$id[i])
+ study <- study %>%
+   mutate(study_type = ifelse(
+     is_empty(fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", ihsn_raw$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name), NA_character_,
+     fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", ihsn_raw$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name
+   ))
+ # Append to dataset
+ all_study_metadata <- all_study_metadata %>%
+   bind_rows(study)
+ # Insert brief pause in code to not look like a robot to the API
+ Sys.sleep(sample(seq(0,0.3,by=0.001),1))
+ # Increment progress bar
+ setTxtProgressBar(pb, i)
+}
+
+close(pb) # Close the connection
+
+##### ADDITIONAL METADATA
+# Authoring Entity Metadata
+fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", ihsn_raw$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$authoring_entity |> 
+as_tibble() %>%
+  # need to use magrittr pipe for the period syntax to work
+  mutate(across(everything(), ~str_squish(.)))  %>%
+  mutate(authoring_entity = ifelse("affiliation" %in% names(.), paste0(name, " (", affiliation, ")"), name)) |> 
+  summarise(authoring_entity = paste0(authoring_entity, collapse = ", ")) |> 
+  pull()
+
+# Unit of Analysis Metadata
+fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", ihsn_raw$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$analysis_unit
+
+# Data Kind
+fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", ihsn_raw$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$data_kind
+####
+
 ## Missing 550 entries for study type because metadata does not have this field
 ## 'Data kind' is closest equivalent for many of them. Repeat calls and acquire these
 #
@@ -626,6 +786,7 @@ ihsn <- ihsn_raw %>%
 
 # Time Use Surveys - UNSD -------------------------------------------------
 
+##### OLD TUS DATA #####
 # https://unstats.un.org/unsd/gender/timeuse and manual ODW check of NSO websites
 tus <- read_csv("Input/time_use_surveys_sgdf_inventory_2020.csv") %>%
   janitor::clean_names() %>%
@@ -646,6 +807,16 @@ tus <- read_csv("Input/time_use_surveys_sgdf_inventory_2020.csv") %>%
   select(country, iso3c = iso, year, instrument_name = time_use_survey, 
          instrument_type, source, status)
 
+##### updated data from https://unstats.un.org/unsd/demographic-social/time-use/ #####
+tus_new <- read_csv("Input/tus_unsd_data.csv", show_col_types = F) |> 
+  rename(country = Country,
+         survey_avail = `Survey Availability`,
+         survey_year = `Year of the survey`) |> 
+  mutate(instrument_type = "Time Use Survey", 
+         source = "https://unstats.un.org/unsd/demographic-social/time-use/",
+         status = "Completed")
+         
+tus_new |> group_by(country) |> summarise(n=n()) |> arrange(desc(n))
 
 # Census - UNSD -----------------------------------------------------------
 
@@ -819,3 +990,4 @@ all_surveys_census %>%
 #### HMIS - ODIN
 
 #### EMIS - ODIN
+

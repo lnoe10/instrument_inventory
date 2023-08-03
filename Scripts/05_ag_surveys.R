@@ -73,20 +73,17 @@ fromJSON(content(GET(str_c("https://microdata.fao.org/index.php/api/catalog//", 
 ####
 
 
-
-# # Combine two metadata sets
-# fao_study_description <- all_fao_metadata %>%
-#  filter(!is.na(study_type)) %>%
-#  mutate(meta_data_field = "Study Type") %>%
-#  bind_rows(addl_fao_metadata %>% mutate(meta_data_field = "Data Kind")) %>%
-#  select(-length)
-
-# Save copy of FAO study descriptions so we don't have to rerun all entries, just new ones
-# saveRDS(fao_study_description, file = "Input/fao_microdata_study_description.rds")
-
-
 # Save copy of FAO metadata so we don't have to rerun all entries, just new ones
 saveRDS(all_fao_metadata, file = "Input/fao_ag_survey_metadata.rds")
+
+
+
+
+
+
+
+
+
 
 # Load study descriptions from saved file
 # fao_study_description <- readRDS("Input/fao_microdata_study_description.rds")

@@ -103,7 +103,7 @@ lsms <- lsms_raw %>%
   # Keep relevant variables
   select(id, idno, country = nation, iso3c, year, instrument_name = title, instrument_type, status, source, study_type, authoring_entity, repositoryid, data_kind, unit_of_analysis)
 
-# filter for years of interest
+# filter for OGDI years of interest
 lsms_clean <- lsms |> filter(year>=2013 & year<=2022)
 
 # export filtered and full datasets

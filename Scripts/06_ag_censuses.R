@@ -1,11 +1,9 @@
 ### script to scrape Agricultural Census data from the FAO
 
-library(httr)
-library(jsonlite)
 library(tidyverse)
 
 # Upload and clean list of 2020 and 2010 round of ag census
-ag_census <- read_csv("Input/wca_2020_2010_notes.csv") %>%
+ag_census <- read_csv("Input/wca_2020_2010_notes.csv", show_col_types = F) %>%
   janitor::clean_names() %>%
   mutate(year_clean = case_when(
     str_detect(census_year, "-[0-9]{2}$") ~ str_c("20", str_extract(census_year, "[0-9]{2}$")),
@@ -13,8 +11,7 @@ ag_census <- read_csv("Input/wca_2020_2010_notes.csv") %>%
     census_year == "AGRIS since 2018" ~ NA_character_,
     str_detect(census_year, "[0-9]{4}$") ~ str_extract(census_year, "[0-9]{4}$"),
     str_detect(census_year, "\\/[0-9]{2}$") ~ str_c("20", str_extract(census_year, "[0-9]{2}$")),
-    TRUE ~ census_year
-  ),
+    TRUE ~ census_year),
   year_clean = as.numeric(year_clean),
   iso3c = countrycode::countrycode(country_link_to_national_census_organisation, "country.name", "iso3c"),
   iso3c = case_when(country_link_to_national_census_organisation == "Netherland" ~ "NLD", TRUE ~ iso3c),

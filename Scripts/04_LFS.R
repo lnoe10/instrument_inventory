@@ -6,10 +6,10 @@ library(tidyverse)
 
 # scrape data from API
 lfs <- fromJSON(content(GET("https://www.ilo.org/surveyLib/index.php/api/catalog/search", 
-                            query=list(from=2012, ps=10000)), "text"))$result$rows |> 
+                            query=list(ps=10000)), "text"))$result$rows |> 
   as_tibble() |> 
-  # filter for only LFS and 2012/13-present
-  filter(repo_title=="Labour force surveys" & year_end >= 2013) |> 
+  # filter for only LFS
+  filter(repo_title=="Labour force surveys") |> 
   rename(country = nation,
          instrument_type = repo_title,
          instrument_name = title,
@@ -21,9 +21,14 @@ lfs <- fromJSON(content(GET("https://www.ilo.org/surveyLib/index.php/api/catalog
          country = ifelse(country=="CÃ´te d'Ivoire", "Côte d'Ivoire", country),
          iso3c = countrycode::countrycode(country, "country.name", "iso3c"),
          iso3c = case_when(country == "Kosovo" ~ "XKX", country == "Netherlands Antilles" ~ "ANT", TRUE ~ iso3c)) |> 
-  #select(country, iso3c, year, instrument_name, instrument_type, authoring_entity, status, source, id, type, idno)
+  select(country, iso3c, year_start, year_end, year, instrument_name, instrument_type, authoring_entity, status, source, id, type, idno)
 
+# filter for OGDI years of interest based on year end
+lfs_clean <- lfs |> filter(year_end >= 2013)
 
+# export filtered and full datasets
+#xlsx::write.xlsx(lfs_clean, "Output/lfs_ogdi_yrs.xlsx")
+#xlsx::write.xlsx(lfs, "Output/lfs_all_yrs.xlsx")
 
 #### comparing above to data from https://ilostat.ilo.org/data/national-sources-catalogue/ ####
 sources_en <- read_csv("~/Documents/ODW/sources_en.csv", show_col_types = F) |> filter(`Source type`=="Labour force survey")
