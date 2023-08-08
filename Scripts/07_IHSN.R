@@ -31,8 +31,7 @@ pb <- txtProgressBar(min = 1,      # Minimum value of the progress bar
                      char = "=")   # Character used to create the bar
 
 # Loop
-# length(ihsn_raw$id)
-for (i in 1:200){
+for (i in 1:length(ihsn_raw$id)){
   # Create a tibble consisting of the id no of the study in IHSN and the metadata of interest
   # To account for where info on metadata is elsewhere other than nested API call, we first determine whether API call is valid and then proceed.
   study <- tibble(id = ihsn_raw$id[i])
@@ -114,14 +113,14 @@ for (i in 1:200){
 close(pb) # Close the connection
 
 # save metadata
-saveRDS(all_study_metadata, "Input/ihsn_metadata.rds")
+# saveRDS(all_study_metadata, "Input/ihsn_metadata.rds")
 
 ## Load study descriptions from saved file
-ihsn_study_description <- readRDS("Input/ihsn_microdata_study_description.rds")
+all_study_metadata <- readRDS("Input/ihsn_metadata.rds")
 
 # Final list of IHSN, to be used to supplement other survey groups as appropriate
 ihsn <- ihsn_raw %>%
-  left_join(ihsn_study_description) %>%
+  left_join(all_study_metadata) %>%
   # drop entirely irrelevant surveys
   filter(!study_type %in% c("Registros administrativos, otros (ad/oth]",
                             "Independent Performance Evaluation",
@@ -163,5 +162,8 @@ ihsn <- ihsn_raw %>%
                             "Event/Transaction data [evn]",
                             "Other",
                             "Sample survey data [ssd], Administrative records data [adm], other",
-                            "Event/transaction data [evn]"
-  ))
+                            "Event/transaction data [evn]")) |> 
+  select(id, idno, instrument_name = title, country=nation, iso3c, year_start, year_end, repositoryid, type, authoring_entity, authoring_entity_detail, funding_agencies, study_type:producers, status, source)
+
+# export filtered and full dataset
+xlsx::write.xlsx(ihsn, "Output/ihsn.xlsx")

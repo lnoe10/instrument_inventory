@@ -24,12 +24,8 @@ dhs <- dhs_raw |>
          source = "https://dhsprogram.com/Methodology/survey-search.cfm?pgtype=main&SrvyTp=year#",
          iso3c = countrycode::countrycode(country, "country.name", "iso3c"),
          year = as.numeric(year),
-         country_clean = countrycode::countrycode(iso3c, "iso3c", "country.name")) %>%
-  rename(country = country_clean, 
-         country_original = country)
-
-# select only core variables of interest
-dhs <- dhs |> select(country = country_clean, iso3c, year, status, instrument_name = survey_type, instrument_type, source, country_original = country)
+         country_clean = countrycode::countrycode(iso3c, "iso3c", "country.name")) |> 
+  select(country = country_clean, iso3c, year, status, instrument_name = survey_type, instrument_type, source, country_original = country)
 
 # filter for OGDI years of interest
 # dhs_clean <- dhs |> filter(year>=2013 & year<=2022)

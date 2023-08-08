@@ -4,7 +4,7 @@ library(httr)
 library(jsonlite)
 library(tidyverse)
 
-# First 
+# First get data from API
 agri_survey_raw <- fromJSON(content(GET("https://microdata.fao.org/index.php/api/catalog/search?ps=10000"), "text"), flatten = TRUE)$result$rows %>%
   as_tibble() %>%
   mutate(api_call = str_c("https://microdata.fao.org/index.php/api/catalog/", id, "?id_format=id"))
@@ -23,9 +23,11 @@ pb <- txtProgressBar(min = 1,      # Minimum value of the progress bar
                      char = "=")   # Character used to create the bar
 
 # Loop
-for (i in 1:length(agri_survey_raw$id)){
+for (i in 1073:length(agri_survey_raw$id)){
+  
   # Set up tibble with basic info
   study <- tibble(id = agri_survey_raw$id[i], study_type = NA_character_)
+  
   # Determine length of list generated from API call to filter out
   # Where we hit error otherwise of subscript being out of bounds
   study <- study %>%
@@ -36,14 +38,103 @@ for (i in 1:length(agri_survey_raw$id)){
   if(study$length > 3){
     study <- study %>%
       # Test first whether response is valid based on tunneling into list
-      mutate(study_type = ifelse(is_empty(fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name), NA_character_,
+      mutate(study_type = ifelse(is_empty(fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name), 
+                                 NA_character_,
                                  fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name),
-             analysis_unit = ifelse(is_empty(fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$analysis_unit), NA_character_,
+             unit_of_analysis = ifelse(is_empty(fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$analysis_unit), 
+                                       NA_character_,
                                     fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$analysis_unit),
-             data_kind = ifelse(is_empty(fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$data_kind), NA_character_,
+             data_kind = ifelse(is_empty(fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$data_kind), 
+                                NA_character_,
                                 fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$data_kind),
-             universe = ifelse(is_empty(fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$universe), NA_character_,
+             universe = ifelse(is_empty(fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$universe), 
+                               NA_character_,
                                fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$universe))
+    
+    ### producers info - special case b/c sometimes role is not available in the metadata, causing code to break
+    if (is_empty(fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$production_statement$producers)==TRUE) {
+      
+      # case when metadata field is empty
+      study <- study |> mutate(producers = NA)
+      
+    } else if ("role" %in% names(as_tibble(fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$production_statement$producers))==FALSE) {
+      
+      # case when there is only a "name" and "abbreviation" available
+      study <- study |> mutate(producers = fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$production_statement$producers |> 
+                                 as_tibble() %>%
+                                 mutate(across(everything(), ~str_squish(.))) |> 
+                                 mutate(all_data = case_when(affiliation!="" ~ paste0(name, " (AFFILIATION: ", affiliation, ")"),
+                                                             affiliation=="" ~ paste0(name))) |> 
+                                 select(all_data) |> 
+                                 summarise(producers = paste0(all_data, collapse = " // ")) |> 
+                                 pull())
+    } else {
+      study <- study |> mutate(producers = fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$production_statement$producers |> 
+                                 as_tibble() %>%
+                                 mutate(across(everything(), ~str_squish(.))) |> 
+                                 mutate(all_data = case_when(affiliation!="" & role!="" ~ paste0(name, " (AFFILIATION: ", affiliation, ", ROLE: ", role, ")"),
+                                                             affiliation=="" ~ paste0(name, ", (ROLE: ", role, ")"),
+                                                             role=="" ~ paste0(name, ", (AFFILIATION: ", affiliation, ")"))) |> 
+                                 select(all_data) |> 
+                                 summarise(producers = paste0(all_data, collapse = " // ")) |> 
+                                 pull())
+    }
+      
+    
+    ### funding agency info - special case b/c sometimes role is not available in the metadata, causing code to break
+    if (is_empty(fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$production_statement$funding_agencies)==TRUE) {
+      
+      # case when metadata field is empty
+      study <- study |> mutate(funding_agencies = NA)
+      
+    } else if ("role" %in% names(as_tibble(fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$production_statement$funding_agencies))==FALSE) {
+      # case when there is only a "name" and "abbreviation" available
+      study <- study |> mutate(funding_agencies = fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$production_statement$funding_agencies |> 
+                                 as_tibble() |> 
+                                 mutate(across(everything(), ~str_squish(.))) %>% 
+                                 mutate(abbreviation = ifelse("abbr" %in% names(.), abbr, abbreviation)) %>% 
+                                 mutate(all_data = paste0(name, " (", abbreviation, ")")) |> 
+                                 select(all_data) |> 
+                                 summarise(funding_agencies = paste0(all_data, collapse = " // ")) |> 
+                                 pull())
+    } else {
+      study <- study |> mutate(funding_agencies = fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$production_statement$funding_agencies |> 
+                                 as_tibble() |> 
+                                 mutate(across(everything(), ~str_squish(.))) %>% 
+                                 mutate(abbreviation = ifelse("abbr" %in% names(.), abbr, abbreviation)) %>% 
+                                 mutate(all_data = ifelse(role!="", paste0(name, " (", abbreviation, "), ROLE: ", role), paste0(name, " (", abbreviation, ")"))) |> 
+                                 select(all_data) |> 
+                                 summarise(funding_agencies = paste0(all_data, collapse = " // ")) |> 
+                                 pull())
+    }
+    
+    ### authoring entity detail - special case b/c sometimes there are two variables in the metadata, and sometimes just one
+    if (is_empty(fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$authoring_entity)==TRUE) {
+      # case when metadata field is empty
+      study <- study |> mutate(authoring_entity_detail = NA)
+      
+    } else if ("affiliation" %in% names(as_tibble(fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$authoring_entity))==FALSE) {
+      # case when there is only a "name" available
+      study <- study |> mutate(authoring_entity_detail = fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$authoring_entity |> 
+                                 as_tibble() %>%
+                                 # need to use magrittr pipe for the period syntax to work
+                                 mutate(across(everything(), ~str_squish(.))) |> 
+                                 summarise(authoring_entity_detail = paste0(name, collapse = ", ")) |> 
+                                 pull())
+    } else {
+      study <- study |> mutate(authoring_entity_detail = ifelse(is_empty(fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$authoring_entity),
+                                                                NA_character_,
+                                                                fromJSON(content(GET(agri_survey_raw$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$authoring_entity |> 
+                                                                  as_tibble() %>%
+                                                                  # need to use magrittr pipe for the period syntax to work
+                                                                  mutate(across(everything(), ~str_squish(.)))  %>%
+                                                                  mutate(authoring_entity = ifelse("affiliation" %in% names(.) & affiliation!="", paste0(name, " (", affiliation, ")"), name)) |> 
+                                                                  # remove empty rows
+                                                                  filter(authoring_entity!="") |> 
+                                                                  summarise(authoring_entity = paste0(authoring_entity, collapse = ", ")) |> 
+                                                                  pull()))
+    }
+    
   }
   
   # Append to dataset
@@ -57,43 +148,14 @@ for (i in 1:length(agri_survey_raw$id)){
 
 close(pb) # Close the connection
 
-##### ADDITIONAL METADATA
-# Authoring Entity Metadata
-fromJSON(content(GET(str_c("https://microdata.fao.org/index.php/api/catalog//", agri_survey_raw$id[366], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$authoring_entity |> 
-  as_tibble() %>%
-  # need to use magrittr pipe for the period syntax to work
-  mutate(across(everything(), ~str_squish(.)))  %>%
-  mutate(authoring_entity = ifelse("affiliation" %in% names(.), paste0(name, " (", affiliation, ")"), name)) |> 
-  summarise(authoring_entity = paste0(authoring_entity, collapse = ", ")) |> 
-  pull()
-
-# Keywords
-fromJSON(content(GET(str_c("https://microdata.fao.org/index.php/api/catalog//", agri_survey_raw$id[10], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$keywords |> 
-  as_tibble() |> select(keyword) |> summarise(keywords = paste0(keyword, collapse=", ")) |> pull()
-####
-
-
 # Save copy of FAO metadata so we don't have to rerun all entries, just new ones
 saveRDS(all_fao_metadata, file = "Input/fao_ag_survey_metadata.rds")
 
-
-
-
-
-
-
-
-
-
 # Load study descriptions from saved file
-# fao_study_description <- readRDS("Input/fao_microdata_study_description.rds")
-
-all_fao_metadata <- readRDS("Input/fao_ag_survey_metadata.rds")
+# all_fao_metadata <- readRDS("Input/fao_ag_survey_metadata.rds")
 
 # Set up final list of Agricultural Surveys
-agri_survey <- fromJSON(content(GET("https://microdata.fao.org/index.php/api/catalog/search?ps=10000"), "text"), flatten = TRUE)$result$rows %>%
-  as_tibble() %>%
-  #left_join(fao_study_description) %>%
+agri_survey <- agri_survey_raw %>%
   left_join(all_fao_metadata, by="id") |> 
   mutate(year_end = as.numeric(year_end),
          iso3c = countrycode::countrycode(nation, "country.name", "iso3c"),
@@ -112,4 +174,8 @@ agri_survey <- fromJSON(content(GET("https://microdata.fao.org/index.php/api/cat
   filter(repositoryid == "agriculture-census-surveys", 
          !study_type %in% c("Administrative Records", "Agricultural Census [ag/census]", "Enterprise Census [en/census]", "Population and Housing Census [hh/popcen]"), 
          !str_detect(title, "mpact|roduction")) %>%
-  select(country = nation, iso3c, year = year_end, instrument_name = title, instrument_type, status, source, authoring_entity, study_type, analysis_unit, data_kind, universe)
+  select(id, country = nation, iso3c, year = year_end, instrument_name = title, instrument_type, status, source, authoring_entity, 
+         study_type, unit_of_analysis, data_kind, universe, producers, authoring_entity_detail, funding_agencies)
+
+# export filtered and full dataset
+xlsx::write.xlsx(agri_survey, "Output/ag_surveys.xlsx")

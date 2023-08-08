@@ -69,6 +69,6 @@ mics <- mics_raw %>%
 mics_clean <- mics |> filter(year>=2013 & year<=2022)
 
 # export filtered and full datasets
-xlsx::write.xlsx(mics_clean, "Output/mics_ogdi_yrs.xlsx")
-xlsx::write.xlsx(mics, "Output/mics_all_yrs.xlsx")
+#xlsx::write.xlsx(mics_clean, "Output/mics_ogdi_yrs.xlsx")
+xlsx::write.xlsx(mics, "Output/mics.xlsx")
 

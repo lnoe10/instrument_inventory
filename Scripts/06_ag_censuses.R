@@ -20,4 +20,8 @@ ag_census <- read_csv("Input/wca_2020_2010_notes.csv", show_col_types = F) %>%
   status = "completed",
   source = "http://www.fao.org/world-census-agriculture/wcarounds/en/") %>%
   filter(!is.na(iso3c), !is.na(year_clean), !(census_round == "WCA2020" & iso3c == "MOZ")) %>%
+  mutate(census_round = str_remove(census_round, "^WCA")) |> 
   select(country = starts_with("country"), iso3c, year = year_clean, instrument_name, instrument_type, status, source, census_round)
+
+# export filtered and full datasets
+#xlsx::write.xlsx(ag_census, "Output/ag_census.xlsx")
