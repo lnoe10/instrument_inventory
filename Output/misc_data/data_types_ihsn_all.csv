@@ -1,0 +1,317 @@
+"","data_kind","study_type","n"
+"1","--","Other Household Survey",1
+"2","--",NA,1
+"3","Administrative records data [adm]","1-2-3 Survey, phase 1 [hh/123-1]",1
+"4","Administrative records data [adm]","Administrative Records, Construction Statistics (ad/oth]",2
+"5","Administrative records data [adm]","Administrative Records, Health (ad/hea]",17
+"6","Administrative records data [adm]","Education/School Survey [ed/sch]",1
+"7","Administrative records data [adm]","Enterprise Census [en/census]",1
+"8","Administrative records data [adm]","Income/Expenditure/Household Survey [hh/ies]",1
+"9","Administrative records data [adm]","Integrated Survey (non-LSMS) [hh/is]",1
+"10","Administrative records data [adm]",NA,2
+"11","Aggregate data [agg]","Enterprise Survey [en/oth]",1
+"12","Aggregate data [agg]","Macroeconomics - Indicators",16
+"13","Aggregate data [agg]","Other Household Survey [hh/oth]",3
+"14","Aggregate data [agg]",NA,8
+"15","Censos (cen)","Censo",1
+"16","Censos (cen)","Censo de Población y Habitación [hh/popcen]",1
+"17","Censos (cen)","Censo de Población y Vivienda",1
+"18","Censos (cen)","Enterprise Census [en/census]",14
+"19","Censos (cen)","Enterprise Survey [en/oth]",10
+"20","Censos (cen)","Population and Housing Census [hh/popcen]",1
+"21","Census/enumeration data","Population and Housing Census [hh/popcen]",16
+"22","Census/enumeration data","Socio-Economic/Monitoring Survey [hh/sems]",1
+"23","Census/enumeration data",NA,1
+"24","Census/enumeration data [cen]","1-2-3 Survey, phase 1 [hh/123-1]",1
+"25","Census/enumeration data [cen]","Administrative Records, Health (ad/hea]",1
+"26","Census/enumeration data [cen]","Agricultural Census [ag/census]",51
+"27","Census/enumeration data [cen]","Agricultural Survey [ag/oth]",1
+"28","Census/enumeration data [cen]","Censo Ambiental",1
+"29","Census/enumeration data [cen]","Censo de la Gestión, Gasto e Inversión en Protección Ambiental en Municipios y Consejos Provinciales",1
+"30","Census/enumeration data [cen]","Education School Census",1
+"31","Census/enumeration data [cen]","Enterprise Census [en/census]",38
+"32","Census/enumeration data [cen]","Enterprise Survey [en/oth]",11
+"33","Census/enumeration data [cen]","Enterprise/Establishment Census [en/census]",3
+"34","Census/enumeration data [cen]","Environmental Census",1
+"35","Census/enumeration data [cen]","Income/Expenditure/Household Survey [hh/ies]",2
+"36","Census/enumeration data [cen]","Other Household Health Survey [hh/hea]",1
+"37","Census/enumeration data [cen]","Other Household Survey [hh/oth]",17
+"38","Census/enumeration data [cen]","Population and Housing Census [hh/popcen]",259
+"39","Census/enumeration data [cen]","Sample Frame, Enterprises [sf/en]",1
+"40","Census/enumeration data [cen]","Service Provision Assessments [hh/spa]",1
+"41","Census/enumeration data [cen]","Socio-Economic/Monitoring Survey [hh/sems]",1
+"42","Census/enumeration data [cen]","Statistical Info. & Monitoring Prog. [hh/simpoc]",1
+"43","Census/enumeration data [cen]",NA,1
+"44","Clinical data [cli]","1-2-3 Survey, phase 1",1
+"45","Clinical data [cli]","Clinical Trial",1
+"46","Clinical data [cli]","Other Household Health Survey",1
+"47","Clinical data [cli]","Sample Frame, Households [sf/hh]",1
+"48","Clinical data [cli]","Service Availability Mapping",1
+"49","Clinical data [cli]",NA,1
+"50","Dados de inquérito por amostragem [ssd]","Agricultural Survey [ag/oth]",1
+"51","Dados de inquérito por amostragem [ssd]","Core Welfare Indicators Questionnaire [hh/cwiq]",1
+"52","Datos obtenidos por un proceso (pro)","Estudio de medición de las condiciones de vida [hh/lsms]",1
+"53","Demographic and Household Survey [hh/dhs]","Demographic and Health Survey [hh/dhs]",97
+"54","Données échantillonées [ssd]","1-2-3 Survey, phase 1 [hh/123-1]",1
+"55","Données échantillonées [ssd]","Autres enquêtes ménages [hh/oth]",3
+"56","Données échantillonées [ssd]","Core Welfare Indicators Questionnaire [hh/cwiq]",2
+"57","Données échantillonées [ssd]","Données administrative, santé [ad/hea]",1
+"58","Données échantillonées [ssd]","Echantillon de référence, ménages [sf/hh]",2
+"59","Données échantillonées [ssd]","Enquête Socio-Economique / Monitoring [hh/sems]",3
+"60","Données échantillonées [ssd]","Enquête agricole [ag/oth]",2
+"61","Données échantillonées [ssd]","Enquête budget-consommation des ménages [hh/ies]",2
+"62","Données échantillonées [ssd]","Enquête sur le secteur informel [hh/iss]",1
+"63","Données échantillonées [ssd]","Enquête sur le travail des enfants [hh/cls]",1
+"64","Données échantillonées [ssd]","Enquête sur les conditions de vie des ménages [hh/lsms]",4
+"65","Données échantillonées [ssd]","Enquête sur les entreprises [en/oth]",1
+"66","Données échantillonées [ssd]","Income/Expenditure/Household Survey [hh/ies]",1
+"67","Données échantillonées [ssd]","Other Household Health Survey[hh/hea]",1
+"68","Données échantillonées [ssd]",NA,1
+"69","Encuesta  por muestreo (ssd)","Encuesta de Hogares de Propósitos Múltiples",7
+"70","Encuesta  por muestreo (ssd)","Encuesta de Hogares de Propósitos Múltiples (EHPM)",1
+"71","Encuesta por muestreo","Demographic and Health Survey (Standard) - DHS VI",1
+"72","Encuesta por muestreo (ssd)","1-2-3 Survey, phase 2 [hh/123-2]",3
+"73","Encuesta por muestreo (ssd)","Agricultural Survey [ag/oth]",2
+"74","Encuesta por muestreo (ssd)","Encuesta Continua de Empleo (ECE)",1
+"75","Encuesta por muestreo (ssd)","Encuesta Nacional (Censo Continuo)",1
+"76","Encuesta por muestreo (ssd)","Encuesta a Hogares",1
+"77","Encuesta por muestreo (ssd)","Encuesta a Hogares - Otro [hh/oth]",5
+"78","Encuesta por muestreo (ssd)","Encuesta agropecuaria [ag/oth]",1
+"79","Encuesta por muestreo (ssd)","Encuesta de Gastos e Ingresos a Hogares[hh/ies]",1
+"80","Encuesta por muestreo (ssd)","Encuesta de Hogares",19
+"81","Encuesta por muestreo (ssd)","Encuesta de Hogares [soc/hog]",1
+"82","Encuesta por muestreo (ssd)","Encuesta de Monitoreo Socio - Económico [hh/sems]",5
+"83","Encuesta por muestreo (ssd)","Encuesta de Monitoreo Socio-Económico [hh/sems]",3
+"84","Encuesta por muestreo (ssd)","Encuesta de Presupuestos Familiares (EPF)",1
+"85","Encuesta por muestreo (ssd)","Encuesta de empleo [hh/lfs]",16
+"86","Encuesta por muestreo (ssd)","Enterprise Survey [en/oth]",16
+"87","Encuesta por muestreo (ssd)","Income/Expenditure/Household Survey [hh/ies]",1
+"88","Encuesta por muestreo (ssd)","Integrated Survey (non-LSMS) [hh/is]",1
+"89","Encuesta por muestreo (ssd)","Labor Force Survey [hh/lfs]",17
+"90","Encuesta por muestreo (ssd)","Living Standards Measurement Study [hh/lsms]",2
+"91","Encuesta por muestreo (ssd)","Other Household Survey [hh/oth]",6
+"92","Encuesta por muestreo (ssd)","Otras encuestas a hogares [hh/oth]",6
+"93","Encuesta por muestreo (ssd)","Service Provision Assessments [hh/spa]",1
+"94","Encuesta por muestreo (ssd)/Datos de una encuesta","Encuesta de Hogares",1
+"95","Encuesta probabilística en hogares","Encuesta Probabilística en Hogares",1
+"96","Encuesta probabilística en hogares","Income/Expenditure/Household Survey [hh/ies]",6
+"97","Encuesta probabilística en hogares","Other Household Health Survey [hh/hea]",1
+"98","Encuestador muestreo (ssd)","Encuesta Fuerza Laboral",6
+"99","Encuestapor muestreo (ssd)","Encuesta Ambiental",1
+"100","Encuestapor muestreo (ssd)","Encuesta Fuerza Laboral",4
+"101","Encuestapor muestreo (ssd)","Encuesta a Hogares",1
+"102","Encuestapor muestreo (ssd)","Encuesta de Buenas Prácticas Ambientales",2
+"103","Encuestapor muestreo (ssd)","Enterprise Survey [en/oth]",4
+"104","Encuestapor muestreo (ssd)","Estadística de precios",1
+"105","Encuestapor muestreo (ssd)","Income/Expenditure/Household Survey [hh/ies]",5
+"106","Encuestapor muestreo (ssd)","Informal Sector Survey [hh/iss]",1
+"107","Encuestapor muestreo (ssd)","Labor Force Survey [hh/lfs]",9
+"108","Encuestapor muestreo (ssd)","Other Household Survey [hh/oth]",1
+"109","Encuestas por muestreo (ssd)","Encuesta Continua de Empleo",4
+"110","Encuestas por muestreo (ssd)","Labor Force Survey [hh/lfs]",15
+"111","Enquete par sondage","Income/Expenditure/Household Survey [hh/ies]",1
+"112","Estadística basada en registros administrativos","Estadística del Sector Eléctrico",1
+"113","Event history data","Demographic Surveillance",27
+"114","Event/Transaction data [evn]","Other Household Survey",3
+"115","Event/Transaction data [evn]",NA,1
+"116","Event/transaction data [evn]","Agricultural Survey [ag/oth]",1
+"117","Event/transaction data [evn]","Other Household Survey [hh/oth]",15
+"118","Event/transaction data [evn]","Sample Frame, Households [sf/hh]",1
+"119","Event/transaction data [evn]",NA,2
+"120","Nationally and regionally representative sample survey data (SSD)","Other Household Health Survey [hh/hea]",1
+"121","Observation data/ratings [obs]","Child Assessment Survey",1
+"122","Observation data/ratings [obs]","Enterprise Survey [en/oth]",1
+"123","Observation data/ratings [obs]","Independent Evaluation",1
+"124","Observation data/ratings [obs]","Macroeconomics - Indicators",1
+"125","Observation data/ratings [obs]","Other Household Survey [hh/oth]",268
+"126","Observation data/ratings [obs]",NA,4
+"127","Other","Independent Evaluation",2
+"128","Other",NA,5
+"129","Process-produced data [pro]","Living Standards Measurement Study [hh/lsms]",2
+"130","Process-produced data [pro]",NA,1
+"131","Qualitative and quantitative","Survey and Case Studies",1
+"132","Registros Administrativos (adm)","Administrative Records, Health (ad/hea]",15
+"133","Registros Administrativos (adm)","Demographic and Health Survey, Round 3  [hh/dhs-3]",1
+"134","Sampel Non-Probabilitas","Agricultural Survey [ag/oth]",1
+"135","Sampel Probabilitas","Agricultural Survey [ag/oth]",6
+"136","Sampel Probabilitas","Demographic and Health Survey (standard) - DHS I",1
+"137","Sampel Probabilitas","Enterprise Survey [en/oth]",7
+"138","Sampel Probabilitas","Health Survey [hh/hea]",1
+"139","Sampel Probabilitas","Health Survey [hh/oth]",1
+"140","Sampel Probabilitas","Other Household Health Survey [hh/hea]",2
+"141","Sampel Probabilitas","Socio-Economic/Monitoring Survey [hh/sems]",2
+"142","Sample survey data","1-2-3 Survey, phase 1 [hh/123-1]",1
+"143","Sample survey data","1-2-3 Survey, phase 2 [hh/123-2]",1
+"144","Sample survey data","1-2-3 Survey, phase 3 [hh/123-3]",1
+"145","Sample survey data","Cross-sectional",1
+"146","Sample survey data","Demographic and Health Survey (Standard) - DHS V",2
+"147","Sample survey data","Demographic and Health Survey (Standard) - DHS VI",7
+"148","Sample survey data","Demographic and Health Survey (standard) - DHS III",1
+"149","Sample survey data","Demographic and Health Survey (standard) - DHS IV",47
+"150","Sample survey data","Demographic and Health Survey (standard) - DHS V",41
+"151","Sample survey data","Demographic and Health Survey (standard) - DHS VI",10
+"152","Sample survey data","Demographic and Health Survey [hh/dhs]",2
+"153","Sample survey data","Labor Force Survey [hh/lfs]",42
+"154","Sample survey data","Living Standards Measurement Study [hh/lsms]",8
+"155","Sample survey data","Other Household Survey [hh/oth]",19
+"156","Sample survey data","Socio-Economic/Monitoring Survey [hh/sems]",10
+"157","Sample survey data",NA,1
+"158","Sample survey data [ssd]","--",13
+"159","Sample survey data [ssd]","1-2-3 Survey, phase 1",2
+"160","Sample survey data [ssd]","1-2-3 Survey, phase 1 [hh/123-1]",13
+"161","Sample survey data [ssd]","1-2-3 Survey, phase 2",1
+"162","Sample survey data [ssd]","1-2-3 Survey, phase 2 [hh/123-2]",7
+"163","Sample survey data [ssd]","1-2-3 Survey, phase 3",1
+"164","Sample survey data [ssd]","1-2-3 Survey, phase 3 [hh/123-3]",4
+"165","Sample survey data [ssd]","1-2-3 Survey, phase 4 [hh/123-3]",1
+"166","Sample survey data [ssd]","AIDS Indicator Survey [hh/ais]",1
+"167","Sample survey data [ssd]","AIDS Indicators Survey (AIS)",1
+"168","Sample survey data [ssd]","Administrative Records, Health (ad/hea]",2
+"169","Sample survey data [ssd]","Africa Client Feedback Surveys",1
+"170","Sample survey data [ssd]","Agricultural Census [ag/census]",10
+"171","Sample survey data [ssd]","Agricultural Survey",4
+"172","Sample survey data [ssd]","Agricultural Survey [ag/oth]",211
+"173","Sample survey data [ssd]","Agricultural survey [ag/oth]",1
+"174","Sample survey data [ssd]","Case study",1
+"175","Sample survey data [ssd]","Child Labor Survey [hh/cls]",18
+"176","Sample survey data [ssd]","Client Feedback Surveys",1
+"177","Sample survey data [ssd]","Community Survey",1
+"178","Sample survey data [ssd]","Comprehensive Food Security & Vulnerability Analysis [hh/cfsva]",36
+"179","Sample survey data [ssd]","Core Welfare Indicators Questionnaire [hh/cwiq]",35
+"180","Sample survey data [ssd]","Country Opinon Survey",1
+"181","Sample survey data [ssd]","Crime Survey [hh/cr]",2
+"182","Sample survey data [ssd]","Demographic Survey [hh/ds]",1
+"183","Sample survey data [ssd]","Demographic and Health Survey (Special) - DHS VI",1
+"184","Sample survey data [ssd]","Demographic and Health Survey (Standard) - DHS VI",28
+"185","Sample survey data [ssd]","Demographic and Health Survey (Standard) - DHS VII",42
+"186","Sample survey data [ssd]","Demographic and Health Survey (Standard) - DHS VIII",2
+"187","Sample survey data [ssd]","Demographic and Health Survey (standard) - DHS IV",1
+"188","Sample survey data [ssd]","Demographic and Health Survey (standard) - DHS VI",1
+"189","Sample survey data [ssd]","Demographic and Health Survey [hh/dhs]",62
+"190","Sample survey data [ssd]","Demographic and Health Survey, AIDS Indicator",1
+"191","Sample survey data [ssd]","Demographic and Health Survey, AIS",1
+"192","Sample survey data [ssd]","Demographic and Health Survey, Interim [hh/dhs-int]",2
+"193","Sample survey data [ssd]","Demographic and Health Survey, MIS",2
+"194","Sample survey data [ssd]","Demographic and Health Survey, Round 2 [hh/dhs-2]",2
+"195","Sample survey data [ssd]","Demographic and Health Survey, Special",2
+"196","Sample survey data [ssd]","Demographic and Health Survey, Special (MIS)",1
+"197","Sample survey data [ssd]","Demographic and Health Survey, Special - AIS",1
+"198","Sample survey data [ssd]","Demographic and Health Survey, Special - Malaria Indicator Survey",2
+"199","Sample survey data [ssd]","Demographic and Health Survey, Special - Service Provision Assessment",1
+"200","Sample survey data [ssd]","Demographic and Health Survey, Special [hh/dhs-sp]",26
+"201","Sample survey data [ssd]","Encuesta Ambiental",1
+"202","Sample survey data [ssd]","Encuesta a Hogares",1
+"203","Sample survey data [ssd]","Encuesta de empleo [hh/lfs]",1
+"204","Sample survey data [ssd]","Enquête budget-consommation des ménages [hh/ies]",1
+"205","Sample survey data [ssd]","Enterprise Census [en/census]",9
+"206","Sample survey data [ssd]","Enterprise Survey [en/oth]",681
+"207","Sample survey data [ssd]","Enterprise/Establishment Survey [en/oth]",31
+"208","Sample survey data [ssd]","Estudio de medición de las condiciones de vida [hh/lsms]",3
+"209","Sample survey data [ssd]","Financial Survey",1
+"210","Sample survey data [ssd]","Global Youth Tobacco Survey",8
+"211","Sample survey data [ssd]","Health Facility Survey",3
+"212","Sample survey data [ssd]","Health Facility Survey [fac/hfs]",2
+"213","Sample survey data [ssd]","Health Survey [hh/hs]",2
+"214","Sample survey data [ssd]","Higher Education Graduates Survey [ind/HEGS]",2
+"215","Sample survey data [ssd]","Household Survey & Census",5
+"216","Sample survey data [ssd]","Household Survey [hh]",2
+"217","Sample survey data [ssd]","Housing Construction Survey",1
+"218","Sample survey data [ssd]","Impact evaluation",4
+"219","Sample survey data [ssd]","Income/Expenditure/Household Survey",5
+"220","Sample survey data [ssd]","Income/Expenditure/Household Survey [hh/ies]",514
+"221","Sample survey data [ssd]","Independent Evaluation",5
+"222","Sample survey data [ssd]","Informal Sector Survey",2
+"223","Sample survey data [ssd]","Informal Sector Survey [hh/iss]",18
+"224","Sample survey data [ssd]","Integrated Survey (non-LSMS)",1
+"225","Sample survey data [ssd]","Integrated Survey (non-LSMS) [hh/is]",87
+"226","Sample survey data [ssd]","Labor Force Survey",2
+"227","Sample survey data [ssd]","Labor Force Survey [hh/lfs]",643
+"228","Sample survey data [ssd]","Labour Force Survey [hh/lfs]",5
+"229","Sample survey data [ssd]","Living Standards Measurement Study",9
+"230","Sample survey data [ssd]","Living Standards Measurement Study [hh/lsms]",120
+"231","Sample survey data [ssd]","Macroeconomics - Indicators",1
+"232","Sample survey data [ssd]","Malaria Indicator Survey",4
+"233","Sample survey data [ssd]","Malaria Indicator Survey [hh/mis]",8
+"234","Sample survey data [ssd]","Malaria Indicators Survey (MIS)",1
+"235","Sample survey data [ssd]","Multiple Indicator Cluster Survey - Round 1 [hh/mics-1]",1
+"236","Sample survey data [ssd]","Multiple Indicator Cluster Survey - Round 2 [hh/mics-2]",61
+"237","Sample survey data [ssd]","Multiple Indicator Cluster Survey - Round 3 [hh/mics-3]",55
+"238","Sample survey data [ssd]","Multiple Indicator Cluster Survey - Round 4 [hh/mics-4]",57
+"239","Sample survey data [ssd]","Multiple Indicator Cluster Survey - Round 5 [hh/mics-5]",48
+"240","Sample survey data [ssd]","Multiple Indicator Cluster Survey - Round 6 [hh/mics-6]",51
+"241","Sample survey data [ssd]","Multiple Indicator Survey",1
+"242","Sample survey data [ssd]","Non-profit Institution Survey",1
+"243","Sample survey data [ssd]","Opinion Survey",1
+"244","Sample survey data [ssd]","Opinion survey",4
+"245","Sample survey data [ssd]","Other Household Health Survey",7
+"246","Sample survey data [ssd]","Other Household Health Survey [hh/hea]",190
+"247","Sample survey data [ssd]","Other Household Survey",50
+"248","Sample survey data [ssd]","Other Household Survey [hh/oth]",1496
+"249","Sample survey data [ssd]","Other Survey",1
+"250","Sample survey data [ssd]","People Security Surveys",1
+"251","Sample survey data [ssd]","Population and Housing Census [hh/popcen]",10
+"252","Sample survey data [ssd]","Priority Survey (hh/ps]",7
+"253","Sample survey data [ssd]","Public Expenditure Tracking Survey",16
+"254","Sample survey data [ssd]","Public Expenditure Tracking Survey (PETS)",30
+"255","Sample survey data [ssd]","Public Expenditure Tracking Survey (PETS)/Quantitative Service Delivery Survey (QSDS)",9
+"256","Sample survey data [ssd]","Public Expenditure Tracking Survey (PETS)/Quantitative Service Delivery Surveys (QSDS)",1
+"257","Sample survey data [ssd]","Public Expenditure Tracking Survey (PETS/QSDS)",1
+"258","Sample survey data [ssd]","Public Expenditure Tracking Survey / Quantitative Service Delivery Survey (PETS/QSDS)",1
+"259","Sample survey data [ssd]","Public Expenditure Tracking Survey / Quantitative Service Delivery Suurvey (PETS/QSDS)",1
+"260","Sample survey data [ssd]","Quantitative Service Delivery Survey (QSDS)",8
+"261","Sample survey data [ssd]","Sample Frame, Enterprises [sf/en]",5
+"262","Sample survey data [ssd]","Sample Frame, Households [sf/hh]",10
+"263","Sample survey data [ssd]","School survey",1
+"264","Sample survey data [ssd]","School survey (baseline)",1
+"265","Sample survey data [ssd]","School survey (endline)",1
+"266","Sample survey data [ssd]","Service Provision Assessments [hh/spa]",26
+"267","Sample survey data [ssd]","Socio-Economic/Monitoring Survey",2
+"268","Sample survey data [ssd]","Socio-Economic/Monitoring Survey [hh/sems]",852
+"269","Sample survey data [ssd]","Statistical Info. & Monitoring Prog. [hh/simpoc]",8
+"270","Sample survey data [ssd]","Time Use Survey",2
+"271","Sample survey data [ssd]","Turism survey",1
+"272","Sample survey data [ssd]","Victim Study",1
+"273","Sample survey data [ssd]","World Health Survey [STEP Survey]",1
+"274","Sample survey data [ssd]","World Health Survey [hh/whs]",175
+"275","Sample survey data [ssd]","Young People in Egypt Survey",2
+"276","Sample survey data [ssd]","multiple Indicator Cluster Survey - Round 5 [hh/mics-5]",1
+"277","Sample survey data [ssd]",NA,527
+"278","Sample survey data [ssd], Administrative records data [adm], other",NA,1
+"279","Sample survey data[ssd]","Enterprise Survey [en/oth]",4
+"280","Sample survey data[ssd]","Income/Expenditure/Household Survey [hh/ies]",1
+"281","Sample survey data[ssd]","Other Household Survey [hh/oth]",1
+"282","Sensus","Agricultural Census [ag/census]",1
+"283","Sensus","Enterprise Census [en/census]",1
+"284","Sensus","Enterprise Survey [en/oth]",4
+"285","Sensus","Population and Housing Census [hh/popcen]",1
+"286","Survey Data",NA,1
+"287","Survey Data
+
+Anthropometric Data",NA,1
+"288","Verbal autopsy-based cause of death data","Demographic Surveillance",1
+"289",NA,"1-2-3 Survey, phase 1 [hh/123-1]",2
+"290",NA,"Agricultural Survey [ag/oth]",1
+"291",NA,"Child Labor Survey [hh/cls]",1
+"292",NA,"Demographic and Health Survey (Standard) - DHS VII",1
+"293",NA,"Demographic and Health Survey [hh/dhs]",1
+"294",NA,"Demographic and Health Survey, Special [hh/dhs-sp]",2
+"295",NA,"Enterprise Survey [en/oth]",1
+"296",NA,"Health Facility Survey",1
+"297",NA,"Household Survey",1
+"298",NA,"Household Survey & Census",1
+"299",NA,"Income/Expenditure/Household Survey [hh/ies]",4
+"300",NA,"Independent Evaluation",5
+"301",NA,"Integrated Survey (non-LSMS) [hh/is]",1
+"302",NA,"Labor Force Survey [hh/lfs]",6
+"303",NA,"Living Standards Measurement Study [hh/lsms]",2
+"304",NA,"Multiple Indicator Cluster Survey - Round 3 [hh/mics-3]",1
+"305",NA,"Multiple Indicator Cluster Survey - Round 4 [hh/mics-4]",4
+"306",NA,"Multiple Indicator Cluster Survey - Round 6 [hh/mics-6]",1
+"307",NA,"Other Household Health Survey [hh/hea]",5
+"308",NA,"Other Household Survey [hh/oth]",34
+"309",NA,"Population and Housing Census [hh/popcen]",4
+"310",NA,"Rural, Agriculture and Fisheries Census",1
+"311",NA,"Sample Frame, Households [sf/hh]",1
+"312",NA,"Socio-Economic/Monitoring Survey [hh/sems]",61
+"313",NA,"World Bank Group Country Opinion Survey Program",1
+"314",NA,NA,136
