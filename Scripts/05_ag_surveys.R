@@ -152,7 +152,7 @@ close(pb) # Close the connection
 saveRDS(all_fao_metadata, file = "Input/fao_ag_survey_metadata.rds")
 
 # Load study descriptions from saved file
-# all_fao_metadata <- readRDS("Input/fao_ag_survey_metadata.rds")
+all_fao_metadata <- readRDS("Input/fao_ag_survey_metadata.rds")
 
 # Set up final list of Agricultural Surveys
 agri_survey <- agri_survey_raw %>%
@@ -174,7 +174,7 @@ agri_survey <- agri_survey_raw %>%
   filter(repositoryid == "agriculture-census-surveys", 
          !study_type %in% c("Administrative Records", "Agricultural Census [ag/census]", "Enterprise Census [en/census]", "Population and Housing Census [hh/popcen]"), 
          !str_detect(title, "mpact|roduction")) %>%
-  select(id, country = nation, iso3c, year = year_end, instrument_name = title, instrument_type, status, source, authoring_entity, 
+  select(id, country = nation, iso3c, year = year_end, instrument_name = title, repositoryid, instrument_type, status, source, authoring_entity, 
          study_type, unit_of_analysis, data_kind, universe, producers, authoring_entity_detail, funding_agencies)
 
 # export filtered and full dataset

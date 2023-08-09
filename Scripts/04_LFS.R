@@ -23,49 +23,51 @@ lfs <- fromJSON(content(GET("https://www.ilo.org/surveyLib/index.php/api/catalog
          iso3c = case_when(country == "Kosovo" ~ "XKX", country == "Netherlands Antilles" ~ "ANT", TRUE ~ iso3c)) |> 
   select(country, iso3c, year_start, year_end, year, instrument_name, instrument_type, authoring_entity, status, source, id, type, idno)
 
-# filter for OGDI years of interest based on year end
-lfs_clean <- lfs |> filter(year_end >= 2013)
-
-# export filtered and full datasets
-#xlsx::write.xlsx(lfs_clean, "Output/lfs_ogdi_yrs.xlsx")
-#xlsx::write.xlsx(lfs, "Output/lfs_all_yrs.xlsx")
-
-#### comparing above to data from https://ilostat.ilo.org/data/national-sources-catalogue/ ####
+# comparing above to data from https://ilostat.ilo.org/data/national-sources-catalogue/
 sources_en <- read_csv("~/Documents/ODW/sources_en.csv", show_col_types = F) |> filter(`Source type`=="Labour force survey")
 
-# separating rows on years b/c a number have multiple years
-sources_en <- sources_en |> select(country = Country, source = Source, year = `Latest period available`) |> 
-  separate_rows(year, sep=", ") |> 
-  mutate(year = str_extract(year, "^\\d{4}"))
+# taking latest year recorded
+sources_en <- sources_en |> select(country = Country, source = Source, `Latest period available`, instrument_type=`Source type`) |> 
+  mutate(year = ifelse(str_detect(`Latest period available`, ", "), 
+                       str_extract(`Latest period available`, "(?<=, )\\d{4}"),
+                       str_extract(`Latest period available`, "^\\d{4}")),
+         iso3c = countrycode::countrycode(country, "country.name", "iso3c"),
+         iso3c = case_when(country == "Kosovo" ~ "XKX", country == "Netherlands Antilles" ~ "ANT", TRUE ~ iso3c)) |> 
+  select(-`Latest period available`)
 
-# left join, filter where there is a match, export to xlsx
-lfs |> select(country, year, instrument_name) |> left_join(sources_en, by=c("year", "country")) |> filter(!is.na(source)) |> 
+# left join, filter where there is a match, flag matching instrument names, export to xlsx
+lfs_country_yr_matches <- lfs |> select(country, year, instrument_name) |> left_join(sources_en, by=c("year", "country")) |> filter(!is.na(source)) |> 
   rename(source_catalog_name = source) |> 
-  arrange(country) |> View()
+  arrange(country) |> 
+  mutate(duplicate = case_when(str_detect(str_to_title(instrument_name), "Lab(o|ou)r Force Survey") & 
+                                 str_detect(str_to_title(source_catalog_name), "Lab(o|ou)r Force Survey") ~ 1,
+                               str_detect(str_to_title(instrument_name), "Employment, Unemployment Survey") &
+                                 str_detect(str_to_title(source_catalog_name), "Employment, Unemployment Survey") ~ 1,
+                               str_detect(str_to_title(instrument_name), "National Household Survey") &
+                                 str_detect(str_to_title(source_catalog_name), "National Household Survey") ~ 1,
+                               str_detect(str_to_title(instrument_name), "Labor Market Panel Survey") &
+                                 str_detect(str_to_title(source_catalog_name), "Labor Market Panel Survey") ~ 1,
+                               str_detect(str_to_title(instrument_name), "Continuous Multi-Purpose Household Survey") &
+                                 str_detect(str_to_title(source_catalog_name), "Continuous Multi-Purpose Household Survey") ~ 1,
+                               str_detect(str_to_title(instrument_name), "Continuous Sample Survey of the Population") &
+                                 str_detect(str_to_title(source_catalog_name), "Continuous Sample Survey of the Population") ~ 1,
+                               .default = 0))
 
+xlsx::write.xlsx(lfs_country_yr_matches, "Output/lfs_country_yr_matches.xlsx")
 
-# https://ilostat.ilo.org/data/national-sources-catalogue/
-# https://www.ilo.org/ilostat-files/Documents/sources_en.csv
-# lfs <- read_csv("https://www.ilo.org/ilostat-files/Documents/sources_en.csv") %>%
-#   janitor::clean_names() %>%
-#   # Filter for where instruments yield information on the labor force
-#   # But don't include MICS, DHS, or HIES
-#   filter(str_detect(topics_covered, "Labour force"), !str_detect(source, "Multiple Indicator"),
-#          !str_detect(source, "Demographic and Health Survey"), !str_detect(source_type, "Household income/expenditure survey"),
-#          !str_detect(source_type, "Population census")) %>%
-#   # Clean latest period available variable by splitting into years
-#   # then only keeping years.
-#   separate(latest_period_available, into = c("year1", "year2", "year3"), sep = ", ", fill = "right") %>%
-#   mutate(across(year1:year3, ~as.numeric(str_extract(.x, "^[0-9]{4}"))),
-#          iso3c = countrycode::countrycode(country, "country.name", "iso3c"),
-#          iso3c = case_when(country == "Kosovo" ~ "XKX", country == "Netherlands Antilles" ~ "ANT", TRUE ~ iso3c),
-#          year1 = case_when(
-#            year2 - year1 == 1 ~ NA_real_,
-#            TRUE ~ year1
-#          )) %>%
-#   ### Adding two additional variables, which might be of value?
-#   select(country, iso3c, source_type, year1, year2, international_classifications, topics_covered) %>%
-#   pivot_longer(year1:year2, names_to = "period", values_to = "year") %>%
-#   filter(!is.na(year)) %>%
-#   mutate(source = "https://ilostat.ilo.org/data/national-sources-catalogue/", status = "Completed", instrument_type = "Labor Force Survey") %>%
-#   select(country, iso3c, year, instrument_name = source_type, instrument_type, status, source, international_classifications, topics_covered)
+# rename variables to match LFS dataframe
+sources_en <- sources_en |> rename(instrument_name = source) |> mutate(source = "https://ilostat.ilo.org/data/national-sources-catalogue/")
+
+# add surveys that did not match to countries found in the API data
+lfs_all <- lfs |> bind_rows(sources_en |> filter(!(iso3c %in% lfs$iso3c)))
+
+# filter remaining source catalogue data that had country-year combos which were not found in ILO API data, add to lfs_all
+lfs_all <- sources_en |> filter(iso3c %in% lfs$iso3c) |> left_join(lfs_country_yr_matches |> select(-instrument_name) |> 
+                                                          rename(instrument_name=source_catalog_name) |> distinct(), 
+                                                        by=c("country", "year", "instrument_name")) |> 
+  filter(is.na(duplicate)) |> 
+  select(-duplicate) %>%
+  bind_rows(lfs_all, .)
+
+# export full dataset
+# xlsx::write.xlsx(lfs_all, "Output/lfs_all.xlsx")
