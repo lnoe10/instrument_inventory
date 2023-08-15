@@ -162,12 +162,12 @@ lsms <- lsms_raw %>%
   bind_rows(
     lsms_raw %>% 
       filter(str_detect(nation, "Serbia and Montenegro")) %>% 
-      uncount(2, .id = "id") %>%
+      uncount(2, .id = "index") %>%
       mutate(nation = case_when(
-        id == 1 ~ "Serbia",
+        index == 1 ~ "Serbia",
         TRUE ~ "Montenegro"
       )) %>%
-      select(-id)
+      select(-index)
   ) %>%
   mutate(year = as.numeric(str_extract(idno, "[0-9]{4}")),
          year = case_when(nation == "Malawi" & year == 2010 ~ as.numeric(year_end), TRUE ~ year),
@@ -194,7 +194,7 @@ lsms <- lsms_raw %>%
 
 # export filtered and full datasets
 #xlsx::write.xlsx(lsms_clean, "Output/lsms_ogdi_yrs.xlsx")
-xlsx::write.xlsx(lsms, "Output/lsms.xlsx")
+xlsx::write.xlsx(lsms, "Output/instrument_data_all_years/lsms.xlsx")
 
 ################ ILO HIES data ################
 
@@ -242,20 +242,46 @@ hies_all <- ilo_hies |> filter(iso3c %in% ilo_countries) |>
 # filter ilo dataframe for those remaining for manual checking
 ilo_hies_filtered <- ilo_hies |> filter(!(iso3c %in% ilo_countries) & !(short_idno %in% shortidno_overlap))
 
+######################
 # export to do assessment manually on google sheets
-# ilo_hies_filtered |> select(id, idno, country, year, instrument_name, instrument_type, repositoryid, authoring_entity) |> 
-#   xlsx::write.xlsx("Output/hies_additional_ilo_data.xlsx")
+# ilo_hies_filtered_new <- ilo_hies_filtered |> select(id_ilo=id, country, year, instrument_name_ilo=instrument_name, instrument_type_ilo=instrument_type, authoring_entity_ilo=authoring_entity) %>% 
+#   left_join(lsms |> select(id_lsms=id, country, year, instrument_name_lsms=instrument_name, instrument_type_lsms=instrument_type, authoring_entity_lsms=authoring_entity), ., by=c("year", "country")) |> 
+#   select(id_ilo, id_lsms, country, year, instrument_name_ilo, instrument_name_lsms, 
+#          instrument_type_ilo, instrument_type_lsms, authoring_entity_ilo, authoring_entity_lsms) |> 
+#   mutate(country_yr_match = ifelse(!is.na(id_lsms) & !is.na(id_ilo), 1, 0))
 
-# read in ilo hies filtered data with my manual duplicate checks - for some reason a lot of empty rows exist so specify endRow
-ilo_hies_filtered_checked <- xlsx::read.xlsx("Output/hies_additional_ilo_data_checked.xlsx", sheetIndex=1, endRow = 66)
+# read in checked dataframe with my classification/notes, merge so we have LSMS and ILO data
+# readxl::read_xlsx("Output/misc_data/hies_additional_ilo_data_checked.xlsx") |> 
+#   select(id, instrument_name, `name diff from LSMS data?`:possible_duplicate) %>%
+#   left_join(ilo_hies_filtered_new, ., by=c("id_ilo" = "id", "instrument_name_ilo" = "instrument_name")) |> 
+#   filter(!is.na(`name diff from LSMS data?`)) |> 
+#   write_csv("Output/misc_data/hies_country_yr_matches.csv")
 
-# extract IDs of those rows from the ILO data that are not possible duplicates of what's in the LSMS data
-ilo_not_duplicate_ids <- ilo_hies_filtered_checked |> as_tibble() |> filter(is.na(possible_duplicate)) |> select(idno) |> pull()
+# # read in ilo hies filtered data with my manual duplicate checks - for some reason a lot of empty rows exist so specify endRow
+# ilo_hies_filtered_checked <- xlsx::read.xlsx("Output/hies_additional_ilo_data_checked.xlsx", sheetIndex=1, endRow = 66)
+
+# # extract IDs of those rows from the ILO data that are not possible duplicates of what's in the LSMS data
+#ilo_not_duplicate_ids <- ilo_hies_filtered_checked |> as_tibble() |> filter(is.na(possible_duplicate)) |> select(idno) |> pull()
+######################
+
+# read in country year matches between ILO and LSMS data that has been checked for duplicates
+ilo_country_yr_matches_checked <- read_csv("Output/misc_data/hies_additional_ilo_data.xlsx - country_yr_matches.csv", show_col_types = F)
+
+# filter above to only include non-duplicates, grab distinct ILO IDs to bind onto hies_all dataframe
+ilo_not_duplicate_ids <- ilo_country_yr_matches_checked |> filter(final_duplicate_flag==0) |> select(id_ilo) |> distinct() |> pull()
 
 # bind those rows onto the hies_all dataframe
-hies_all <- ilo_hies_filtered |> filter(idno %in% ilo_not_duplicate_ids) |> 
+hies_all <- ilo_hies_filtered |> filter(id %in% ilo_not_duplicate_ids) |> 
+  mutate(id = as.numeric(id)) %>% 
+  bind_rows(hies_all, .)
+
+# update ilo dataframe for those remaining that didn't have a country-yr match / haven't added to the hies_all dataframe
+ilo_hies_filtered <- ilo_hies_filtered |> filter(!(id %in% ilo_country_yr_matches_checked$id_ilo))
+
+# checked manually in Google sheets, none are suspected duplicates, so we can add them into the hies_all df
+hies_all <- ilo_hies_filtered |> 
   mutate(id = as.numeric(id)) %>% 
   bind_rows(hies_all, .)
 
 # export combined data to excel
-# xlsx::write.xlsx("Output/hies.xlsx")
+xlsx::write.xlsx(hies_all, "Output/instrument_data_all_years/hies.xlsx")

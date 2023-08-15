@@ -53,7 +53,11 @@ lfs_country_yr_matches <- lfs |> select(country, year, instrument_name) |> left_
                                  str_detect(str_to_title(source_catalog_name), "Continuous Sample Survey of the Population") ~ 1,
                                .default = 0))
 
-xlsx::write.xlsx(lfs_country_yr_matches, "Output/lfs_country_yr_matches.xlsx")
+# export country-year matches to be checked in Google sheets
+# xlsx::write.xlsx(lfs_country_yr_matches, "Output/lfs_country_yr_matches.xlsx")
+
+# read in checked country-year matches
+lfs_country_yr_matches_checked <- read_csv("Output/misc_data/lfs_country_yr_matches_checked.csv", show_col_types = F)
 
 # rename variables to match LFS dataframe
 sources_en <- sources_en |> rename(instrument_name = source) |> mutate(source = "https://ilostat.ilo.org/data/national-sources-catalogue/")
@@ -62,12 +66,21 @@ sources_en <- sources_en |> rename(instrument_name = source) |> mutate(source = 
 lfs_all <- lfs |> bind_rows(sources_en |> filter(!(iso3c %in% lfs$iso3c)))
 
 # filter remaining source catalogue data that had country-year combos which were not found in ILO API data, add to lfs_all
-lfs_all <- sources_en |> filter(iso3c %in% lfs$iso3c) |> left_join(lfs_country_yr_matches |> select(-instrument_name) |> 
-                                                          rename(instrument_name=source_catalog_name) |> distinct(), 
-                                                        by=c("country", "year", "instrument_name")) |> 
+lfs_all <- sources_en |> filter(iso3c %in% lfs$iso3c) |> 
+  # left joining with lfs_country_yr_matches so we can isolate those that did NOT appear in this df
+  left_join(lfs_country_yr_matches |> select(-instrument_name) |> 
+              rename(instrument_name=source_catalog_name) |> distinct(),
+            by=c("country", "year", "instrument_name", "iso3c", "instrument_type")) |> 
+  # filtering for those rows that do not belong in the lfs_country_yr_matches df, all of which we manually checked
+  # and are in fact not duplicates
+  # do so by filtering for those w/ missing duplicate value (all of which are 1 or 0 in lfs_country_yr_matches df)
   filter(is.na(duplicate)) |> 
   select(-duplicate) %>%
   bind_rows(lfs_all, .)
 
+# add in the one from country year match that we deemed not to be a duplicate
+# Korea's Survey on Immigrants' Living Conditions and Labour Force from 2021
+lfs_all <- bind_rows(lfs_all, sources_en |> filter(country=="Korea, Republic of" & year=="2021")) |> mutate(year = as.numeric(year))
+
 # export full dataset
-# xlsx::write.xlsx(lfs_all, "Output/lfs_all.xlsx")
+xlsx::write.xlsx(lfs_all, "Output/instrument_data_all_years/lfs_all.xlsx")

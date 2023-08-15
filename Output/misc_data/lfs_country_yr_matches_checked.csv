@@ -1,0 +1,66 @@
+country,year,instrument_name,instrument_name_translation,source_catalog_name,duplicate (same name?),note,LN,final_duplicate_flag
+Afghanistan,2021,Labour Force Survey 2021,,Labour Force Survey,1,,,1
+Bangladesh,2017,Labour Force Survey 2017,,Labour Force Survey,1,,,1
+Barbados,2019,Labour Force Survey 2019,,Labour Force Survey,1,,,1
+Belarus,2021,Labour Force Survey 2021,,Labour Force Survey,1,,,1
+Belgium,2021,EU Labour Force Survey 2021,,Labour Force Survey,1,,,1
+Belize,2021,Labour force survey 2021,,Labour Force Survey,1,,,1
+Brunei Darussalam,2021,Labour force survey 2021,,Labour Force Survey,1,,,1
+Cambodia,2019,Labour force survey 2019,,Labour Force Survey,1,,,1
+"Congo, Democratic Republic of the",2012,Enquête 1-2-3 sur l'Emploi et le Secteur Informel 2012,1-2-3 Survey on Employment and the Informal Sector 2012,Survey on Employment and household's living conditions,0,suspected duplicate,Duplicate,1
+Cook Islands,2019,Labour Force Survey 2019,,Labour Force Survey,1,,,1
+Côte d'Ivoire,2017,Enquête Régionale Intégrée sur l'Emploi et le Secteur Informel 2017,Integrated Regional Survey on Employment and the Informal Sector 2017,Regional Integrated Survey on Employment and the Informal Sector,1,,,1
+Ethiopia,2021,National Labour Force Survey 2021,,National Labor Force Survey,1,,,1
+Fiji,2016,"Employment, Unemployment Survey 2015-2016",,"Employment, Unemployment Survey",1,,,1
+Gambia,2018,Labour force survey 2018,,Labour Force Survey,1,,,1
+Ghana,2015,Labour Force Survey 2015,,Labour Force Survey,1,,,1
+Guinea,2019,Enquête Nationale sur l'Emploi et le Secteur Informel 2019,National Survey on Employment and the Informal Sector 2019,National Survey on Employment and the Informal Sector,1,,,1
+Indonesia,2022,National Labour Force Survey 2022,,National Labour Force Survey,1,,,1
+Iraq,2021,Labour Force Survey 2021,,Labour Force Survey,1,,,1
+Ireland,2021,National Household Survey 2021,,Quarterly National Household Survey,1,,,1
+Jordan,2021,Labour Force Survey 2021,,Employment and Unemployment Survey,0,suspected duplicate (https://www.ilo.org/dyn/lfsurvey/lfsurvey.list?p_lang=en&p_country=JO),Duplicate,1
+"Korea, Republic of",2021,Economically Active Population Survey 2021,,Survey on Immigrants' Living Conditions and Labour Force,0,"unsure b/c only one LFS from 2021 for Korea on both sources, but different names: see https://www.ilo.org/surveyLib/index.php/catalog/7635 and search Korea LFS at https://ilostat.ilo.org/data/national-sources-catalogue/",not duplicate,0
+Kyrgyzstan,2021,Labour Force Survey 2021,,Employment and Unemployment Survey,0,"unsure b/c only one LFS from that year for this country on both sources, but different names",Duplicate,1
+Lebanon,2019,Labour Force Survey 2019,,Labour Force Survey,1,,,1
+Liberia,2017,Labour force survey 2017,,Labour Force Survey,1,,,1
+Lithuania,2020,EU Labour Force Survey 2020,,Labour Force Survey,1,,,1
+Lithuania,2020,Labour Force Survey 2020,,Labour Force Survey,1,,,1
+Luxembourg,2017,EU Labour Force Survey 2017,,Labour Force Survey,1,,,1
+Madagascar,2015,Enquête Nationale sur l'Emploi et le Secteur Informel 2015,National Survey on Employment and the Informal Sector 2015,Labour force Survey,0,"unsure b/c only one LFS from that year for this country on both sources, but different names",Duplicate,1
+Malawi,2013,Labour Force Survey 2012-2013,,Labour Force Survey,1,,,1
+Mali,2020,Enquête Modulaire et Permanente auprès des Ménages 2020,Modular and Permanent Household Survey 2020,Continous Household Employment Survey,0,"unsure b/c only one LFS from that year for this country on both sources, but different names",Duplicate,1
+Mauritania,2017,Enquête Nationale de Référence sur l'Emploi et le Secteur Informel 2017,National Reference Survey on Employment and the Informal Sector 2017,National Reference Survey on Employment and Informal Sector,1,,,1
+Mauritius,2021,Continuous Multi-Purpose Household Survey 2021,,Continuous Multi-Purpose Household Survey,1,,,1
+Mongolia,2021,Labour force survey 2021,,Labour Force Survey,1,,,1
+Montenegro,2020,Labour force survey 2020,,Labour Force Survey,1,,,1
+Montserrat,2020,Labour Force Survey 2020,,Labour Force Survey,1,,,1
+Myanmar,2020,Labour force survey 2020,,Labour Force Survey,1,,,1
+Namibia,2018,Labour force survey 2018,,Labour Force Survey,1,,,1
+Nepal,2017,Nepal Labour Force Survey 2017,,Labour Force Survey,1,,,1
+New Caledonia,2020,Enquête sur les Forces de Travail 2020,Labor Force Survey 2020,Labour Force Survey,1,,,1
+Niger,2017,Enquête Nationale sur l'Emploi et le Secteur Informel 2017,National Survey on Employment and the Informal Sector 2017,National Survey on Employment and the Informal Sector,1,,,1
+Pakistan,2021,Labour Force Survey 2021,,Labour Force Survey,1,,,1
+Panama,2021,Encuesta de Mercado Laboral 2021,Labor Market Survey 2021,Labour Market Survey,1,,,1
+Russian Federation,2021,Population survey on employment situation 2021,,Labour Force Survey,0,suspected duplicate,Duplicate,1
+Rwanda,2021,Labour Force Survey 2021,,Labour Force Survey,1,,,1
+Samoa,2017,Labour force survey 2017,,Labour Force Survey,1,,,1
+Senegal,2019,Enquête Nationale sur l'Emploi 2019,National Employment Survey 2019,National Employment Survey,1,,,1
+Seychelles,2020,Labour Force Survey 2020,,Labour Force Survey,1,,,1
+Sierra Leone,2014,Labour force survey 2014,,Labour Force Survey,1,,,1
+Singapore,2021,Labour Force Survey 2021,,Labour Force Survey,1,,,1
+Somalia,2019,Labour force survey 2019,,Labour Force Survey,1,,,1
+Sudan,2011,Labour Force Survey 2011,,Household Survey,0,suspected duplicate b/c only one from that year for Sudan,Duplicate,1
+"Tanzania, United Republic of",2020,Labour Force Survey 2020,,Labour Force Survey,1,,,1
+Thailand,2021,Labour force survey 2021,,Labour Force Survey and Migration Survey,1,,,1
+Togo,2017,Enquête Régionale Intégrée sur l'Emploi et le Secteur Informel 2017,Integrated Regional Survey on Employment and the Informal Sector 2017,Regional Integrated Survey on Employment and the Informal Sector,1,,,1
+Tonga,2018,Labour Force Survey 2018,,Labour Force Survey,1,,,1
+Trinidad and Tobago,2021,Continuous Sample Survey of the Population 2021,,Continuous Sample Survey of the Population,1,,,1
+Tunisia,2014,Labor Market Panel Survey 2014,,Labor Market Panel Survey,1,,,1
+Ukraine,2021,Sample survey of the population (households) on economic activity 2021,,Labour Force Survey,0,,Duplicate,1
+United Arab Emirates,2021,Labour Force Survey 2021,,Labour Force Survey,1,,,1
+United Kingdom,2018,EU Labour Force Survey 2018,,Annual Population Survey,0,"suspected duplicate, https://www.ilo.org/surveyLib/index.php/catalog/LFS/?page=1&country%5B%5D=226&ps=15","Duplicate with source_catalog_name, but not within instrument_name",1
+United Kingdom,2018,Labour Force Survey 2018,,Annual Population Survey,0,"suspected duplicate as well, but distinct name from row above seems correct based on search results linked in the cell above","Duplicate with source_catalog_name, but not within instrument_name",1
+Uruguay,2022,Encuesta Continua de Hogares 2022,Continuous Household Survey 2022,Continous Household Survey,1,,,1
+Uzbekistan,2020,Labour Force Survey 2020,,Labour Force Survey,1,,,1
+Yemen,2014,Labour Force Survey 2014,,Labour Force Survey,1,,,1
+Zambia,2021,Labour Force Survey 2021,,Labour Force Survey,1,,,1

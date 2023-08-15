@@ -177,5 +177,11 @@ agri_survey <- agri_survey_raw %>%
   select(id, country = nation, iso3c, year = year_end, instrument_name = title, repositoryid, instrument_type, status, source, authoring_entity, 
          study_type, unit_of_analysis, data_kind, universe, producers, authoring_entity_detail, funding_agencies)
 
+# import ag survey filtering from Lorenz
+ag_filter_info <- read_csv("Output/misc_data/ag_survey_study_info_LN.csv", show_col_types = F) |> select(study_type:keep, -n)
+
+# merge above with survey df, filter for those where keep = 1
+agri_survey_filtered <- left_join(agri_survey, ag_filter_info, by = c("study_type", "unit_of_analysis")) |> filter(keep==1)
+
 # export filtered and full dataset
-xlsx::write.xlsx(agri_survey, "Output/ag_surveys.xlsx")
+xlsx::write.xlsx(agri_survey_filtered, "Output/instrument_data_all_years/ag_surveys.xlsx")

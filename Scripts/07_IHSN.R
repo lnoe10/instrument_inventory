@@ -165,5 +165,11 @@ ihsn <- ihsn_raw %>%
                             "Event/transaction data [evn]")) |> 
   select(id, idno, instrument_name = title, country=nation, iso3c, year_start, year_end, repositoryid, type, authoring_entity, authoring_entity_detail, funding_agencies, study_type:producers, status, source)
 
+data_types_LN <- read_csv("Output/misc_data/data_types_ihsn_2013_LN.csv", show_col_types = F) |> select(data_kind:instrument_type)
+
+# bind Lorenz' "keep" flag onto the IHSN data, filter for where keep==1
+ihsn_filtered <- data_types_LN |> filter(!is.na(keep)) |> select(-n) |> right_join(ihsn, by=c("data_kind", "study_type"), multiple="all") |> 
+  filter(keep==1)
+
 # export filtered and full dataset
-xlsx::write.xlsx(ihsn, "Output/ihsn.xlsx")
+# xlsx::write.xlsx(ihsn_filtered, "Output/ihsn.xlsx")
