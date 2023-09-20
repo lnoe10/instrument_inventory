@@ -1,0 +1,1107 @@
+data_kind,study_type,unit_of_analysis,universe,keep,rationale,instrument_type
+--,Other Household Survey,NA,NA,NA,,
+Encuesta probabilística en hogares,Other Household Health Survey [hh/hea],"El hogar, la vivienda y los integrantes del hogar",El módulo está dirigido a los hogares de las viviendas particulares habitadas del territorio nacional.,Yes,Household and health,Household health survey
+Event/Transaction data [evn],Other Household Survey,"The main unit for data collection for transactions was the household. However, each income source and financial instrument was ascribed to a specific household member during the initial questionnaire. Thus all transactions associated with that instrument or income source are registered under its owner. Similarly, transactions related to expenses were individually attributed to the member who initiated the respective transaction. 
+
+There was a small number of cash flows where the interviewer was not able to unambiguously identify the initiating household member. In these cases, the cash flow was recorded as belonging to the entire household (in the dataset the member ID field would be blank).
+
+Analysis can be performed at two different levels of aggregation:
+a) The household itself
+b) Individual household members
+
+In our study the household is defined as including those who consistently share financial resources, live together, share the same cooking arrangement, and report to the same household head. This includes babies, children, people who travel for work or school during the week and consider the household to be their main residence. However, the definition does not include people who are currently spending an extended period of time away from the household, including college students, students away at boarding school, military personnel, people in prison, or people who live in the house but maintain completely separate expenses (e.g. roommates, other families).","Once the villages for the Smallholder Diaries were selected, the research teams used a screening process to help identify a range of families with 5 acres of land or less, diverse income sources, access to agricultural inputs, wealth levels, and crops to participate in the research. 
+
+In Mozambique, these eligible households were identified using a participatory rural appraisal wealth-ranking technique. Working with committees of village representatives, the research teams conducted wealth-ranking exercises to assess the relative wealth of households in village hamlets or subareas.",Yes,Household and expenditures,Household income/expenditure survey
+Event/Transaction data [evn],Other Household Survey,"The main unit for data collection for transactions was the household. However, each income source and financial instrument was ascribed to a specific household member during the initial questionnaire. Thus all transactions associated with that instrument or income source are registered under its owner. Similarly, transactions related to expenses were individually attributed to the member who initiated the respective transaction. 
+
+There was a small number of cash flows where the interviewer was not able to unambiguously identify the initiating household member. In these cases, the cash flow was recorded as belonging to the entire household (in the dataset the member ID field would be blank).
+
+Analysis can be performed at two different levels of aggregation:
+a) The household itself
+b) Individual household members
+
+In our study the household is defined as including those who consistently share financial resources, live together, share the same cooking arrangement, and report to the same household head. This includes babies, children, people who travel for work or school during the week and consider the household to be their main residence. However, the definition does not include people who are currently spending an extended period of time away from the household, including college students, students away at boarding school, military personnel, people in prison, or people who live in the house but maintain completely separate expenses (e.g. roommates, other families).","Once the villages for the Smallholder Diaries were selected, the research teams used a screening process to help identify a range of families with 5 acres of land or less, diverse income sources, access to agricultural inputs, wealth levels, and crops to participate in the research. 
+
+In Pakistan, the sample was selected using a traditional screener survey with questions related to household demographics, crops and livestock, main income sources, and wealth indicators, administered to all households in the selected villages. As a supplement to this process, village leaders and community representatives were consulted to help ensure local participation and eliminate households with large landholdings.",Yes,Household and expenditures,Household income/expenditure survey
+Event/Transaction data [evn],Other Household Survey,"The main unit for data collection for transactions was the household. However, each income source and financial instrument was ascribed to a specific household member during the initial questionnaire. Thus all transactions associated with that instrument or income source are registered under its owner. Similarly, transactions related to expenses were individually attributed to the member who initiated the respective transaction. 
+
+There was a small number of cash flows where the interviewer was not able to unambiguously identify the initiating household member. In these cases, the cash flow was recorded as belonging to the entire household (in the dataset the member ID field would be blank).
+
+Analysis can be performed at two different levels of aggregation:
+a) The household itself
+b) Individual household members
+
+In our study the household is defined as including those who consistently share financial resources, live together, share the same cooking arrangement, and report to the same household head. This includes babies, children, people who travel for work or school during the week and consider the household to be their main residence. However, the definition does not include people who are currently spending an extended period of time away from the household, including college students, students away at boarding school, military personnel, people in prison, or people who live in the house but maintain completely separate expenses (e.g. roommates, other families).","Once the villages for the Smallholder Diaries were selected, the research teams used a screening process to help identify a range of families with 5 acres of land or less, diverse income sources, access to agricultural inputs, wealth levels, and crops to participate in the research. 
+
+In Tanzania, these eligible households were identified using a participatory rural appraisal wealth-ranking technique. Working with committees of village representatives, the research teams conducted wealth-ranking exercises to assess the relative wealth of households in village hamlets or subareas.",Yes,Household and expenditures,Household income/expenditure survey
+Event/transaction data [evn],Other Household Survey [hh/oth],Household,NA,NA,,
+Event/transaction data [evn],Other Household Survey [hh/oth],Individual,All persons of concern to UNHCR including Refugees.,No,UNHCR survey,
+Event/transaction data [evn],Other Household Survey [hh/oth],Household and member,NA,NA,,
+Event/transaction data [evn],"Sample Frame, Households [sf/hh]",Individual,Nigerian Refugees,No,Limited sample,
+Event/transaction data [evn],Other Household Survey [hh/oth],Group and member,NA,NA,,
+NA,NA,"Individuals
+Households",The study population consists of individuals included in the lists of enrolled beneficiaries covered by Give Directly for the COVID-19 CT.,NA,,
+NA,NA,Household,NA,NA,,
+NA,Other Household Survey [hh/oth],"- Households
+- Individuals",NA,NA,,
+NA,NA,NA,NA,NA,,
+NA,NA,"- recent college graduates;
+- enterprises seeking to hire new employees.",NA,No,Limited sample,
+NA,NA,Resident enterprises in Kenya with foreign assets and liabilities.,NA,No,enterprise survey,
+NA,Other Household Survey [hh/oth],"The basic unit of analysis is at the household level. However, some datasets contain individual level data, whilst some data is collected at the community level.","The quantitative survey was implemented in 398 clusters across 48 sub-counties in eight programme districts (Apac, Kaberamaido, Katakwi, Kiboga, Kyenjojo, Moroto, Nakapiripirit and Nebbi). The two targeting mechanisms (SCG and VFSG) were randomly assigned evenly between the 48 sub-counties, with the exception of the Karamoja region in which only the SCG targeting mechanism was employed. The SAGE programme implemented the targeting process in evaluation areas where selected recipients received the transfer, but only after they were surveyed at baseline by the evaluation teams.
+
+The households in the evaluation areas that were selected for the programme are referred to as the treatment group. The comparison households that were selected were those households that fell just shy of the selection thresholds. For SCG the threshold is 65 years of age, dropping to 60 years of age in the Karamoja region. For VFSG eligibility depends on a household's labour capacity and dependency (LCD) score, with the threshold score for eligibility varying by region. Households who fell just below the relevant SCG/VFSG threshold are referred to as the comparison group.",No,Impact evaluation,
+NA,NA,Stakeholders of the World Bank Group in Kazakhstan,NA,No,Relevant only to World Bank,
+NA,NA,Stakeholders of the World Bank Group in Angola,NA,No,Relevant only to World Bank,
+NA,NA,NA,"Opinion leaders from national and local governments, multilateral/bilateral agencies, media, academia, the private sector, and civil society.",No,opinion survey,
+NA,NA,Stakeholders of the World Bank Group in Benin,NA,No,Relevant only to World Bank,
+NA,NA,Stakeholders of the World Bank Group in Bulgaria,NA,No,Relevant only to World Bank,
+NA,NA,Stakeholders of the World Bank Group in Burundi,NA,No,Relevant only to World Bank,
+NA,NA,Stakeholders of the World Bank Group in the Republic of Cabo Verde.,NA,No,Relevant only to World Bank,
+NA,NA,Stakeholders of the World Bank Group in Chad,NA,No,Relevant only to World Bank,
+NA,NA,Stakeholders of the World Bank Group in Chile,NA,No,Relevant only to World Bank,
+NA,NA,Stakeholders of the World Bank Group in Croatia,NA,No,Relevant only to World Bank,
+NA,NA,Stakeholders of the World Bank Group in Djibouti,NA,No,Relevant only to World Bank,
+NA,NA,Stakeholders of the World Bank Group in Ethiopia,NA,No,Relevant only to World Bank,
+NA,NA,Stakeholders of the World Bank Group in Gambia,NA,No,Relevant only to World Bank,
+NA,NA,Stakeholders of the World Bank Group in India,NA,No,Relevant only to World Bank,
+NA,NA,Stakeholders of the World Bank Group in Indonesia,NA,No,Relevant only to World Bank,
+NA,NA,Stakeholders of the World Bank Group in Kenya,NA,No,Relevant only to World Bank,
+NA,NA,Stakeholders of the World Bank Group in Lao PDR,NA,No,Relevant only to World Bank,
+NA,NA,Stakeholders of the World Bank Group in Mauritania,NA,No,Relevant only to World Bank,
+NA,NA,Stakeholders of the World Bank Group in Mauritius,NA,No,Relevant only to World Bank,
+NA,NA,Individuals,"Targeted participants of the three RSRCs, including children, secondary students, business people, general community members, and other populations. With the exception of a few educators, all evaluation participants will be familiar with the RSRCs; non-user interviews are beyond the scope of this evaluation.",No,Impact evaluation,
+NA,NA,Stakeholders of the World Bank Group in Pakistan,NA,No,Relevant only to World Bank,
+NA,NA,Stakeholders of the World Bank Group in Afghanistan,NA,No,Relevant only to World Bank,
+NA,NA,Stakeholders of the World Bank Group in Nicaragua,NA,No,Relevant only to World Bank,
+NA,NA,Stakeholders of the World Bank Group in Bolivia.,NA,No,Relevant only to World Bank,
+NA,NA,Stakeholders of the World Bank Group in Brazil,NA,No,Relevant only to World Bank,
+NA,NA,Stakeholders of the World Bank Group in Costa Rica.,NA,No,Relevant only to World Bank,
+NA,NA,Stakeholders of the World Bank Group in Dominican Republic.,NA,No,Relevant only to World Bank,
+NA,NA,Stakeholders of the World Bank Group in Georgia,NA,No,Relevant only to World Bank,
+NA,NA,Household and individual,IDPs and host communities.,No,limited sample,
+NA,NA,"Opinion leaders from national and local governments, multilateral/bilateral agencies, media, academia, the private sector, and civil society.",NA,No,opinion survey,
+NA,NA,Household and individual.,NA,NA,,
+NA,NA,Stakeholders of the World Bank Group in Paraguay.,NA,No,Relevant only to World Bank,
+NA,NA,Stakeholders of the World Bank Group in Peru.,NA,No,Relevant only to World Bank,
+NA,NA,Stakeholders of the World Bank Group in Argentina,NA,No,Relevant only to World Bank,
+NA,NA,Stakeholders of the World Bank Group in Belarus,NA,No,Relevant only to World Bank,
+NA,NA,Stakeholders of the World Bank Group in Honduras.,NA,No,Relevant only to World Bank,
+NA,NA,Stakeholders of the World Bank Group in Panama.,NA,No,Relevant only to World Bank,
+NA,NA,Individual,NA,NA,,
+NA,NA,Households and individuals,NA,NA,,
+NA,NA,Shelter,NA,No,wrong unit of analysis,
+NA,NA,Household.,NA,NA,,
+NA,NA,Individuals,NA,NA,,
+NA,Other Household Survey [hh/oth],"Circuit, school, individual",NA,NA,,
+NA,NA,households,NA,NA,,
+NA,NA,Household and individual,NA,NA,,
+NA,NA,NA,"Study populations are:
+
+Impact Evaluation:
+- Households, businessess, and communities sampled for the evaluation of OCEF grants: these are households, businessess, and communities (including those in rural and off-grid areas) which are targeted as customers by OCEF grant recipients. The control population are equivalent entities in control (non-treated) communities which will be matched ex-post
+- OCEF grant beneficiaries
+
+Performance Evaluation:
+- OCEF grant beneficiaries
+- Other private sector off-grid energy firms (including those who at least initiated an application for OCEF funding in Calls 1 and/or 2, and those who completed an application but where not shortlisted)
+- Other key stakeholders involved in or knowledgeable about OCEF, including representatives from: MCC, MCA, NIRAS, IED, the Government of Benin (eg, ARE, ABERME), and other stakeholding entities (e.g, EU, World Bank, GiZ)",No,Impact evaluation,
+NA,NA,"Individuals
+Households","The following sub-counties are included in the population : Ganze, Magarini and Kaloleni in Kilifi county and Balambala, Dadaab, Fafi and Ijara in Garissa county. The definition of the population is constricted by the circumstances on the ground. Particularly, areas of extreme security risk are excluded from the viable population as the operation of both implementation and evaluation teams would be unsafe. Within these areas, the population of households is restricted to those households eligible for enrolment in the Mwangaza Mashinani pilot project. Specifically, these are CT-OVC and/or OP-CT beneficiary households residing in off-grid communities in Kilifi and Garissa, that have at least one household member enrolled in and attending school and that do not possess a solar device with more than one bulb and who have indicated to be willing to pay 250 Ksh as a deposit for the solar device.",No,irrelevant topic,
+NA,NA,"Community-level questionnaires with units of analysis being individuals (G-united participants, local community members, teachers, school students)",NA,No,irrelevant topic,
+NA,NA,Household,All population of concern to UNHCR who have been recepients of cash-based interventions.,No,UNHCR survey,
+NA,Other Household Survey [hh/oth],Child,NA,NA,,
+NA,Other Household Survey [hh/oth],"Individual, Household",NA,NA,,
+NA,Other Household Survey [hh/oth],Household,NA,NA,,
+NA,NA,household,NA,NA,,
+NA,Household Survey,"Households, individuals, and plots",NA,NA,,
+NA,NA,Focus group,NA,NA,,
+NA,NA,Household,All people of concern.,NA,,
+NA,Other Household Survey [hh/oth],Households,NA,NA,,
+NA,NA,"F1- health facility assessment: health center 
+F2- health provider interview: health provider 
+F3 - direct observation of antenatal care consultation: consultation 
+F4 - direct observation of curative care for children under-5: consultation 
+F5 - exit interview for antenatal care: pregnant woman 
+F6 - exit interview for child curative care: parent or guardian of caregiver of sick child
+F7 -exit interview for family planning consultation: user
+F8-direct observation of family planning consultation: consultation 
+F9- direct observation of curative care for children under-5: consultation",NA,Yes,Household health,Household health survey
+NA,NA,"Households, Individuals",NA,NA,,
+NA,NA,Stakeholder,NA,No,Relevant only to World Bank,
+NA,NA,Stakeholders of the World Bank Group in Armenia,NA,No,Relevant only to World Bank,
+NA,"Sample Frame, Households [sf/hh]",Individuals,NA,NA,,
+Observation data/ratings [obs],Other Household Survey [hh/oth],NA,"The target population is the civilian, non-institutionalized population 15 years and above.",NA,,
+Observation data/ratings [obs],Other Household Survey [hh/oth],Individual,"The target population is the civilian, non-institutionalized population 15 years and above.",NA,,
+Observation data/ratings [obs],Other Household Survey [hh/oth],Individuals,"The target population is the civilian, non-institutionalized population 15 years and above.",NA,,
+Observation data/ratings [obs],Other Household Survey [hh/oth],Individual,NA,NA,,
+Other,NA,Individuals,"The study population includes all grantees, grant applicants, contractors, MCA-I staff involved in GP, MCC staff involved in GP, GOI representatives invovled in GP, and grant administrators for Green Prosperity.",No,limited sample,
+Other,NA,individuals,"The study population includes all grantees, grant applicants, contractors, MCA-I staff involved in GP, MCC staff involved in GP, GOI representatives invovled in GP, and grant administrators for Green Prosperity.",No,limited sample,
+Other,NA,"Households, enterprises","At baseline, the universe is constructed of households and enterprises connected to the 11 kampung-level micro-grids that will be constructed in East Sumba and the 3 village-level micro-grids that will be constructed in Berau. At future data collection points, this universe may expand to treatment populations of other CBOG RE grants.",No,limited sample,
+Other,NA,"Community, households, administrative units, other",Road users,No,limited sample,
+Process-produced data [pro],NA,#NAME?,NA,No,limited sample,
+Qualitative and quantitative,Survey and Case Studies,Individuals and institutions,"The study covered grade 3 and grade 6 learners in the sampled schools, and principals, teachers and schools in the 8 schools selected for the case studies.",No,Impact evaluation,
+Sample survey data,Other Household Survey [hh/oth],"Unit analisis: rumah tangga, desa","1. Buku Karakteristik Desa   : Kepala Desa/Lurah atau Sekretaris Desa/Lurah atau Kepala Urusan.
+2. Buku Karakteristik Dusun : Kepala Dusun/Unit Wilcah atau Ketua RW atau Ketua RT.
+3. Buku Rumah Tangga        : Kepala Rumah Tangga atau Pasangan Kepala Rumah Tangga atau Anggota Rumah Tangga perempuan lainnya yang berumur 18 tahun atau lebih.
+4. Buku Indvidu Dewasa      : Anggota Rumah Tangga yang berumur lebih dari 15 tahun
+5. Buku Individu Anak          : Anggota Rumah Tangga yang berumur <= 15  tahun.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Household,All people of concern.,NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],"Individual, Household-level","Telephone accessible adult population, aged 18+",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Individuals,All population of concern to UNHCR who have been recepients of MHM kits as part of non food items' distribution.,No,UNHCR survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],Individuals,All population of concern to UNHCR who have been recepients of soap kits as part of non food items' distribution.,No,UNHCR survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households and individuals,The universe of the study is South Africans 18 years old or older.,NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],"Survey I: Household and adult over age of 18; 
+Survey II: Household with children;
+Survey III: Household and adult over age of 18; households with migrants;
+Survey IV: Household and adult over age of 18; households with children",NA,NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Households and individuals,a) Rohingya population living in camps and b) host population within Cox's Bazar and Bandarban district.,No,UNHCR survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,"The survey covers households that reported telephone numbers, are included in the social registry data collected by the Ministry of Social Affairs and Solidarity (MASS) and have been interviewed after 2017. Refugees are excluded from this first round.",NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Individual,"Adult population (18 years old and over), excluding the populations living in territories affected by military conflict (South Ossetia and Abkhazia).",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Household,NA,NA,,
+Sample survey data [ssd],NA,Household,NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Individuals,NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,"The survey covered all de jure households excluding prisons, hospitals, military barracks, and school dormitories.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,NA,NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Households,NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],NA,NA,NA,,
+Sample survey data [ssd],NA,Student,NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],"Households
+Individuals",The survey covered urban and rural households,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Individuals,Individual Small Scale Farmers.,NA,,
+Sample survey data [ssd],NA,The units of analysis are establishments or workplaces – a single location at which one or more employees work. The larger legal entity may include multiple establishments.,"The universe of the study are non-government enterprise workplaces registered with the Azeri Statistical Office 2013 with at least five employees excluding the following sectors: land, water and air transportation, wood processing, pulp and paper, tobacco manufacturing and recycling.",No,enterprise survey,
+Sample survey data [ssd],Other Household Survey,Data are collected at both the individual and household level,NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],CBO(community-based organization)-municipality,NA,NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Households and individuals of 18 years of age and older.,"Households with a landline or in which at least one member has a cell phone, and individuals 18 years of age or above who have an active cell phone number or a landline at home.",NA,,
+Sample survey data [ssd],"Sample Frame, Households [sf/hh]",Household,NA,NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Individual and Household,All persons of concern for UNHCR,No,UNHCR survey,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Households,"The sample universe covers all urban refugee households (239) living in Kathmandu as well as all 2,409 Bhutanese refugee households living in Pathari sanichare and Beldangi camps.",No,irrelevant topic,
+Sample survey data [ssd],NA,#NAME?,The survey was fielded to active Facebook users ages 18 and above.,No,limited sample,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],#NAME?,"The survey covered all de jure households (with a phone number) excluding prisons, hospitals, military barracks, and school dormitories.",NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Household,"Refugees, Host communities",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,"The survey covered only households of the 2018/19 Enquête sur la Consommation des Ménages et le Secteur Informel au Tchad (ECOSIT 4) which excluded populations in prisons, hospitals, military barracks, and school dormitories.",Yes,consumption survey,Household Income/expenditure survey
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,"The survey covers national households that reported telephone numbers, are included in the social registry data collected by the Ministry of Social Affairs and Solidarity (MASS) and have been interviewed after 2017.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,"For the refugee sample, the survey covers households from the sample of the Refugee Survey collected in 2019 by INSD jointly with MASS, World Food Program (WFP) and United Nations High Commissioner for Refugees (UNHCR) through face-to-face interviews. The resultant refugee sample of the COVID-19 Phone Survey only includes households who had a phone number, and have responded to the survey.",No,UNHCR survey,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Households and individuals of 18 years of age and older.,"Households with a landline or in which at least one member has a cell phone, and individuals 18 years of age or above who have an active cell phone number or a landline at home. For Ecuador, Venezuelan households and people, provided they meet the previous requirements.",NA,,
+Sample survey data [ssd],NA,Student,"Our sampling frame for the phone survey consisted of 4,163 students in 177 classes in 88 schools in Zone 2 of Ecuador.",No,limited sample,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Household,NA,NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],"Household, Individual (adult over age 18)",NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,The total population spans all beneficiaries subject to the last four Cash-Based Intervention in 2020 in Malaysia.,No,Impact evaluation,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,"The survey covered only households of the 2018/19 survey which excluded populations in prisons, hospitals, military barracks, and school dormitories.",NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],#NAME?,The universe for this survey is the whole population in Myanmar. The sample frame used was an existing list of phone numbers provided by the firm collecting the data.,NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],"Household, individuals",NA,NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],#NAME?,Households with access to phones.,NA,,
+Sample survey data [ssd],NA,Household,Refugees & host communities,No,limited sample,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Household,Urban refugees,No,limited sample,
+Sample survey data [ssd],NA,NA,NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,The survey covers all households not sectors.,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,The survey covered all household members. The questionnaire was administered to only one respondent per household - most often a male household head.,NA,,
+Sample survey data [ssd],Other Household Survey,Household,NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,"- At the household level, the study population consists of all the households in the four HSNP counties (i.e. Mandera, Marsabit, Turkana and Wajir). Within a household, the survey covered all de jure household members (usual residents). 
+
+- At the market level, the survey covered a random sample of businesses in the three main commercial hubs of each county. The aim was to capture information on three main sectors of the local economy:
+
+1.	Retailing - shops that sell retail goods on which a price mark-up is applied;
+2.	Services;
+3.	Producers - businesses that transform inputs into outputs.
+
+The following categories of businesses were excluded from the listing:
+
+1.	Temporary stalls or mobile sellers located outside permanent kiosks;
+2.	Banks;
+3.	Education institutions (schools, universities etc.);
+4.	Health facilities.
+
+- The livestock trader survey was conducted in the three main livestock markets of each county. To the extent possible, livestock traders have been sampled in order to achieve a balance between those trading large animals, those trading small or medium value animals, those trading only within the HSNP counties and those who also trade outside the HSNP counties.",No,enterprise survey,
+Sample survey data [ssd],Other Household Survey,The units of analysis are the individual respondents and households. A household roster is undertaken at the start of the survey and the individual respondent is randomly selected among all household members aged 15 to 64 included. The random selection process was designed by the STEP team and compliance with the procedure is carefully monitored during fieldwork.,"The target population for the Armenia STEP survey comprises all non-institutionalized persons 15 to 64 years of age (inclusive) living in private dwellings in urban areas of the country at the time of data collection. This includes all residents except foreign diplomats and non-nationals working for international organizations.
+
+The following are excluded from the sample:
+- Residents of institutions (prisons, hospitals, etc)
+- Residents of senior homes and hospices
+- Residents of other group dwellings such as college dormitories, halfway homes, workers' quarters, etc
+- Persons living outside the country at the time of data collection
+
+In some countries, extremely remote villages or conflict-ridden regions could not be surveyed.",Yes,STEP Surveys have sex-disaggregated data,LFS
+Sample survey data [ssd],NA,The units of analysis are establishments and workplaces – a single location at which one or more employees work. The larger legal entity may include multiple establishments.,"The universe of the study are non-government businesses registered with Armenia Social Security State Agency from 2012, with at least five employees in the following sectors: food processing, fishing, mining, manufacturing, electricity, gas and waterworks, construction, wholesale, retail trade, repair of motor vehicles, motorcycle and household goods, hotels and restaurants, transportation, financial services, real estate.",No,enterprise survey,
+Sample survey data [ssd],Other Household Survey,The units of analysis are the individual respondents and households. A household roster is undertaken at the start of the survey and the individual respondent is randomly selected among all household members 18 (in Macedonia case) to 64 years old (included). The random selection process was designed by the STEP team and compliance with the procedure is carefully monitored during fieldwork.,"The target population for the Macedonia STEP survey comprises all non-institutionalized persons 15 to 64 years old living in private dwellings in urban areas of the country at the time of data collection. This includes all residents except foreign diplomats and non-nationals working for international organizations.
+
+Persons 15-17 years old were not explicitly included in the sample frame due to the fact that they do not have the right to vote in the Republic of Macedonia. The sampling frame was electoral polling stations listing. This group of 15 to 17 year old persons is most probably living in a dwelling with a person who is 18 to 64 years old and therefore the 15 to 17 year old persons are likely present in the target dwellings.",Yes,STEP Surveys have sex-disaggregated data,LFS
+Sample survey data [ssd],Other Household Survey,The units of analysis are the individual respondents and households. A household roster is undertaken at the start of the survey and the individual respondent is randomly selected among all household members aged 15 to 64 included. The random selection process was designed by the STEP team and compliance with the procedure is carefully monitored during fieldwork.,"The STEP target population are individuals 15-64 years old, living in urban areas.
+
+In Georgia, the following groups were excluded:
+- Residents of institutions (prisons, hospitals, etc.)
+- Residents of senior homes and hospices
+- Residents of other group dwellings (college dormitories, halfway homes, workers' quarters, etc.)
+- Persons living outside the country at the time of data collection
+- Persons living in the conflict regions Abkhazia and South Ossetia",Yes,STEP Surveys have sex-disaggregated data,LFS
+Sample survey data [ssd],Other Household Survey,The units of analysis are the individual respondents and households. A household roster is undertaken at the start of the survey and the individual respondent is randomly selected among all household members aged 15 to 64 included. The random selection process was designed by the STEP team and compliance with the procedure is carefully monitored during fieldwork.,"The target population for the Ghana STEP survey comprises all non-institutionalized persons 15 to 64 years of age (inclusive) living in private dwellings in urban areas of the country at the time of data collection. This includes all residents except foreign diplomats and non-nationals working for international organizations. 
+Exclusions : Military barracks were excluded from the Ghana target population.",Yes,STEP Surveys have sex-disaggregated data,LFS
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Households and individuals,NA,NA,,
+Sample survey data [ssd],Other Household Survey,The units of analysis are the individual respondents and households. A household roster is undertaken at the start of the survey and the individual respondent is randomly selected among all household members aged 15 to 64 included. The random selection process was designed by the STEP team and compliance with the procedure is carefully monitored during fieldwork.,"The target population is defined as all non-institutionalized persons aged 15 to 64 (inclusive) living in private dwellings in the urban areas of the country at the time of the data collection. This includes all residents, except foreign diplomats and non-nationals working for international organizations  
+The following are considered ""institutionalized"" and excluded from the STEP survey:  
+- Residents of institutions (prisons, hospitals, etc)  
+- Residents of senior homes and hospices  
+- Residents of other group dwellings such as college dormitories, halfway homes, workers' quarters, etc   
+
+Other acceptable exclusions are:  
+- Persons living outside the country at the time of data collection, e.g., students at foreign universities  
+Deviation Requested from the Standard: The statistical population is composed of core urban households and excludes the categories identified here, as well as itinerants (as classified in the Population Census 2009 in Kenya).",Yes,STEP Surveys have sex-disaggregated data,LFS
+Sample survey data [ssd],NA,The units of analysis are establishments and workplaces – a single location at which one or more employees work. The larger legal entity may include multiple establishments.,"The universe of the study are non-government enterprise workplaces registered with the Georgia State Department of Statistics with at least twenty employees in the following sectors: tourism, construction and IT and telecommunication.",No,enterprise survey,
+Sample survey data [ssd],NA,#NAME?,"The evaluation will use household surveys and community surveys. To identify the households to be sampled, a census of the selected areas was implemented and a sample framework was developed which include a variable that identified if the household had access to electricity or not. From the sample framework a stratified random sample was selected within the household which did not have access to electricity at the moment of the pre-census.
+
+The household survey will interview approximately 1,532 households especifically for the electricity sub-activity impact evaluation.",No,Impact evaluation,
+Sample survey data [ssd],NA,"Individuals, Schools",NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],"Household
+Individual","WVS surveys are required to cover all residents (not only citizens) between the ages of 18 and 85, inclusive. PI's can lower the minimum age limit as long as the minimum required sample size for the 18+ population (N=1200) is achieved.",No,opinion survey (World Values Survey),
+Sample survey data [ssd],NA,#NAME?,NA,NA,,
+Sample survey data [ssd],NA,"Productivity
+Individuals, herder groups
+
+Phase 1
+Households
+
+Phase 2
+Individuals, households","Productivity
+Herder groups in intervention areas
+
+Phase 1
+Herder households in rural Mongolia, in the areas around Ulaanbaatar, Darkhan, and Erdenet cities.
+
+Phase 2
+All households that were members of the 328 herder groups that applied to the PURP in the Phase II areas. And two neighbor households of these groups that lived within 2 km of the lease area boundaries.
+
+Modification for Wave 2:
+Sampling of neighbor households was extended to 5 km distance from lease area boundaries, due to low rates of successful neighbor interview in the baseline survey.",Yes,Agricultural survey,Agricultural survey
+Sample survey data [ssd],NA,Individuals,"12,000 15-17 year old applicants to 10 oversubscribed TVET schools in urban and peri-urban Mongolia",NA,,Other household survey
+Sample survey data [ssd],Other Household Survey [hh/oth],Individuals,"The sample universe for Afrobarometer surveys includes all citizens of voting age within the country. In other words, we exclude anyone who is not a citizen and anyone who has not attained this age (usually 18 years) on the day of the survey. Also excluded are areas determined to be either inaccessible or not relevant to the study, such as those experiencing armed conflict or natural disasters, as well as national parks and game reserves. As a matter of practice, we have also excluded people living in institutionalized settings, such as students in dormitories and persons in prisons or nursing homes.",No,opinion survey (Afrobarometer),Other household survey
+Sample survey data [ssd],NA,Individuals,NA,NA,,
+Sample survey data [ssd],NA,"Depending on the research question:  conservancy, PPO, household, individual
+
+Household survey: The primary unit of analysis is the household. The definition of a household for the purposes of this survey is a group of people that live in the same compound and take meals together at least 4 days a week, as well as young children living elsewhere that are answerable to the head of the household. Several questions in the questionnaire apply to each individual family member.","For Conservancies, there are a total of 76 conservancies in Namibia, 28 of which are included in the evaluation.
+
+For INP, the sample frame only included membership from 28 PPOs (out of 63 targeted PPOs) since only the most organized PPOs could provide membership lists.",No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,"In order to have pre-program baseline data that predated the vetting of communities for the PWP, the national Integrated Household Survey (IHS3) collected in 2010/2011 by Malawi's National Statistics Office was used as the basis for the MRLS. Within the 12 selected districts, the list of PWP-eligible (pre-screened) communities from the District Council and Traditional Authorities was compared with the 786 enumeration areas (EAs) in the IHS3.",Yes,household health,Household health survey
+Sample survey data [ssd],Other Household Survey [hh/oth],"Household
+Individual","National Population, Both sexes,18 and more years.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],"Household
+Individual","National Population, Both sexes,18 and more years",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],"La unidad de análisis de este estudio describe: vivienda, individuos y hogares",El universo para la Encuesta Nacional de Uso del Tiempo está conformado por la población civil no institucional residente en todo el territorio nacional.,Yes,time use,Time Use
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Individuals,"All persons aged 15 and over, resident within private households, regardless of their nationality, citizenship, language or legal status, in participating countries.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],"Individuals
+Institutions/organisations",NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households and individuals.,NA,NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Household and individuals,NA,NA,,
+Sample survey data [ssd],"Sample Frame, Households [sf/hh]",#NAME?,NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],"Household
+Urban center",NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Household and Induvisual,"- All households in the country determined on the basis of the usual place of their residence (de jure househols).  The households of diplomatic missions, the institutional households (like people living in schools hostels, prisons, army camps and hospitals) were excluded from the survey. 
+-  All persons aged 5 years and above household members.",NA,,
+Sample survey data [ssd],NA,"The unit of randomization for the intervention is a village.
+ 
+Administered questionnaires have the following units of analysis: individuals (teachers, students, parents), households, schools, and communities.","All primary schools and rural households in Mirpur Khas, Mitiari and Sanghar districts in Sindh province.",No,Impact evaluation,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,"The target population is low-cost private schools in rural areas of Faisalabad district. Sampling is at the village level, so urban, and peri-urban villages are excluded.  Furthermore, for the design of the intervention, villages without any private schools, or with only one private school, are excluded.  Villages with population over 10,000 or high village aggregated revenue are also excluded.  
+
+Government schools, and schools where money is not contained within the school itself (i.e. some network schools share money across multiple schools in the network), are also excluded.",No,Impact evaluation,
+Sample survey data [ssd],NA,#NAME?,NA,NA,,
+Sample survey data [ssd],NA,Households and individuals.,NA,NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],#NAME?,NA,NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Unit analiasis terkecil yang digunakan pada kegiatan ini : Anggota Rumah Tangga (Individu) dan Rumah Tangga,NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Establishment,All service rendering establishments in the Central Business Register.,No,enterprise survey,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],"Individuals, households",The survey covered all de jure household members (usual residents),NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],The units of anaylsis for the General Household Survey 2013 are individuals and households.,"The survey covers all de jure household members (usual residents) of households in the nine provinces of South Africa and residents in workers' hostels. The survey does not cover collective living quarters such as student hostels, old age homes, hospitals, prisons and military barracks.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Units of analysis in the survey were individuals and households,"The target population of the survey consists of all private households in all nine provinces of South Africa and residents in workers' hostels. The survey does not cover other collective living quarters such as students' hostels, old-age homes, hospitals, prisons and military barracks.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],"Household
+Individual","National Population, Both sexes,16 and more years, excluding domestic workers and hostel dwellers.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,"The survey found out that a total of 133, 544 Albanian citizens of the age segment 18- above returned to Albania in the period 2009-2013.",No,migration survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],"- Households;
+- Individuals 16 years and older.",The survey covered all household members over 16 years old. Persons living in collective households and in institutions are generally excluded from the target population.,NA,,
+Sample survey data [ssd],Other Household Survey,"Household, Individual",NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],The unit of analysis consists of households with children between 3 and 18 months of age residing in the catchment area of participating community clinics at the time of baseline data collection.,The full universe of the evaluation consists of households with children between 3 and 18 months of age residing in the catchment area of the 78 community clinics at the time of baseline data collection.,No,Impact evaluation,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Household,It consists of all Palestinian households and individuals who are staying normally in the state of Palestine during 2013,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,The target population was all Palestinian households living in the Palestine.,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],"Household
+Individual","National Population, Both sexes,18 and more years excluding people in hospitals, prisons and living outside the household for a period longer than 6 months.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,The target population was all Palestinian households living in West Bank and Gaza.,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,All Palestinians households living in West Bank and Gaza Strip.,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],"- households,
+- individuals",NA,NA,,
+Sample survey data [ssd],NA,Health facility,All health facilities in targeted districts,NA,,
+Sample survey data [ssd],Priority Survey (hh/ps],"-  Households
+
+-  Individuals (Eligible from 13-24 years old)","Children aged 13-24 years old, male and female, who have been victims of physical, emotional, and sexual violence",Yes,Gender-based violence survey,Gender-based violence survey
+Sample survey data [ssd],Other Household Survey [hh/oth],Hogares e Individuos,"Se consideran miembros del hogar a todas las personas que normalmente hacen vida en común y comparten un presupuesto de alimentación, es decir que comen juntas. Se excluyen aquellas personas que estuvieron ausentes más de seis meses en el último año, exceptuándose el jefe del hogar y los niños menores de seis meses. 
+También se consideran miembros del hogar a las personas que se encuentren en las siguientes situaciones:
+• Las personas que, en el momento de la encuesta, están residiendo transitoriamente fuera del hogar, ya sea por vacaciones, enfermedad, negocio, trabajo u otra razón, siempre que los períodos de ausencia no superen los seis meses. Estas personas, por tanto, no han definido otro lugar de residencia habitual, es decir, que tenga como residencia habitual solamente el hogar que se está encuestando.
+• Las personas que realizan servicios domésticos (remunerados) y residen habitualmente en el hogar (""servicio doméstico puertas adentro"").
+• Los extranjeros que trabajan o estudian en el país y que han estado residiendo en la vivienda, o que tengan intención de residir en ella, por seis meses o más.
+• Las personas que se encuentran cumpliendo condena, sujetas a régimen de reclusión nocturna o de salida diaria (sólo duermen en el recinto penitenciario), siempre y cuando la persona tenga su residencia habitual en el hogar encuestado.
+• Los estudiantes internos y los que estudian y residen en un lugar diferente al de la residencia familiar, aunque excepcionalmente excedan los seis meses de ausencia.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],"UNIDAD DE OBSERVACIÓN
+
+Las viviendas, los hogares y todas las personas que los conforman exceptuando los menores de 15 años.
+
+UNIDAD DE ANÁLISIS
+
+Las personas de 15 años en adelante residentes en los hogares particulares seleccionados en la muestra.
+
+UNIAD DE MUESTREO 
+Es el segmento (MT), conformado por 10 viviendas en promedio, seleccionadas y ubicadas en una manzana con límites definidos.",El universo de la ECSC está compuesto por los hogares particulares y la población civil no institucional residente habitual en las cabeceras municipales de los dominios de la encuesta.,NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],"Households, individuals and communities.",NA,NA,,
+Sample survey data [ssd],--,"student, teacher, clusters of schools",All elementary and primary schools in the province of WHP.,Yes,education data,EMIS
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Rumah tangga dan individu,Pelaksanaan Susenas Triwulan IV 2013 mencakup 75.000 rumah tangga sampel yang tersebar di seluruh provinsi dan 497 Kab/Kota di Indonesia.  Populasi dibedakan menurut desa/kota.,Yes,household health,Household health survey
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Unit analisis terkecil yang digunakan pada kegiatan ini adalah : rumah tangga,"1. Responden yang dicakup pada kegiatan ini adalah anggota rumah tangga 
+
+2. Dibedakan menurut desa/kota",NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Jenis barang dan jasa,NA,No,irrelevant topic,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],secara ringkas unit analisis terkecil yang digunakan pada kegiatan ini adalah rumah tangga,NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households and Individuals.,NA,NA,,
+Sample survey data [ssd],NA,"Households, properties/parcels, individuals",1904 households in 40 clusters at the baseline in Maseru,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],NA,The survey covered all household members over 16 years old. Persons living in collective households and in institutions are generally excluded from the target population.,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],NA,The reference population of EU-SILC is all private households and their current members residing in the territory of the Member States (MS) at the time of data collection. Persons living in collective households and in institutions are generally excluded from the target population.,Yes,Household income/expenditure survey,Household income/expenditure survey
+Sample survey data [ssd],NA,"- Ménage
+- Femmes âgées de 15-49 ans",NA,Yes,Household Health,Gender-based violence survey
+Sample survey data [ssd],NA,"- Community-based childcare centers (CBCC) and their committee chairs/caregivers 
+- 4-5-year-old children attending the CBCC
+- Mothers/guardians of the 4-5 year old children attending the CBCC",NA,Yes,household health,Household health survey
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],La Unidad de Análisis de la Encuesta describe: Individuos y Hogares.,"La encuesta está dirigida a la población de 18 años cumplidos o más, que reside permanentemente en viviendas particulares dentro del territorio nacional.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],"La encuesta está diseñada para recoger información de las siguientes unidades de análisis:
+
+-  Vivienda
+
+-  Hogar principal
+
+-  Población de 18 años y más","La encuesta está dirigida a la población de 18 años cumplidos o más, en ciudades urbanas de 100,000 habitantes y más residentes en viviendas particulares dentro del territorio nacional.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],"Está constituida por la población de 18 años de edad y más, en donde se selecciona a la persona que cumpla años en fecha más cercana al día de la entrevista.","La población objeto de estudio son las personas de 18 años de edad y más, que residan permanentemente en las viviendas particulares ubicadas en el territorio nacional, en la fecha del levantamiento.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],"- Households,
+- Individuals","- Women age 15-49 living in a household
+- Men age 15-54 living in a household
+- Children under 5 living in a household
+- Children age 5-14 living in a household",Yes,Other household survey,Other household survey
+Sample survey data [ssd],NA,"Banking - Individuals applying for a mortgage or loan using property as collateral at banks
+
+Back office - Application to process property-related transaction at GASR","The Banking survey covered Loan Applicants at banks, men and women aged above 18. 
+
+The Back office time tracking survey covered people who engaged in land-based transactions at General Authority of State Registry (GASR).
+
+The informational interview covered qualitative interviews with GASR workers - Registry Officers of three district GASR offices (Chingeltei, Bayanzurkh, and Songinokhairkhan).",No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],"The Annual Household survey have the following unit of analysis: income, expenditure, consumption,employment, unemployment,and educational status of individual and households.","The survey covered all de jure household members (usual residents), all individual aged 5 years and above.",Yes,Household income/expenditure survey,Household income/expenditure survey
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,NA,NA,,
+Sample survey data [ssd],NA,Health facilities and healthcare providers,All health facilities providing primary-level care in these twelve states.,No,irrelevant topic,
+Sample survey data [ssd],NA,"Schools, teachers, students.",All primary schools.,No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households and Individuals,"The universe of this survey consists of all urban and rural areas of all four provinces, AJK and Gilgit Baltistan. FATA and Military restricted areas have been excluded from the scope of the survey.",NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],"La encuesta tiene las siguientes unidades de análisis: Hogares e Individuos
+
+La unidad de investigación es el hogar que está constituido por:
+
+-  Los integrantes del hogar familiar.
+
+-  Los trabajadores del hogar con cama adentro, reciban o no pago por sus servicios.
+
+-  Los integrantes de una pensión familiar que tienen como máximo 9 pensionistas.
+
+-  Las personas que no son miembros del hogar familiar, pero que estuvieron presentes en el hogar los últimos 30 días.
+
+No serán investigados:
+
+-  Los integrantes de una pensión familiar que tiene de 10 a más pensionistas.
+
+-  Los trabajadores del hogar con cama afuera.
+
+-  Las viviendas habitadas por más de 5 hogares.","La población bajo estudio estuvo constituida por el conjunto de viviendas particulares y sus ocupantes del área urbana y rural del país.
+
+Se excluyó del estudio a los miembros de las fuerzas armadas que viven en cuarteles, campamentos, barcos etc. Además, se excluyó del estudio a la población residente en viviendas tipo colectivas como hospitales, cuarteles, comisarías, hoteles, asilos, claustros  religiosos, centros de reclusión, etc.",NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],"Las Unidades de análisis describen: Viviendas particulares, Hogares y Todas las personas residentes habituales del hogar.","Comprende a todas aquellas viviendas y sus ocupantes residentes del area urbana y área rural del país.
+
+No forman parte del estudio aquellas personas que residan en viviendas colectivas (hoteles, asilos, hospitales, cárceles, etc.)",NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Individu par site d'habitation,L'ensemble des femmes transformatrices sur les 5 sites.,NA,,
+Sample survey data [ssd],Other Household Survey,Household,"The sample does not include nomadic households (which recent estimates suggest comprises 36% of the population), and omits households in areas affected by ongoing conflict",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],NA,"Population are households in eight districts in mainland Tanzania (Bagamoyo, Kinondoni, Kilosa, Iringa Urban, Mbozi, Kahama, Geita, Musoma Rural). Within each district, we visited ten SAVVY enumeration areas and randomly selected 45 households within each enumeration area, i.e. 450 households per district. The only exception was Kinondoni, due to its urban nature, there were only 6 SAVVY enumeration areas and we therefore only selected 270 households in Kindondoni. Participation in the study was at the household level.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Establishments,Formal establishment of both public and private sectors.,No,enterprise survey,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],#NAME?,"The survey covered all private, noninstitution households residing in all provinces, and also in both municipal and non-municipal areas (excluding households of foreign diplomats and other temporary residents).",NA,,
+Sample survey data [ssd],NA,Health facilities and healthcare providers,All health facilities providing primary-level care.,No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],"Schools, teachers and students",All primary schools,No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],"Some questions are at the level of individuals in household (e.g. livelihood activities, education levels); other questions are at the household level (e.g. assets). A sizeable share of the questionnaire is devoted to perceptions based questions, which are at the individual (respondent) level.","Randomly selected households in purposely sampled sites (sampling procedure varied slightly by country).
+
+Within a selected household, only one household members was interviewed about the household. Respondents were adults and we aimed to interview a fairly even share of  men/ women. In some countries this was achieved, but in other countries the share of male respondents is substantially higher (e.g. Pakistan).",Yes,Other household survey,Other household survey
+Sample survey data [ssd],NA,#NAME?,All primary schools.,No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,A purposive sample refers to selection of units based on personal judgement rather than randomization.,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],"La encuesta tiene las siguientes unidades de análisis: Hogares e Individuos.
+
+Quedan excluidos tanto las viviendas como los hogares colectivos (hoteles, conventos, cuarteles, hospitales). No obstante lo anterior, sí se incluyen las familias que formando un grupo independiente, residen en estos establecimientos, como puede ser el caso de los encargados, caseros, porteros, etc.","Residentes en viviendas particulares o colectivas que constituyen uno o más hogares particulares en todo el territorio nacional. Quedan excluidos los miembros de hogares colectivos o residentes particulares en hogares colectivos como hospitales, conventos, casas cuna, hogares de larga estadía (casas de salud), prisiones, residencias extraterritoriales (embajadas y consulados), cuarteles, hoteles y pensiones.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,Población residente en hogares particulares de Montevideo y de localidades de 5.000 y más habitantes del territorio nacional.,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,Adolescentes y jóvenes de entre 12 y 29 años,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],"Individuals 
+Families/households 
+Data are also gathered at Community and Mini-Community level.","Cross-national; Subnational
+Children aged 12 years old, children aged 19 years old, and the households of both sets, in Ethiopia, India (Andhra Pradesh), Peru and Vietnam. These children were originally interviewed in Rounds 1-3 of the study.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Individual and Household,All refugees in Meheba and Mayukwayukwa refugee settlements,No,limited sample,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Unit analisis terkecil yang digunakan pada kegiatan ini adalah rumah tangga,Responden yang dicakup pada kegaitan ini adalah anggota rumah tangga,NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],"Unit analisis terkecil yang digunakan pada kegiatan ini, adalah Kepala rumah tangga dan anggota rumah tangga.","1. Responden yang dicakup dalam Susenas 2013 adalah rumah tangga biasa, tidak termasuk rumah tangga khusus. Pelaksanaan Susenas 2013 mencakup 300.000 rumah tangga sampel yang tersebar di seluruh provinsi dan 497 Kab/Kota di Indonesia, di mana setiap triwulan akan didistribusikan sebanyak 75.000 rumah tangga.
+
+2. Dibedakan menurut desa/kota",Yes,Other household survey,Other household survey
+Sample survey data [ssd],NA,Individual,"The target population is the civilian, non-institutionalized population 15 years and above.",NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Individuals,Individuals of 15 years or older.,NA,,
+Sample survey data [ssd],Household Survey [hh],The units of anaylsis for the General Household Survey 2014 are individuals and households.,"The survey covers all de jure household members (usual residents) of households in the nine provinces of South Africa and residents in workers' hostels. The survey does not cover collective living quarters such as student hostels, old age homes, hospitals, prisons and military barracks.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households and individuals,The target population of the survey consists of individuals aged 15 years and older who live in South Africa and who are members of households living in dwellings that have been selected to take part in the second quarter Quarterly Labour Force Survey (QLFS).,Yes,LFS,LFS
+Sample survey data [ssd],"Sample Frame, Households [sf/hh]","- Household.
+- Persons 10 years and over .",All Palestinian households and individuals whose usual place of residence in Palestine with focus on persons aged 10 years and over in year 2014.,NA,,
+Sample survey data [ssd],"Sample Frame, Households [sf/hh]","- Household.
+- Person 10 years and over .",All Palestinian households and individuals whose usual place of residence is in Palestine with focus on persons aged 10 years and over in the year 2014.,NA,,
+Sample survey data [ssd],NA,"- children,
+- households,
+- preschools,
+- communities",NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],"Households
+Children 0-23 months
+Children 6-59 months
+Women 15-49 years","children 0-59 months
+women 15-49 years
+refugee households",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],"Tendo em conta que o objetivo do inquérito é estudar as despesas de consumo dos agregados familiares, as unidades básicas de análise serão os agregados familiares e todos os membros que o compõem.",NA,Yes,Household income/expenditure survey,Household income/expenditure survey
+Sample survey data [ssd],Case study,Individuals,The survey covered students and instructors in the single institution involved in the study.,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],"La unidad de análisis de este estudio describe: viviendas, hogares y personas.",El universo para la Encuesta Nacional de Calidad de Vida está conformado por la población civil no institucional residente en todo el territorio nacional.,Yes,Household income/expenditure survey,Household income/expenditure survey
+Sample survey data [ssd],Other Household Survey [hh/oth],"La unidad de análisis de este estudio describe: viviendas, hogares y personas.",El universo para la Encuesta de Consumo Cultural está conformado por la población civil no institucional residente en las cabeceras municipales del territorio nacional.,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],"En la Encuesta de Convivencia y Seguridad Ciudadana, las unidades de análisis son: Las viviendas, los hogares y todas las personas que los conforman exceptuando los menores de 15 años.",El universo de la ECSC está compuesto por los hogares particulares y la población civil no institucional residente habitual en las cabeceras municipales de los dominios de la encuesta.,NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Individuals,"All persons aged 15 and over, residing within private households, regardless of their nationality, citizenship, language or legal status, in participating countries.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Individuals,"For the baseline survey, the plan was to interview at least all the 200 participants in mentors treatment and control groups, as well as all the 1,600 eligible and ineligible mentees. By the time survey field work started, mid-April 2014, just at the closure of the application period and before the selection of eligible applications, the sample included 234 applicant mentors; adding recommended mentees, the total number of households to be surveyed had become close to 1,600 in total. In this data we have information on a total of 231 (potential) mentors and 1,363 (potential) mentees, including those who later dropped out of the program or were ineligible because of some criteria.",No,Impact evaluation,
+Sample survey data [ssd],NA,"- households,
+- health facilities,
+- villages",NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],"- Individuals, 
+- Households",Adults age 15 and older residing in households,NA,,
+Sample survey data [ssd],NA,Ecoles,NA,No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,NA,NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Randomly selected households  based on sampling procedure and members of the household,The survey used the interview method of data collection from a sample of randomly selected households and members of the household.,NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Unit analisis terkecil yang digunakan pada Susenas 2014 triwulan 1 adalah rumah tangga.,"1. Responden yang dicakup pada kegiatan ini adalah anggota rumah tangga biasa dan tidak termasuk rumah tangga khusus.
+
+2. Dibedakan menurut desa/kota",NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Secara ringkas unit analisis terkecil yang digunakanpada kegiatan ini adalah rumah tangga,"1. Susenas Modul Ketahanan Sosial 2014 dilaksanakan di seluruh kabupaten/kota dengan sampel sebanyak 75.000 rumah tangga. Sampel rumah tangga Modul Ketahanan Sosial adalah sampel Susenas Triwulan III Tahun 2014. 
+
+2. Survei ini dibedakan menurut desa\kota.",Yes,Other household survey,Other household survey
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],"Unit analisis terkecil yang digunakan pada kegiatan ini,rumah tangga.",Susenas September 2014 mencakup 75 000 rumah tangga sampel yang tersebar di seluruh wilayah geografis Indonesia. Hasil dari Susenas September 2014 dapat disajikan baik pada tingkat nasional maupun tingkat provinsi dan dibedakan menurut daerah perkotaan dan perdesaan.,Yes,Other household survey,Other household survey
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],"Unit analisis terkecil yang digunakan pada kegiatan ini, rumah tangga.","1. Responden yang dicakup pada kegiatan ini mencakup 75 000 rumah tangga sampel yang tersebar di seluruh wilayah geografis Indonesia
+
+2. Survei ini dibedakan menurut perdesaan dan perkotaan",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Respondents aged 16 and older.,NA,NA,,
+Sample survey data [ssd],--,"Student, teacher, school, school committee, village, Village Education Development Committee, Principals","Six provinces, three regions in country.",No,irrelevant topic,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],#NAME?,All households from the 2014 Sierra Leone Labor Force Survey which provided cell phone numbers.,Yes,LFS,LFS
+Sample survey data [ssd],Other Household Survey,"- individuals,
+- households,
+- villages",NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],"Household
+Individual","National Population, Both sexes,20 to 24 years.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],"Pregnant women, children 0-12 months old and respective households",Target population: pregnant women and children eligible to attend the national community based nutrition program,Yes,household health,Household health survey
+Sample survey data [ssd],Other Household Survey [hh/oth],"La encuesta está diseñada para recoger información de las siguientes unidades de análisis:
+
+- Vivienda
+
+- Hogar principal
+
+- Población de 18 años y más","La encuesta está dirigida a la población de 18 años cumplidos o más, en ciudades urbanas de 100,000 habitantes y más residentes en viviendas particulares dentro del territorio nacional.",NA,,
+Sample survey data [ssd],NA,"Schools, teachers, students.",All public primary schools,No,irrelevant topic,
+Sample survey data [ssd],NA,Health facilities and healthcare providers,All health facilities providing primary-level care,No,irrelevant topic,
+Sample survey data [ssd],NA,#NAME?,NA,No,irrelevant topic,
+Sample survey data [ssd],NA,#NAME?,"Five hundred primary healthcare facilities participating in the first phase of the program, and 500 more primary healthcare facilities participating in the second phase of the program; 1,285 midwives enrolled the first phase (during 2013/14) in an experiment to test the effectiveness of different forms of incentives (monetary; non-monetary; combined) on midwife attrition and 2,180 midwives enrolled in the second phase; ward development committees in the catchment areas of all primary healthcare facilities included in the study; women that had given birth in the three months preceding the survey in the catchment areas of all primary healthcare facilities included in the study.",No,Impact evaluation,
+Sample survey data [ssd],Other Household Survey [hh/oth],Individuals,Individual Small Scale Farmers,Yes,Agricultural survey,Agricultural survey
+Sample survey data [ssd],Other Household Survey [hh/oth],"La unidad de investigación está constituida por: 
+
+-  Los integrantes del hogar familiar
+
+-  El hogar","La población de estudio, son todas las viviendas particulares y sus ocupantes residentes en el área rural del país. 
+
+Se excluye a las personas que residen en las viviendas colectivas (hoteles, hospitales, asilos, conventos, centros de reclusión entre otros).",NA,,
+Sample survey data [ssd],NA,Stakeholders of the World Bank Group in Tajikistan,NA,No,Relevant only to World Bank,
+Sample survey data [ssd],NA,"Schools, teachers, students.",NA,No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,Formal establishment of both public and private sectors.,No,enterprise survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],Individuals/Households,NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],"The basic unit of analysis is at the household level. However, some datasets contain individual level data, whilst some data is collected at the community level.","The quantitative survey was implemented in 398 clusters across 48 sub-counties in eight programme districts (Apac, Kaberamaido, Katakwi, Kiboga, Kyenjojo, Moroto, Nakapiripirit and Nebbi). The two targeting mechanisms (SCG and VFSG) were randomly assigned evenly between the 48 sub-counties, with the exception of the Karamoja region in which only the SCG targeting mechanism was employed. The SAGE programme implemented the targeting process in evaluation areas where selected recipients received the transfer, but only after they were surveyed at baseline by the evaluation teams.
+
+The households in the evaluation areas that were selected for the programme are referred to as the treatment group. The comparison households that were selected were those households that fell just shy of the selection thresholds. For SCG the threshold is 65 years of age, dropping to 60 years of age in the Karamoja region. For VFSG eligibility depends on a household's labour capacity and dependency (LCD) score, with the threshold score for eligibility varying by region. Households who fell just below the relevant SCG/VFSG threshold are referred to as the comparison group.",No,Impact evaluation,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,"The survey covered all de jure household members (usual residents), who usually reside at the household and the dwelling in Zimbabwe.",NA,,
+Sample survey data [ssd],NA,#NAME?,NA,NA,,
+Sample survey data [ssd],Other Household Survey,"- Households
+- Individuals
+- Children aged 6-59 months old",NA,NA,,
+Sample survey data [ssd],Statistical Info. & Monitoring Prog. [hh/simpoc],#NAME?,The TIMSS target populations are fourth and eighth graders in each participating country.,No,irrelevant topic,
+Sample survey data [ssd],NA,"To better compare student performance internationally, PISA targets a specific age of students. PISA students are aged between 15 years 3 months and 16 years 2 months at the time of the assessment, and have completed at least 6 years of formal schooling. They can be enrolled in any type of institution, participate in full-time or part-time education, in academic or vocational programmes, and attend public or private schools or foreign schools within the country. Using this age across countries and over time allows PISA to compare consistently the knowledge and skills of individuals born in the same year who are still in school at age 15, despite the diversity of their education histories in and outside of school.","To provide valid estimates of student achievement, the sample of students had to be selected using established and professionally recognised principles of scientific sampling in a way that ensured representation of the full target population of 15-year-old students in the participating countries. 
+Furthermore, quality standards had to be maintained with respect to (i) the coverage of the PISA international target population, (ii) accuracy and precision, and (iii) the school and student response rates. 
+
+National Project Managers (NPMs) might have found it necessary to reduce their coverage of the target population by excluding, for instance, a small, remote geographical region due to inaccessibility, or a language group, possibly due to political, organisational or operational reasons, or special education needs students. Areas deemed to be part of a country (for the purpose of PISA), but which were not included for sampling, although this occurred infrequently, were designated as non-covered areas. Care was taken in this regard because, when such situations did occur, the national desired target population differed from the international desired target population. In an international survey in education, the types of exclusion must be defined consistently for all participating countries and the exclusion rates have to be limited. Indeed, if a significant proportion of students were excluded, this would mean that survey results would not be representative of the entire national school system. Thus, efforts were made to ensure that exclusions, if they were necessary, were minimised according to the PISA 2015 Technical Standards (see Appendix F of the Technical Report).",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households and individuals,The universe which the AMPS sample is drawn comprises virtually all South African adults aged 15 years or older throughout urban and rural areas of major metropolitans in South Africa.,No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],The units of analysis in the Domestic Tourism Survey are households and individuals,"The target population of the survey consists of all private households and residents in workers' hostels in the nine provinces of South Africa. The survey does not cover other collective living quarters such as students' hostels, old age homes, hospitals, prisons and military barracks.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],The units of anaylsis for the General Household Survey 2015 are individuals and households.,"The target population of the survey consists of all private households in all nine provinces of South Africa and residents in workers’ hostels. The survey does not cover other collective living quarters such as students’ hostels, old-age homes, hospitals, prisons and military barracks, and is therefore
+only representative of non-institutionalised and non-military persons or households in South Africa.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Household and individual,"The Gauteng City-Region Observatory's Quality of Life Survey covers all household residents of Gauteng and selected areas of the four neighbouring provinces of Free State, North West, Limpopo and Mpumalanga.",Yes,Household income/expenditure survey,Household income/expenditure survey
+Sample survey data [ssd],NA,Stakeholders in South Africa,"Opinion leaders from national and local governments, multilateral/bilateral agencies, media, academia, the private sector, and civil society.",No,opinion survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],"Households
+Individuals",Households with children between 3 and 18 months of age residing in the catchment area of participating community clinics at the time of baseline data collection.,Yes,household health,Household health survey
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,It consists of all the individuals in the age group 15-29 years old and living with their households normally in the State of Palestine  in 2015.,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Household,It consists of all Palestinian households who are staying normally in Palestine during 2015.,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],La unidad de análisis de la operación estadística Encuesta de Hogares 2015 son los miembros del hogar que residen en viviendas particulares.,La encuesta cubre a todos los miembros del hogar que residen en viviendas particulares.,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,"Todas las personas de 12 años y más, que tengan condiciones físicas y mentales aptas para responder la encuesta, que residan habitualmente en viviendas particulares ocupadas (elegibles) y que se encuentren en estas durante el período de levantamiento. Esta población involucra al área urbana de todas las regiones del país, y específicamente pertenece a las principales comunas que acumulan el 85% de la población total nacional. Esto equivale a 118 comunas.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],"La unidad de análisis de este estudio describe: viviendas, hogares y personas.",Está conformado por la población civil no institucional residente en las cabeceras municipales del territorio nacional.,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Individual,These datasets are the baseline data of the first cohort of the project. The data contain information on 880 individuals who received or not the program.,No,irrelevant topic,
+Sample survey data [ssd],NA,Stakeholders in Republic of Congo,"Opinion leaders from national and local governments, multilateral/bilateral agencies, media, academia, the private sector, and civil society.",No,opinion survey,
+Sample survey data [ssd],NA,Individuals,"To estimate the impacts of the school rehabilitation activity, our study uses a school-level, stratified random assignment design. Schools assigned to the treatment group will at minimum receive detailed rehabilitation design assessments, and-where rehabilitation is feasible-treatment schools will receive the program's full set of infrastructure rehabilitation services.",No,Impact evaluation,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],"Unit analisis terkecil yang digunakan pada kegiatan ini, adalah rumah tangga","Pendataan Susenas MSBP 2015 dilaksanakan bulan September 2015, mencakup 75.000 rumah tangga sampel dan tersebar di seluruh wilayah di Indonesia menghasilkan estimasi yang dapat disajikan pada tingkat nasional dan provinsi.
+
+Rumah tangga sampel Susenas adalah rumah tangga yang terdapat dalam blok sensus biasa, tidak termasuk yang tinggal dalam blok sensus khusus seperti kompleks militer dan sejenisnya serta rumah tangga khusus yang berada di blok sensus biasa.",Yes,Other household survey,Other household survey
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Households,"The March National Socio-Economic Survey 2015 covers 300,000 households of all the provinces in Indonesia.  
+Compared with the National Socio-Economic Survey 2014, provincial coverage increased by 1 (one). The National Socio-Economic Survey 2015 covers the North Kalimantan Province which is a fraction of East Kalimantan Province. As for the district / city coverage, the 2015 SUSENAS covers Penukal Abab Lematang Ilir Regency North and Musi Rawas (South Sumatra), West Coast (Lampung), Pangandaran (West Java), Malacca (East Nusa Tenggara), Hulu Mahakam (East Kalimantan), Sea Banggai and MorowaliNorth (Central Sulawesi), Konawe Islands and East Kolaka (Sulawesi Tenggara), Central Mamuju (West Sulawesi), Taliabu Island (Maluku), South Manokwari and Arfak Mountains (West Papua).",Yes,Other household survey,Other household survey
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],The unit of analysis used in this activity are household.,The National Socio-Economic Survey 2015 September (Module) only includes common households.,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Refugee household and individual,NA,No,limited sample,
+Sample survey data [ssd],NA,Stakeholders in Solomon Islands,"Opinion leaders from national and local governments, multilateral/bilateral agencies, media, academia, the private sector, and civil society.",No,opinion survey,
+Sample survey data [ssd],NA,Refugee household and individual,NA,No,limited sample,
+Sample survey data [ssd],Other Household Survey [hh/oth],Household and individual,"All refugee households residing in Kakuma refugee camp, Kenya.
+
+UNHCR PPG: 1KENB",No,UNHCR survey,
+Sample survey data [ssd],NA,"The units of analysis are establishments or workplaces - a single location at which one or more employees work. The larger legal entity may include multiple establishments. The firms on the list will have been randomly chosen, with probability proportional to the number of employees in the firm.","The universe of the study are non-government businesses registered with Kosovo Agency of Statistics (ASK) from 2015, and a complementary frame of Serb enterprises in Northern Kosovo which was obtained independently. Firms with at least five employees were selected from the following sectors: Manufacturing, Trade and Other Services.",No,enterprise survey,
+Sample survey data [ssd],NA,Stakeholders in Sri Lanka,"Opinion leaders from national and local governments, multilateral/bilateral agencies, media, academia, the private sector, and civil society.",No,opinion survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],Adolescent girls - caregivers,NA,NA,,
+Sample survey data [ssd],NA,Manufacturing Industries,The survey covers 259 industries in the manufacturing sector (based on the Malaysia Standard Industrial Classification (2008).,No,enterprise survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],"Integrantes de los hogares que habitan en las viviendas particulares localizadas en el territorio nacional, de 18 a 70 años, seleccionados para responder sobre los temas que se abordan a partir de la tercera sección del cuestionario de la encuesta.","La encuesta está dirigida a la población de 18 a 70 años de edad, que reside permanentemente en viviendas particulares dentro del territorio nacional.",NA,,
+Sample survey data [ssd],Other Household Survey,Households and individual household members,"The universe for the survey consists of smallholder households defined as households with the following criteria: 
+1) Household with up to 5 hectares OR farmers who have less than 50 heads of cattle, 100 goats/sheep/pigs, or 1,000 chickens; AND 
+2) Agriculture provides a meaningful contribution to the household livelihood, income, or consumption.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Household and individual,all refugee households living in the camp,No,limited sample,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,The universe for Household Integrated Income and Consumption Survey (HIICS) 2015-16 consists of all urban and rural areas of the four provinces of Pakistan excluding Federally Administered Tribal Areas (FATA) and military restricted areas. The population of excluded areas constitutes about 2% of the total population.,Yes,Household income/expenditure survey,Household income/expenditure survey
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],"La encuesta tiene las siguientes unidades de análisis: Hogares e Individuos
+
+La unidad de análisis está constituida por:
+
+-  Los integrantes del hogar familiar.
+
+-  Los trabajadores del hogar con cama adentro, reciban o no pago por sus servicios.
+
+-  Los integrantes de una pensión familiar que tienen como máximo 9 pensionistas.
+
+-  Las personas que no son miembros del hogar familiar, pero que estuvieron presentes en el hogar los últimos 30 días.
+
+No serán investigados:
+
+-  Los integrantes de una pensión familiar que tiene de 10 a más pensionistas.
+
+-  Los trabajadores del hogar con cama afuera.","La población de estudio está definida como el conjunto de todas las viviendas particulares y sus ocupantes residentes en el área urbana y rural del país.
+
+Por no ser parte de la población de estudio, se excluyó a los miembros de las fuerzas armadas que viven en cuarteles, campamentos, barcos, y otros. También se excluye a las personas que residen en viviendas colectivas (hoteles, hospitales, asilos y claustros religiosos, cárceles, etc.).",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],"- Mujeres de 18 años y más de edad, (Violencia familiar, económica y sexual)
+
+- Varones y mujeres de 18 años y más de edad (Tolerancia social a la violencia familiar)
+
+- Niñas y niños de 9 a 11 años de edad, (Violencia psicológica y física en el entorno familiar y escolar)
+
+- Adolescentes de 12 a 17 años de edad (Violencia psicológica, física y sexual en el entorno familiar y escolar)","- Viviendas particulares y sus ocupantes residentes del área urbana y rural del país. Se excluye a la población que reside en viviendas colectivas. 
+
+El marco básico para la selección de la muestra de la encuesta está constituido por la información estadística y documentos cartográficos del Censo de Población y Vivienda del año 2007 con actualización del Sistema de      Focalización de Hogares 2012- 2013.
+
+- Instituciones educativas y sus alumnos de primaria de 9 a 11 años y alumnos de secundaria de 12 a 17 años de edad del área urbana y rural. El marco básico para la selección de la muestra de la encuesta está constituido del Padrón de Instituciones Educativas proporcionados por la unidad de Estadística Educativa del Ministerio de Educación.",Yes,household health,Household health survey
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],"En la Encuesta Nacional de Programas Estratégicos (ENAPRES), las unidades de investigación estadística son las siguientes: 
+
+-  Vivienda particular
+
+-  Hogar
+
+-  Todas las personas residentes habituales del hogar
+
+No serán investigados: 
+
+-   Los integrantes de una pensión que tienen de 10 a más pensionistas 
+
+-   Los trabajadores del hogar con cama afuera","Comprende las viviendas particulares y sus ocupantes residentes habituales del área urbana y área rural del país. No forman parte del estudio las personas que residen en viviendas colectivas (hospitales, hoteles, asilos, claustros religiosos, cuarteles, cárceles, etc.).",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],The units of analysis are the individual respondents and households. A household roster is undertaken at the start of the survey and the individual respondent is randomly selected among all household members aged 15 to 64 included. The random selection process was designed by the STEP team and compliance with the procedure is carefully monitored during fieldwork.,"The target population is defined as all non-institutionalized persons aged 15 to 64 (inclusive) living in private dwellings in the urban areas of the country at the time of the data collection. This includes all residents, except foreign diplomats and non-nationals working for international organizations.",Yes,STEP Surveys have sex-disaggregated data,LFS
+Sample survey data [ssd],Other Household Survey [hh/oth],Household,"All study participants were 4Ps beneficiaries, who are required to attend Family Development Sessions (FDS) that included a module on sanitation promotion.",Yes,Household health,Household health survey
+Sample survey data [ssd],NA,Stakeholders of the World Bank Group in São Tomé and Príncipe,NA,No,Relevant only to World Bank,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,NA,NA,,
+Sample survey data [ssd],NA,"The units of analysis are establishments or workplaces - a single location at which one or more employees work. The larger legal entity may include multiple establishments. The firms on the list will have been randomly chosen, with probability proportional to the number of employees in the firm.","The universe of the study are non-government businesses registered with Serbian Business Register Agency from 2013, with at least five employees from the following sectors: Manufacturing, Trade and Other Services.",No,enterprise survey,
+Sample survey data [ssd],NA,Households,"The target populations for this profiling exercise were IDPs from Somaliland, IDPs from South-Central Somalia, economic migrants, host communities, and refugees and asylum-seekers. IDPs from Somaliland (also referred as “SL IDPs”) were defined as persons originally from Somaliland, who had been displaced to Hargeisa from another location in Somaliland, mainly as result of conflict, insecurity or disaster (floods and drought). IDPs from South–Central Somalia (also referred as “SC IDPs”) were defined as persons originating from Somalia (South-Central) who were displaced and found refuge in Somaliland mainly as a result of armed conflict, insecurity or disaster. During the profiling exercise, a second group of IDPs from South-Central Somalia was identified: out-of- settlement South-Central IDPs (also referred as “OoS SC IDPs”), who lived outside of the targeted settlements.",No,irrelevant topic,
+Sample survey data [ssd],NA,Stakeholders in Sudan,"Opinion leaders from national and local governments, multilateral/bilateral agencies, media, academia, the private sector, and civil society.",No,opinion survey,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],#NAME?,"The survey covered all private, noninstitution households residing in all provinces, and also in both municipal and non-municipal areas including the private households living in the institutional place for example private households living in hospitals. The survey coverage excluded households of foreign diplomats and other temporary residents.",NA,,
+Sample survey data [ssd],NA,Stakeholders in Tunisia,"Opinion leaders from national and local governments, multilateral/bilateral agencies, media, academia, the private sector, and civil society.",No,opinion survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],"La encuesta tiene las siguientes unidades de análisis: Hogares e Individuos.
+
+Quedan excluidos tanto las viviendas como los hogares colectivos (hoteles, conventos, cuarteles, hospitales). No obstante lo anterior, sí se incluyen las familias que formando un grupo independiente, residen en estos establecimientos, como puede ser el caso de los encargados, caseros, porteros, etc","Residentes en viviendas particulares o colectivas que constituyen uno o más hogares particulares en todo el territorio nacional. Quedan excluidos los miembros de hogares colectivos o residentes particulares en hogares colectivos como hospitales, conventos, casas cuna, hogares de larga estadía (casas de salud), prisiones, residencias extraterritoriales (embajadas y consulados), cuarteles, hoteles y pensiones.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,"Mujeres y varones uruguayos entre 15 y 44 años de edad, residentes en hogares particulares en localidades urbanas de todo el territorio nacional.",NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey,"1. Module 1- Facility Questionnaire: facilities
+2. Module 2- Health worker interviews: doctors (district hospitals) or health staff (commune health stations)
+3. Module 3- Clinical vignettes: doctors or assistant doctors
+4. Module 4- Clinical observations: interactions of doctors and patients
+5. Module 5- Exit patient interviews: inpatients/outpatients","6 provinces: Dien Bien, Hanoi, Binh Dinh, Dak Lak, Dong Nai, Dong Thap",No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey,KNOMAD-ILO Migration Costs Surveys (KNOMAD-ILO MCS) have the following unit of analysis: individuals,"Surveys of migrants from the following corridors are included:
+
+• Ethiopia to Saudi Arabia
+• India to Qatar
+• Nepal to Qatar
+• Pakistan to Saudi Arabia and United Arab Emirates
+• Philippines to Qatar
+• Vietnam to Malaysia
+• Guatemala, Honduras and El-Salvador to Mexico",No,irrelevant topic,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],#NAME?,NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Individuals,The survey covered all usual household residents age 16 and above in Zambia.,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Household and individual,"All refugee households residing in Gozamir and Belom refugee camps, Chad. UNHCR PPG: 1TCDA, 1TCDB",No,UNHCR survey,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],"Unit analisis terkecil yang digunakan pada kegiatan ini adalah rumah tangga biasa, tidak termasuk rumah tangga khusus.","1. Total jumlah rumah tangga sampel Susenas 2015 adalah 300.000 rumah tangga untuk estimasi kabupaten/kota pada bulan Maret dan 75.000 rumah tangga untuk estimasi provinsi pada bulan September.
+
+2. Tidak dibedakan menurut desa/kota",Yes,Other household survey,
+Sample survey data [ssd],NA,Stakeholders in Zambia,"Opinion leaders from national and local governments, multilateral/bilateral agencies, media, academia, the private sector, and civil society.",No,opinion survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households and individuals,Refugees aged 16 years old or over at the time of interview who arrived in the U.S. during FY 2011-2015,No,irrelevant topic,
+Sample survey data [ssd],Household Survey [hh],Households and individuals,"The survey covers all de jure household members (usual residents) of households in the nine provinces of South Africa, and residents in workers' hostels. The survey does not cover collective living quarters such as student hostels, old age homes, hospitals, prisons, and military barracks.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households and individuals,The survey enumerated residents in the 10 communities aged 18+,NA,,
+Sample survey data [ssd],NA,Households and individuals,"The target population of the survey consists of all private households in all nine provinces of South Africa and residents in workers' hostels. The survey does not cover other collective living quarters such as students' hostels, old-age homes, hospitals, prisons and military barracks, and is therefore only representative of non-institutionalized and non-military persons or households in South Africa.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Les unités d'analyse sont les Ménages ordinaires et les communautés.,L'enquête porte sur les ménages ordinaires y compris les communautés.,NA,,
+Sample survey data [ssd],Other Household Survey,Households and individual household members,"The universe for the survey consists of smallholder households defined as households with the following criteria: 1) Household with up to 5 hectares OR farmers who have less than 50 heads of cattle, 100 goats/sheep/pigs, or 1,000 chickens; AND 2) Agriculture provides a meaningful contribution to the household livelihood, income, or consumption.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Slum household,NA,No,limited sample,
+Sample survey data [ssd],Other Household Survey [hh/oth],"La unidad de análisis es la mujer de 15 años o más, y que reside habitualmente la vivienda particular dentro del territorio nacional.","La investigación está dirigida al conjunto de hogares establecidos en viviendas particulares ocupadas de los 9 departamentos de Bolivia, área urbana y rural, donde residen mujeres de 15 años o más de edad.
+
+Se excluye de la investigación a la población residente en viviendas colectivas tales como hospitales, hoteles, cárceles, recintos militares, hogares de ancianos, unidades educativas, etc.",Yes,Other household survey,Other household survey
+Sample survey data [ssd],NA,"The units of analysis are establishments or workplaces - a single location at which one or more employees work. The larger legal entity may include multiple establishments. The firms on the list will have been randomly chosen, with probability proportional to the number of employees in the firm.","The universe of the study are non-government businesses registered with TEC, a private firm, from 2014. Firms with at least five employees were selected from the following sectors: Manufacturing, Trade and Other Services.",No,enterprise survey,
+Sample survey data [ssd],NA,Stakeholders of the World Bank Group in Burkina Faso.,"Opinion leaders from national and local governments, multilateral/bilateral agencies, media, academia, the private sector, and civil society in Burkina Faso",No,opinion survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],Household and individual,"All Malian refugee households residing in Burkina Faso. 
+
+UNHCR PPG: 1BFAA, 1BFAB",No,UNHCR survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],"The ECCD describes children and caregivers, households and villages.",Households with at least one child of age 2 - 4 at baseline.,No,Impact evaluation,
+Sample survey data [ssd],NA,Stakeholders of the World Bank Group in Cameroon.,"Opinion leaders from national and local governments, multilateral/bilateral agencies, media, academia, the private sector, and civil society in Cameroon.",No,opinion survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],Household and individual,"All Central African refugee households residing in the 5 subsistence zones under study within Cameroon's Adamanou, Eastern and Northern regions.
+
+UNHCR PPG: 1CMRB",No,UNHCR survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,Refugees living outside of camps,No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,All refugees in Minawao refugee camp,No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],Individual and Household,Refugees living outside of camps,No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],Individual and Household,All refugees in Minawao refugee camp,No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],Household and individual,"All Central African refugee households residing in the 5 subsistence zones under study within Cameroon's Adamanou, Eastern and Northern regions.",No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,Las personas de 15 o más años que componen los hogares que habitan las viviendas particulares ocupadas.,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],"En la Encuesta de Convivencia y Seguridad Ciudadana, las unidades de análisis son: Las viviendas, los hogares y todas las personas mayores de 14 años.",El universo de la ECSC está compuesto por los hogares particulares y la población civil no institucional residente habitual en las cabeceras municipales de los dominios de la encuesta.,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Firm,NA,No,enterprise survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],Household and individual.,NA,NA,,
+Sample survey data [ssd],NA,Individual & Organization,NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Poor rural households,NA,NA,,
+Sample survey data [ssd],NA,Individuals (Public employees) & Firms (Vendors),"Public Employees Survey
+The study population consists of public employees of the government of Honduras at the technical level and above working at the three target institutions: the Secretariats of Health (SESAL), of Education (SEDUC), and of Infrastructure and Public Works (INSEP)
+
+Vendor Survey
+Vendors registered to sell goods and services to the government through the Regulatory Office of Contracting and Acquisitions (ONCAE)",No,irrelevant topic,
+Sample survey data [ssd],NA,Administrative units (Procurement Service Units or PSUs),The survey covered employees of PSUs and corresponding SKPDs (spending units) that are involved with the procurement process. Employees that have other roles at these institutions were not interviewed. Respondents are aged between 18-59 years and are 80% male.,No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey,"Individuals, households",Low-income Jordanians and Syrian refugees,No,irrelevant topic,
+Sample survey data [ssd],NA,"The units of analysis are establishments or workplaces - a single location at which one or more employees work. The larger legal entity may include multiple establishments. The firms on the list will have been randomly chosen, with probability proportional to the number of employees in the firm.","The universe of the study are non-government businesses registered with the Kenya National Bureau of Statistics (KNBS), from 2016. Firms with at least five employees were selected from the following sectors: Manufacturing, Trade and Other Services.",No,enterprise survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],Individual,Citizens of Kenya who are 18 years or older,NA,,
+Sample survey data [ssd],NA,Stakeholders of the World Bank Group in Kosovo,NA,No,Relevant only to World Bank,
+Sample survey data [ssd],NA,Stakeholders of the World Bank Group in Malawi.,"Opinion leaders from national and local governments, multilateral/bilateral agencies, media, academia, the private sector, and civil society.",No,opinion survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],"La encuesta está diseñada para recoger información de las siguientes unidades de análisis:
+
+-  Vivienda
+
+-  Hogar principal
+
+-  Población de 18 años y más.","La encuesta está dirigida a la población de 18 años cumplidos o más, en ciudades urbanas de 100,000 habitantes y más residentes en viviendas particulares dentro del territorio nacional.",NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Household and household members,"Households (defined as a group of persons who usually live and eat together)
+- Household members (defined as members of the household who usually live in the household, which may include people who did not sleep in the household the previous night, but does not include visitors who slept in the household the previous night but do not usually live in the household)",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],"Households, individuals and plots of land in Angonia, Tsangano, Chiuta and Macanga districts in the Province of Tete of Mozambique.",NA,NA,,
+Sample survey data [ssd],NA,"- households
+- children between 36 and 59 months old
+- children aged between 0 and 35 months old","Households located in eligible communities with at least a child between 36 and 59 months old and households located in eligible communities with at least a child between 0 and 35 months old and no other children between 36 and 59 months. 
+
+Eligible communities are identified to meet the criteria for implementation of the program:
+- The community is located in a rural area;
+- The community already has a primary school;
+- The community has more than 30 children in the age range of 3-5 years old;
+- There was no other education program for children 3-5 years old in the community in the past 5 years.",NA,,
+Sample survey data [ssd],NA,#NAME?,"500 primary health care facilities originally selected for Phase 1 of the SURE-P MCH project; 1,285 midwives enrolled (in 2013/14) in an experiment to test the effectiveness of different form of incentives (monetary; non-monetary; combined) on midwife attrition.",Yes,Household health,Household health survey
+Sample survey data [ssd],NA,Stakeholders of the World Bank Group in Nigeria.,NA,No,Relevant only to World Bank,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,"La investigación está dirigida a la población de 14 años y más de edad que reside habitualmente en viviendas particulares, excluyendo a la población que reside en viviendas colectivas y en comunidades indígenas.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],"household, individual","Household - all sample households
+Individual - persons aged 15 years and older from different educational and cultural backgrounds",NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Ménages et individus.,L'enquête couvre l'ensemble des ménages du territoire national.,NA,,
+Sample survey data [ssd],NA,"Individuals, households, and schools.","Primary school and Daara teachers, students, and caretakers of students.",No,irrelevant topic,
+Sample survey data [ssd],NA,#NAME?,NA,NA,,
+Sample survey data [ssd],Other Household Survey,Households and individual household members,"The universe for the survey consists of smallholder households defined as households with the following criteria: 
+1) Household with up to 5 hectares OR farmers who have less than 50 heads of cattle, 100 goats/sheep/pigs, or 1,000 chickens; AND
+2) Agriculture provides a meaningful contribution to the household livelihood, income, or consumption.",NA,,
+Sample survey data [ssd],NA,#NAME?,NA,No,irrelevant topic,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],#NAME?,"The survey was based on the household population and excluded the population in institutions, refugee camps, forest reserves, police and army barracks, and other special areas.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],"Household 
+Individual
+Household based enterprises",The survey targeted households with enterprise and non-household enterprise identified within the enumeration areas. These were  identified during a listing operation undertaken prior to the start of the survey.,NA,,
+Sample survey data [ssd],NA,"The Uganda Private School Impact Evaluation describes: Individuals (Students, Teachers and Head Teachers)","All public secondary schools with more than 80 students per class in Uganda.  From this list the following schools were dropped: 
+
+(i) schools already adopting Double Shift; 
+
+(ii) boarding schools; 
+
+(iii) hard to reach schools; and 
+
+(iv) schools in Karamoja where security issues were present.",No,Impact evaluation,
+Sample survey data [ssd],Other Household Survey [hh/oth],Individual,"Citizens age 18 years or older, excluding institutions",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Individuals,Four of Rhino Camp’s 14 villages: two unlit (Katiku and Siripi) and two lit (Ocea and Odobu).,No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,Households in Karamoja region.,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,Residentes en viviendas particulares o colectivas que constituyen uno o más hogares particulares en todo el territorio nacional.,NA,,
+Sample survey data [ssd],Other Household Survey,KNOMAD-ILO Migration Costs Surveys (KNOMAD-ILO MCS) have the following unit of analysis: individuals,"Surveys of migrants from the following corridors are included:
+• India-Saudi Arabia
+• Philippines to Saudi Arabia
+• Nepal to Malaysia, Qatar and Saudi Arabia
+• Kyrgyzstan, Tajikistan, Uzbekistan to Russia
+• West African countries to Italy",No,irrelevant topic,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],"The unit of analysis describes:
+
+- Schools
+
+-  Students
+
+-  Parents
+
+-  Teachers","All students enrolled in the grade that represents four years of schooling counting from the first year of ISCED Level 1, providing the mean age at the time of testing is at least 9.5 years.
+
+All students enrolled in the target grade, regardless of their age, belong to the international target population and should be eligible to participate in PIRLS. Because students are sampled in two stages, first by randomly selecting a school and then randomly selecting a class from within the school, it is necessary to identify all schools in which eligible students are enrolled. Essentially, eligible schools for PIRLS are those that have any students enrolled in the target grade, regardless of type of school.",No,irrelevant topic,
+Sample survey data [ssd],NA,Stakeholders of the World Bank Group in Botswana,"Opinion leaders from national and local governments, multilateral/bilateral agencies, media, academia, the private sector, and civil society in Botswana.",No,opinion survey,
+Sample survey data [ssd],NA,Stakeholders of the World Bank Group in Comoros.,"Opinion leaders from national and local governments, multilateral/bilateral agencies, media, academia, the private sector, and civil society.",No,opinion survey,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],"Unit analisis terkecil yang digunakan pada kegiatan ini,adalah rumah tangga",Survei Sosial Ekonomi Nasional  2016 Maret (Modul) mencakup 300.000 rumah tangga sampel yang tersebar di 34 provinsi dan 511 kabupaten/kota di Indonesia,Yes,Household income/expenditure survey,Household income/expenditure survey
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],"Unit analisis terkecil yang digunakan pada kegiatan ini, adalah rumah tangga.",Pelaksanaan Susenas Maret 2016 mencakup 300.000 rumah tangga sampel yang tersebar di 34 provinsi dan 511 kabupaten/kota di Indonesia.,Yes,Household income/expenditure survey,Household income/expenditure survey
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Basic units of analyisis were  individuals and  households.,"The target population eligible for FinScope survey comprises individuals aged 16 years  and above, resident in  selected  households",No,enterprise survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households and individuals,"The population of interest – the study population – for the 2017 ASR is defined as refugees entering the U.S. between FY 2012 and FY 2016, inclusive, who are at ages 16 and over at the time of the 2017 ASR interview3. Because the interviews were conducted in early 2018, the population includes a small number of refugees younger than 16 at the time of arrival to the U.S.
+
+While this covers five distinct fiscal years of refugee entrants, there is special policy/analytic interest in collapsing years into three domains as follows:
+
+• Cohort 1 – Refugees entering FY 2012 and FY 2013,
+
+• Cohort 2 – Refugees entering FY 2014 and FY 2015, and
+
+• Cohort 3 – Refugees entering FY 2016",No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],Household and individual,"All IDPs and returnees living in the five most populated IDP/returnee settlements of Afghanistan's Herat Province, namely Shagofan, Jebrael, Maslakh, Now Abad and Kahdistan.
+
+UNHCR PPG: 3AFGA, 4AFGA",No,UNHCR survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],Household and individual,"All Pakistani refugees living in Afghanistan's Khost and Paktika provinces.
+
+UNHCR PPG: -",No,UNHCR survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households and individuals,"The survey covers all de jure household members (usual residents) of households in the nine provinces of South Africa, and residents in workers' hostels. The survey does not cover collective living quarters such as student hostels, old age homes, hospitals, prisons, and military barracks.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households and individuals,The data is nationally representative on a household and individual level for individuals 16 years of age or older.,NA,,
+Sample survey data [ssd],NA,Households and individuals,"Victims of crime 2017-2018 statistics are population estimates of the level of crime in South Africa. The target population of the survey consists of all private households in all nine provinces of South Africa, as well as residents in workers' hostels. The survey does not cover other collective living quarters such as students' hostels, old-age homes, hospitals, prisons and military barracks, and is therefore only representative of non-institutionalized and non-military persons or households in South Africa.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,"The survey covered households in Site C, Khayelitsha",No,limited sample,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households and individuals,"The target population of the survey consists of all private households and residents in workers' hostels in the nine provinces of South Africa. The survey does not cover other collective living quarters such as students' hostels, old age homes, hospitals, prisons and military barracks.",NA,,
+Sample survey data [ssd],NA,"The units of analysis are establishments or workplaces - a single location at which one or more employees work. The larger legal entity may include multiple establishments. The firms on the list will have been randomly chosen, with probability proportional to the number of employees in the firm.","The universe of the study are non-government businesses registered with the Institute of Statistics in Albania (INSTAT) from 2016. Firms were selected from all economic sectors, with oversampling from the following sectors: Tourism, Food Processing, and ICT. The sample also included firms with 1-4 employees.",No,enterprise survey,
+Sample survey data [ssd],NA,Individuals and Households,NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],"Household, Individual",NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households and individuals (members of sample households),"Selected districts in the 6 regions.
+
+Random sample of 15 households in a randomly selected village from the catchment area of each health facility in intervention districts, as well as from the catchment area of a random sample of health facilities in the control districts for an intervention-control facility ratio of approximately 3:1. Household eligibility criterion: At least one currently pregnant women and/or at least one woman who has ended a pregnancy in the two years preceding the survey.",Yes,Household health,Household health survey
+Sample survey data [ssd],Other Household Survey [hh/oth],Individual,Citizens who are 18 years and older.,NA,,
+Sample survey data [ssd],NA,"Individuals and households.
+Cows.","Quantitative: Di perimeter beneficiaries, Di lottery applicants, Farmer training beneficiaries.
+
+Qualitative: Former and current staff from MCA/APD, staff from Regional directorate of Ministry of Agriculture, staff from Ministry of Water resources, staff from other organizations involved as well as community members.",NA,,
+Sample survey data [ssd],NA,Households,NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Household and individual,"All refugee households residing in Chad. UNHCR PPG: 1TCDA, 1TCDB, 1TCDD",No,UNHCR survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,All rural households in Guera region of Chad.,No,limited sample,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,"Hogares y las personas de 15 años y más que los constituyen, que residen en las viviendas particulares elegidas en las comunas pertenecientes al estudio; representados por un informante seleccionado por el método de Kish, siendo este último, la unidad de información.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,El universo para la Encuesta Nacional de Calidad de Vida está conformado por la población civil no institucional residente en todo el territorio nacional.,Yes,Household income/expenditure survey,Household income/expenditure survey
+Sample survey data [ssd],Other Household Survey [hh/oth],"Corresponde a las viviendas, hogares y personas de 18 años y más.",El universo para la Encuesta de Cultura Política está conformado por la población civil no institucional residente en las cabeceras municipales del territorio nacional.,No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,Está conformado por la población civil no institucional residente en todo el territorio nacional.,NA,,
+Sample survey data [ssd],NA,"KAP survey focusing on water, hygiene and sanitation practices and issues with the following unit of analysis: household",NA,Yes,Household health,Household health survey
+Sample survey data [ssd],Other Household Survey,Household and individual.,NA,NA,,
+Sample survey data [ssd],NA,"Individuals
+Households","The survey covered all de jure household members (usual residents), all women aged 15-49 years resident in the household, and all children aged 0-4 years (under age 5) resident in the household.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Individual,"The sample universe for Afrobarometer surveys includes all citizens of voting age within the country. In other words, we exclude anyone who is not a citizen and anyone who has not attained this age (usually 18 years) on the day of the survey. Also excluded are areas determined to be either inaccessible or not relevant to the study, such as those experiencing armed conflict or natural disasters, as well as national parks and game reserves. As a matter of practice, we have also excluded people living in institutionalized settings, such as students in dormitories and persons in prisons or nursing homes.",No,opinion survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households and individuals,The survey targeted adults aged 18 and above in sampled households in The Gambia.,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,NA,NA,,
+Sample survey data [ssd],--,Stakeholders of the World Bank Group in Papua New Guinea.,"Opinion leaders from national and local governments, multilateral/bilateral agencies, media, academia, the private sector, and civil society.",No,opinion survey,
+Sample survey data [ssd],NA,"individuals, other (farming associations), community, government","In Phase1, the study population included farmers, buying station (collectors) and input suppliers (i.e. nurseries), farmer groups and associations, MCC/MCA-I project staff, grantee staff, field staff, goverment representatives, project management and private sector partners in Indonesia. 
+
+In Phase 2 the study population included the same beneficiary groups but since the grants had concluded it did not include grantee field staff or MCA-I.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],"Households
+Children 0-23 months 
+Children 6-59 months 
+Women 15-49 years",Children 0-59 months Women 15-49 years Refugee households,Yes,Household health,Household health survey
+Sample survey data [ssd],Other Household Survey [hh/oth],"Children 0-23 months
+Children 6-59 months
+Women 15-49 years
+Households",Children 0-59 months Women 15-49 years Refugee households,Yes,Household health,Household health survey
+Sample survey data [ssd],NA,"Households
+Individual","Survey population – all residents of Lithuania aged 16–74.
+Statistical unit – individual aged 16–74. Individuals residing in institutional households (care homes, imprisonment institutions, monasteries, convents, seminaries, etc.) are not surveyed.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Household and individual,"All refugee and asylum seeker households residing in Dzaleka and Luwani refugee camps, Malawi.
+
+UNHCR PPG: 1MWIA, 1MWIB",No,UNHCR survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,The survey covers the beneficiaries of the Cash+ project and the non-beneficiaries as part of a control group.,No,Impact evaluation,
+Sample survey data [ssd],Other Household Survey [hh/oth],Individual,Citizens of the Republic of Mauritius who are 18 years and older,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Household and only woman members,NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households as well as individuals within households.,"Only households that are beneficiaries of the national cash transfer, located in communes and villages mentioned above",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],"Individuals
+Households
+Communities",The survey covered all household members. The questionnaire was administered to only one respondent per household - most often a male household head.,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Individual,Citizens of Nigeria who are 18 years and older,NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],"La unidad de investigación estadística es la vivienda particular, el hogar y todas las personas residentes habituales del hogar.
+
+No forman parte del estudio las viviendas colectivas (hospitales, hoteles, asilos, claustros religiosos, cuarteles, cárceles, etc.).","Comprende las viviendas particulares y sus ocupantes residentes habituales del área urbana y área rural del país. 
+
+No forman parte del estudio las personas que residen en viviendas colectivas (hospitales, hoteles, asilos, claustros religiosos, cuarteles, cárceles, etc.).",NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],"La unidad de análisis está constituida por:
+
+1) Los integrantes del hogar familiar,
+
+2) Los trabajadores del hogar con cama adentro, reciban o no pago por sus servicios,
+
+3) Los integrantes de una pensión familiar que tienen como máximo 9 pensionistas, y
+
+4) Las personas que no son miembros del hogar familiar, pero que estuvieron presentes en el hogar los últimos 30 días.
+
+No serán investigados:
+
+1) Los integrantes de una pensión familiar que tiene de 10 a más pensionistas, y
+
+2) Los trabajadores del hogar con cama afuera.","La población de estudio está definida como el conjunto de todas las viviendas particulares y sus ocupantes residentes en el área urbana y rural del país.
+
+Por no ser parte de la población de estudio, se excluyó a los miembros de las fuerzas armadas que viven en cuarteles, campamentos, barcos, y otros. También se excluye a las personas que residen en viviendas colectivas (hoteles, hospitales, asilos y claustros religiosos, cárceles, etc.).",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],"La unidad de análisis de la I Encuesta Virtual para Personas LGBTI, está conformada por las personas LGBTI (lesbianas, gays, bisexuales, trans e intersexuales) y aquellas que, sin identificarse con dichas categorías tienen una identidad de género, expresión de género y/o anatomía sexual que no se adscribe a las definiciones binarias y rígidas de lo masculino y lo femenino.","El universo de estudio esta definida por personas de 18 y más años de edad, residentes en el territorio peruano que se identifican como parte de la comunidad LGBTI (Lesbianas, Gays, Bisexuales, Trans e Intersex) o que, sin identificarse con dichas categorías, no se adscribe a las definiciones binarias y rígidas de lo masculino y femenino.",NA,,
+Sample survey data [ssd],Statistical Info. & Monitoring Prog. [hh/simpoc],Individuals,Individuals of 15 years or older.,NA,,
+Sample survey data [ssd],NA,#NAME?,NA,NA,,
+Sample survey data [ssd],--,Stakeholders of the World Bank Group in Serbia.,"Opinion leaders from national and local governments, multilateral/bilateral agencies, media, academia, the private sector, and civil society.",No,opinion survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],Individual,NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Individual,Citizens aged 18 years and above excluding those living in institutionalized buildings.,NA,,
+Sample survey data [ssd],NA,#NAME?,NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,Refugees and host community households (Households living near settlements).,No,irrelevant topic,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Households,All 1732 repairs conducted by UNHCR between December 2017 and August 2018.,No,UNHCR survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,Residentes en viviendas particulares ubicadas en cualquier parte del territorio nacional.,NA,,
+Sample survey data [ssd],NA,Stakeholders of The World Bank Group in Vietnam,"Opinion leaders from national and local governments, multilateral/bilateral agencies, media, academia, the private sector, and civil society",No,opinion survey,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],#NAME?,Households with active phone connections and charged phones in 13 (pre-war) regions classified to be under ‘Emergency’.,NA,,
+Sample survey data [ssd],--,Stakeholders of the World Bank Group in Zimbabwe,"Opinion leaders from national and local governments, multilateral/bilateral agencies, media, academia, the private sector, and civil society.",No,opinion survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],Household and individual,"All refugee and asylum-seeker households residing in Zimbabwe's Tongogara Refugee Camp.
+
+UNHCR PPG: 1ZWEA",No,UNHCR survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],Son los hogares y todas las personas mayores de 14 años.,El universo de la ECSC está compuesto por la población civil no institucional residente habitual de los hogares en las cabeceras municipales de 28 ciudades de las cuales 23 son capitales de departamento y 5 ciudades intermedias.,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households and individuals,"Refugees aged 16 years old or over at the time of interview who arrived in the U.S. during FY 2013-2017 inclusive.
+
+While this covers five distinct fiscal years of refugee entrants, there is special
+policy/analytic interest in collapsing years into three domains as follows:
+
+• Cohort 1 – Refugees entering FY 2013 and FY 2014,
+• Cohort 2 – Refugees entering FY 2015 and FY 2016, and
+• Cohort 3 – Refugees entering FY 2017",No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households and individuals,"The target population of the survey consists of all private households in all nine provinces of South Africa, as well as residents in workers' hostels. The survey does not cover other collective living quarters such as students' hostels, old-age homes, hospitals, prisons and military barracks. It is only representative of non-institutionalized and non-military persons or households in South Africa.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households and individuals,"The target population of the survey consists of all private households in all nine provinces of South Africa and residents in workers’ hostels. The survey does not cover other collective living quarters such as students’ hostels, old age homes, hospitals, prisons and military barracks, and is therefore only representative of non-institutionalized and non-military persons or households in South Africa.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,"Argentina: Población de 18 años y más del país.
+
+Bolvia: Población de 18 años y más del país.
+
+Brasil: Población de 16 años y más del país (rural y urbana).
+
+Chile: Población de 18 años y más del país.
+
+Colombia: Población de 18 años y más del país.
+
+Costa Rica: Población de 18 años y más del país.
+
+Ecuador: Población de 18 años y más del país.
+
+El Salvador: Población de 18 años y más del país.
+
+Guatemala: Población de 18 años y más del país.
+
+Honduras: Población de 18 años y más del país.
+
+México: Población de 18 años y más del país.
+ 
+Nicaragua: Población de 16 años y más del país.
+
+Panamá: Población de 18 años y más del país.
+
+Paraguay: Población de 18 años y más del país.
+
+Perú: Población de 18 años y más del país.
+
+República Dominicana: Población de 18 años y más del país.
+
+Uruguay: Población de 18 años y más del país.",NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Household,"O inquérito abrangeu todos os membros do agregado familiar (residentes usuais), todos os membros dos 15-49 anos de idade residentes no agregado familiar e todas as crianças dos 0-14 anos de idade residentes no aagregado familiar.
+
+A amostra terá cobertura nacional, abarcando áreas rurais e urbanas do país.",NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],"Households, and individuals",The target population includes all Palestinian households and individuals with regular residency in Palestine during the survey's period (2018).,NA,,
+Sample survey data [ssd],NA,#NAME?,NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],La unidad de análisis de la operación estadística Encuesta de Hogares 2018 son los miembros del hogar que residen en viviendas particulares.,La encuesta cubre a todos los miembros del hogar que residen en viviendas particulares.,Yes,Other household survey,Other household survey
+Sample survey data [ssd],NA,Households.,"The sample of farmers comprised of 100 farmers in Santo Antão and 25 farmers in Fogo. The sample also included 11 traders, 9 from Santo Antão and 2 from Fogo. 87% of the survey participants were aged above 40 years, 10% were between 31-40 years and 2% between 26-30 years. Most of the farmers  were male (2%). The survey covered farm households operating in the treatment areas. The sample was drawn from a list of potential beneficiaries held by the local offices of the Ministry of Agriculture in Mosteiros and Paúl and from CAIXA. All farms were small scale.",No,Impact evaluation,
+Sample survey data [ssd],Other Household Survey [hh/oth],Household,Refugees living in Camps and settlements in the area of Gore,No,irrelevant topic,
+Sample survey data [ssd],NA,"F1- health facility assessment: health center
+F2- health provider interview: health provider
+F3 - direct observation of antenatal care consultation: consultation
+F4 - direct observation of curative care for children under-5: consultation
+F5 - exit interview for antenatal care: pregnant woman
+F6 - exit interview for child curative care: parent of caregiver of sick child",NA,Yes,Household health,Household health survey
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Individual,"All persons aged 15 and over, residing within private households, regardless of their nationality, citizenship, language or legal status, in participating countries.",NA,,
+Sample survey data [ssd],NA,"Households, children (0-59 months) women (15-49 years).","Households, and women and children within the households, in refugee sites in Melkadida.",No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,El universo de este estudio es la pobación nacional.,NA,,
+Sample survey data [ssd],NA,Household and individual.,NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Household and individual,All refugees living in Kalobeyei Settlement,No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],"Children 0-23 months
+Children 6-59 months
+Women 15-49 years Households",Children 0-59 months Women 15-49 years Refugee households,Yes,Other household survey,Other household survey
+Sample survey data [ssd],NA,Household and individual,The sampling frame used for VASyR 2018 was the total number of Syrian refugees known to UNHCR as of February 2018. A total of 855 cases were not considered part of the sampling frame due to missing addresses.,No,UNHCR survey,
+Sample survey data [ssd],NA,"Patients, health professionals, health care system, districts, OPDs, HCs",NA,Yes,Household health,Household health survey
+Sample survey data [ssd],Other Household Survey [hh/oth],"Las unidades de análisis utilizadas en la ENCO son:
+
+-  Vivienda: Constituye la unidad de muestreo, es decir, la vivienda es utilizada para efectos de selección, la cual, es seleccionada a través de un esquema de muestreo tipo polietápico y estratificado.
+
+-  Hogar: El hogar conforma la unidad de observación, se identifica a través de la vivienda particular, y en él se puede detectar la población objeto de estudio de la encuesta.",La población objeto de estudio son las personas de 18 años y más que residan permanentemente en las viviendas particulares ubicadas dentro del dominio de estudio en la fecha del levantamiento.,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],"Residentes de las viviendas seleccionadas de 18 y más años, y personas seleccionadas para responder sobre los temas que se abordan a partir de la tercera sección del cuestionario de la encuesta.","La encuesta está dirigida a la población de 18 a 70 años de edad, que reside permanentemente en viviendas particulares dentro del territorio nacional.",NA,,
+Sample survey data [ssd],Other Household Survey,"Household, individual",NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,The National Post Measles Campaign Coverage Survey (PMCCS) was conducted following measles campaign targeting children aged 9 and 59 months.Parents and caregivers of all children aged between 9 month and 59 months in the selected households were eligible to participate in the survey,Yes,Household health,Household health survey
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,"(1) Hosts, (2) IDPs and (3) Returnee households.",No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,"The universe for survey consists of all urban and rural areas of the four provinces of Pakistan, excluded military restricted areas. The areas of erstwhile FATA have now been covered in Khyber Pakhtunkhwa.",NA,,
+Sample survey data [ssd],NA,Household and individual,NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,"Refugees in camps in Kigeme, Nyabiheke, and Gihembe",No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],Individual,"Citizens of Tunisia who are 18 years and older, excluding institutions",NA,,
+Sample survey data [ssd],NA,Household,"This KAP survey covers the whole refugee settlement of Kyangwali. All refugee household, new and old caseloads, residing in the settlement has been included in the sampling frame.",No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,Refugees and host community households,No,irrelevant topic,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Households,All 1374 repairs conducted by UNHCR between September 2018 and March 2019.,No,UNHCR survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,All households in selected camps,No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households and individuals,Refugees aged 16 years old or over at the time of interview who arrived in the U.S. during FY 2014-2018,No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households and individuals,"The SAYP covers children aged 7-17 years resident in a household. The survey excluded all people in prison, patients in hospitals, people residing in boarding houses and hotels, and boarding schools. Any single person households were screened out in all areas before the sample was drawn. Families living in hostels were treated as households.",Yes,Other household survey,Other household survey
+Sample survey data [ssd],Other Household Survey [hh/oth],- Ménage,L'enquête porte sur les ménages ordinaires et les personnes déplacées internes,NA,,
+Sample survey data [ssd],NA,Households,"South Sudanese Refugees in Central African Republic, Democratic Republic of The Congo, Ethiopia, Kenya, Sudan and Uganda",No,irrelevant topic,
+Sample survey data [ssd],NA,Regulation at the national level.,Banking supervisors and Local Banking Associations.,No,enterprise survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,All population of concern to UNHCR who have been recepients of cash-based interventions.,No,UNHCR survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],Stakeholders of the World Bank Group in Argentina.,"Opinion leaders from national and local governments, multilateral/bilateral agencies, media, academia, the private sector, and civil society.",No,opinion survey,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],"Household, individual",NA,NA,,
+Sample survey data [ssd],NA,"Individuals, schools, and communities",NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Individuals,All ‘New’ Rohingya (those who had arrived in Bangladesh after the events of 25 August 2017) and currently residing in refugee camps in Cox’s Bazar district.,No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],"Household, Individual",All Palestinian households and individuals (10 years and above) whose usual place of residence in 2019 was in the state of Palestine.,NA,,
+Sample survey data [ssd],NA,NA,"Opinion leaders from national and local governments, multilateral/bilateral agencies, media, academia, the private sector, and civil society.",No,opinion survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],Individual,Citizens of Botswana who are 18 years and older.,NA,,
+Sample survey data [ssd],NA,Household,Households living in shelters,NA,,
+Sample survey data [ssd],NA,Household,Households living in shelters.,NA,,
+Sample survey data [ssd],NA,Household,Households that relocated internally from one city to another.,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Stakeholders of the World Bank Group in Cameroon.,"Opinion leaders from national and local governments, multilateral/bilateral agencies, media, academia, the private sector, and civil society.",No,opinion survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],Household,Refugees living in Camps and settlements in the area of BAGA SOLA,No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],Individual and Household,"All refugees from Burundi, Central African Republic and South Sudan.",No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],Stakeholders of the World Bank in Costa Rica.,"Opinion leaders from national and local governments, multilateral/bilateral agencies, media, academia, the private sector, and civil society.",No,opinion survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],Individual,Citizens of Ghana who are 18 years and older.,NA,,
+Sample survey data [ssd],NA,"Micro, Small and Medium Tourism and tourism-related enterprises","The universe of MSMEs in Tourism and Tourism-related sectors of Accra, Elmina and Sekondi-Takoradi in Ghana comprises 2,677 entities identified individually in the sampling frame.",No,enterprise survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],Individual,Citizens of Kenya who are 18 years and older.,NA,,
+Sample survey data [ssd],NA,Household,All refugee households,No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],Household and individual,"Sampled household survey, representative of all refugees living in Kakuma refugee camp.",No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],Stakeholders of the World Bank Group in Sri Lanka.,"Opinion leaders from national and local governments, multilateral/bilateral agencies, media, academia, the private sector, and civil society.",No,opinion survey,
+Sample survey data [ssd],NA,Household and individual,The sampling frame used for VASyR 2019 was the total number of Syrian refugees in Lebanon known to UNHCR.,No,UNHCR survey,
+Sample survey data [ssd],NA,Household and individual,The sampling frame used for VASyR 2019 was the total number of Syrian refugees in Arsaal known to UNHCR.,No,UNHCR survey,
+Sample survey data [ssd],NA,"Micro, Small and Medium Tourism and tourism-related enterprises","The universe of MSMEs in Tourism and Tourism-related sectors of Freetown and the Western Area in Sierra Leone comprises 1,067 entities identified individually in the sampling frame.",No,enterprise survey,
+Sample survey data [ssd],NA,"For project impact: Households in Maseru, in Roma and Morija (both peri-urban towns near the capital of Maseru), and in Semonkong (a newly designated urban area in Maseru district)
+
+For project implementation: Packages of water infrastructure and associated works in all towns included in the Compact (e.g. Metolong Water Treatment Works and downstream conveyance, urban water network in each town, etc.)
+
+For project performance: Households in towns not included in the impact evaluation.","Impact evaluation in Roma & Morija as well as in Semonkong: All new customers (who have lived in the town since before completion of the works and connected after completion of the works; varies by site); All unconnected customers -- all within 300m from the network (eligibility boundaries) and having lived in the town since before connection of the works.
+Impact evaluation in Maseru: All customers who connected before the Metolong Dam was commissionied in areas supplied by the Dam and in areas supplied by alternative sources.
+Performance evaluation: WASCO customers in towns included in the Compact. Utility (WASCO). Industrial firms in Maseru in the garment & textile industry.",No,Impact evaluation,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,GNAFC project beneficiaries,No,Impact evaluation,
+Sample survey data [ssd],Other Household Survey [hh/oth],Individual,Citizens of Namibia who are 18 years and older.,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,This questionnaire was administered to the selected individual if the individual is aged 15 years and above and to mothers or caregivers of the selected child if the selected child is aged 9 months - 14 years.,Yes,Other household survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],"Households
+Children 0-23 months 
+Children 6-59 months 
+Women 15-49 years","Children 0-59 months Women 15-49 years Refugee households.
+
+A household was defined as: a group of people who live together and routinely eat out of the same pot. Where two families share the same pot, they were assessed as one household even if they lived in the same compound.",Yes,Other household survey,Other household survey
+Sample survey data [ssd],Other Household Survey [hh/oth],"Households
+Children 0-23 months
+Children 6-59 months
+Women 15-49 years","Children 0-59 months
+Women 15-49 years
+Refugee households
+
+A household was defined as: a group of people who live together and routinely eat out of the same pot. Where two families share the same pot, they were assessed as one household even if they lived in the same compound.",Yes,Other household survey,Other household survey
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,"South Sudanese Refugees in Central African Republic, Democratic Republic of The Congo, Ethiopia, Kenya, Sudan and Uganda",No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],Household,"All Persons of Concern to UNHCR  living within Nduta, Nyarugusu and Mtendeli camps",No,UNHCR survey,
+Sample survey data [ssd],NA,The study describes (including but not limited to): - Household - Individual - Parcel - Plot - Community,NA,NA,,
+Sample survey data [ssd],NA,Households,Refugees and host community,No,irrelevant topic,
+Sample survey data [ssd],NA,Households,Entire members of the household,NA,,
+Sample survey data [ssd],NA,Individuals and households,NA,NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Households,All recipients of CBI in 2019 in Oruchinga Camp,No,irrelevant topic,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Households,All 1316 repairs conducted by UNHCR between October 2019 and April 2020.,No,UNHCR survey,
+Sample survey data [ssd],NA,"Firm, affiliate of multinational company","Firms (affiliates of multinational company) in 10 middle-income countries (MICs): Brazil, China, India, Indonesia, Malaysia, Mexico, Nigeria, Thailand, Turkey, and Vietnam.",No,enterprise survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],"Households, children (0-59 months) and women (15-49 years)","Households, and children (0-59 months) and women (15-49 years) within the households",Yes,Household health,Household health survey
+Sample survey data [ssd],Other Household Survey [hh/oth],"Households, properties/parcels, individuals",NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,persons of concern to UNHCR who received cash as part of UNHCR's CBI to support shelther and protection needs,No,UNHCR survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,Persons of concerns (PoCs) to UNHCR in the Maratane camp and the host communities living within 6 km radius from the centre of the camp.,No,UNHCR survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households and individuals,"The target population of the survey consists of all private households in all nine provinces of South Africa and residents in workers' hostels. The survey does not cover other collective living quarters such as students' hostels, old-age homes, hospitals, prisons and military barracks.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households and individuals,"The target population of the survey consists of all private households in all nine provinces of South Africa, as well as residents in workers' hostels. The survey does not cover other collective living quarters such as students' hostels, old-age homes, hospitals, prisons and military barracks. It is only representative of non-institutionalised and non-military persons or households in South Africa.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Individuals,The survey collected data from pregnant women and new mothers in South Africa.,Yes,Household health,Household health survey
+Sample survey data [ssd],Other Household Survey [hh/oth],Households and individuals,"The survey covers all adult residence in Gauteng province, South Africa.",NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Individuals,Individuals of 15 years or older with access to landline and/or mobile phones.,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Individuals and households,All households within 6 km of UNHCR camps in Ukhiya and Teknaf upazilas.,No,UNHCR survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,The survey universe covered all households subject to CBI in Cox's Bazar 9 districts.,No,limited sample,
+Sample survey data [ssd],Other Household Survey [hh/oth],Individuals and households,34 refugee camps in Ukhiya and Teknaf upazilas.,No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,"The survey covered a sub-sample of the households of the 2018/19 - Enquête Harmonisée sur le Conditions de Vie des Ménages (EHCVM) survey which excluded populations in prisons, hospitals, military barracks, and school dormitories.",Yes,Household income/expenditure survey,Household income/expenditure survey
+Sample survey data [ssd],Other Household Survey [hh/oth],Incident,NA,NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Individual and household,"The survey covered all de jure households excluding prisons, hospitals, military barracks, and school dormitories.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Individuals/household,"The data are from a baseline survey and consist of 2,250 households from Ethiopia's Amhara region. Among the 2,250 households, there are 900 PSNP and 1350 non-PSNP households. The baseline survey is intended to provide a detailed picture of selected households through information on their household’s characteristics, PSNP eligibility, labor supply, time use, childcare, food security, crop production and non-farm enterprises.",Yes,detailed description of topics covered,Household health survey
+Sample survey data [ssd],Other Household Survey [hh/oth],Households and individuals,NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,"The sample universe includes all refugee households registered to receive COVID-19 cash assisstance in 2020 (3,105).",No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],Individual and Household,NA,NA,,
+Sample survey data [ssd],NA,Household,Mixed - heads of households & the registered receipient of cash assistance,NA,,
+Sample survey data [ssd],NA,Stakeholder,"Opinion leaders from national and local governments, multilateral/bilateral agencies, media, academia, the private sector, and civil society.",No,opinion survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],"Household
+Individual","Survey population – all residents of Lithuania aged 16–74.
+Statistical unit – individual aged 16–74. Individuals residing in institutional households (care homes, imprisonment institutions, monasteries, convents, seminaries, etc.) are not surveyed.",NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,persons of concern to UNHCR and host communities,No,UNHCR survey,
+Sample survey data [ssd],NA,Household/Individual,All household members and salaries & wages particulars of household members aged 15 years and over.,NA,,
+Sample survey data [ssd],NA,Household/Individual,All household members 1 year and older,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,The total population spans all beneficiaries of Cash-Based Interventions.,NA,,
+Sample survey data [ssd],NA,Stakeholders of the World Bank Group in Romania,"Opinion leaders from national and local governments, multilateral/bilateral agencies, media, academia, the private sector, and civil society.",No,opinion survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,"All camp-based population of concern to UNHCR living in Rwanda's six camps: Gihembe, Kigeme, Kiziba, Mahama, Mugombwa and Nyabiheke",No,UNHCR survey,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Basic units of analyisis were individuals and households.,The target population eligible for FinScope survey is every 16 years old and above resident in selected households,No,enterprise survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,All recepients of CBI,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Stakeholders of the World Bank Group in the Seychelles,"Opinion leaders from national and local governments, multilateral/bilateral agencies, media, academia, the private sector, and civil society.",No,opinion survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],Individual and household,"All IDP returnes, IDPs, nomads in damrahs and non-displaced populations across five Darfur states' eight localities.",No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],Individuals,"Women, men, boys and girls residing in refugee settlements, including vulnerable groups as PLWD, older persons with serious medical conditions, persons living with HIV and PLW.",No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,Refugees and host community households (Households living near settlements),No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,All recepients of cash-based assistance.,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,The survey was fielded to active Facebook users.,No,limited sample,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,Refugees in Mantapala Settlement.,No,irrelevant topic,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Basic units of analysis were individuals and households.,"The target population eligible for FinScope survey is every 16 year old and above, resident in selected households.",No,enterprise survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],Household and individual,NA,NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Individuals,"All Rohingya refugees registered with UNHCR in Bangladesh, India, Indonesia, Malaysia, Nepal, and Thailand.",No,UNHCR survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,All households in selected locations for targeted population groups,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,Identified key informants representing targeted population groups,NA,,
+Sample survey data [ssd],Statistical Info. & Monitoring Prog. [hh/simpoc],Households,All recipients of cash assistance,NA,,
+Sample survey data [ssd],Priority Survey (hh/ps],Households,"All IDP returnees, refugee returnees, host community and IDPs across Afghanistan",No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,"Persons we serve (incl. refugees, idps, returnees, undocumented retunees and host community) in Afghanistan, 2021",No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],Household,All population of concern to UNHCR who have been recepients of cash-based interventions.,No,UNHCR survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households and individuals,IDPs in Mayo-Tasnaga,No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],"Households, children under five and women of childbearing age",Nigerian refugees in and out of camps. See more details under sampling.,No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],Household,Refugees living in Camps and settlements in Chad,No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],Household,Refugees living in Camps and settlements in the area of Goz Beida,No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,"The sample universe includes all refugees registered to receive cash assisstance in Q2, 2021.",No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,Refugees from Burundi living in Lusenda and Mulongwe refugee camps in South Kivu,No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,"Refugees from South Sudan living in sites of Biringi (Ituri province), Bele and Meri (Haut Uélé province) refugee camps.",No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,Refugees from the Central African Republic living with host families in Zongo (South Ubangi province) and Yakoma (North Ubangi province).,No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,Refugees from the Central African Republic in camps in North and South Ubangui provinces.,No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],Household,All people of concern,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,Refugees in India,No,irrelevant topic,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Households,"All refugees, asylum seekers and others of concern to UNHCR",No,UNHCR survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,The total population spans all beneficiaries subject to the Cash Based Intervention.,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,The sample universe includes all urban refugees in Sri Lanka registered to receive cash assistance.,No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],Household,56000 households that took part in Proxy Means Tests.,No,irrelevant topic,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Individual,"All refugees that received cash-based assistance in the camps of Abala, Ayerou and Ouallam in the Tillabery region of Niger in 2021.",No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],#NAME?,NA,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Household,All refugee households in camp,No,irrelevant topic,
+Sample survey data [ssd],Priority Survey (hh/ps],Households,"All IDP returnees, refugee returnees, IDPs in camps and out of camps, and non-displaced populations across Kabkabiya and Kutum.",No,irrelevant topic,
+Sample survey data [ssd],Priority Survey (hh/ps],Households,"All IDP returnees, refugee returnees, IDPs in camps and out of camps, and non-displaced populations across Talodi and Rashad localities.",No,irrelevant topic,
+Sample survey data [ssd],Priority Survey (hh/ps],Households,"All IDP returnees, refugee returnees, IDPs in camps and out of camps, and non-displaced populations across El Genaina.",No,irrelevant topic,
+Sample survey data [ssd],Priority Survey (hh/ps],Households,"All IDP returnees, refugee returnees, IDPs in camps and out of camps, and non-displaced populations across Baw locality.",No,irrelevant topic,
+Sample survey data [ssd],Priority Survey (hh/ps],Households,"All IDP returnees, refugee returnees, IDPs in camps and out of camps, and non-displaced populations across Kaas.",No,irrelevant topic,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,The sample universe includes all beneficiaries subject to the Cash-Based Intervention.,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,All refugees in the camp,No,irrelevant topic,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Households,All refugees in the camp,No,irrelevant topic,
+Sample survey data [ssd],NA,"Households
+Individuals","The survey covered all de jure households excluding prisons, hospitals, military barracks, and school dormitories.",NA,,
+Sample survey data [ssd],Socio-Economic/Monitoring Survey [hh/sems],Households and individuals,"All refugees registered with UNHCR via ProGres, verified via the Verification Exercise conducted in 2021",No,UNHCR survey,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,The total population spans all beneficiaries subject to the last two Cash-Based Intervention in 2020 in Malaysia.,NA,,
+Sample survey data [ssd],Other Household Survey [hh/oth],Households,The total population spans all Bhutanese and urban households subject to the Cash-Based Intervention.,NA,,
+Sample survey data [ssd],NA,"Household, Case (family), Individual",NA,NA,,
+"Sample survey data [ssd], Administrative records data [adm], other",NA,"Households, Clusters of Coconut Palms","Rural households living in the ""coconut belt"" of central Mozambique, specifically in the coastal districts of Zambezia and Nampula provinces.
+
+For the biophysical survey, the study population are coconut palms in the same region.",NA,,
+Sample survey data[ssd],Other Household Survey [hh/oth],"Household
+Individual",NA,NA,,
+"Survey Data
+
+Anthropometric Data",NA,"Household
+
+Individual",Households residing in Cox's Bazar camps. See enclosed Basic Information Document for further details.,No,irrelevant topic,
