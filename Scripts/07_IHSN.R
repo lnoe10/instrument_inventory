@@ -165,11 +165,90 @@ ihsn <- ihsn_raw %>%
                             "Event/transaction data [evn]")) |> 
   select(id, idno, instrument_name = title, country=nation, iso3c, year_start, year_end, repositoryid, type, authoring_entity, authoring_entity_detail, funding_agencies, study_type:producers, status, source)
 
-data_types_LN <- read_csv("Output/misc_data/data_types_ihsn_2013_LN.csv", show_col_types = F) |> select(data_kind:instrument_type)
+#### add in "keep" classification based on Lorenz' work
+# read in old ihsn
+# ihsn <- readxl::read_xlsx("Output/instrument_data_all_years/ihsn.xlsx") |> select(-`...1`)
 
-# bind Lorenz' "keep" flag onto the IHSN data, filter for where keep==1
-ihsn_filtered <- data_types_LN |> filter(!is.na(keep)) |> select(-n) |> right_join(ihsn, by=c("data_kind", "study_type"), multiple="all") |> 
-  filter(keep==1)
+# read in Lorenz' classification files
+data_types_LN <- read_csv("Output/misc_data/data_types_ihsn_2013_LN.csv", show_col_types = F) |> select(data_kind:instrument_type) |> filter(!is.na(keep)) |> select(-n)
+additional_info_LN <- read_csv("Output/misc_data/ihsn_additional_info_LN.csv", show_col_types = F) |> filter(!is.na(keep)) |> 
+  mutate(keep = ifelse(keep=="Yes", 1, 0))
 
-# export filtered and full dataset
-# xlsx::write.xlsx(ihsn_filtered, "Output/ihsn.xlsx")
+# bind Lorenz' "keep" flag onto the IHSN data
+ihsn_keep <- left_join(ihsn, data_types_LN, by=c("data_kind", "study_type"))
+
+# now add the additionally classified rows which required extra metadata for proper classification
+ihsn_keep_all <- left_join(ihsn_keep, additional_info_LN |> 
+                         rename(keep_additional = keep, instrument_type_additional = instrument_type), 
+                       by=c("data_kind", "study_type", "unit_of_analysis", "universe")) |> 
+  # combine the two keep flags, had to keep them separate first for correct merging
+  # also, I checked in the console and there were no rows where keep and keep_additional were both filled in
+  # same for instrument_type
+  mutate(keep = ifelse(is.na(keep) & !is.na(keep_additional), keep_additional, keep),
+         instrument_type = ifelse(is.na(instrument_type) & !is.na(instrument_type_additional), instrument_type_additional, instrument_type)) |> 
+  select(-keep_additional, -instrument_type_additional)
+
+# # export unclassified rows for Lorenz to classify in Google sheets with first entry for each distinct metadata combo
+# ihsn_keep_all |> filter(is.na(keep)) |> 
+#   filter((year_start == 2012 & year_end >=2013) | year_start>=2013) |> 
+#   select(id, idno, instrument_name, universe, unit_of_analysis, data_kind, authoring_entity_detail, study_type, study_scope, source) |> 
+#   group_by(instrument_name, universe, unit_of_analysis, data_kind) |> 
+#   slice(1) |> 
+#   ungroup() |> 
+#   # add id to link so specific instrument's catalog webpage is more accessible
+#   mutate(source = paste0(source, "/", id)) |> 
+#   write_csv("Output/misc_data/ihsn_unclassified.csv")
+
+# read in the rows from above that Lorenz classified manually
+ihsn_remaining <- readxl::read_xlsx("Output/misc_data/ihsn_unclassified_LN.xlsx") |> 
+  # to avoid merging issues, convert text NA to actual NA, and remove extra whitespace
+  mutate(across(everything(), ~ ifelse(.x=="NA", NA, .x))) |> 
+  mutate(across(everything(), ~ str_squish(.x)))
+
+# add the classifications for remaining ihsn entries back to main dataframe
+ihsn_final <- left_join(ihsn_keep_all |> 
+                          # remove excess whitespace so no issues when merging
+                          mutate(across(everything(), ~ str_squish(.x))), 
+                        ihsn_remaining |> 
+                        # rename same variables accordingly so we don't have overlapping names
+                          select(instrument_name, universe, unit_of_analysis, data_kind, 
+                                 keep_remaining = keep, rationale_remaining = rationale, 
+                                 instrument_type_remaining = instrument_type), 
+                        by=c("instrument_name", "universe", "unit_of_analysis","data_kind")) |> 
+  # fill in the new classifications
+  mutate(instrument_type = ifelse(is.na(instrument_type) & !is.na(instrument_type_remaining),
+                                  instrument_type_remaining, instrument_type),
+         keep = ifelse(is.na(keep) & !is.na(keep_remaining), keep_remaining, keep),
+         rationale = ifelse(is.na(rationale) & !is.na(rationale_remaining), rationale_remaining, rationale)) |> 
+  # drop extra variables which are now redundant b/c we filled everything in
+  select(-c(keep_remaining, rationale_remaining, instrument_type_remaining))
+
+# standardize "keep" classification to logical true/false
+ihsn_final <- ihsn_final |> mutate(keep = case_when(keep %in% c("Yes", "1") ~ TRUE,
+                                                    keep %in% c("No", "0") ~ FALSE))
+
+# standardize instrument type naming with those in the rest of the instrument inventory data
+ihsn_final <- ihsn_final |> 
+  mutate(instrument_type = case_when(instrument_type=="Ag survey" ~ "Agricultural Survey/Census",
+                                     instrument_type=="Agricultural survey" ~ "Agricultural Survey/Census",
+                                     instrument_type=="Time Use survey" ~ "Time Use Survey",
+                                     instrument_type=="Time Use" ~ "Time Use Survey",
+                                     instrument_type=="Household income/expenditure survey" ~ "HIES",
+                                     instrument_type=="household health survey" ~ "Household Health Survey",
+                                     instrument_type=="Household health survey" ~ "Household Health Survey",
+                                     .default = instrument_type))
+
+# export full dataset for all years, overwriting old one with updated information
+xlsx::write.xlsx(ihsn_final, "Output/instrument_data_all_years/ihsn.xlsx")
+
+# filter for years of interest (we only classified entries in this time frame)
+ihsn_final <- ihsn_final |> filter((year_start == 2012 & year_end >=2013) | year_start>=2013)
+
+# check that all rows have been classified with "keep"
+stopifnot(ihsn_final |> filter(is.na(keep)) |> nrow() == 0)
+
+# filter for only rows where keep is TRUE
+ihsn_final_keep <- ihsn_final |> filter(keep==TRUE)
+
+# export final dataset
+xlsx::write.xlsx(ihsn_final_keep, "Output/instrument_data_ogdi_years/ihsn_2013-2022.xlsx")
