@@ -28,6 +28,8 @@ census_clean <- census |>
   filter(census_round==2010|census_round==2020) |> select(-`...1`)
 
 ##################################################
+# census_clean_old <- xlsx::read.xlsx("~/Desktop/census_2013-2022-OLD.xlsx", sheetIndex = 1) |> as_tibble()
+##################################################
 
 ###### Export filtered individual datasets ######
 xlsx::write.xlsx(as.data.frame(dhs_clean), "Output/instrument_data_ogdi_years/dhs_2013-2022.xlsx", row.names = FALSE)
@@ -56,7 +58,7 @@ all_surveys_census_filtered <- list(dhs_clean, mics_clean, tus_clean) |>
 
 # incorporating IHSN data
 # import the 2013-2022 IHSN data that Lorenz has manually classified
-ihsn <- readxl::read_xlsx("Output/instrument_data_ogdi_years/ihsn_2013-2022.xlsx") |> select(-`...1`)
+ihsn <- readxl::read_xlsx("Output/instrument_data_ogdi_years/ihsn_2013-2022.xlsx")
 
 # drop "Good Growth Plan" rows as decided by Tawheeda and Lorenz
 ihsn <- ihsn |> filter(!(authoring_entity=="Syngenta" & str_detect(instrument_name, "Good Growth Plan")))
@@ -132,21 +134,87 @@ full_instruments_df <- bind_rows(dhs_clean, mics_clean, tus_clean, hies_clean |>
 ######### filtering out irrelevant instruments ##########
 
 # read in full instruments df
-full_instruments_df  <- readxl::read_xlsx("Output/instrument_data_ogdi_years/full_instruments_df.xlsx")
+full_instruments_df <- readxl::read_xlsx("Output/instrument_data_ogdi_years/full_instruments_df.xlsx")
 
 # filter out all food insecurity experience scale surveys and IFAD impact assessment surveys
 filtered_instruments_df <- full_instruments_df |> 
   filter(!str_detect(instrument_name, "Food Insecurity Experience Scale")) |> 
   filter(!str_detect(instrument_name, "IFAD Impact Assessment Surveys"))
+
+# add keyword flag to identify impact evaluation surveys
+# define keywords
+keywords <- c("(I|i)mpact","(B|b)ase-?line","(M|m)id-?line","(E|e)nd-?line", "(E|e)vidence",
+              "(M|m)onitor","(A|a)ssessment", "(E|e)valuation")
+
+# add flag for keywords
+filtered_instruments_df <- filtered_instruments_df |> mutate(keyword_flag = ifelse(str_detect(instrument_name, paste0(keywords, collapse = "|")), 1, 0))
+
+# export rows w/ keyword flag so that we can manually check and assign keep status
+# filtered_instruments_df |> filter(keyword_flag==1) |> 
+#   select(country, year, instrument_name, instrument_type, keyword_flag) |>
+#   distinct() |> 
+#   xlsx::write.xlsx("Output/misc_data/keyword_matches.xlsx")
+
+# read in keyword matches spreadsheet with "keep" variable filled in
+
+# left join w/ filtered_instruments_df on all vars and filter for keep==TRUE, then drop the keep variable and the keyword variable
+
+# add variable for rows with a wave or round specification by string extraction
+filtered_instruments_df <- filtered_instruments_df |> 
+  mutate(wave_or_round = case_when(str_detect(instrument_name, "Waves ") ~ str_extract(instrument_name, "Waves \\d( and |-)\\d"),
+                                   str_detect(instrument_name, "Wave ") ~ str_extract(instrument_name, "Wave \\d"),
+                                   str_detect(instrument_name, "Rounds ") ~ str_extract(instrument_name, "Rounds \\d-\\d"),
+                                   str_detect(instrument_name, "Round ") ~ str_extract(instrument_name, "Round \\d{1,2}"),
+                                   .default = NA))
+
+# look at distinct instrument names for those with multiple waves and rounds in the same country/year so we can standardize instrument names without the wave # included
+filtered_instruments_df |> filter(!is.na(wave_or_round)) |> select(iso3c, year, instrument_name) |> distinct() |> 
+  group_by(iso3c, year) |> filter(n()>1) |> ungroup() |> select(instrument_name) |> distinct()
+
+
+filtered_instruments_df |> filter(!is.na(wave_or_round)) |> select(iso3c, year, instrument_name) |> distinct() |> 
+  group_by(iso3c, year) |> filter(n()>1) |> ungroup() |> View()
+
+
+# create standardized instrument name by removing wave/round part of the string
+####stopping here thursday - need to figure out wave collapse 
+
+filtered_instruments_df |> 
+  mutate(name_multiple_waves = case_when(!is.na(wave_or_round) & str_detect(instrument_name, "^COVID-19 LAC High Frequency Phone Surveys 2021, Wave \\d$") ~ "COVID-19 LAC High Frequency Phone Surveys 2021",
+                                         !is.na(wave_or_round) & str_detect(instrument_name, "^COVID-19 National Panel Phone Survey - Wave 1, 2020$") ~ "COVID-19 National Panel Phone Survey 2020",
+                                         !is.na(wave_or_round) & str_detect(instrument_name, "^COVID-19 National Panel Phone Survey 2020,") ~ "COVID-19 National Panel Phone Survey 2020",
+                                         !is.na(wave_or_round) & str_detect(instrument_name, "^COVID-19 High Frequency Phone Survey of Households 2020, Round \\d$$") ~ "COVID-19 High Frequency Phone Survey of Households 2020",
+                                         !is.na(wave_or_round) & str_detect(instrument_name, "^COVID-19 High Frequency Phone Survey of Households 2021") ~ "COVID-19 High Frequency Phone Survey of Households 2021",
+                                         !is.na(wave_or_round) & str_detect(instrument_name, "COVID-19 National Panel Phone Survey 2021, Wave 4") ~ "COVID-19 National Panel Phone Survey 2021",
+                                         .default = NA)) |> 
+  select(instrument_name, name_multiple_waves, wave_or_round, country, year) |> 
+  filter(!is.na(name_multiple_waves)) |> arrange(country, year) |> 
+  group_by(country, year, name_multiple_waves) |> 
+  mutate(multiple_waves = ifelse(n()>1, 1, 0)) |> 
+  mutate(name_multiple_waves = ifelse(multiple_waves==0, NA, name_multiple_waves)) |> 
+  filter(!is.na(name_multiple_waves)) |> 
+  summarise(wave_or_round = paste0(wave_or_round, collapse = ", "))
   
-# filter out all impact evaluation surveys (keywords: baseline, midline, endline, evidence)
-filtered_instruments_df |> filter(str_detect(instrument_name, "Impact Evaluation|Baseline|Midline|Endline|Evidence")) |> View()
+  
+# we need to drop rows with possible duplicates that weren't previously identified
+# see - this reduces the row count by 158 instruments
+filtered_instruments_df |> select(country, year, instrument_name) |> distinct()
+
+# we also should look at country/year groupings with more than one instrument and see if the instrument names may be duplicates (ex: "Poverty and Groundwater Salinity Survey")
+
+
+
 
 # filter out poultry/palay production type surveys
 all_surveys_census_filtered |> filter(str_detect(instrument_name, "Poultry|Impact Assessment|Palay"))
 
 # collapse surveys w/ multiple waves into one instrument if they have the same year (keywords: wave, round)
-all_surveys_census_filtered |> filter(str_detect(instrument_name, "(W|w)ave|(R|r)ound"))
+filtered_instruments_df |> filter(str_detect(instrument_name, "(W|w)ave(?=s| )|(R|r)ound(?=s| )")) |> 
+  select(country, year, instrument_name) |> distinct() |> group_by(country, year) |> 
+  filter(n()>1)
+
+filtered_instruments_df |> select(country, year, instrument_name) |> group_by(country, year) |>
+  filter(n()>1) |> arrange(country, year) |> View()
 
 # # Export
 # ### NOTE - I am modifying this code with an if-else to allow country names that do not have an iso3c code to be maintained

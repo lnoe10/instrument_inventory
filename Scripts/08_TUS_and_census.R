@@ -66,8 +66,25 @@ census <- readRDS("Input/census_dates_df.rds") %>%
          ),
          instrument_name = "Population Census",
          instrument_type = "Census",
-         source = "https://unstats.un.org/unsd/demographic-social/census/censusdates/") %>%
-  select(country, iso3c, year, status = planned, instrument_name, instrument_type, source, census_round)
+         source = "https://unstats.un.org/unsd/demographic-social/census/censusdates/",
+         # remove parentheses for dates with just a year like (2023)-->2023
+         date = ifelse(str_detect(date, "^\\(\\d{4}\\)$"), str_remove_all(date, "\\(|\\)"), date)) %>%
+  select(country, iso3c, year, status = planned, instrument_name, instrument_type, source, census_round, date)
 
-# export filtered and full dataset
-#xlsx::write.xlsx(census, "Output/census.xlsx")
+# read in list of censuses which have planned status and are from the year 2023 or prior that we have manually checked for completion
+# note - this came from a separate inspection of differences between the old data and the newly scraped data, where many census dates have changed
+planned_censuses <- readxl::read_xlsx("Output/misc_data/planned_censuses.xlsx") |> 
+  rename(status = status_new) |> 
+  mutate(census_round = as.character(census_round),
+         # remove random dash from dates with just a year for merging
+         date = ifelse(str_detect(date, "^-\\d{4}$"), str_remove(date, "^-"), date))
+
+# left join
+census_final <- left_join(census, planned_censuses |> select(-country), by=c("iso3c", "year", "date", "status", "census_round"))
+
+# replace status variable with the update status data, and rename accordingly
+census_final <- census_final |> mutate(updated_status = ifelse(is.na(updated_status) & !is.na(status), status, updated_status)) |> 
+  select(-status) |> rename(status = updated_status, status_note = updated_status_note)
+
+# export census dataset
+xlsx::write.xlsx(census_final, "Output/instrument_data_all_years/census.xlsx")

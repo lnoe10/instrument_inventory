@@ -1,13 +1,13 @@
 library(rvest)
 library(tidyverse)
 
-setwd("C:/Users/loren/Documents/GitHub/instrument_inventory/")
+#setwd("C:/Users/loren/Documents/GitHub/instrument_inventory/")
 
 # Define url
 census <- "https://unstats.un.org/unsd/demographic-social/census/censusdates/"
 
 # Import WB income and region groups groups. From https://datahelpdesk.worldbank.org/knowledgebase/articles/906519-world-bank-country-and-lending-groups
-wb_codes <- read_csv("Input/wb_countries_fy22.csv") %>% 
+wb_codes <- read_csv("Input/wb_countries_fy22.csv", show_col_types = F) %>% 
   janitor::clean_names() %>%
   filter(!is.na(region)) %>%
   # Venezuela is not classified in FY2022. Manually assign to last year's income classification "UM"
@@ -28,28 +28,33 @@ regions <- c("Africa", "North", "South", "Asia", "Europe", "Oceania")
 webpage <- census %>%
   read_html()
 
-# Initialize empty dataframe
-df <- data.frame()
+# define empty tibble
+df <- tibble()
 
 # Loop through rows. Max number of rows set by region with most entries.
 # Was Europe in this case. Check xpath of last line of table manually
 for (r in regions){
-for (i in 1:66){
-  country <- setNames(data.frame(cbind(
-    html_text(html_nodes(webpage, xpath = str_c('//*[@id="',r,'"]/div[',i,']/div[1]', sep = ""))),
-    html_text(html_nodes(webpage, xpath = str_c('//*[@id="',r,'"]/div[',i,']/div[2]', sep = ""))),
-    html_text(html_nodes(webpage, xpath = str_c('//*[@id="',r,'"]/div[',i,']/div[3]', sep = ""))),
-    html_text(html_nodes(webpage, xpath = str_c('//*[@id="',r,'"]/div[',i,']/div[4]', sep = ""))),
-    html_text(html_nodes(webpage, xpath = str_c('//*[@id="',r,'"]/div[',i,']/div[5]', sep = "")))
-  )),c("countryname", "round1990", "round2000", "round2010", "round2020"))
-
-df <- df %>%
-  rbind(country)
   
-}}
+  for (i in 1:66){
+  
+    country <- tibble(countryname = ifelse(length(html_text(html_nodes(webpage, xpath = str_c('//*[@id="',r,'"]/div[',i,']/div[1]', sep = ""))))==0, NA, 
+                                         html_text(html_nodes(webpage, xpath = str_c('//*[@id="',r,'"]/div[',i,']/div[1]', sep = "")))),
+                    round1990 = ifelse(length(html_text(html_nodes(webpage, xpath = str_c('//*[@id="',r,'"]/div[',i,']/div[2]', sep = ""))))==0, NA,
+                                       html_text(html_nodes(webpage, xpath = str_c('//*[@id="',r,'"]/div[',i,']/div[2]', sep = "")))),
+                    round2000 = ifelse(length(html_text(html_nodes(webpage, xpath = str_c('//*[@id="',r,'"]/div[',i,']/div[3]', sep = ""))))==0, NA,
+                                       html_text(html_nodes(webpage, xpath = str_c('//*[@id="',r,'"]/div[',i,']/div[3]', sep = "")))),
+                    round2010 = ifelse(length(html_text(html_nodes(webpage, xpath = str_c('//*[@id="',r,'"]/div[',i,']/div[4]', sep = ""))))==0, NA,
+                                       html_text(html_nodes(webpage, xpath = str_c('//*[@id="',r,'"]/div[',i,']/div[4]', sep = "")))),
+                    round2020 = ifelse(length(html_text(html_nodes(webpage, xpath = str_c('//*[@id="',r,'"]/div[',i,']/div[5]', sep = ""))))==0, NA,
+                                       html_text(html_nodes(webpage, xpath = str_c('//*[@id="',r,'"]/div[',i,']/div[5]', sep = "")))))
+  
+  df <- df %>% rbind(country)
+  
+  }
+}
 
 # Clean up
-df <- df %>%
+df_clean <- df %>%
   # Remove headers that have been imported with first line of every region
   mutate(countryname = str_remove(countryname, "(AFRICA|AMERICA, NORTH|AMERICA, SOUTH|ASIA|EUROPE|OCEANIA)\\s*Countries or areas"),
          round1990 = str_remove(round1990, "1990 round\\(1985-1994\\)"),
@@ -57,7 +62,9 @@ df <- df %>%
          round2010 = str_remove(round2010, "2010 round\\(2005-2014\\)"),
          round2020 = str_remove(round2020, "2020 round\\(2015-2024\\)")) %>%
   # Remove leading and trailing white-space
-  mutate_all(str_trim) %>%
+  mutate_all(str_squish) %>%
+  # drop rows where everything is null
+  janitor::remove_empty(which = "rows") |> 
   # Come up with count of characters in countryname column to replace with NA
   mutate(num_char = nchar(countryname),
          countryname = case_when(
@@ -74,7 +81,7 @@ df <- df %>%
   filter(!countryname %in% c("United Kingdom", "- Scotland", "- Northern Ireland")) %>%
   mutate(countryname = str_replace(countryname, "- England and Wales", "United Kingdom")) %>%
   # Reshape dataframe to long, with every census date or round as one row
-  pivot_longer(-countryname, names_to = "census_round", values_to = "date") %>%
+  pivot_longer(-countryname, names_to = "census_round", values_to = "date") |> 
   # Create variables of interest, such as year by extracting four number year
   # Extract year
   mutate(year = as.numeric(str_extract(date, "[0-9]{4}")),
@@ -129,11 +136,11 @@ df <- df %>%
   countryname = str_remove(countryname, "\\(3\\)|\\(4\\)"),
   # Create iso code. Netherlands Antilles will be without code (no longer exists)
   # And therefore will not have any info on lending groups and regions
-  code = countrycode::countrycode(countryname, "country.name", "iso3c"),
-  code = case_when(
+  iso3c = countrycode::countrycode(countryname, "country.name", "iso3c"),
+  iso3c = case_when(
     countryname == "Eswatini" ~ "SWZ",
     countryname == "Saint-Martin" ~ "MAF",
-    TRUE ~ code
+    TRUE ~ iso3c
   )) %>%
   # Drop years where there was no census (census == NA)
   # This drops Afghanistan 2010 obs, where census is incomplete
@@ -142,10 +149,27 @@ df <- df %>%
   # but who only have info that "Population figures compiled from administrative registers."
   filter(!is.na(year)) %>%
   # Merge in region and income groups
-  left_join(wb_codes)
+  left_join(wb_codes |> rename(iso3c=code)) |> 
+  rename(country = countryname) |>
+  mutate(census_round = str_remove(census_round, "round"))
+
+##################################################
+census_clean_old <- xlsx::read.xlsx("~/Desktop/census_2013-2022-OLD.xlsx", sheetIndex = 1) |> as_tibble()
+#########################
+
+
+df_clean |> select(country, iso3c, year, date, planned, census_round) |> 
+  mutate(planned = as.character(planned),
+         planned = case_when(
+           planned == 1 ~ "Planned",
+           TRUE ~ "Complete")) |> 
+  rename(status_new = planned) |> 
+  filter(status_new=="Planned" & year<=2023)
+
+##################################################
 
 # Save copy of census scrape to load into main instrument inventory
-saveRDS(df, file = "Input/census_dates_df.rds")
+saveRDS(df_clean, file = "Input/census_dates_df.rds")
 
 ## Create df of years since last census
 #last_census <- df %>%
