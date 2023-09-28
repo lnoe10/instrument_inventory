@@ -172,7 +172,10 @@ agri_survey <- agri_survey_raw %>%
     "National Panel Survey, 2019-2020", "Uganda", "UGA", 2020, "Agricultural Survey/Census", "Completed", "https://www.worldbank.org/en/programs/lsms/initiatives/lsms-ISA#46", "Living Standards Measurement Study [hh/lsms]", "agriculture-census-surveys"
   )) %>%
   filter(repositoryid == "agriculture-census-surveys", 
-         !study_type %in% c("Administrative Records", "Agricultural Census [ag/census]", "Enterprise Census [en/census]", "Population and Housing Census [hh/popcen]"), 
+         !study_type %in% c("Administrative Records", "Agricultural Census [ag/census]", "Enterprise Census [en/census]", 
+                            "Population and Housing Census [hh/popcen]", "Living Standards Measurement Study [hh/lsms]", 
+                            "Income/Expenditure/Household Survey [hh/ies]", "Socio-Economic/Monitoring Survey [hh/sems]",
+                            "Other Household Survey [hh/oth]", "Integrated Survey (non-LSMS) [hh/is]", NA), 
          !str_detect(title, "mpact|roduction")) %>%
   select(id, country = nation, iso3c, year = year_end, instrument_name = title, repositoryid, instrument_type, status, source, authoring_entity, 
          study_type, unit_of_analysis, data_kind, universe, producers, authoring_entity_detail, funding_agencies)
