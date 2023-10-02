@@ -274,6 +274,24 @@ filtered_instruments_df_new  <- filtered_instruments_df_new |> mutate(status = i
 xlsx::write.xlsx(filtered_instruments_df_new |> arrange(country, instrument_name, year), "Output/instrument_inventory_filtered.xlsx")
 ##########################################################
 
-################## LORENZ - here is where you should read in the manually checked complete instrument inventory dataframe ##################
-# and filter out the ones where drop is 1 (careful if the rest are left NA, doing a filter(drop!=1) will not work - you'll need to do filter(!is.na(drop)))
+################## read in the dataframe with added "drop" column ##################
+# this was to check for duplicates manually
+df <- readxl::read_xlsx("Output/instrument_inventory_filtered_deduped.xlsx")
+
+# clean up year based on remaining comments left by Tawheeda
+df_final <- df |> mutate(year = case_when(drop=="This should be 2017" ~ "2017",
+                                          drop=="This should be 2013" ~ "2013",
+                                          drop=="This should be 2014" ~ "2014",
+                                          drop=="Change to 2018 for year" ~ "2018",
+                                          .default = year)) |> 
+  # convert drop to all binary 0/1 for filtering
+  mutate(drop = case_when(is.na(drop) ~ "0",
+                          drop=="This should be 2017" ~ "0",
+                          drop=="This should be 2013" ~ "0",
+                          drop=="This should be 2014" ~ "0",
+                          drop=="Change to 2018 for year" ~ "0",
+                          .default = drop),
+         drop = as.numeric(drop)) |> 
+  filter(drop==0) |> 
+  select(-drop)
 
