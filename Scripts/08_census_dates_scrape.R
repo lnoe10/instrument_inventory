@@ -1,3 +1,5 @@
+## script to get census dates
+
 library(rvest)
 library(tidyverse)
 
@@ -153,24 +155,10 @@ df_clean <- df %>%
   rename(country = countryname) |>
   mutate(census_round = str_remove(census_round, "round"))
 
-##################################################
-census_clean_old <- xlsx::read.xlsx("~/Desktop/census_2013-2022-OLD.xlsx", sheetIndex = 1) |> as_tibble()
-#########################
-
-
-df_clean |> select(country, iso3c, year, date, planned, census_round) |> 
-  mutate(planned = as.character(planned),
-         planned = case_when(
-           planned == 1 ~ "Planned",
-           TRUE ~ "Complete")) |> 
-  rename(status_new = planned) |> 
-  filter(status_new=="Planned" & year<=2023)
-
-##################################################
-
 # Save copy of census scrape to load into main instrument inventory
 saveRDS(df_clean, file = "Input/census_dates_df.rds")
 
+###################### old code from Lorenz ######################
 ## Create df of years since last census
 #last_census <- df %>%
 #  # Keep only last year of actual census

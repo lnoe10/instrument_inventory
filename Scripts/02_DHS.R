@@ -27,9 +27,5 @@ dhs <- dhs_raw |>
          country_clean = countrycode::countrycode(iso3c, "iso3c", "country.name")) |> 
   select(country = country_clean, iso3c, year, status, instrument_name = survey_type, instrument_type, source, country_original = country)
 
-# filter for OGDI years of interest
-# dhs_clean <- dhs |> filter(year>=2013 & year<=2022)
-
-# export filtered and full datasets
-#xlsx::write.xlsx(dhs_clean, "Output/dhs_ogdi_yrs.xlsx")
-xlsx::write.xlsx(dhs, "Output/dhs.xlsx")
+# export the clean dataset
+xlsx::write.xlsx(dhs, "Output/instrument_data_all_years/dhs.xlsx")

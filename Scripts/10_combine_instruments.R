@@ -4,7 +4,7 @@ library(tidyverse)
 # read in all prepared instrument data (except ihsn because we are dealing with that separately in case of overlap)
 mics <- readxl::read_xlsx("Output/instrument_data_all_years/mics.xlsx") |> mutate(year=as.character(year))
 dhs <- readxl::read_xlsx("Output/instrument_data_all_years/dhs.xlsx") |> mutate(year=as.character(year))
-lfs <- readxl::read_xlsx("Output/instrument_data_all_years/lfs_all.xlsx") |> mutate(year=as.character(year))
+lfs <- readxl::read_xlsx("Output/instrument_data_all_years/lfs.xlsx") |> mutate(year=as.character(year))
 hies <- readxl::read_xlsx("Output/instrument_data_all_years/hies.xlsx") |> mutate(year=as.character(year))
 ag_survey <- readxl::read_xlsx("Output/instrument_data_all_years/ag_surveys.xlsx") |> mutate(year=as.character(year))
 ag_census <- readxl::read_xlsx("Output/instrument_data_all_years/ag_census.xlsx") |> mutate(year=as.character(year))
@@ -27,8 +27,6 @@ census_clean <- census |>
   filter(census_round==2010|census_round==2020) |> select(-`...1`)
 
 ##################################################
-# census_clean_old <- xlsx::read.xlsx("~/Desktop/census_2013-2022-OLD.xlsx", sheetIndex = 1) |> as_tibble()
-##################################################
 
 ###### Export filtered individual datasets ######
 xlsx::write.xlsx(as.data.frame(dhs_clean), "Output/instrument_data_ogdi_years/dhs_2013-2022.xlsx", row.names = FALSE)
@@ -37,7 +35,6 @@ xlsx::write.xlsx(as.data.frame(hies_clean), "Output/instrument_data_ogdi_years/h
 xlsx::write.xlsx(as.data.frame(lfs_clean), "Output/instrument_data_ogdi_years/lfs_2013-2022.xlsx", row.names = FALSE)
 xlsx::write.xlsx(as.data.frame(ag_survey_clean), "Output/instrument_data_ogdi_years/ag_survey_2013-2022.xlsx", row.names = FALSE)
 xlsx::write.xlsx(as.data.frame(tus_clean), "Output/instrument_data_ogdi_years/tus_2013-2022.xlsx", row.names = FALSE)
-xlsx::write.xlsx(as.data.frame(dhs_clean), "Output/instrument_data_ogdi_years/dhs_2013-2022.xlsx", row.names = FALSE)
 xlsx::write.xlsx(as.data.frame(ag_census_clean), "Output/instrument_data_ogdi_years/ag_census_2013-2022.xlsx", row.names = FALSE)
 xlsx::write.xlsx(as.data.frame(census_clean), "Output/instrument_data_ogdi_years/census_2013-2022.xlsx", row.names = FALSE)
 
@@ -67,16 +64,7 @@ ihsn_clean <- ihsn |> mutate(across(c(year_start, year_end), ~ as.numeric(.x))) 
   mutate(year = case_when(year_start==year_end ~ as.character(year_start),
                           year_start!=year_end ~ paste0(year_start, "-", year_end))) 
 
-# ihsn_clean <- ihsn |> mutate(across(c(year_start, year_end), ~ as.numeric(.x))) |> 
-#   mutate(year = case_when(year_start==year_end ~ as.character(year_start),
-#                           year_start!=year_end & year_end-year_start==1 ~ paste0(year_start, "/", str_extract(year_end, "\\d{2}$")),
-#                           year_start!=year_end & year_end-year_start>1 ~ paste0(year_start, "-", year_end))) 
-
-# we need to now look for overlap in the ihsn data with the rest of the instrument inventory data 
-# to avoid double-counting surveys
-# note that to do this we need to merge with year, but this is tricky since ihsn data comes with a year start and year end variable
-# upon manual inspection of the rest of the instrument inventory data, the year chosen is the end year of surveys 
-# (see by looking at instrument names with a time frame in the title) - so, we will merge on the year_end variable
+# we need to now look for overlap in the ihsn data with the rest of the instrument inventory data to avoid double-counting surveys
 
 # there are 5 rows in the all_surveys_census_filtered dataframe where a timeframe is given in the year variable
 # those are all TUS, so we can inspect them manually - there are no overlaps we need to be concerned about
@@ -286,59 +274,6 @@ filtered_instruments_df_new  <- filtered_instruments_df_new |> mutate(status = i
 xlsx::write.xlsx(filtered_instruments_df_new |> arrange(country, instrument_name, year), "Output/instrument_inventory_filtered.xlsx")
 ##########################################################
 
+################## LORENZ - here is where you should read in the manually checked complete instrument inventory dataframe ##################
+# and filter out the ones where drop is 1 (careful if the rest are left NA, doing a filter(drop!=1) will not work - you'll need to do filter(!is.na(drop)))
 
-
-# duplicates arising from EU LFS and national LFS in the same year
-filtered_instruments_df_new |> group_by(country, year, instrument_type) |> 
-  # flag if there is an EU LFS accompanied with a national LFS in the same country/year
-  mutate(eu_lfs = ifelse(n()>1 & instrument_type=="Labour Force Survey" & 
-                           all(str_detect(str_to_lower(instrument_name), "labour force|emploi|emprego")) & 
-                           any(str_detect(instrument_name, "EU")), 
-                         1, 0),
-         # if there is an EU LFS and a national LFS, flag the national one to be dropped
-         lfs_drop = ifelse(eu_lfs==1 & !str_detect(instrument_name, "EU"), 1, 0)) |> 
-  select(country:instrument_type, eu_lfs, lfs_drop) |> 
-  filter(eu_lfs==1)
-
-
-filtered_instruments_df_new |> group_by(country, year, instrument_type) |> 
-  # flag if there is an EU LFS accompanied with a national LFS in the same country/year
-  mutate(eu_lfs = ifelse(n()>1 & instrument_type=="Labour Force Survey" & 
-                           all(str_detect(str_to_lower(instrument_name), "labour force|emploi|emprego")) & 
-                           any(str_detect(instrument_name, "EU")), 
-                         1, 0),
-         # if there is an EU LFS and a national LFS, flag the national one to be dropped
-         lfs_drop = ifelse(eu_lfs==1 & !str_detect(instrument_name, "EU"), 1, 0)) |> 
-  filter(lfs_drop==0 | is.na(lfs_drop)) |> ungroup() |> 
-  select(country:source, authoring_entity) |> 
-  arrange(country, year, instrument_name) |> 
-  group_by(country) |> 
-  filter(n()>1) |> 
-  View()
-
-
-
-# i missed duplicted IHSN LFS b/c the instrument type was "Labor Force Survey" but those in the ILO are "LFS"
-filtered_instruments_df_new |> 
-  #filter(str_detect(instrument_type, "Labou?r|LFS")) |> 
-  select(country:source, authoring_entity) |> 
-  arrange(country, year, instrument_name) |> 
-  group_by(country) |> 
-  filter(n()>1) |> 
-  View()
-
-
-# # Export
-# ### NOTE - I am modifying this code with an if-else to allow country names that do not have an iso3c code to be maintained
-# all_surveys_census %>%
-#   filter(year>=2010, year<=2020) %>%
-#   rename(country_orig = country) %>%
-#   mutate(country = ifelse(!is.na(iso3c), countrycode::countrycode(iso3c, "iso3c", "country.name"), country_orig),
-#          country = case_when(
-#            iso3c == "ANT" ~ "Netherland Antilles",
-#            iso3c == "XKX" ~ "Kosovo",
-#            TRUE ~ country
-#          ), .before = iso3c) %>%
-#   arrange(iso3c, year, instrument_type) %>%
-#   select(-country_orig) |> 
-#   xlsx::write.xlsx("Output/instrument_inventory.xlsx")

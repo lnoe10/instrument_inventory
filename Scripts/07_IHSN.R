@@ -165,14 +165,26 @@ ihsn <- ihsn_raw %>%
                             "Event/transaction data [evn]")) |> 
   select(id, idno, instrument_name = title, country=nation, iso3c, year_start, year_end, repositoryid, type, authoring_entity, authoring_entity_detail, funding_agencies, study_type:producers, status, source)
 
-#### add in "keep" classification based on Lorenz' work
-# read in old ihsn
-# ihsn <- readxl::read_xlsx("Output/instrument_data_all_years/ihsn.xlsx") |> select(-`...1`)
+# export distinct data kind / study type groupings for Lorenz to have a look at
+# ihsn |> filter(year_end>=2013)|> group_by(data_kind, study_type) |> summarise(n=n()) |> write.csv("Output/misc_data/data_types_ihsn_2013.csv")
 
-# read in Lorenz' classification files
-data_types_LN <- read_csv("Output/misc_data/data_types_ihsn_2013_LN.csv", show_col_types = F) |> select(data_kind:instrument_type) |> filter(!is.na(keep)) |> select(-n)
+#### add in "keep" classification based on Lorenz' work
+# read in Lorenz' classification file based on study type and data kind
+data_types_LN <- read_csv("Output/misc_data/data_types_ihsn_2013_LN.csv", show_col_types = F) |> select(data_kind:instrument_type)
+
+# export additional metadata file for Lorenz to do final classification - this is for rows in the above csv that didn't have enough info
+# left_join(ihsn, data_types_LN) |> filter(is.na(keep) & year_end>=2013) |> 
+#   select(data_kind, study_type, unit_of_analysis, universe) |> 
+#   distinct() |> 
+#   write.csv("Output/misc_data/ihsn_additional_info.csv")
+
+# read in the completed csv with Lorenz' classification for those which he couldn't previously classify
+# and needed additional metadata for
 additional_info_LN <- read_csv("Output/misc_data/ihsn_additional_info_LN.csv", show_col_types = F) |> filter(!is.na(keep)) |> 
   mutate(keep = ifelse(keep=="Yes", 1, 0))
+
+# filter for where "keep" is not NA
+data_types_LN <- data_types_LN |> filter(!is.na(keep)) |> select(-n)
 
 # bind Lorenz' "keep" flag onto the IHSN data
 ihsn_keep <- left_join(ihsn, data_types_LN, by=c("data_kind", "study_type"))

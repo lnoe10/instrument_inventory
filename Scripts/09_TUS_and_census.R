@@ -49,8 +49,8 @@ tus_clean <- tus |> filter(country!="Ethiopia") |>
   bind_rows(tus_unsd) |> 
   arrange(country)
 
-# export filtered and full dataset
-#xlsx::write.xlsx(tus_clean, "Output/tus.xlsx")
+# export clean dataset
+#xlsx::write.xlsx(tus_clean, "Output/instrument_data_all_years/tus.xlsx")
 
 # Census - UNSD -----------------------------------------------------------
 
@@ -71,6 +71,13 @@ census <- readRDS("Input/census_dates_df.rds") %>%
          date = ifelse(str_detect(date, "^\\(\\d{4}\\)$"), str_remove_all(date, "\\(|\\)"), date)) %>%
   select(country, iso3c, year, status = planned, instrument_name, instrument_type, source, census_round, date)
 
+# export a list of censuses with status planned and are from 2023 or prior
+# we will manually check these ourselves to see if they have actually been completed and the data is just not updated
+# census |> filter(status=="Planned" & year<=2023) |> xlsx::write.xlsx("Output/misc_data/planned_censuses.xlsx")
+
+# note that this was added to a google sheets doc and we checked everything manually and then 
+# overwrote the originally exported data with the data that had our added notes/changes downloaded from Google sheets
+
 # read in list of censuses which have planned status and are from the year 2023 or prior that we have manually checked for completion
 # note - this came from a separate inspection of differences between the old data and the newly scraped data, where many census dates have changed
 planned_censuses <- readxl::read_xlsx("Output/misc_data/planned_censuses.xlsx") |> 
@@ -87,4 +94,4 @@ census_final <- census_final |> mutate(updated_status = ifelse(is.na(updated_sta
   select(-status) |> rename(status = updated_status, status_note = updated_status_note)
 
 # export census dataset
-xlsx::write.xlsx(census_final, "Output/instrument_data_all_years/census.xlsx")
+# xlsx::write.xlsx(census_final, "Output/instrument_data_all_years/census.xlsx")

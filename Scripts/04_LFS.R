@@ -78,9 +78,9 @@ lfs_all <- sources_en |> filter(iso3c %in% lfs$iso3c) |>
   select(-duplicate) %>%
   bind_rows(lfs_all, .)
 
-# add in the one from country year match that we deemed not to be a duplicate
+# add in the only one from country year match that we deemed not to be a duplicate
 # Korea's Survey on Immigrants' Living Conditions and Labour Force from 2021
 lfs_all <- bind_rows(lfs_all, sources_en |> filter(country=="Korea, Republic of" & year=="2021")) |> mutate(year = as.numeric(year))
 
 # export full dataset
-xlsx::write.xlsx(lfs_all, "Output/instrument_data_all_years/lfs_all.xlsx")
+xlsx::write.xlsx(lfs_all, "Output/instrument_data_all_years/lfs.xlsx")

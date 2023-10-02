@@ -65,10 +65,5 @@ mics <- mics_raw %>%
     instrument_type = "Household health survey") %>%
   select(country = country_clean, iso3c, year, status, instrument_name, instrument_type, source, country_original = country, notes)
 
-# filter to OGDI years only
-mics_clean <- mics |> filter(year>=2013 & year<=2022)
-
-# export filtered and full datasets
-#xlsx::write.xlsx(mics_clean, "Output/mics_ogdi_yrs.xlsx")
-xlsx::write.xlsx(mics, "Output/mics.xlsx")
-
+# export the cleaned dataset
+xlsx::write.xlsx(mics, "Output/instrument_data_all_years/mics.xlsx")
