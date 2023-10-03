@@ -297,3 +297,5 @@ df_final <- df |> mutate(year = case_when(drop=="This should be 2013" ~ "2013",
   filter(drop==0) |> 
   select(-drop)
 
+df_final |>
+  writexl::write_xlsx("Output/instrument_inventory_final.xlsx", format_headers = FALSE)
