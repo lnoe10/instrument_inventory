@@ -279,9 +279,11 @@ xlsx::write.xlsx(filtered_instruments_df_new |> arrange(country, instrument_name
 df <- readxl::read_xlsx("Output/instrument_inventory_filtered_deduped.xlsx")
 
 # clean up year based on remaining comments left by Tawheeda
-df_final <- df |> mutate(year = case_when(drop=="This should be 2017" ~ "2017",
-                                          drop=="This should be 2013" ~ "2013",
+df_final <- df |> mutate(year = case_when(drop=="This should be 2013" ~ "2013",
                                           drop=="This should be 2014" ~ "2014",
+                                          drop=="This should be 2015" ~ "2015",
+                                          drop=="This should be 2016" ~ "2016",
+                                          drop=="This should be 2017" ~ "2017",
                                           drop=="Change to 2018 for year" ~ "2018",
                                           .default = year)) |> 
   # convert drop to all binary 0/1 for filtering
