@@ -268,7 +268,7 @@ filtered_instruments_df_new <- filtered_instruments_df_new |>
                                      .default = instrument_type))
 
 # standardize completed status for consistency
-filtered_instruments_df_new  <- filtered_instruments_df_new |> mutate(status = ifelse(str_detect(status, "completed||Complete"), "Completed", status))
+filtered_instruments_df_new  <- filtered_instruments_df_new |> mutate(status = ifelse(str_detect(status, "completed|Complete"), "Completed", status))
 
 ###### export dataframe before doing more filtering ######
 xlsx::write.xlsx(filtered_instruments_df_new |> arrange(country, instrument_name, year), "Output/instrument_inventory_filtered.xlsx")
@@ -276,7 +276,13 @@ xlsx::write.xlsx(filtered_instruments_df_new |> arrange(country, instrument_name
 
 ################## read in the dataframe with added "drop" column ##################
 # this was to check for duplicates manually
-df <- readxl::read_xlsx("Output/instrument_inventory_filtered_deduped.xlsx")
+df <- readxl::read_xlsx("Output/instrument_inventory_filtered_deduped.xlsx") |>
+  # remove status variable, since deduped file has wrong information from coding error that has since been fixed.
+  # If deduped is redone in the future (manual checks resulting in drop column), this will not be necessary
+  select(-status) |>
+  # bring previous dataframe (same dimension, just without drop column), will merge on all variables
+  # and add just corrected status variable
+  left_join(filtered_instruments_df_new)
 
 # clean up year based on remaining comments left by Tawheeda
 df_final <- df |> mutate(year = case_when(drop=="This should be 2013" ~ "2013",
