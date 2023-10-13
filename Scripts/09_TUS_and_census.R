@@ -60,7 +60,7 @@ tus_final <- readxl::read_excel("Input/tus_all_countries_2013-2022.xlsx", sheet 
            TRUE ~ second_year
          )) |>
   # Dropping notes column, which contains page numbers for select publications if of interest
-  select(country, country_code, year = second_year, instrument_name = instrument_name_or_type, instrument_type, source, status) |>
+  select(country, iso3c = country_code, year = second_year, instrument_name = instrument_name_or_type, instrument_type, source, status) |>
   filter(!is.na(year))
 
 # export clean dataset
