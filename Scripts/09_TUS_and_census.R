@@ -49,8 +49,13 @@ tus_clean <- tus |> filter(country!="Ethiopia") |>
   bind_rows(tus_unsd) |> 
   arrange(country)
 
+tus_final <- readxl::read_excel("Input/tus_all_countries_2013-2022.xlsx", sheet = 1) |>
+  # Dropping notes column, which contains page numbers for select publications if of interest
+  select(country, country_code, year, instrument_name = instrument_name_or_type, instrument_type, source, status) |>
+  filter(!is.na(year))
+
 # export clean dataset
-#xlsx::write.xlsx(tus_clean, "Output/instrument_data_all_years/tus.xlsx")
+#xlsx::write.xlsx(tus_final, "Output/instrument_data_all_years/tus.xlsx")
 
 # Census - UNSD -----------------------------------------------------------
 
