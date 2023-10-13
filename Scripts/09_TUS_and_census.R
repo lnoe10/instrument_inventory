@@ -50,8 +50,17 @@ tus_clean <- tus |> filter(country!="Ethiopia") |>
   arrange(country)
 
 tus_final <- readxl::read_excel("Input/tus_all_countries_2013-2022.xlsx", sheet = 1) |>
+  mutate(second_year = as.numeric(str_extract(year, "(?<=-)[0-9]*$")),
+         second_year = case_when(
+           nchar(second_year) == 2 ~ (2000 + second_year),
+           TRUE ~ second_year
+         ),
+         second_year = case_when(
+           is.na(second_year) & !is.na(year) ~ as.numeric(year),
+           TRUE ~ second_year
+         )) |>
   # Dropping notes column, which contains page numbers for select publications if of interest
-  select(country, country_code, year, instrument_name = instrument_name_or_type, instrument_type, source, status) |>
+  select(country, country_code, year = second_year, instrument_name = instrument_name_or_type, instrument_type, source, status) |>
   filter(!is.na(year))
 
 # export clean dataset
