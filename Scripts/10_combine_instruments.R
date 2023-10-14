@@ -282,9 +282,10 @@ df <- readxl::read_xlsx("Output/instrument_inventory_filtered_deduped.xlsx") |>
   select(-status) |>
   # bring previous dataframe (same dimension, just without drop column), will merge on all variables
   # and add just corrected status variable
-  left_join(filtered_instruments_df_new)
+  full_join(filtered_instruments_df_new) |>
+  distinct(country, iso3c, year, instrument_name, instrument_type,  .keep_all = TRUE)
 
-# clean up year based on remaining comments left by Tawheeda
+# clean up year based on remaining comments left by Tawheeda and Lorenz
 df_final <- df |> mutate(year = case_when(drop=="This should be 2013" ~ "2013",
                                           drop=="This should be 2014" ~ "2014",
                                           drop=="This should be 2015" ~ "2015",
@@ -299,7 +300,16 @@ df_final <- df |> mutate(year = case_when(drop=="This should be 2013" ~ "2013",
                           drop=="This should be 2014" ~ "0",
                           drop=="Change to 2018 for year" ~ "0",
                           .default = drop),
-         drop = as.numeric(drop)) |> 
+         drop = as.numeric(drop),
+         drop = case_when(
+           instrument_type == "Time Use Survey" & iso3c == "CHL" & instrument_name == "Encuesta Nacional sobre Uso del Tiempo 2015" ~ 1,
+           instrument_type == "Time Use Survey" & iso3c == "COL" & year == "2012-2013" ~ 1,
+           instrument_type == "Time Use Survey" & iso3c == "KGZ" & instrument_name == "Time Use Survey 2010, 2015" ~ 1,
+           instrument_type == "Time Use Survey" & iso3c == "MNG" & instrument_name == "Time Use Survey 2015" ~ 1,
+           instrument_type == "Time Use Survey" & iso3c == "PRY" & instrument_name == "Encuesta Sobre Uso del Tiempo 2016" ~ 1,
+           instrument_type == "Time Use Survey" & iso3c == "TZA" & instrument_name =="Integrated Labour Force Survey - Time Use Survey Module 2014" ~ 1,
+           TRUE ~ drop
+         )) |> 
   filter(drop==0) |> 
   select(-drop)
 
