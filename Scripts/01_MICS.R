@@ -51,11 +51,14 @@ mics <- mics_raw %>%
     iso3c = countrycode::countrycode(country, "country.name", "iso3c"),
     iso3c = case_when(
       str_detect(country, "Kosovo") ~ "XKX",
+      str_detect(country, "iye$") ~ "TUR",
       TRUE ~ iso3c
     ),
     # Create clean country column
     country_clean = countrycode::countrycode(iso3c, "iso3c", "country.name"),
-    country_clean = case_when(iso3c == "XKX" ~ "Kosovo", TRUE ~ country_clean),
+    country_clean = case_when(iso3c == "XKX" ~ "Kosovo",
+                              iso3c == "TUR" ~  "Türkiye",
+                              TRUE ~ country_clean),
     # Clean years, keeping last year. in case of survey like 2015-2016, keep 2016
     year = as.numeric(case_when(
       str_detect(year, "-") ~ str_extract(year, "(?<=-)[0-9]{4}"),
