@@ -29,4 +29,4 @@ Data Source: Use [script census dates scrap.R](https://github.com/lnoe10/instrum
 ### Supplemental Surveys (IHSN)
 Exact specifications in script [instrument_inventory_master.R](https://github.com/lnoe10/instrument_inventory/blob/main/instrument_inventory_master.R)  
 Data Source: API pulls information from [IHSN](https://catalog.ihsn.org/catalog)  
-This information is not yet integrated into the survey inventory due to lack of methodology for how to add to existing survey base
+IHSN data supplemented for different survey types if existing repositories above do not contain a survey for a year yet.
