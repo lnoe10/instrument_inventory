@@ -1,5 +1,5 @@
-# Clearinghouse (Gender data focus) Instrument Inventory
-A repository to automate creating an inventory of statistical instruments, starting with gender-relevant instruments for the [Clearinghouse for Financing Development Data](https://smartdatafinance.org/)
+# Gender Data Compass and Clearinghouse gender data channel Instrument Inventory
+A repository to automate creating an inventory of statistical instruments, starting with gender-relevant instruments for the [Gender Data Compass](https://genderdatacompass.org/) and [Clearinghouse for Financing Development Data](https://smartdatafinance.org/)
 
 ## Data Sources:
 ### Household Health Surveys (DHS & MICS)
@@ -12,7 +12,7 @@ Data Source: API pulls LSMS information from World Bank [microdata catalog](http
 
 ### Labor Force Surveys (LFS)
 Exact specifications in script [instrument_inventory_master.R](https://github.com/lnoe10/instrument_inventory/blob/main/instrument_inventory_master.R)  
-Data Source: API pulls information from ILO [source catalog](https://ilostat.ilo.org/data/national-sources-catalogue/)
+Data Source: API pulls information from ILO [Survey Catalogue](https://www.ilo.org/surveyLib/index.php/catalog/LFS)
 
 ### Ag Surveys and Census
 Exact specifications in script [instrument_inventory_master.R](https://github.com/lnoe10/instrument_inventory/blob/main/instrument_inventory_master.R)  
@@ -24,7 +24,7 @@ Data Source: Manual lookup of [UNSD website](https://unstats.un.org/unsd/gender/
 
 ### Population and Housing Census
 Exact specifications in script [instrument_inventory_master.R](https://github.com/lnoe10/instrument_inventory/blob/main/instrument_inventory_master.R)  
-Data Source: Use [script census dates scrap.R](https://github.com/lnoe10/instrument_inventory/blob/main/Census%20dates%20scrape.R) file to import data on population and housing censuses from UNSD. Then filtered to drop Housing only censuses.
+Data Source: Use [script census dates scrap.R](https://github.com/lnoe10/instrument_inventory/blob/main/Census%20dates%20scrape.R) file to import data on population and housing censuses from UNSD. Then filtered to drop Housing only censuses. Supplemented with manual check for 2023 census operations without specific dates in order to verify whether census is ongoing or has been conducted. UNSD census dates website as of 22 August 2023.
 
 ### Supplemental Surveys (IHSN)
 Exact specifications in script [instrument_inventory_master.R](https://github.com/lnoe10/instrument_inventory/blob/main/instrument_inventory_master.R)  
