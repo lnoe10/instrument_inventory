@@ -3,6 +3,7 @@
 library(httr)
 library(jsonlite)
 library(tidyverse)
+library(openxlsx)
 
 # scrape data
 dhs_raw <- fromJSON(content(GET("https://api.dhsprogram.com/rest/dhs/surveys?surveyStatus=all"), "text"))$Data %>%
@@ -28,4 +29,4 @@ dhs <- dhs_raw |>
   select(country = country_clean, iso3c, year, status, instrument_name = survey_type, instrument_type, source, country_original = country)
 
 # export the clean dataset
-xlsx::write.xlsx(dhs, "Output/instrument_data_all_years/dhs.xlsx")
+openxlsx::write.xlsx(dhs, "Output/instrument_data_all_years/dhs.xlsx")
