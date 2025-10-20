@@ -1,6 +1,7 @@
 ### script to scrape Agricultural Census data from the FAO
 
 library(tidyverse)
+library(openxlsx)
 
 # Upload and clean list of 2020 and 2010 round of ag census
 ag_census <- read_csv("Input/wca_2020_2010_notes.csv", show_col_types = F) %>%
@@ -24,4 +25,4 @@ ag_census <- read_csv("Input/wca_2020_2010_notes.csv", show_col_types = F) %>%
   select(country = starts_with("country"), iso3c, year = year_clean, instrument_name, instrument_type, status, source, census_round)
 
 # export clean dataset
-xlsx::write.xlsx(ag_census, "Output/instrument_data_all_years/ag_census.xlsx")
+openxlsx::write.xlsx(ag_census, "Output/instrument_data_all_years/ag_census.xlsx")
