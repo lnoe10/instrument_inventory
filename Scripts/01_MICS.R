@@ -3,21 +3,21 @@
 library(httr)
 library(jsonlite)
 library(tidyverse)
-
-# jay's github commit
+library(openxlsx)
 
 # Download raw file, convert to tibble, and restrict to relevant variables
-mics_raw <- fromJSON(content(GET("https://mics.unicef.org/api/survey"), "text"), flatten = TRUE) %>%
-  as_tibble() |> 
-  select(country_in_filter, country, year, status, notes = round) 
+# CSV file from https://mics.unicef.org/surveys
+mics_raw <- read.csv('Input/mics_surveys_catalogue.csv') %>%
+  as_tibble() %>%
+  select(survey, country, year, status, notes = round)
 
 # There are sub-national surveys that we need to separate from
 # national surveys, which is what we count as producing data that can be used
 # for national monitoring of gender data.
-# The variable country_in_filter describes the country name in case the variable
-# country only describes a sub-set of the country
+# The variable country describes the country name in case the variable
+# survey only describes a sub-set of the country
 # To get the national surveys we want, we filter as follows:
-# Where country_in_filter == country
+# Where country == survey
 # Exceptions:
 #   Nepal (Six Cycles) was a national survey
 #   Kosovo is mislabelled for 1996 and 2000 in country_in_filter. 
@@ -30,24 +30,42 @@ mics_raw <- fromJSON(content(GET("https://mics.unicef.org/api/survey"), "text"),
 mics <- mics_raw %>%
   # Drop Federal Republic of Yugoslavia, which was a union between
   # present-day Serbia and Montenegro. Duplicate these rows and assign to either country
-  filter(!str_detect(country, "Yugoslavia")) %>%
+  filter(!str_detect(survey, "Yugoslavia")) %>%
   bind_rows(mics_raw %>% 
-              filter(str_detect(country, "Yugoslavia")) %>% 
+              filter(str_detect(survey, "Yugoslavia")) %>% 
               uncount(2, .id = "id") %>%
-              mutate(country = case_when(
+              mutate(survey = case_when(
                 id == 1 ~ "Serbia",
                 TRUE ~ "Montenegro"),
-                country_in_filter = country) %>%
+                country = survey) %>%
               select(-id)) %>%
-  # Correct country variable names where country_in_filter clash but it's actually
+  # Correct survey variable names where country clash but it's actually
   # a national survey
-  mutate(country = case_when(
-    str_detect(country, "Six Cycles") ~ "Nepal",
-    str_detect(country, "including current South Sudan") ~ "Sudan",
-    TRUE ~ country)) %>%
+  mutate(survey = case_when(
+    str_detect(survey, "Six Cycles") ~ "Nepal",
+    str_detect(survey, "including current South Sudan") ~ "Sudan",
+    survey == "Marshall Islands, Republic of" ~ "Marshall Islands",
+    survey == "Syrian Arab Republic" ~ "Syria",
+    survey == "South Sudan, Republic of" ~ "South Sudan",
+    survey == "Kosovo under UNSC res. 1244" ~ "Kosovo (UNSC 1244)",
+    survey == "Trinidad and Tobago" ~ "Trinidad & Tobago",
+    survey == "Sao Tome and Principe" ~ "Sao Tome & Principe",
+    survey == "North Macedonia, Republic of" ~ "North Macedonia",
+    survey == "Korea, Democratic People's Republic of" ~ "Korea DPR",
+    survey == "Congo, Democratic Republic of the" ~ "Congo DR",
+    survey == "Côte d'Ivoire" ~ "Cote d'Ivoire",
+    survey == "Moldova, Republic of" ~ "Moldova",
+    survey == "Bosnia and Herzegovina" ~ "Bosnia & Herzegovina",
+    survey == "Myanmar, Republic of the Union of" ~ "Myanmar",
+    survey == "Bolivia, Plurinational State of" ~ "Bolivia",
+    survey == "Venezuela, Bolivarian Republic of" ~ "Venezuela",
+    survey == "Iran, Islamic Republic of" ~ "Iran",
+    survey == "Tanzania, United Republic of" ~ "Tanzania",
+    survey == "Türkiye" ~ "Turkiye",
+    TRUE ~ survey)) %>%
   # Filter where agreement between country_in_filter and country that
   # this was a national survey, which is what we want.
-  filter(country_in_filter == country) %>%
+  filter(country == survey) %>%
   # Additional cleaning, creating necessary identifiers
   mutate(
     iso3c = countrycode::countrycode(country, "country.name", "iso3c"),
@@ -71,4 +89,5 @@ mics <- mics_raw %>%
   select(country = country_clean, iso3c, year, status, instrument_name, instrument_type, source, country_original = country, notes)
 
 # export the cleaned dataset
-xlsx::write.xlsx(mics, "Output/instrument_data_all_years/mics.xlsx")
+
+openxlsx::write.xlsx(mics, "Output/instrument_data_all_years/mics.xlsx")
