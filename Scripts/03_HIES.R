@@ -3,6 +3,7 @@
 library(httr)
 library(jsonlite)
 library(tidyverse)
+library(openxlsx)
 
 ############ LSMS - WORLD BANK ############
 
@@ -193,7 +194,7 @@ lsms <- lsms_raw %>%
   select(id, idno, country = nation, iso3c, year, instrument_name = title, instrument_type, status, source, study_type, authoring_entity, repositoryid, data_kind, unit_of_analysis, authoring_entity_detail)
 
 # export the clean dataset
-xlsx::write.xlsx(lsms, "Output/instrument_data_all_years/lsms.xlsx")
+openxlsx::write.xlsx(lsms, "Output/instrument_data_all_years/lsms.xlsx")
 
 ################ ILO HIES data ################
 
@@ -285,4 +286,4 @@ hies_all <- ilo_hies_filtered |>
   bind_rows(hies_all, .)
 
 # export combined data to excel
-xlsx::write.xlsx(hies_all, "Output/instrument_data_all_years/hies.xlsx")
+openxlsx::write.xlsx(hies_all, "Output/instrument_data_all_years/hies.xlsx")
