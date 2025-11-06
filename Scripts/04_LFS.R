@@ -3,9 +3,10 @@
 library(httr)
 library(jsonlite)
 library(tidyverse)
+library(openxlsx)
 
 # scrape data from API
-lfs <- fromJSON(content(GET("https://www.ilo.org/surveyLib/index.php/api/catalog/search", 
+lfs <- fromJSON(content(GET("https://webapps.ilo.org/surveyLib/index.php/api/catalog/search", 
                             query=list(ps=10000)), "text"))$result$rows |> 
   as_tibble() |> 
   # filter for only LFS
@@ -24,7 +25,7 @@ lfs <- fromJSON(content(GET("https://www.ilo.org/surveyLib/index.php/api/catalog
   select(country, iso3c, year_start, year_end, year, instrument_name, instrument_type, authoring_entity, status, source, id, type, idno)
 
 # comparing above to data from https://ilostat.ilo.org/data/national-sources-catalogue/
-sources_en <- read_csv("~/Documents/ODW/sources_en.csv", show_col_types = F) |> filter(`Source type`=="Labour force survey")
+sources_en <- read_csv("https://rplumber.ilo.org/files/website/catalogue/sources_en.csv", show_col_types = F) |> filter(`Source type`=="Labour force survey")
 
 # taking latest year recorded
 sources_en <- sources_en |> select(country = Country, source = Source, `Latest period available`, instrument_type=`Source type`) |> 
@@ -83,4 +84,4 @@ lfs_all <- sources_en |> filter(iso3c %in% lfs$iso3c) |>
 lfs_all <- bind_rows(lfs_all, sources_en |> filter(country=="Korea, Republic of" & year=="2021")) |> mutate(year = as.numeric(year))
 
 # export full dataset
-xlsx::write.xlsx(lfs_all, "Output/instrument_data_all_years/lfs.xlsx")
+openxlsx::write.xlsx(lfs_all, "Output/instrument_data_all_years/lfs.xlsx")
