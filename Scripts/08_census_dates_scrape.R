@@ -9,7 +9,7 @@ library(tidyverse)
 census <- "https://unstats.un.org/unsd/demographic-social/census/censusdates/"
 
 # Import WB income and region groups groups. From https://datahelpdesk.worldbank.org/knowledgebase/articles/906519-world-bank-country-and-lending-groups
-wb_codes <- read_csv("Input/wb_countries_fy22.csv", show_col_types = F) %>% 
+wb_codes <- read_csv("Input/wb_countries_fy26.csv", show_col_types = F) %>% 
   janitor::clean_names() %>%
   filter(!is.na(region)) %>%
   # Venezuela is not classified in FY2022. Manually assign to last year's income classification "UM"
