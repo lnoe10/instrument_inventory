@@ -63,8 +63,51 @@ tus_final <- readxl::read_excel("Input/tus_all_countries_2013-2022.xlsx", sheet 
   select(country, iso3c = country_code, year = second_year, instrument_name = instrument_name_or_type, instrument_type, source, status) |>
   filter(!is.na(year))
 
+# 2025 update. From https://unstats.un.org/UNSDWebsite/demographic-social/time-use/data-and-metadata
+# have to load in via tempfile because we don't have a direct link
+temp_file <- tempfile(fileext = ".xlsx")
+download.file(
+  url = "https://undesa.maps.arcgis.com/sharing/rest/content/items/3182e4041ff3411990c14b2213b9ada6/data",
+  destfile = temp_file,
+  mode = "wb"
+)
+
+# Read new df from tempfile
+tus_2025 <- readxl::read_excel(temp_file) |>
+  janitor::clean_names()
+
+#Clean up
+unlink(temp_file)
+
+# Further work on df
+tus_2025_clean <- tus_2025 |>
+  mutate(year = as.numeric(year_of_the_survey),
+         iso3c = countrycode::countrycode(country, "country.name", "iso3c"),
+         status = "Completed",
+         source = "https://unstats.un.org/UNSDWebsite/demographic-social/time-use/data-and-metadata",
+         instrument_type = "Time Use Survey") |>
+  select(country, iso3c, year, instrument_name = name_of_survey, instrument_type, source, status)
+
+# Compare to tus_final, last final update in 2023.
+tus_full <- tus_2025_clean |>
+  full_join(tus_final, by = c("iso3c", "year")) |>
+  mutate(country.x = case_when(iso3c == "TZA" ~ "United Republic of Tanzania", is.na(country.x) ~ country.y, TRUE ~ country.x),
+         instrument_name.x = case_when(is.na(instrument_name.x) ~ instrument_name.y, TRUE ~ instrument_name.x),
+         instrument_type.x = case_when(is.na(instrument_type.x) ~ instrument_type.y, TRUE ~ instrument_type.x),
+         source.x = case_when(is.na(source.x) ~ source.y, TRUE ~ source.x),
+         status.x = case_when(is.na(status.x) ~ status.y, TRUE ~ status.x)) |>
+  select(country = country.x, iso3c, year, instrument_name = instrument_name.x, instrument_type = instrument_type.x, source = source.x, status = status.x)
+
+# Compare and update with other older data. Adds Afghanistan pilot survey and 2014 Greece survey
+tus_full <- tus_full |>
+  bind_rows(tus_clean |>
+              filter(iso3c %in% c("AFG", "GRC"))|>
+              mutate(year = case_when(iso3c == "GRC" ~ "2014", TRUE ~ year),
+                     year = as.numeric(year))) |>
+  arrange(iso3c, year)
+
 # export clean dataset
-#xlsx::write.xlsx(tus_final, "Output/instrument_data_all_years/tus.xlsx")
+xlsx::write.xlsx(tus_full, "Output/instrument_data_all_years/tus.xlsx")
 
 # Census - UNSD -----------------------------------------------------------
 
