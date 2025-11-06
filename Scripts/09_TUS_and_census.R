@@ -4,6 +4,7 @@ library(httr)
 library(jsonlite)
 library(tidyverse)
 
+#### 1. Import original sheet from State of Gender Data Financing. Contains very old data ####
 # original TUS data based on Tawheeda's manual search
 # https://unstats.un.org/unsd/gender/timeuse and manual ODW check of NSO websites
 tus <- read_csv("Input/time_use_surveys_sgdf_inventory_2020.csv", show_col_types = F) |>
@@ -26,6 +27,7 @@ tus <- read_csv("Input/time_use_surveys_sgdf_inventory_2020.csv", show_col_types
          instrument_type, source, status) |> 
   filter(year >= 2013)
 
+#### 2. Import old UNSD time use survey data, AS OF 2023 ####
 # data from https://unstats.un.org/unsd/demographic-social/time-use/
 tus_unsd <- read_csv("Input/tus_unsd_data.csv", show_col_types = F) |> 
   rename(country = Country,
@@ -49,6 +51,7 @@ tus_clean <- tus |> filter(country!="Ethiopia") |>
   bind_rows(tus_unsd) |> 
   arrange(country)
 
+#### After Manual work was done to add more time use surveys in 2023 to the above files, we get this new workbook ####
 tus_final <- readxl::read_excel("Input/tus_all_countries_2013-2022.xlsx", sheet = 1) |>
   mutate(second_year = as.numeric(str_extract(year, "(?<=-)[0-9]*$")),
          second_year = case_when(
@@ -63,7 +66,8 @@ tus_final <- readxl::read_excel("Input/tus_all_countries_2013-2022.xlsx", sheet 
   select(country, iso3c = country_code, year = second_year, instrument_name = instrument_name_or_type, instrument_type, source, status) |>
   filter(!is.na(year))
 
-# 2025 update. From https://unstats.un.org/UNSDWebsite/demographic-social/time-use/data-and-metadata
+#### 2025 update, keeping old data and using to fill in new data where necessary ####
+# From https://unstats.un.org/UNSDWebsite/demographic-social/time-use/data-and-metadata
 # have to load in via tempfile because we don't have a direct link
 temp_file <- tempfile(fileext = ".xlsx")
 download.file(
