@@ -106,4 +106,4 @@ df_clean <- df |>
   mutate(ag_census_round = str_remove(ag_census_round, "round"))
 
 # Save copy of census scrape to load into main instrument inventory
-saveRDS(df_clean, file = "Input/ag_census_dates_df.rds")
+saveRDS(df_clean, file = "Input/ag_census_df.rds")
