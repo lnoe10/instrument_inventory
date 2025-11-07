@@ -172,12 +172,12 @@ agri_survey <- agri_survey_raw %>%
     "Annual Agricultural Survey 2019-2020", "Senegal", "SEN", 2020, "Agricultural Survey/Census", "Completed", "http://www.fao.org/in-action/agrisurvey/country-work/senegal/en/", "Agriculture Integrated Survey[AGRISurvey]", "agricultural-surveys",
     "National Panel Survey, 2019-2020", "Uganda", "UGA", 2020, "Agricultural Survey/Census", "Completed", "https://www.worldbank.org/en/programs/lsms/initiatives/lsms-ISA#46", "Living Standards Measurement Study [hh/lsms]", "agricultural-surveys"
   )) %>%
-  filter(repositoryid == "agriculture-census-surveys", 
+  filter(repositoryid %in% c("agricultural-surveys", "50x2030"),
          !study_type %in% c("Administrative Records", "Agricultural Census [ag/census]", "Enterprise Census [en/census]", 
                             "Population and Housing Census [hh/popcen]", "Living Standards Measurement Study [hh/lsms]", 
                             "Income/Expenditure/Household Survey [hh/ies]", "Socio-Economic/Monitoring Survey [hh/sems]",
-                            "Other Household Survey [hh/oth]", "Integrated Survey (non-LSMS) [hh/is]", NA), 
-         !str_detect(title, "mpact|roduction")) %>%
+                            "Other Household Survey [hh/oth]", "Integrated Survey (non-LSMS) [hh/is]"), 
+         !str_detect(title, "mpact|roduction|ensus|oldings|Good Growth Plan|Stock|isheries|ivestock|oultry|Corn|Fish|fish|Avian|Aquaculture|Losses|Conservation|Pesticide|Commodities")) %>%
   select(id, country = nation, iso3c, year = year_end, instrument_name = title, repositoryid, instrument_type, status, source, authoring_entity, 
          study_type, unit_of_analysis, data_kind, universe, producers, authoring_entity_detail, funding_agencies)
 
@@ -191,4 +191,4 @@ ag_filter_info <- read_csv("Output/misc_data/ag_survey_study_info_LN.csv", show_
 agri_survey_filtered <- left_join(agri_survey, ag_filter_info, by = c("study_type", "unit_of_analysis")) |> filter(keep==1)
 
 # export clean dataset
-xlsx::write.xlsx(agri_survey_filtered, "Output/instrument_data_all_years/ag_surveys.xlsx")
+openxlsx::write.xlsx(agri_survey_filtered, "Output/instrument_data_all_years/ag_surveys.xlsx")
