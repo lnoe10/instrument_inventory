@@ -4,6 +4,8 @@ library(httr)
 library(jsonlite)
 library(tidyverse)
 
+setwd("C:/Users/loren/Documents/GitHub/instrument_inventory")
+
 # IHSN https://catalog.ihsn.org/catalog
 # https://catalog.ihsn.org/catalog/export/csv?ps=10000&collection[]=central
 # Import all surveys
@@ -19,6 +21,9 @@ ihsn_raw <- fromJSON(content(GET("https://catalog.ihsn.org/index.php/api/catalog
          source = "https://catalog.ihsn.org/catalog")
 
 # To acquire more metadata with which to filter data, we loop individual survey API calls for their metadata
+
+## Load study descriptions from saved file to check against what other metadata we need
+all_study_metadata <- readRDS("Input/ihsn_metadata.rds")
 
 # Initialize empty dataset
 all_study_metadata <- tibble()
