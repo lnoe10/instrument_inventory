@@ -178,7 +178,7 @@ ihsn <- ihsn_raw %>%
                             "Other",
                             "Sample survey data [ssd], Administrative records data [adm], other",
                             "Event/transaction data [evn]")) |> 
-  select(id, idno, instrument_name = title, country=nation, iso3c, year_start, year_end, repositoryid, type, authoring_entity, authoring_entity_detail, funding_agencies, study_type:producers, status, source)
+  select(id, idno, instrument_name = title, country=nation, iso3c, year_start, year_end, repositoryid, type, authoring_entity, authoring_entity_detail, study_type:data_kind, status, source)
 
 # export distinct data kind / study type groupings for Lorenz to have a look at
 # ihsn |> filter(year_end>=2013)|> group_by(data_kind, study_type) |> summarise(n=n()) |> write.csv("Output/misc_data/data_types_ihsn_2013.csv")
@@ -269,7 +269,7 @@ ihsn_final <- ihsn_final |>
 xlsx::write.xlsx(ihsn_final, "Output/instrument_data_all_years/ihsn.xlsx")
 
 # filter for years of interest (we only classified entries in this time frame)
-ihsn_final <- ihsn_final |> filter((year_start == 2012 & year_end >=2013) | year_start>=2013)
+ihsn_final <- ihsn_final |> filter((year_start == 2015 & year_end >=2016) | year_start>=2015)
 
 # check that all rows have been classified with "keep"
 stopifnot(ihsn_final |> filter(is.na(keep)) |> nrow() == 0)
@@ -278,4 +278,4 @@ stopifnot(ihsn_final |> filter(is.na(keep)) |> nrow() == 0)
 ihsn_final_keep <- ihsn_final |> filter(keep==TRUE)
 
 # export final dataset
-xlsx::write.xlsx(ihsn_final_keep, "Output/instrument_data_ogdi_years/ihsn_2013-2022.xlsx")
+xlsx::write.xlsx(ihsn_final_keep, "Output/instrument_data_ogdi_years/ihsn_2015-2024.xlsx")
