@@ -7,12 +7,13 @@ library(tidyverse)
 # IHSN https://catalog.ihsn.org/catalog
 # https://catalog.ihsn.org/catalog/export/csv?ps=10000&collection[]=central
 # Import all surveys
-ihsn_raw <- fromJSON(content(GET("https://catalog.ihsn.org/index.php/api/catalog/search?ps=10000&from=2000&to=2021"), "text"), flatten = TRUE)$result$rows %>%
+ihsn_raw <- fromJSON(content(GET("https://catalog.ihsn.org/index.php/api/catalog/search?ps=10000&from=2010&to=2024"), "text"), flatten = TRUE)$result$rows %>%
   as_tibble() %>%
   mutate(iso3c = countrycode::countrycode(nation, "country.name", "iso3c"),
          iso3c = case_when(
            nation == "Kosovo" ~ "XKX",
-           nation == "S?n?gal" ~ "SEN",
+           str_detect(nation, "gal") & nation != "Portugal" ~ "SEN",
+           nation == "Micronesia" ~ "FSM",
            TRUE ~ iso3c),
          status = "Completed", 
          source = "https://catalog.ihsn.org/catalog")
