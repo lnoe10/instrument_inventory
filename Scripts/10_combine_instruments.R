@@ -53,8 +53,8 @@ all_surveys_census_filtered <- list(dhs_clean, mics_clean, tus_clean) |>
 #################################################
 
 # incorporating IHSN data
-# import the 2013-2022 IHSN data that Lorenz has manually classified
-ihsn <- readxl::read_xlsx("Output/instrument_data_ogdi_years/ihsn_2013-2022.xlsx")
+# import the 2015-2025 IHSN data
+ihsn <- readxl::read_xlsx("Output/instrument_data_ogdi_years/ihsn_2015-2024.xlsx")
 
 # drop "Good Growth Plan" rows as decided by Tawheeda and Lorenz
 ihsn <- ihsn |> filter(!(authoring_entity=="Syngenta" & str_detect(instrument_name, "Good Growth Plan")))
