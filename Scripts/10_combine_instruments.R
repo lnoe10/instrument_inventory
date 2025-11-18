@@ -13,30 +13,30 @@ census <- readxl::read_xlsx("Output/instrument_data_all_years/census.xlsx") |> m
 
 ######### FILTER FOR OGDI / CENSUS YEARS #########
 
-# 2013-2022 / 2012/13-2021/22 for non-calendar years, 2010 and 2020 census rounds
-dhs_clean <- dhs |> filter(year>=2013 & year<=2022) |> select(-`...1`)
-mics_clean <- mics |> filter(year>=2013 & year<=2022) |> select(-`...1`)
-hies_clean <- hies |> filter(year>=2013 & year<=2022) |> select(-`...1`)
-lfs_clean <- lfs |> filter(year>=2013 & year<=2022) |> select(-`...1`)
-ag_survey_clean <- ag_survey |> filter(year>=2013 & year<=2022) |> select(-`...1`)
-tus_clean <- tus |> filter(year>=2013 & year<=2022) |> select(-`...1`)
-dhs_clean <- dhs |> filter(year>=2013 & year<=2022) |> select(-`...1`)
+# 2015-2024 / 2014/15-2023/24 for non-calendar years, 2020 census rounds
+dhs_clean <- dhs |> filter(year>=2015 & year<=2024)
+mics_clean <- mics |> filter(year>=2015 & year<=2024)
+hies_clean <- hies |> filter(year>=2015 & year<=2024)
+lfs_clean <- lfs |> filter(year>=2015 & year<=2024)
+ag_survey_clean <- ag_survey |> filter(year>=2015 & year<=2024)
+tus_clean <- tus |> filter(year>=2015 & year<=2024) |> select(-`...1`)
+dhs_clean <- dhs |> filter(year>=2015 & year<=2024)
 ag_census_clean <- ag_census |> 
-  filter(census_round==2010|census_round==2020) |> select(-`...1`)
+  filter(census_round==2020) |> select(-`...1`)
 census_clean <- census |> 
-  filter(census_round==2010|census_round==2020) |> select(-`...1`)
+  filter(census_round==2020) |> select(-`...1`)
 
 ##################################################
 
 ###### Export filtered individual datasets ######
-xlsx::write.xlsx(as.data.frame(dhs_clean), "Output/instrument_data_ogdi_years/dhs_2013-2022.xlsx", row.names = FALSE)
-xlsx::write.xlsx(as.data.frame(mics_clean), "Output/instrument_data_ogdi_years/mics_2013-2022.xlsx", row.names = FALSE)
-xlsx::write.xlsx(as.data.frame(hies_clean), "Output/instrument_data_ogdi_years/hies_2013-2022.xlsx", row.names = FALSE)
-xlsx::write.xlsx(as.data.frame(lfs_clean), "Output/instrument_data_ogdi_years/lfs_2013-2022.xlsx", row.names = FALSE)
-xlsx::write.xlsx(as.data.frame(ag_survey_clean), "Output/instrument_data_ogdi_years/ag_survey_2013-2022.xlsx", row.names = FALSE)
-xlsx::write.xlsx(as.data.frame(tus_clean), "Output/instrument_data_ogdi_years/tus_2013-2022.xlsx", row.names = FALSE)
-xlsx::write.xlsx(as.data.frame(ag_census_clean), "Output/instrument_data_ogdi_years/ag_census_2013-2022.xlsx", row.names = FALSE)
-xlsx::write.xlsx(as.data.frame(census_clean), "Output/instrument_data_ogdi_years/census_2013-2022.xlsx", row.names = FALSE)
+xlsx::write.xlsx(as.data.frame(dhs_clean), "Output/instrument_data_ogdi_years/dhs_2015-2024.xlsx", row.names = FALSE)
+xlsx::write.xlsx(as.data.frame(mics_clean), "Output/instrument_data_ogdi_years/mics_2015-2024.xlsx", row.names = FALSE)
+xlsx::write.xlsx(as.data.frame(hies_clean), "Output/instrument_data_ogdi_years/hies_2015-2024.xlsx", row.names = FALSE)
+xlsx::write.xlsx(as.data.frame(lfs_clean), "Output/instrument_data_ogdi_years/lfs_2015-2024.xlsx", row.names = FALSE)
+xlsx::write.xlsx(as.data.frame(ag_survey_clean), "Output/instrument_data_ogdi_years/ag_survey_2015-2024.xlsx", row.names = FALSE)
+xlsx::write.xlsx(as.data.frame(tus_clean), "Output/instrument_data_ogdi_years/tus_2015-2024.xlsx", row.names = FALSE)
+xlsx::write.xlsx(as.data.frame(ag_census_clean), "Output/instrument_data_ogdi_years/ag_census_2015-2024.xlsx", row.names = FALSE)
+xlsx::write.xlsx(as.data.frame(census_clean), "Output/instrument_data_ogdi_years/census_2015-2024.xlsx", row.names = FALSE)
 
 ##################################################
 
