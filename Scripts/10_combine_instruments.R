@@ -120,7 +120,7 @@ ihsn_clean <- ihsn_clean |>
 # this will help with specific instrument filtering later on
 full_instruments_df <- bind_rows(dhs_clean, mics_clean, tus_clean, hies_clean |> mutate(id=as.character(id)), 
                                  lfs_clean |> mutate(year_start = as.numeric(year_start), year_end = as.numeric(year_end)), 
-                                 ag_survey_clean, census_clean, ag_census_clean, ihsn_clean |> select(-keep)) |> 
+                                 ag_survey_clean, census_clean, ag_census_clean, ihsn_clean) |> 
   select(-c(keep, notes, country_original)) |> arrange(country)
 
 # export this dataframe for later use
@@ -175,7 +175,7 @@ filtered_instruments_df_new <- filtered_instruments_df |> group_by(country, year
   mutate(index = 1:n()) |> 
   mutate(both_ihsn = ifelse(all(str_detect(source, "ihsn")), 1, 0),
          one_ihsn = ifelse(both_ihsn==0 & any(str_detect(source, "ihsn")), 1, 0)) |> 
-  select(country:id, authoring_entity, study_type:authoring_entity_detail, census_round, date, index, both_ihsn, one_ihsn, rationale, status_note) |> 
+  select(country:id, authoring_entity, study_type:authoring_entity_detail, census_round, date, index, both_ihsn, one_ihsn, rationale) |> 
   # keep rows that are not a duplicate (i.e. only one item in the group)
   filter((n()==1) | 
            # where there are multiple rows in the group and neither are IHSN, take the first in the group
@@ -271,7 +271,7 @@ filtered_instruments_df_new <- filtered_instruments_df_new |>
 filtered_instruments_df_new  <- filtered_instruments_df_new |> mutate(status = ifelse(str_detect(status, "completed|Complete"), "Completed", status))
 
 ###### export dataframe before doing more filtering ######
-xlsx::write.xlsx(filtered_instruments_df_new |> arrange(country, instrument_name, year), "Output/instrument_inventory_filtered.xlsx")
+xlsx::write.xlsx(filtered_instruments_df_new |> arrange(country, instrument_name, year), "Output/instrument_inventory_filtered_2015_2024.xlsx")
 ##########################################################
 
 ################## read in the dataframe with added "drop" column ##################
