@@ -89,11 +89,13 @@ df_clean <- df |>
          ),
   # Create iso code. Netherlands Antilles will be without code (no longer exists)
   # And therefore will not have any info on lending groups and regions
-  iso3c = countrycode::countrycode(countryname, "country.name", "iso3c"),
+  # drop " (USA)" etc. so territories like "Guam (USA)" match
+  iso3c = countrycode::countrycode(str_remove(countryname, " \\([A-Z]+\\)$"), "country.name", "iso3c"),
   iso3c = case_when(
     countryname == "Eswatini" ~ "SWZ",
     countryname == "Kosovo" ~ "XKX",
     countryname == "Saint-Martin" ~ "MAF",
+    countryname == "Naoero" ~ "NRU",
     TRUE ~ iso3c
   ),
   did_agcensus_take_place = case_when(
@@ -107,3 +109,37 @@ df_clean <- df |>
 
 # Save copy of census scrape to load into main instrument inventory
 saveRDS(df_clean, file = "Input/ag_census_df.rds")
+
+# Instrument inventory file for 10_combine_instruments.R ---------------------
+# Replaces the hand-made 2021 list (Input/wca_2020_2010_notes.csv) used in instrument_inventory_master.R.
+# One row per census: cells listing several censuses in a round ("2016 & 2020 & 2025",
+# "2005/06 & 2010/11") are split, and each census is placed in its end year
+# ("2024/25" -> 2025, "2022-2024" -> 2024), like multi-year surveys elsewhere.
+census_end_year <- function(x) {
+  start <- as.numeric(str_extract(x, "[0-9]{4}"))
+  # trailing year after "/" or "-": two digits ("/25") or four digits ("-2024")
+  end <- str_match(x, "[0-9]{4}\\s*[-/]\\s*([0-9]{2,4})(?![0-9])")[, 2]
+  case_when(
+    is.na(end) ~ start,
+    nchar(end) == 4 ~ as.numeric(end),
+    TRUE ~ floor(start / 100) * 100 + as.numeric(end)
+  )
+}
+
+ag_census_inventory <- df_clean |>
+  filter(ag_census_round %in% c("2010", "2020", "2030"), !is.na(date), date != "") |>
+  separate_longer_delim(date, delim = "&") |>
+  mutate(date = str_squish(date),
+         year = census_end_year(date)) |>
+  filter(!is.na(year)) |>
+  mutate(instrument_name = "Agriculture Census",
+         instrument_type = "Agricultural Survey/Census",
+         # the FAO page lists conducted and scheduled censuses together
+         status = if_else(year < as.numeric(format(Sys.Date(), "%Y")), "Completed", "Planned"),
+         source = ag_census,
+         census_round = ag_census_round) |>
+  select(country, iso3c, year, date, status, instrument_name, instrument_type, source, census_round) |>
+  distinct() |>
+  arrange(country, year)
+
+writexl::write_xlsx(ag_census_inventory, "Output/instrument_data_all_years/ag_census.xlsx")

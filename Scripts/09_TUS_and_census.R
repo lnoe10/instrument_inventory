@@ -69,16 +69,23 @@ tus_final <- readxl::read_excel("Input/tus_all_countries_2013-2022.xlsx", sheet 
 #### 2025 update, keeping old data and using to fill in new data where necessary ####
 # From https://unstats.un.org/UNSDWebsite/demographic-social/time-use/data-and-metadata
 # have to load in via tempfile because we don't have a direct link
+# Since 2026 the UN DESA ArcGIS subscription is disabled and the download returns 403.
+# If it fails, fall back to Input/tus_unsd_2025_snapshot.csv: the Oct 2025 UNSD list
+# (TUSurveyInfo20251009) as merged into tus.xlsx in Nov 2025.
 temp_file <- tempfile(fileext = ".xlsx")
-download.file(
-  url = "https://undesa.maps.arcgis.com/sharing/rest/content/items/3182e4041ff3411990c14b2213b9ada6/data",
-  destfile = temp_file,
-  mode = "wb"
-)
-
-# Read new df from tempfile
-tus_2025 <- readxl::read_excel(temp_file) |>
-  janitor::clean_names()
+tus_2025 <- tryCatch({
+  download.file(
+    url = "https://undesa.maps.arcgis.com/sharing/rest/content/items/3182e4041ff3411990c14b2213b9ada6/data",
+    destfile = temp_file,
+    mode = "wb", quiet = TRUE
+  )
+  # Read new df from tempfile
+  readxl::read_excel(temp_file) |>
+    janitor::clean_names()
+}, error = function(e) {
+  warning("UNSD time use download failed (", conditionMessage(e), "). Using Input/tus_unsd_2025_snapshot.csv")
+  read_csv("Input/tus_unsd_2025_snapshot.csv", show_col_types = FALSE, col_types = cols(.default = "c"))
+})
 
 #Clean up
 unlink(temp_file)
