@@ -5,6 +5,9 @@ library(jsonlite)
 library(tidyverse)
 library(openxlsx)
 
+# idno_core(), title_key() and nada_metadata_for() helpers
+source("Scripts/00_settings.R")
+
 # First get data from API
 agri_survey_raw <- fromJSON(content(GET("https://microdata.fao.org/index.php/api/catalog/search?ps=10000"), "text"), flatten = TRUE)$result$rows |>
   as_tibble() |>
@@ -189,8 +192,17 @@ agri_survey <- agri_survey_raw |>
                             "Population and Housing Census [hh/popcen]", "Living Standards Measurement Study [hh/lsms]", 
                             "Income/Expenditure/Household Survey [hh/ies]", "Socio-Economic/Monitoring Survey [hh/sems]",
                             "Other Household Survey [hh/oth]", "Integrated Survey (non-LSMS) [hh/is]"), 
-         !str_detect(title, "mpact|roduction|ensus|oldings|Good Growth Plan|Stock|isheries|ivestock|oultry|Corn|Fish|fish|Avian|Aquaculture|Losses|Conservation|Pesticide|Commodities")) |>
-  distinct(iso3c, year_end, .keep_all = TRUE) |>
+         !str_detect(title, "mpact|roduction|ensus|oldings|Good Growth Plan|Stock|isheries|ivestock|oultry|Corn|Fish|fish|Avian|Aquaculture|Losses|Conservation|Pesticide|Commodities"),
+         # household surveys filed under agriculture: income/expenditure (Mexico ENIGH), LSMS panels
+         # (Uganda NPS, Malawi IHPS; counted as HIES via the World Bank), women's empowerment and nutrition surveys
+         !str_detect(title, "ncome and Expenditure|Panel Survey|mpowerment and Nutrition")) |>
+  # One row per survey round. Previously one row per country and end year, which merged different
+  # rounds ending in the same year (e.g. Cambodia Agriculture Survey 2020 and 2021, both ending 2021).
+  # A round is identified by its identifier core without module suffix ("GHA_2018_AGRIS-ECO" and
+  # "GHA_2018_AGRIS-LABOUR" are modules of one survey); without an identifier, by country, end year and title.
+  mutate(survey_key = coalesce(str_remove(idno_core(idno), "-[A-Z]+$"),
+                               str_c(iso3c, "_", year_end, "_", title_key(title, iso3c)))) |>
+  distinct(iso3c, survey_key, .keep_all = TRUE) |>
   select(id, idno, country = nation, iso3c, year = year_end, instrument_name = title, repositoryid, instrument_type, status, source, authoring_entity, 
          study_type, unit_of_analysis, data_kind, universe, producers, authoring_entity_detail, funding_agencies)
 
