@@ -362,5 +362,13 @@ df_final <- df |> mutate(year = case_when(str_detect(coalesce(drop, ""), year_fi
   # year corrections above can move a survey out of the window; censuses are kept by round
   filter(instrument_type == "Census" | !is.na(census_round) | in_window(year))
 
+# Phone, COVID and high-frequency surveys are not counted, whatever the source or earlier manual
+# classification (2026 review: 17 such surveys were counted as HIES or health surveys).
+phone_covid <- regex("phone survey|high[- ]frequency|covid", ignore_case = TRUE)
+phone_covid_dropped <- df_final |> filter(instrument_type != "Census", str_detect(instrument_name, phone_covid))
+writexl::write_xlsx(phone_covid_dropped |> select(country, iso3c, year, instrument_name, instrument_type, source),
+                    str_c("Output/misc_data/phone_covid_surveys_dropped_", WINDOW_LABEL, ".xlsx"))
+df_final <- df_final |> filter(instrument_type == "Census" | !str_detect(instrument_name, phone_covid))
+
 df_final |>
   writexl::write_xlsx(str_c("Output/instrument_inventory_final_", str_replace(WINDOW_LABEL, "-", "_"), ".xlsx"), format_headers = FALSE)
