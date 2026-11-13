@@ -155,6 +155,8 @@ ihsn_remaining <- list("Output/misc_data/ihsn_unclassified_LN.xlsx", ihsn_review
   map(\(f) readxl::read_xlsx(f, col_types = "text")) |>
   bind_rows() |>
   filter(!is.na(keep)) |>
+  # in the review file, a row confirmed without an instrument_type takes the rule's suggested type
+  mutate(instrument_type = coalesce(instrument_type, if ("suggested_type" %in% names(pick(everything()))) suggested_type else NA_character_)) |>
   # to avoid merging issues, convert text NA to actual NA, and remove extra whitespace
   mutate(across(everything(), ~ ifelse(.x=="NA", NA, .x))) |>
   mutate(across(everything(), ~ str_squish(.x))) |>
@@ -179,8 +181,9 @@ ihsn_final <- left_join(ihsn_keep_all |>
   select(-c(keep_remaining, rationale_remaining, instrument_type_remaining))
 
 # standardize "keep" classification to logical true/false
-ihsn_final <- ihsn_final |> mutate(keep = case_when(keep %in% c("Yes", "1") ~ TRUE,
-                                                    keep %in% c("No", "0") ~ FALSE))
+# (Yes/No, 1/0, or TRUE/FALSE as Excel writes them)
+ihsn_final <- ihsn_final |> mutate(keep = case_when(str_to_lower(keep) %in% c("yes", "1", "true") ~ TRUE,
+                                                    str_to_lower(keep) %in% c("no", "0", "false") ~ FALSE))
 
 # standardize instrument type naming with those in the rest of the instrument inventory data
 ihsn_final <- ihsn_final |> 
