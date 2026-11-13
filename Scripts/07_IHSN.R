@@ -6,10 +6,13 @@ library(tidyverse)
 
 setwd("C:/Users/loren/Documents/GitHub/instrument_inventory")
 
+# Reference window (WINDOW_START, WINDOW_END, WINDOW_LABEL)
+source("Scripts/00_settings.R")
+
 # IHSN https://catalog.ihsn.org/catalog
 # https://catalog.ihsn.org/catalog/export/csv?ps=10000&collection[]=central
 # Import all surveys
-ihsn_raw <- fromJSON(content(GET("https://catalog.ihsn.org/index.php/api/catalog/search?ps=10000&from=2010&to=2024"), "text"), flatten = TRUE)$result$rows %>%
+ihsn_raw <- fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/search?ps=10000&from=2010&to=", WINDOW_END)), "text"), flatten = TRUE)$result$rows %>%
   as_tibble() %>%
   mutate(iso3c = countrycode::countrycode(nation, "country.name", "iso3c"),
          iso3c = case_when(
@@ -266,10 +269,11 @@ ihsn_final <- ihsn_final |>
                                      .default = instrument_type))
 
 # export full dataset for all years, overwriting old one with updated information
-xlsx::write.xlsx(ihsn_final, "Output/instrument_data_all_years/ihsn.xlsx")
+writexl::write_xlsx(ihsn_final, "Output/instrument_data_all_years/ihsn.xlsx")
 
 # filter for years of interest (we only classified entries in this time frame)
-ihsn_final <- ihsn_final |> filter((year_start == 2015 & year_end >=2016) | year_start>=2015)
+# Multi-year studies are placed in their end year, as in 10_combine_instruments.R
+ihsn_final <- ihsn_final |> filter(in_window(year_end))
 
 # check that all rows have been classified with "keep"
 stopifnot(ihsn_final |> filter(is.na(keep)) |> nrow() == 0)
@@ -278,4 +282,4 @@ stopifnot(ihsn_final |> filter(is.na(keep)) |> nrow() == 0)
 ihsn_final_keep <- ihsn_final |> filter(keep==TRUE)
 
 # export final dataset
-xlsx::write.xlsx(ihsn_final_keep, "Output/instrument_data_ogdi_years/ihsn_2015-2024.xlsx")
+writexl::write_xlsx(ihsn_final_keep, str_c("Output/instrument_data_ogdi_years/ihsn_", WINDOW_LABEL, ".xlsx"))

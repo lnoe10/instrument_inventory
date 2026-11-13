@@ -111,7 +111,7 @@ tus_full <- tus_full |>
   arrange(iso3c, year)
 
 # export clean dataset
-xlsx::write.xlsx(tus_full, "Output/instrument_data_all_years/tus.xlsx")
+writexl::write_xlsx(tus_full, "Output/instrument_data_all_years/tus.xlsx")
 
 # Census - UNSD -----------------------------------------------------------
 
@@ -157,4 +157,4 @@ census <- readRDS("Input/census_dates_df.rds") |>
 #  select(-status) |> rename(status = updated_status, status_note = updated_status_note)
 
 # export census dataset
-xlsx::write.xlsx(census, "Output/instrument_data_all_years/census.xlsx")
+writexl::write_xlsx(census, "Output/instrument_data_all_years/census.xlsx")
