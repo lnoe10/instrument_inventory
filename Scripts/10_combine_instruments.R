@@ -182,7 +182,7 @@ filtered_instruments_df <- left_join(filtered_instruments_df, keyword_matches, b
 # we need to drop rows with possible duplicates that weren't previously identified
 # grab # of rows of distinct country/year/instrument_name combos by counting # of rows where index for that group == 1
 # this is the # of rows we want to have after we do our filtering for duplicates, so save it and we will check against this after filtering
-nrow_distinct <- filtered_instruments_df |> group_by(country, year, instrument_name) |> mutate(index = 1:n()) |> filter(index==1) |> nrow()
+nrow_distinct <- filtered_instruments_df |> group_by(country, year, instrument_name) |> mutate(index = seq_len(n())) |> filter(index==1) |> nrow()
 
 # there are duplicate Ag Censuses for Congo and Cote d'Ivoire we identified (rows have diff census rounds, correct one is 2020) - let's fix those manually here
 filtered_instruments_df <- filtered_instruments_df |> 
@@ -192,7 +192,7 @@ filtered_instruments_df <- filtered_instruments_df |>
 
 # group by country, year and instrument name, and choose the first available - where IHSN is one of the entries, choose the row from the other source
 filtered_instruments_df_new <- filtered_instruments_df |> group_by(country, year, instrument_name) |>
-  mutate(index = 1:n()) |> 
+  mutate(index = seq_len(n())) |> 
   mutate(both_ihsn = ifelse(all(str_detect(source, "ihsn")), 1, 0),
          one_ihsn = ifelse(both_ihsn==0 & any(str_detect(source, "ihsn")), 1, 0)) |> 
   select(country:id, authoring_entity, study_type:authoring_entity_detail, census_round, date, index, both_ihsn, one_ihsn, rationale) |> 
@@ -235,7 +235,7 @@ waves <- readxl::read_xlsx("Output/misc_data/waves.xlsx", sheet=1)
 # update), so only rows that match the current data enter the expected count
 nrows_waves_collapsed <- nrow(filtered_instruments_df_new)-(waves |> filter(`combined?`=="yes") |>
                                                               semi_join(filtered_instruments_df_new, by=c("country", "iso3c", "year", "status", "instrument_name", "instrument_type")) |>
-                                                              group_by(country, combined_title) |> mutate(index=1:n()) |> filter(index!=1) |> nrow())
+                                                              group_by(country, combined_title) |> mutate(index = seq_len(n())) |> filter(index!=1) |> nrow())
 
 # we want to keep the rows where combined?==no, and then keep one of the rows from each country/year/combined_title grouping when combined?==yes
 filtered_instruments_df_new <- left_join(filtered_instruments_df_new, waves, 
@@ -244,7 +244,7 @@ filtered_instruments_df_new <- left_join(filtered_instruments_df_new, waves,
   mutate(instrument_name = ifelse(!is.na(wave_or_round) & `combined?`=="yes", combined_title, instrument_name)) |>
   group_by(country, instrument_name, combined_title, `combined?`) |> 
   # create index for groupings
-  mutate(index = 1:n()) |> 
+  mutate(index = seq_len(n())) |> 
   # create boolean keep variable to maintain rows where wave/round wasn't detected in the name, rows where wave/round was detected but we do not want to collapse,
   # and the first instrument belonging to each group of rows which we want to collapse together (we do this to maintain metadata for that instrument)
   mutate(keep = case_when(`combined?`=="no" ~ TRUE,
@@ -308,6 +308,10 @@ manual_drop <- readxl::read_xlsx("Output/instrument_inventory_filtered_deduped.x
   select(country, iso3c, year, instrument_name, instrument_type, drop) |>
   mutate(year = as.character(year), drop = as.character(drop)) |>
   filter(!is.na(drop)) |>
+  # LFS now comes from ILOSTAT (one row per country, survey and year). The 2023 decisions dropped
+  # "Labour Force Survey <year>" where the ILO catalogue also had "EU Labour Force Survey <year>";
+  # applied to ILOSTAT names they would delete the only row (e.g. Poland, Switzerland 2016-2021).
+  filter(instrument_type != "Labour Force Survey") |>
   distinct(country, iso3c, year, instrument_name, instrument_type, .keep_all = TRUE)
 
 df <- filtered_instruments_df_new |>
