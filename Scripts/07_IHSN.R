@@ -193,33 +193,42 @@ ihsn_final <- ihsn_final |>
                                      instrument_type=="Household health survey" ~ "Household Health Survey",
                                      .default = instrument_type))
 
-# export full dataset for all years, overwriting old one with updated information
-writexl::write_xlsx(ihsn_final, "Output/instrument_data_all_years/ihsn.xlsx")
+# Studies without a manual classification are classified by rule (classify_by_rules() in 00_settings.R).
+# Manual classifications (the *_LN files and the review file) always take precedence.
+ihsn_final <- ihsn_final |>
+  bind_cols(classify_by_rules(ihsn_final$instrument_name, ihsn_final$study_type, ihsn_final$data_kind)) |>
+  mutate(classified_by = if_else(is.na(keep), "rule", "manual"),
+         instrument_type = if_else(is.na(keep), auto_type, instrument_type),
+         rationale = if_else(is.na(keep), str_c("auto: ", rule), rationale),
+         keep = if_else(is.na(keep), auto_keep, keep))
+stopifnot(!anyNA(ihsn_final$keep))
 
-# filter for years of interest (we only classified entries in this time frame)
+# export full dataset for all years, overwriting old one with updated information
+writexl::write_xlsx(ihsn_final |> select(-c(auto_keep, auto_type)), "Output/instrument_data_all_years/ihsn.xlsx")
+
+# filter for years of interest
 # Multi-year studies are placed in their end year, as in 10_combine_instruments.R
 ihsn_final <- ihsn_final |> filter(in_window(year_end))
 
-# check that all rows have been classified with "keep". Rows that are not get added to the review file
-# (one row per distinct name/universe/unit/data kind, as before) and are left out until classified.
-unclassified <- ihsn_final |> filter(is.na(keep))
-if (nrow(unclassified) > 0) {
-  existing_review <- if (file.exists(ihsn_review_file)) readxl::read_xlsx(ihsn_review_file, col_types = "text") else tibble()
-  new_review <- unclassified |>
-    select(id, idno, instrument_name, country, year_start, year_end, universe, unit_of_analysis, data_kind,
-           authoring_entity_detail, study_type, study_scope, source) |>
-    group_by(across(all_of(review_key))) |>
-    slice(1) |>
-    ungroup() |>
-    # add id to link so specific instrument's catalog webpage is more accessible
-    mutate(source = paste0(source, "/", id), keep = NA_character_, instrument_type = NA_character_, rationale = NA_character_) |>
-    mutate(across(everything(), as.character))
-  if (nrow(existing_review) > 0) new_review <- anti_join(new_review, existing_review, by = review_key)
-  # never overwrite classifications already entered: only append rows not yet in the file
-  writexl::write_xlsx(bind_rows(existing_review, new_review) |> arrange(country, instrument_name), ihsn_review_file)
-  warning(nrow(unclassified), " IHSN studies in the window are not classified yet and are left out. ",
-          "Classify them in ", ihsn_review_file, " (", nrow(new_review), " rows added) and rerun.")
-}
+# Review file: rule-classified studies in the window that should be checked by hand (scored types and
+# borderline titles), one row per distinct name/universe/unit/data kind. The rule's suggestion is applied
+# until keep is filled in. Rows already filled in are never overwritten; unfilled rows are regenerated.
+to_check <- ihsn_final |>
+  filter(classified_by == "rule", needs_check) |>
+  select(id, idno, instrument_name, country, year_start, year_end, universe, unit_of_analysis, data_kind,
+         authoring_entity_detail, study_type, study_scope, source, rule, suggested_keep = auto_keep, suggested_type = auto_type) |>
+  group_by(across(all_of(review_key))) |>
+  slice(1) |>
+  ungroup() |>
+  # add id to link so specific instrument's catalog webpage is more accessible
+  mutate(source = paste0(source, "/", id), keep = NA_character_, instrument_type = NA_character_, rationale = NA_character_) |>
+  mutate(across(everything(), as.character))
+existing_review <- if (file.exists(ihsn_review_file)) readxl::read_xlsx(ihsn_review_file, col_types = "text") |> filter(!is.na(keep)) else tibble()
+if (nrow(existing_review) > 0) to_check <- anti_join(to_check, existing_review, by = review_key)
+writexl::write_xlsx(bind_rows(existing_review, to_check) |> arrange(country, instrument_name), ihsn_review_file)
+message(nrow(to_check), " IHSN entries to check in ", ihsn_review_file, " (rule suggestion used until filled in)")
+
+ihsn_final <- ihsn_final |> select(-c(rule, auto_keep, auto_type, needs_check))
 
 # filter for only rows where keep is TRUE
 ihsn_final_keep <- ihsn_final |> filter(keep==TRUE)

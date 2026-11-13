@@ -151,6 +151,15 @@ lsms <- lsms_raw %>%
   # Keep relevant variables
   select(id, idno, country = nation, iso3c, year, instrument_name = title, instrument_type, status, source, study_type, authoring_entity, repositoryid, data_kind, unit_of_analysis, authoring_entity_detail)
 
+# Drop phone, refugee and impact evaluation collections, and studies that the shared drop rules
+# (classify_by_rules() in 00_settings.R, rules "A") identify as monitoring/evaluation/opinion/project etc.
+# Studies in the LSMS collection itself are always kept.
+lsms <- lsms |>
+  mutate(wb_rule = classify_by_rules(instrument_name, study_type, data_kind)$rule) |>
+  filter(!repositoryid %in% c("hfps", "unhcr", "impact_evaluation"),
+         repositoryid == "lsms" | !startsWith(wb_rule, "A")) |>
+  select(-wb_rule)
+
 # export the clean dataset
 openxlsx::write.xlsx(lsms, "Output/instrument_data_all_years/lsms.xlsx")
 

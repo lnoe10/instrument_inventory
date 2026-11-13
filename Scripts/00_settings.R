@@ -104,6 +104,67 @@ nada_metadata_for <- function(ids, api_calls, pause = 0.1) {
   }, .progress = TRUE)
 }
 
+# Rule-based classification of catalogue studies -------------------------------------
+# Used for IHSN studies that no manual review covers (07_IHSN.R) and to drop monitoring,
+# phone, evaluation etc. studies from the World Bank list (03_HIES.R). Rules apply in order:
+#   A drop: sample frames, population censuses / IPUMS extracts, data that is not sample
+#           survey data, and titles that point to evaluations, monitoring, opinion, phone,
+#           project, refugee, enterprise, school/facility surveys etc.
+#   B not counted: labour force surveys (ILOSTAT is the LFS source)
+#   C keep as one of the scored types (title-based) -> flagged for a manual check
+#   D other household survey, not one of the scored types -> not kept
+# Returns rule, auto_keep, auto_type and needs_check (TRUE for C and a few borderline titles).
+classify_by_rules <- function(title, study_type, data_kind) {
+  rx <- function(...) stringr::regex(paste(c(...), collapse = "|"), ignore_case = TRUE)
+  t <- dplyr::coalesce(title, "")
+  st <- dplyr::coalesce(study_type, "")
+  dk <- dplyr::coalesce(data_kind, "")
+  drop_title <- rx("impact", "evaluation", "baseline", "base line", "endline", "end-line", "midline", "mid-line", "follow-?up survey",
+                   "monitoring", "assessment", "opinion", "poll", "barometer", "perception", "attitude", "high[- ]frequency",
+                   "phone survey", "telephone", "covid", "rapid", "pilot", "refugee", "displaced", "\\bidp", "beneficiar", "project",
+                   "programme", "program\\b", "enterprise", "\\bfirms?\\b", "business", "establishment", "school", "student", "teacher",
+                   "facility", "provider", "market", "price", "trader", "listing", "census of", "sample frame",
+                   "world values", "gallup", "findex", "global", "multi-country", "experiment", "trial", "randomi", "lottery",
+                   "kap survey", "knowledge, attitudes", "post-distribution", "humanitarian", "migrants?\\b", "returnees", "\\bcamps?\\b",
+                   "food insecurity experience scale", "promotion of", "climate smart", "longitudinal", "invasion")
+  not_ssd <- rx("\\[(obs|evn|adm|agg|cli|pro)\\]", "observation data", "event/transaction", "administrative records",
+                "aggregate data", "clinical data", "process-produced")
+  lfs <- rx("labou?r force", "employment", "empleo", "\\bemploi\\b", "fuerza (de trabajo|laboral)", "\\blfs\\b", "travail")
+  tus <- rx("time use", "time-use", "uso del tiempo", "emploi du temps", "time budget")
+  health <- rx("demographic and health", "\\bdhs\\b", "multiple indicator", "\\bmics\\b", "family health survey", "\\bendes\\b",
+               "ensanut", "national health and nutrition", "health and nutrition survey", "household health survey", "health survey",
+               "demograf[ií]a y salud")
+  ag <- rx("agricultur", "agro", "farm", "crop", "livestock", "agrisurvey", "50x2030", "fisher", "rural household")
+  hies <- rx("income and expenditure", "income, consumption", "expenditure and consumption", "household budget", "\\bhbs\\b",
+             "\\bhies\\b", "\\bhices?\\b", "living standards", "living conditions", "conditions de vie", "condiciones de vida",
+             "integrated household survey", "consumption survey", "consommation", "ingresos y gastos", "presupuestos familiares",
+             "eicv", "enigh", "socio-?economic survey", "welfare monitoring survey", "core welfare", "cwiq", "harmonized survey on household",
+             "encuesta de hogares")
+  food_diet <- rx("food consumption", "dietary", "nutrition", "food insecurity")
+  borderline <- rx("general household survey", "quality of life", "socio-?economic survey", "childcare")
+  rule <- dplyr::case_when(
+    stringr::str_detect(st, rx("sf/hh", "sample frame", "echantillon de r")) ~ "A drop: sample frame",
+    stringr::str_detect(st, rx("popcen", "census")) | stringr::str_detect(t, rx("population (and housing )?census", "ipums")) ~ "A drop: population census / IPUMS extract",
+    stringr::str_detect(dk, not_ssd) ~ "A drop: not sample survey data",
+    stringr::str_detect(st, rx("lfs", "fuerza", "labou?r force")) | stringr::str_detect(t, lfs) ~ "B not counted: labour force (ILOSTAT is the LFS source)",
+    stringr::str_detect(t, drop_title) ~ "A drop: evaluation/monitoring/opinion/phone/project/refugee/enterprise etc.",
+    stringr::str_detect(t, tus) ~ "C Time Use Survey",
+    stringr::str_detect(t, health) ~ "C Household Health Survey",
+    stringr::str_detect(t, ag) ~ "C Agricultural Survey/Census",
+    (stringr::str_detect(t, hies) | stringr::str_detect(st, rx("hh/ies", "lsms"))) & !stringr::str_detect(t, food_diet) ~ "C HIES",
+    TRUE ~ "D other household survey, not a scored type"
+  )
+  tibble::tibble(
+    rule = rule,
+    auto_keep = startsWith(rule, "C"),
+    auto_type = dplyr::case_when(startsWith(rule, "C") ~ sub("^C ", "", rule),
+                                 startsWith(rule, "B") ~ "LFS",
+                                 startsWith(rule, "D") ~ "Other household survey",
+                                 TRUE ~ NA_character_),
+    needs_check = startsWith(rule, "C") | stringr::str_detect(t, borderline)
+  )
+}
+
 # ILOSTAT survey sources --------------------------------------------------------
 # Used by 03_HIES.R and 04_LFS.R after the ILO Survey Catalogue was retired (2026).
 # Every annual ILOSTAT observation is tagged with its source survey, e.g. "LFS - EU Labour Force Survey"

@@ -111,7 +111,10 @@ ihsn_clean <- ihsn_clean |>
                              "Encuesta de empleo [hh/lfs]",
                              "Labor Force Survey",
                              "Labor Force Survey [hh/lfs]",
-                             "Labour Force Survey [hh/lfs]")))
+                             "Labour Force Survey [hh/lfs]"))) |>
+  # labour force surveys now come only from ILOSTAT (04_LFS.R); drop IHSN studies classified as LFS
+  # (manually or by rule) so they are not counted twice
+  filter(!instrument_type %in% "LFS")
 
 # export clean ihsn data
 # xlsx::write.xlsx(as.data.frame(ihsn_clean), "Output/instrument_data_ogdi_years/ihsn_2013-2022.xlsx", row.names = FALSE)
