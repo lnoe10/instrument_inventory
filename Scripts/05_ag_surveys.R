@@ -191,7 +191,7 @@ agri_survey <- agri_survey_raw |>
                             "Other Household Survey [hh/oth]", "Integrated Survey (non-LSMS) [hh/is]"), 
          !str_detect(title, "mpact|roduction|ensus|oldings|Good Growth Plan|Stock|isheries|ivestock|oultry|Corn|Fish|fish|Avian|Aquaculture|Losses|Conservation|Pesticide|Commodities")) |>
   distinct(iso3c, year_end, .keep_all = TRUE) |>
-  select(id, country = nation, iso3c, year = year_end, instrument_name = title, repositoryid, instrument_type, status, source, authoring_entity, 
+  select(id, idno, country = nation, iso3c, year = year_end, instrument_name = title, repositoryid, instrument_type, status, source, authoring_entity, 
          study_type, unit_of_analysis, data_kind, universe, producers, authoring_entity_detail, funding_agencies)
 
 # export clean dataset

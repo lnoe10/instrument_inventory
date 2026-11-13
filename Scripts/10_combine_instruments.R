@@ -116,6 +116,16 @@ ihsn_clean <- ihsn_clean |>
   # (manually or by rule) so they are not counted twice
   filter(!instrument_type %in% "LFS")
 
+# drop IHSN studies that duplicate an FAO ag survey or a World Bank/ILO income/expenditure survey listed
+# under a different title or year (same identifier core, or same country/type/end year and near-identical
+# title; find_cross_source_duplicates() in 00_settings.R). E.g. IHSN "Agriculture Survey 2023" =
+# FAO "Cambodia Agriculture Survey 2023". Matches are exported for checking.
+cross_source_ref <- bind_rows(ag_survey_clean |> select(iso3c, year, instrument_type, instrument_name, idno),
+                              hies_clean |> mutate(idno = as.character(idno)) |> select(iso3c, year, instrument_type, instrument_name, idno))
+ihsn_cross_dups <- find_cross_source_duplicates(ihsn_clean, cross_source_ref)
+writexl::write_xlsx(ihsn_cross_dups |> select(-.row), str_c("Output/misc_data/ihsn_cross_source_duplicates_", WINDOW_LABEL, ".xlsx"))
+ihsn_clean <- ihsn_clean |> filter(!row_number() %in% ihsn_cross_dups$.row)
+
 # export clean ihsn data
 # xlsx::write.xlsx(as.data.frame(ihsn_clean), "Output/instrument_data_ogdi_years/ihsn_2013-2022.xlsx", row.names = FALSE)
 

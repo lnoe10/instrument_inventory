@@ -165,6 +165,52 @@ classify_by_rules <- function(title, study_type, data_kind) {
   )
 }
 
+# Cross-source duplicates ------------------------------------------------------------
+# The same survey is often listed by IHSN and by a specialised catalogue (FAO, World Bank, ILO)
+# under a different title or year, e.g. IHSN "Agriculture Survey 2023" and FAO "Cambodia
+# Agriculture Survey 2023". A row in `x` (IHSN) duplicates a row in `ref` (other sources) if
+#   (a) the identifier core matches: ISO_YEAR_CODE without version/language suffixes
+#       ("KHM_2021_CAS_v01_EN_M_v01_A_ESS" -> "KHM_2021_CAS"), or
+#   (b) same country, same instrument type and same end year, and titles that are near-identical
+#       once country names, years and punctuation are removed (similarity >= min_sim).
+# Both need columns iso3c, year, instrument_type, instrument_name, idno.
+# Returns x's rows that are duplicates, with the matching ref row and how they matched.
+idno_core <- function(idno) {
+  core <- toupper(idno)
+  core <- sub("_V[0-9].*$", "", core)
+  core <- gsub("_(EN|FR|ES|PT|AR|RU)(?=_|$)", "", core, perl = TRUE)
+  ifelse(grepl("^[A-Z]{3}_[0-9]{4}", core), core, NA_character_)
+}
+
+title_key <- function(title, iso3c) {
+  country <- countrycode::countrycode(iso3c, "iso3c", "country.name", warn = FALSE)
+  t <- tolower(title)
+  t <- mapply(function(s, cn) if (is.na(cn)) s else gsub(tolower(cn), " ", s, fixed = TRUE), t, country, USE.NAMES = FALSE)
+  t <- gsub("[0-9]{4}(\\s*[-/]\\s*[0-9]{2,4})?", " ", t)
+  t <- gsub("[^a-z ]", " ", t)
+  trimws(gsub("\\s+", " ", t))
+}
+
+find_cross_source_duplicates <- function(x, ref, min_sim = 0.85) {
+  prep <- function(d) d |>
+    dplyr::transmute(iso3c, end_year = end_year(year), instrument_type, instrument_name, idno,
+                     core = idno_core(idno), key = title_key(instrument_name, iso3c))
+  xp <- prep(x) |> dplyr::mutate(.row = dplyr::row_number())
+  rp <- prep(ref)
+  by_idno <- dplyr::inner_join(xp |> dplyr::filter(!is.na(core)), rp |> dplyr::filter(!is.na(core)),
+                               by = "core", suffix = c("", "_ref"), relationship = "many-to-many") |>
+    dplyr::mutate(match = "identifier")
+  by_title <- dplyr::inner_join(xp, rp, by = c("iso3c", "instrument_type", "end_year"),
+                                suffix = c("", "_ref"), relationship = "many-to-many") |>
+    dplyr::mutate(sim = 1 - mapply(function(a, b) utils::adist(a, b)[1, 1], key, key_ref) / pmax(nchar(key), nchar(key_ref), 1)) |>
+    dplyr::filter(key != "", sim >= min_sim) |>
+    dplyr::mutate(match = "title")
+  dplyr::bind_rows(by_idno, by_title) |>
+    dplyr::distinct(.row, .keep_all = TRUE) |>
+    dplyr::select(.row, iso3c, end_year, instrument_type, instrument_name, idno, match,
+                  ref_name = instrument_name_ref, ref_idno = idno_ref, ref_year = dplyr::any_of("end_year_ref"))
+}
+
 # ILOSTAT survey sources --------------------------------------------------------
 # Used by 03_HIES.R and 04_LFS.R after the ILO Survey Catalogue was retired (2026).
 # Every annual ILOSTAT observation is tagged with its source survey, e.g. "LFS - EU Labour Force Survey"
