@@ -8,6 +8,11 @@ source("Scripts/00_settings.R")
 # Instrument inventory from Github repository instrument inventory (written by 10_combine_instruments.R)
 instrument_inventory <- readxl::read_excel(str_c("Output/instrument_inventory_final_", str_replace(WINDOW_LABEL, "-", "_"), ".xlsx"))
 
+# UNSD M49 country list and regions
+unsd_codes <- readxl::read_excel("Input/unsd_codes.xlsx") |>
+  janitor::clean_names() |>
+  filter(!is.na(iso_alpha3_code))
+
 # Instruments that count towards the scores
 counted_instruments <- instrument_inventory |>
   filter(!is.na(iso3c)) |>
@@ -39,12 +44,10 @@ indicator_notes <- tibble(instrument_type = names(STANDARDS), standard = unname(
 # Compute instrument threshold achievement per country per survey type
 survey_scores <- counted_instruments |>
   count(iso3c, instrument_type, name = "count_surveys") |>
-  # every country with at least one survey of the scored types in the inventory gets a row for
-  # every indicator, 0 where nothing counted. Countries that only appear through a population
-  # census (mostly small territories) are left out, as in earlier releases.
-  right_join(expand_grid(iso3c = instrument_inventory |>
-                           filter(instrument_type %in% names(STANDARDS), !is.na(iso3c)) |>
-                           distinct(iso3c) |> pull() |> sort(),
+  # full country list (see 00_settings.R): every country gets a row for every indicator,
+  # 0 where nothing counted. Country cuts happen at the end of this script.
+  right_join(expand_grid(iso3c = sort(union(unsd_codes$iso_alpha3_code,
+                                            c("XKX", "TWN", na.omit(instrument_inventory$iso3c)))),
                          instrument_type = names(STANDARDS)),
              by = c("iso3c", "instrument_type")) |>
   left_join(indicator_notes, by = "instrument_type") |>
@@ -66,9 +69,7 @@ survey_scores <- counted_instruments |>
 # Export data for clearinghouse - Country level
 survey_country <- survey_scores |>
   mutate(indicator_value_raw = pmin(indicator_value_raw, 10)) |>
-  left_join(readxl::read_excel("Input/unsd_codes.xlsx") |>
-              janitor::clean_names() |>
-              select(country_code = iso_alpha3_code, region = region_name),
+  left_join(unsd_codes |> select(country_code = iso_alpha3_code, region = region_name),
             by = "country_code") |>
   mutate(region = case_when(
     country_code == "ANT" ~ "Americas",
@@ -83,6 +84,11 @@ survey_country <- survey_scores |>
     TRUE ~ country
   )) |>
   select(country, country_code, indicator_name, number_of_surveys = indicator_value_raw, percent_complete = indicator_score, standard, region)
+
+# Country cuts: the only place countries are removed (COUNTRY_EXCLUDE in 00_settings.R).
+# Done before the region averages so they cover the same countries as the published table.
+survey_country <- survey_country |>
+  filter(!country_code %in% COUNTRY_EXCLUDE)
 
 # Export data for clearinghouse - Region level
 survey_region <- survey_country |>

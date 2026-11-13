@@ -24,6 +24,12 @@ STANDARDS <- c(
   "Time Use Survey" = 2
 )
 
+# Country list: every UNSD M49 country/area (Input/unsd_codes.xlsx) plus Kosovo, Taiwan and any
+# other code found in the inventory gets a row, with 0 where no instrument is found.
+# Countries to leave out of the final table are applied in one step at the very end of
+# 11_survey_type_threshold_scoring.R. Add ISO3 codes here once the cuts are decided.
+COUNTRY_EXCLUDE <- c("ATA")  # Antarctica
+
 # End year of a year string such as "2019", "2018-2019" or "2014-2016"
 end_year <- function(year) {
   suppressWarnings(as.numeric(sub(".*([0-9]{4})$", "\\1", as.character(year))))
