@@ -7,40 +7,18 @@
 # and year in which ILOSTAT has data from that survey. Quarterly/monthly rounds of the same survey
 # in a year therefore count once, as one annual LFS.
 
-library(httr)
 library(tidyverse)
 
-# Annual indicators that are mostly derived from labour force surveys. A survey-year counts if it
-# appears as source for any of them.
-ilostat_indicators <- c(
-  "EAP_TEAP_SEX_AGE_NB_A",  # labour force by sex and age
-  "EMP_TEMP_SEX_AGE_NB_A",  # employment by sex and age
-  "UNE_DEAP_SEX_AGE_RT_A"   # unemployment rate by sex and age
-)
+# ilostat_sources() helper (download + cache in Input/ilostat_sources.rds)
+source("Scripts/00_settings.R")
 
-get_ilostat_sources <- function(id) {
-  f <- tempfile(fileext = ".csv")
-  on.exit(unlink(f))
-  r <- GET(str_c("https://rplumber.ilo.org/data/indicator/?id=", id, "&lang=en&type=label&format=.csv&channel=ilostat"),
-           write_disk(f, overwrite = TRUE), timeout(600))
-  stop_for_status(r)
-  read_csv(f, show_col_types = FALSE, col_select = c(ref_area.label, source.label, time)) |>
-    distinct() |>
-    mutate(indicator = id)
-}
+# cached download, shared with 03_HIES.R
+ilostat <- ilostat_sources()
 
-ilostat_sources <- map_dfr(ilostat_indicators, get_ilostat_sources)
-
-lfs_all <- ilostat_sources |>
-  # source type is the prefix of the source label: LFS, HIES, HS (other household survey), PC (census), ...
-  mutate(source_type = str_extract(source.label, "^[A-Z]+(?= - )")) |>
-  filter(source_type == "LFS") |>
-  group_by(country = ref_area.label, survey = str_remove(source.label, "^LFS - "), year = as.numeric(time)) |>
+lfs_all <- ilostat |>
+  filter(source_type == "LFS", !is.na(iso3c)) |>
+  group_by(country = ref_area.label, iso3c, survey = str_remove(source.label, "^LFS - "), year = as.numeric(time)) |>
   summarise(indicators = str_c(sort(unique(indicator)), collapse = ", "), .groups = "drop") |>
-  mutate(iso3c = countrycode::countrycode(country, "country.name", "iso3c", warn = FALSE),
-         iso3c = case_when(country == "Kosovo" ~ "XKX", country == "Netherlands Antilles" ~ "ANT", TRUE ~ iso3c)) |>
-  # drop regional aggregates
-  filter(!is.na(iso3c)) |>
   mutate(year_start = year,
          year_end = year,
          instrument_name = str_c(survey, " ", year),

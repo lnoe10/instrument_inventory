@@ -40,3 +40,69 @@ in_window <- function(year) {
   y <- end_year(year)
   !is.na(y) & y >= WINDOW_START & y <= WINDOW_END
 }
+
+# NADA catalogue search with paging ---------------------------------------------
+# Some NADA catalogues cap the page size (World Bank microdata returns at most 100 rows per
+# request since 2026, whatever ps is set to), so fetch page by page until all `found` rows are in.
+# base: catalogue root, e.g. "https://microdata.worldbank.org"; query: extra search parameters.
+nada_search <- function(base, query = list(), ps = 100, pause = 0.2) {
+  get_page <- function(page) {
+    r <- httr::GET(paste0(base, "/index.php/api/catalog/search"),
+                   query = c(query, list(ps = ps, page = page)), httr::timeout(120))
+    httr::stop_for_status(r)
+    jsonlite::fromJSON(httr::content(r, "text", encoding = "UTF-8"), flatten = TRUE)$result
+  }
+  first <- get_page(1)
+  found <- as.numeric(first$found)
+  pages <- list(tibble::as_tibble(first$rows))
+  n_pages <- ceiling(found / NROW(first$rows))
+  if (n_pages > 1) for (p in 2:n_pages) {
+    Sys.sleep(pause)
+    pages[[p]] <- tibble::as_tibble(get_page(p)$rows)
+  }
+  out <- dplyr::bind_rows(pages)
+  out <- out[!duplicated(out$id), ]
+  if (nrow(out) < found) warning(base, ": got ", nrow(out), " of ", found, " studies")
+  out
+}
+
+# ILOSTAT survey sources --------------------------------------------------------
+# Used by 03_HIES.R and 04_LFS.R after the ILO Survey Catalogue was retired (2026).
+# Every annual ILOSTAT observation is tagged with its source survey, e.g. "LFS - EU Labour Force Survey"
+# or "HIES - Living Standards Survey". Returns one row per country, source and year that appear in
+# any of the indicators below. Cached in Input/ilostat_sources.rds and re-downloaded (about 240 MB)
+# when the cache is missing or more than max_age_days old; refresh = TRUE forces a download.
+ILOSTAT_INDICATORS <- c(
+  "EAP_TEAP_SEX_AGE_NB_A",  # labour force by sex and age
+  "EMP_TEMP_SEX_AGE_NB_A",  # employment by sex and age
+  "UNE_DEAP_SEX_AGE_RT_A"   # unemployment rate by sex and age
+)
+
+ilostat_sources <- function(refresh = FALSE, cache = "Input/ilostat_sources.rds", max_age_days = 7) {
+  if (!refresh && file.exists(cache)) {
+    cached <- readRDS(cache)
+    downloaded <- attr(cached, "downloaded")
+    if (!is.null(downloaded) && as.numeric(Sys.Date() - downloaded) <= max_age_days) return(cached)
+  }
+  out <- lapply(ILOSTAT_INDICATORS, function(id) {
+    f <- tempfile(fileext = ".csv")
+    on.exit(unlink(f))
+    r <- httr::GET(paste0("https://rplumber.ilo.org/data/indicator/?id=", id, "&lang=en&type=label&format=.csv&channel=ilostat"),
+                   httr::write_disk(f, overwrite = TRUE), httr::timeout(600))
+    httr::stop_for_status(r)
+    d <- readr::read_csv(f, show_col_types = FALSE, col_select = c("ref_area.label", "source.label", "time"))
+    d <- unique(d)
+    d$indicator <- id
+    d
+  })
+  src <- do.call(rbind, out)
+  # source type is the prefix of the label: LFS, HIES, HS (other household survey), PC (census), ...
+  src$source_type <- sub("^([A-Z]+) - .*$", "\\1", src$source.label)
+  src$source_type[!grepl("^[A-Z]+ - ", src$source.label)] <- NA
+  src$iso3c <- countrycode::countrycode(src$ref_area.label, "country.name", "iso3c", warn = FALSE)
+  src$iso3c[src$ref_area.label == "Kosovo"] <- "XKX"
+  src$iso3c[src$ref_area.label == "Netherlands Antilles"] <- "ANT"
+  attr(src, "downloaded") <- Sys.Date()
+  saveRDS(src, cache)
+  src
+}
