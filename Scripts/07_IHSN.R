@@ -32,106 +32,108 @@ all_study_metadata <- readRDS("Input/ihsn_metadata.rds")
 # don't share.
 new_ihsn_surveys <- ihsn_raw |>
   anti_join(all_study_metadata, by = "id")
-# IF THIS df is not empty, you need to uncomment the below and rerun for the extra surveys.
+# Metadata for new studies is fetched automatically below and appended to the cache.
 
-## Initialize empty dataset
-#new_study_metadata <- tibble()
-#
-## Set up progress bar
-#n_iter <- length(new_ihsn_surveys$id)
-#pb <- txtProgressBar(min = 1,      # Minimum value of the progress bar
-#                     max = n_iter, # Maximum value of the progress bar
-#                     style = 3,    # Progress bar style (also available style = 1 and style = 2)
-#                     width = 50,   # Progress bar width. Defaults to getOption("width")
-#                     char = "=")   # Character used to create the bar
-#
-## Loop
-#for (i in 1:length(new_ihsn_surveys$id)){
-#  # Create a tibble consisting of the id no of the study in IHSN and the metadata of interest
-#  # To account for where info on metadata is elsewhere other than nested API call, we first determine whether API call is valid and then proceed.
-#  study <- tibble(id = new_ihsn_surveys$id[i])
-#  
-#  # grab metadata
-#  study <- study %>%
-#    mutate(study_type = ifelse(is_empty(fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name), 
-#                               NA_character_,
-#                               fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name),
-#           unit_of_analysis = ifelse(is_empty(fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$analysis_unit),
-#                                     NA_character_,
-#                                     fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$analysis_unit),
-#           study_scope = ifelse(is_empty(fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$study_scope),
-#                                NA_character_,
-#                                fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$study_scope),
-#           universe = ifelse(is_empty(fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$universe),
-#                             NA_character_,
-#                             fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$universe),
-#           data_kind = ifelse(is_empty(fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$data_kind),
-#                              NA_character_,
-#                              fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$data_kind),
-#           #producers = ifelse(is_empty(fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$production_statement$producers),
-#           #                   NA_character_,
-#           #                   fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$production_statement$producers |> 
-#           #                     as_tibble() %>%
-#           #                     mutate(across(everything(), ~str_squish(.))) |> 
-#           #                     mutate(all_data = case_when(affiliation!="" & role!="" ~ paste0(name, " (AFFILIATION: ", affiliation, ", ROLE: ", role, ")"),
-#           #                                                 affiliation=="" ~ paste0(name, ", (ROLE: ", role, ")"),
-#           #                                                 role=="" ~ paste0(name, ", (AFFILIATION: ", affiliation, ")"))) |> 
-#           #                     select(all_data) |> 
-#           #                     summarise(producers = paste0(all_data, collapse = " // ")) |> 
-#           #                     pull()),
-#           #funding_agencies = ifelse(is_empty(fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$production_statement$funding_agencies),
-#           #                          NA_character_,
-#           #                          fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$production_statement$funding_agencies |> 
-#           #                            as_tibble() %>%
-#           #                            mutate(across(everything(), ~str_squish(.))) %>% 
-#           #                            mutate(abbreviation = ifelse("abbr" %in% names(.), abbr, abbreviation)) |> 
-#           #                            mutate(all_data = ifelse(role!="", paste0(name, " (", abbreviation, "), ROLE: ", role), paste0(name, " (", abbreviation, ")"))) |> 
-#           #                            select(all_data) |> 
-#           #                            summarise(funding_agencies = paste0(all_data, collapse = " // ")) |> 
-#           #                            pull())
-#           )
-#  
-#  ### authoring entity detail - special case b/c sometimes there are two variables in the metadata, and sometimes just one
-#  if (is_empty(fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$authoring_entity)==TRUE) {
-#    # case when metadata field is empty
-#    study <- study |> mutate(authoring_entity_detail = NA)
-#    
-#  } else if ("affiliation" %in% names(as_tibble(fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$authoring_entity))==FALSE) {
-#    # case when there is only a "name" available
-#    study <- study |> mutate(authoring_entity_detail = fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$authoring_entity |> 
-#                               as_tibble() %>%
-#                               # need to use magrittr pipe for the period syntax to work
-#                               mutate(across(everything(), ~str_squish(.))) |> 
-#                               summarise(authoring_entity_detail = paste0(name, collapse = ", ")) |> 
-#                               pull())
-#  } else {
-#    study <- study |> mutate(authoring_entity_detail = ifelse(is_empty(fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$authoring_entity),
-#                                                              NA_character_,
-#                                                              fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$authoring_entity |> 
-#                                                                as_tibble() %>%
-#                                                                # need to use magrittr pipe for the period syntax to work
-#                                                                mutate(across(everything(), ~str_squish(.)))  %>%
-#                                                                mutate(authoring_entity = ifelse("affiliation" %in% names(.) & affiliation!="", paste0(name, " (", affiliation, ")"), name)) |> 
-#                                                                summarise(authoring_entity = paste0(authoring_entity, collapse = ", ")) |> 
-#                                                                pull()))
-#  }
-#  
-#  
-#  # Append to existing metadataset
-#  new_study_metadata <- new_study_metadata %>%
-#    bind_rows(study)
-#  # Insert brief pause in code to not look like a robot to the API
-#  Sys.sleep(sample(seq(0,0.3,by=0.001),1))
-#  # Increment progress bar
-#  setTxtProgressBar(pb, i)
-#}
-#
-#close(pb) # Close the connection
-#
-## save metadata
-#all_study_metadata <- all_study_metadata |>
-#  bind_rows(new_study_metadata)
-#saveRDS(all_study_metadata, "Input/ihsn_metadata.rds")
+if (nrow(new_ihsn_surveys) > 0) {
+# Initialize empty dataset
+new_study_metadata <- tibble()
+
+# Set up progress bar
+n_iter <- length(new_ihsn_surveys$id)
+pb <- txtProgressBar(min = 1,      # Minimum value of the progress bar
+                     max = max(n_iter, 2), # Maximum value of the progress bar
+                     style = 3,    # Progress bar style (also available style = 1 and style = 2)
+                     width = 50,   # Progress bar width. Defaults to getOption("width")
+                     char = "=")   # Character used to create the bar
+
+# Loop
+for (i in 1:length(new_ihsn_surveys$id)){
+  # Create a tibble consisting of the id no of the study in IHSN and the metadata of interest
+  # To account for where info on metadata is elsewhere other than nested API call, we first determine whether API call is valid and then proceed.
+  study <- tibble(id = new_ihsn_surveys$id[i])
+  
+  # grab metadata
+  study <- study %>%
+    mutate(study_type = ifelse(is_empty(fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name), 
+                               NA_character_,
+                               fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name),
+           unit_of_analysis = ifelse(is_empty(fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$analysis_unit),
+                                     NA_character_,
+                                     fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$analysis_unit),
+           study_scope = ifelse(is_empty(fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$study_scope),
+                                NA_character_,
+                                fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$study_scope),
+           universe = ifelse(is_empty(fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$universe),
+                             NA_character_,
+                             fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$universe),
+           data_kind = ifelse(is_empty(fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$data_kind),
+                              NA_character_,
+                              fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$data_kind),
+           #producers = ifelse(is_empty(fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$production_statement$producers),
+           #                   NA_character_,
+           #                   fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$production_statement$producers |> 
+           #                     as_tibble() %>%
+           #                     mutate(across(everything(), ~str_squish(.))) |> 
+           #                     mutate(all_data = case_when(affiliation!="" & role!="" ~ paste0(name, " (AFFILIATION: ", affiliation, ", ROLE: ", role, ")"),
+           #                                                 affiliation=="" ~ paste0(name, ", (ROLE: ", role, ")"),
+           #                                                 role=="" ~ paste0(name, ", (AFFILIATION: ", affiliation, ")"))) |> 
+           #                     select(all_data) |> 
+           #                     summarise(producers = paste0(all_data, collapse = " // ")) |> 
+           #                     pull()),
+           #funding_agencies = ifelse(is_empty(fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$production_statement$funding_agencies),
+           #                          NA_character_,
+           #                          fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$production_statement$funding_agencies |> 
+           #                            as_tibble() %>%
+           #                            mutate(across(everything(), ~str_squish(.))) %>% 
+           #                            mutate(abbreviation = ifelse("abbr" %in% names(.), abbr, abbreviation)) |> 
+           #                            mutate(all_data = ifelse(role!="", paste0(name, " (", abbreviation, "), ROLE: ", role), paste0(name, " (", abbreviation, ")"))) |> 
+           #                            select(all_data) |> 
+           #                            summarise(funding_agencies = paste0(all_data, collapse = " // ")) |> 
+           #                            pull())
+           )
+  
+  ### authoring entity detail - special case b/c sometimes there are two variables in the metadata, and sometimes just one
+  if (is_empty(fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$authoring_entity)==TRUE) {
+    # case when metadata field is empty
+    study <- study |> mutate(authoring_entity_detail = NA)
+    
+  } else if ("affiliation" %in% names(as_tibble(fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$authoring_entity))==FALSE) {
+    # case when there is only a "name" available
+    study <- study |> mutate(authoring_entity_detail = fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$authoring_entity |> 
+                               as_tibble() %>%
+                               # need to use magrittr pipe for the period syntax to work
+                               mutate(across(everything(), ~str_squish(.))) |> 
+                               summarise(authoring_entity_detail = paste0(name, collapse = ", ")) |> 
+                               pull())
+  } else {
+    study <- study |> mutate(authoring_entity_detail = ifelse(is_empty(fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$authoring_entity),
+                                                              NA_character_,
+                                                              fromJSON(content(GET(str_c("https://catalog.ihsn.org/index.php/api/catalog/", new_ihsn_surveys$id[i], "?id_format=id")), "text"), flatten = TRUE)$dataset$metadata$study_desc$authoring_entity |> 
+                                                                as_tibble() %>%
+                                                                # need to use magrittr pipe for the period syntax to work
+                                                                mutate(across(everything(), ~str_squish(.)))  %>%
+                                                                mutate(authoring_entity = ifelse(affiliation!="", paste0(name, " (", affiliation, ")"), name)) |> 
+                                                                summarise(authoring_entity = paste0(authoring_entity, collapse = ", ")) |> 
+                                                                pull()))
+  }
+  
+  
+  # Append to existing metadataset
+  new_study_metadata <- new_study_metadata %>%
+    bind_rows(study)
+  # Insert brief pause in code to not look like a robot to the API
+  Sys.sleep(sample(seq(0,0.3,by=0.001),1))
+  # Increment progress bar
+  setTxtProgressBar(pb, i)
+}
+
+close(pb) # Close the connection
+
+# save metadata
+all_study_metadata <- all_study_metadata |>
+  bind_rows(new_study_metadata)
+saveRDS(all_study_metadata, "Input/ihsn_metadata.rds")
+}
 
 ## Load study descriptions from saved file
 all_study_metadata <- readRDS("Input/ihsn_metadata.rds")
@@ -229,11 +231,21 @@ ihsn_keep_all <- left_join(ihsn_keep, additional_info_LN |>
 #   mutate(source = paste0(source, "/", id)) |> 
 #   write_csv("Output/misc_data/ihsn_unclassified.csv")
 
-# read in the rows from above that Lorenz classified manually
-ihsn_remaining <- readxl::read_xlsx("Output/misc_data/ihsn_unclassified_LN.xlsx") |> 
+# Review file for studies not covered by any earlier classification (written further below).
+# Fill in keep (Yes/No), instrument_type and rationale in this file, then rerun this script.
+ihsn_review_file <- str_c("Output/misc_data/ihsn_unclassified_", WINDOW_LABEL, ".xlsx")
+review_key <- c("instrument_name", "universe", "unit_of_analysis", "data_kind")
+
+# read in the rows from above that Lorenz classified manually, plus any rows reviewed for this update
+ihsn_remaining <- list("Output/misc_data/ihsn_unclassified_LN.xlsx", ihsn_review_file) |>
+  keep(file.exists) |>
+  map(\(f) readxl::read_xlsx(f, col_types = "text")) |>
+  bind_rows() |>
+  filter(!is.na(keep)) |>
   # to avoid merging issues, convert text NA to actual NA, and remove extra whitespace
-  mutate(across(everything(), ~ ifelse(.x=="NA", NA, .x))) |> 
-  mutate(across(everything(), ~ str_squish(.x)))
+  mutate(across(everything(), ~ ifelse(.x=="NA", NA, .x))) |>
+  mutate(across(everything(), ~ str_squish(.x))) |>
+  distinct(across(all_of(review_key)), .keep_all = TRUE)
 
 # add the classifications for remaining ihsn entries back to main dataframe
 ihsn_final <- left_join(ihsn_keep_all |> 
@@ -275,8 +287,26 @@ writexl::write_xlsx(ihsn_final, "Output/instrument_data_all_years/ihsn.xlsx")
 # Multi-year studies are placed in their end year, as in 10_combine_instruments.R
 ihsn_final <- ihsn_final |> filter(in_window(year_end))
 
-# check that all rows have been classified with "keep"
-stopifnot(ihsn_final |> filter(is.na(keep)) |> nrow() == 0)
+# check that all rows have been classified with "keep". Rows that are not get added to the review file
+# (one row per distinct name/universe/unit/data kind, as before) and are left out until classified.
+unclassified <- ihsn_final |> filter(is.na(keep))
+if (nrow(unclassified) > 0) {
+  existing_review <- if (file.exists(ihsn_review_file)) readxl::read_xlsx(ihsn_review_file, col_types = "text") else tibble()
+  new_review <- unclassified |>
+    select(id, idno, instrument_name, country, year_start, year_end, universe, unit_of_analysis, data_kind,
+           authoring_entity_detail, study_type, study_scope, source) |>
+    group_by(across(all_of(review_key))) |>
+    slice(1) |>
+    ungroup() |>
+    # add id to link so specific instrument's catalog webpage is more accessible
+    mutate(source = paste0(source, "/", id), keep = NA_character_, instrument_type = NA_character_, rationale = NA_character_) |>
+    mutate(across(everything(), as.character))
+  if (nrow(existing_review) > 0) new_review <- anti_join(new_review, existing_review, by = review_key)
+  # never overwrite classifications already entered: only append rows not yet in the file
+  writexl::write_xlsx(bind_rows(existing_review, new_review) |> arrange(country, instrument_name), ihsn_review_file)
+  warning(nrow(unclassified), " IHSN studies in the window are not classified yet and are left out. ",
+          "Classify them in ", ihsn_review_file, " (", nrow(new_review), " rows added) and rerun.")
+}
 
 # filter for only rows where keep is TRUE
 ihsn_final_keep <- ihsn_final |> filter(keep==TRUE)

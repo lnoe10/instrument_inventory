@@ -69,31 +69,20 @@ tus_final <- readxl::read_excel("Input/tus_all_countries_2013-2022.xlsx", sheet 
 #### 2025 update, keeping old data and using to fill in new data where necessary ####
 # From https://unstats.un.org/UNSDWebsite/demographic-social/time-use/data-and-metadata
 # have to load in via tempfile because we don't have a direct link
-# Since 2026 the UN DESA ArcGIS subscription is disabled and the download returns 403.
-# If it fails, fall back to Input/tus_unsd_2025_snapshot.csv: the Oct 2025 UNSD list
-# (TUSurveyInfo20251009) as merged into tus.xlsx in Nov 2025.
-temp_file <- tempfile(fileext = ".xlsx")
-tus_2025 <- tryCatch({
-  download.file(
-    url = "https://undesa.maps.arcgis.com/sharing/rest/content/items/3182e4041ff3411990c14b2213b9ada6/data",
-    destfile = temp_file,
-    mode = "wb", quiet = TRUE
-  )
-  # Read new df from tempfile
-  readxl::read_excel(temp_file) |>
-    janitor::clean_names()
-}, error = function(e) {
-  warning("UNSD time use download failed (", conditionMessage(e), "). Using Input/tus_unsd_2025_snapshot.csv")
-  read_csv("Input/tus_unsd_2025_snapshot.csv", show_col_types = FALSE, col_types = cols(.default = "c"))
-})
-
-#Clean up
-unlink(temp_file)
+# The UN DESA ArcGIS download used until 2025 no longer works (subscription disabled, 403).
+# UNSD time use survey catalogue, June 2026 version (TUSurveyInfo202606_web.xlsx), saved in Input/.
+# Replace the file with a newer version from UNSD when available.
+tus_2025 <- readxl::read_excel("Input/TUSurveyInfo202606_web.xlsx", sheet = "Survey", col_types = "text") |>
+  janitor::clean_names()
 
 # Further work on df
 tus_2025_clean <- tus_2025 |>
-  mutate(year = as.numeric(year_of_the_survey),
-         iso3c = countrycode::countrycode(country, "country.name", "iso3c"),
+  # surveys spanning years are placed in their end year, as elsewhere in the inventory
+  mutate(year = as.numeric(str_extract(year_of_the_survey, "[0-9]{4}$")),
+         # match on M49 code; country names as fallback (e.g. Kosovo)
+         iso3c = coalesce(countrycode::countrycode(as.numeric(m49_code), "un", "iso3c", warn = FALSE),
+                          countrycode::countrycode(country, "country.name", "iso3c", warn = FALSE)),
+         iso3c = case_when(str_detect(country, "Kosovo") ~ "XKX", TRUE ~ iso3c),
          status = "Completed",
          source = "https://unstats.un.org/UNSDWebsite/demographic-social/time-use/data-and-metadata",
          instrument_type = "Time Use Survey") |>
@@ -115,6 +104,19 @@ tus_full <- tus_full |>
               filter(iso3c %in% c("AFG", "GRC"))|>
               mutate(year = case_when(iso3c == "GRC" ~ "2014", TRUE ~ year),
                      year = as.numeric(year))) |>
+  arrange(iso3c, year)
+
+# Older lists sometimes date a survey by its start year while UNSD uses the end year
+# (e.g. Serbia 2021/22 as 2021 and 2022). Drop non-UNSD rows within a year of a UNSD survey.
+unsd_source <- "https://unstats.un.org/UNSDWebsite/demographic-social/time-use/data-and-metadata"
+unsd_years <- tus_full |> filter(source == unsd_source) |> distinct(iso3c, unsd_year = year)
+tus_full <- tus_full |>
+  left_join(unsd_years, by = "iso3c", relationship = "many-to-many") |>
+  mutate(near_unsd = source != unsd_source & !is.na(unsd_year) & abs(year - unsd_year) <= 1) |>
+  group_by(across(c(country, iso3c, year, instrument_name, instrument_type, source, status))) |>
+  summarise(near_unsd = any(near_unsd), .groups = "drop") |>
+  filter(!near_unsd) |>
+  select(-near_unsd) |>
   arrange(iso3c, year)
 
 # export clean dataset
