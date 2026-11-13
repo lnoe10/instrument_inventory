@@ -66,6 +66,44 @@ nada_search <- function(base, query = list(), ps = 100, pause = 0.2) {
   out
 }
 
+# NADA study metadata, one API call per study ------------------------------------
+# Returns the fields used to classify studies: study_type (series name), unit_of_analysis,
+# study_scope, universe, data_kind and authoring_entity_detail ("name (affiliation), ...").
+# api_call: e.g. "https://catalog.ihsn.org/index.php/api/catalog/<id>?id_format=id".
+# Fields hold the first value when the metadata has several, as the earlier ifelse() code did.
+nada_study_metadata <- function(id, api_call) {
+  first_or_na <- function(x) if (is.null(x) || length(x) == 0 || all(is.na(unlist(x)))) NA_character_ else as.character(unlist(x)[[1]])
+  study <- tibble::tibble(id = id, study_type = NA_character_, unit_of_analysis = NA_character_,
+                          study_scope = NA_character_, universe = NA_character_, data_kind = NA_character_,
+                          authoring_entity_detail = NA_character_)
+  meta <- tryCatch(jsonlite::fromJSON(httr::content(httr::GET(api_call, httr::timeout(60)), "text", encoding = "UTF-8"), flatten = TRUE),
+                   error = function(e) NULL)
+  sd <- meta$dataset$metadata$study_desc
+  if (is.null(sd)) return(study)
+  study$study_type <- first_or_na(sd$series_statement$series_name)
+  study$unit_of_analysis <- first_or_na(sd$study_info$analysis_unit)
+  study$study_scope <- first_or_na(sd$study_info$study_scope)
+  study$universe <- first_or_na(sd$study_info$universe)
+  study$data_kind <- first_or_na(sd$study_info$data_kind)
+  ae <- sd$authoring_entity
+  if (is.data.frame(ae) && nrow(ae) > 0 && "name" %in% names(ae)) {
+    ae[] <- lapply(ae, function(v) stringr::str_squish(as.character(v)))
+    nm <- ae$name
+    if ("affiliation" %in% names(ae)) nm <- ifelse(!is.na(ae$affiliation) & ae$affiliation != "", paste0(nm, " (", ae$affiliation, ")"), nm)
+    nm <- nm[!is.na(nm) & nm != ""]
+    if (length(nm) > 0) study$authoring_entity_detail <- paste0(nm, collapse = ", ")
+  }
+  study
+}
+
+# Metadata for many studies, with a short pause between calls and a progress bar
+nada_metadata_for <- function(ids, api_calls, pause = 0.1) {
+  purrr::map2_dfr(ids, api_calls, function(id, url) {
+    Sys.sleep(pause)
+    nada_study_metadata(id, url)
+  }, .progress = TRUE)
+}
+
 # ILOSTAT survey sources --------------------------------------------------------
 # Used by 03_HIES.R and 04_LFS.R after the ILO Survey Catalogue was retired (2026).
 # Every annual ILOSTAT observation is tagged with its source survey, e.g. "LFS - EU Labour Force Survey"

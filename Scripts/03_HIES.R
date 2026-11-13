@@ -102,34 +102,8 @@ new_lsms <- lsms_raw |> filter(!(id %in% all_wb_metadata$id))
 # metadata for new studies is appended to the cache. Each study's metadata is fetched once.
 # (Previously every field made its own API call, each iteration overwrote the result so only the
 # last new study was kept, and an empty new_lsms made 1:nrow() loop over 1 and 0.)
-first_or_na <- function(x) if (is.null(x) || length(x) == 0 || all(is.na(x))) NA_character_ else as.character(x[[1]])
-
-wb_study_metadata <- function(id, api_call) {
-  study <- tibble(id = id, study_type = NA_character_, data_kind = NA_character_,
-                  unit_of_analysis = NA_character_, authoring_entity_detail = NA_character_)
-  meta <- tryCatch(fromJSON(content(GET(api_call, timeout(60)), "text", encoding = "UTF-8"), flatten = TRUE),
-                   error = function(e) NULL)
-  sd <- meta$dataset$metadata$study_desc
-  if (is.null(sd)) return(study)
-  study$study_type <- first_or_na(sd$series_statement$series_name)
-  study$data_kind <- first_or_na(sd$study_info$data_kind)
-  study$unit_of_analysis <- first_or_na(sd$study_info$analysis_unit)
-  # authoring entity: "name", optionally with "affiliation"
-  ae <- sd$authoring_entity
-  if (!is.null(ae) && length(ae) > 0) {
-    ae <- as_tibble(ae) |> mutate(across(everything(), ~str_squish(as.character(.))))
-    if (!"name" %in% names(ae)) ae$name <- NA_character_
-    if ("affiliation" %in% names(ae)) ae <- ae |> mutate(name = ifelse(!is.na(affiliation) & affiliation != "", paste0(name, " (", affiliation, ")"), name))
-    ae <- ae |> filter(!is.na(name), name != "")
-    if (nrow(ae) > 0) study$authoring_entity_detail <- paste0(ae$name, collapse = ", ")
-  }
-  study
-}
-
-new_wb_metadata <- map2_dfr(new_lsms$id, new_lsms$api_call, \(id, url) {
-  Sys.sleep(0.1)
-  wb_study_metadata(id, url)
-}, .progress = TRUE)
+# one API call per study: nada_metadata_for() in 00_settings.R (shared with 07_IHSN.R)
+new_wb_metadata <- nada_metadata_for(new_lsms$id, new_lsms$api_call)
 
 all_wb_metadata_new <- all_wb_metadata |>
   bind_rows(new_wb_metadata)
