@@ -175,9 +175,28 @@ filtered_instruments_df <- filtered_instruments_df |> mutate(keyword_flag = ifel
 keyword_matches <- readxl::read_xlsx("Output/misc_data/keyword_matches.xlsx") |> select(-`...1`)
 
 # left join w/ filtered_instruments_df on all vars and filter for keep==TRUE, then drop the keep variable and the keyword variable
-filtered_instruments_df <- left_join(filtered_instruments_df, keyword_matches, by=c("country", "year", "instrument_name", "instrument_type", "keyword_flag")) |> 
-  filter(keep!=FALSE | is.na(keep)) |> 
-  select(-c(keep, keyword_flag))
+filtered_instruments_df <- left_join(filtered_instruments_df, keyword_matches, by=c("country", "year", "instrument_name", "instrument_type", "keyword_flag"))
+
+# Keyword-flagged rows without a manual decision (new since the 2023 review) are decided by the shared
+# drop rules (classify_by_rules() in 00_settings.R): dropped when the title matches an "A drop" rule
+# (monitoring, evaluation, phone, project, refugee etc.), otherwise kept. Exceptions are national
+# surveys that only match because of a word in the title. Decisions are exported for checking.
+keyword_rule_exceptions <- "Situation Assessment of Agricultural Households"
+keyword_rule_rows <- filtered_instruments_df |>
+  filter(keyword_flag == 1, is.na(keep)) |>
+  mutate(rule = classify_by_rules(instrument_name, NA_character_, NA_character_)$rule,
+         exception = str_detect(instrument_name, keyword_rule_exceptions),
+         keep_rule = !startsWith(rule, "A") | exception)
+writexl::write_xlsx(keyword_rule_rows |> select(country, iso3c, year, instrument_name, instrument_type, source, rule, exception, keep_rule) |>
+                      arrange(keep_rule, country, year),
+                    str_c("Output/misc_data/keyword_matches_rules_", WINDOW_LABEL, ".xlsx"))
+
+filtered_instruments_df <- filtered_instruments_df |>
+  left_join(keyword_rule_rows |> select(country, year, instrument_name, instrument_type, keep_rule) |> distinct(),
+            by = c("country", "year", "instrument_name", "instrument_type")) |>
+  mutate(keep = coalesce(keep, keep_rule)) |>
+  filter(keep!=FALSE | is.na(keep)) |>
+  select(-c(keep, keep_rule, keyword_flag))
 
 # we need to drop rows with possible duplicates that weren't previously identified
 # grab # of rows of distinct country/year/instrument_name combos by counting # of rows where index for that group == 1

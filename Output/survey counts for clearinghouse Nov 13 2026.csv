@@ -1,11 +1,11 @@
 country,country_code,indicator_name,number_of_surveys,percent_complete,standard
-Afghanistan,AFG,Agricultural Survey/Census,4,100,2
+Afghanistan,AFG,Agricultural Survey/Census,0,0,2
 Afghanistan,AFG,Household Health Survey,1,25,4
-Afghanistan,AFG,Household Income and Expenditure Survey,2,100,2
+Afghanistan,AFG,Household Income and Expenditure Survey,1,50,2
 Afghanistan,AFG,Labour Force Survey,2,20,10
 Afghanistan,AFG,Population Census,0,0,1
 Afghanistan,AFG,Time Use Survey,1,50,2
-Africa,,Agricultural Survey/Census,2,100,2
+Africa,,Agricultural Survey/Census,1,50,2
 Africa,,Household Health Survey,2,50,4
 Africa,,Household Income and Expenditure Survey,2,100,2
 Africa,,Labour Force Survey,2,20,10
@@ -77,7 +77,7 @@ Aruba,ABW,Household Income and Expenditure Survey,0,0,2
 Aruba,ABW,Labour Force Survey,0,0,10
 Aruba,ABW,Population Census,1,100,1
 Aruba,ABW,Time Use Survey,0,0,2
-Asia,,Agricultural Survey/Census,2,100,2
+Asia,,Agricultural Survey/Census,1,50,2
 Asia,,Household Health Survey,1,25,4
 Asia,,Household Income and Expenditure Survey,2,100,2
 Asia,,Labour Force Survey,6,60,10
@@ -113,9 +113,9 @@ Bahrain,BHR,Household Income and Expenditure Survey,0,0,2
 Bahrain,BHR,Labour Force Survey,0,0,10
 Bahrain,BHR,Population Census,1,100,1
 Bahrain,BHR,Time Use Survey,0,0,2
-Bangladesh,BGD,Agricultural Survey/Census,4,100,2
+Bangladesh,BGD,Agricultural Survey/Census,1,50,2
 Bangladesh,BGD,Household Health Survey,5,100,4
-Bangladesh,BGD,Household Income and Expenditure Survey,5,100,2
+Bangladesh,BGD,Household Income and Expenditure Survey,2,100,2
 Bangladesh,BGD,Labour Force Survey,5,50,10
 Bangladesh,BGD,Population Census,1,100,1
 Bangladesh,BGD,Time Use Survey,1,50,2
@@ -215,7 +215,7 @@ Bulgaria,BGR,Household Income and Expenditure Survey,0,0,2
 Bulgaria,BGR,Labour Force Survey,10,100,10
 Bulgaria,BGR,Population Census,1,100,1
 Bulgaria,BGR,Time Use Survey,1,50,2
-Burkina Faso,BFA,Agricultural Survey/Census,7,100,2
+Burkina Faso,BFA,Agricultural Survey/Census,5,100,2
 Burkina Faso,BFA,Household Health Survey,2,50,4
 Burkina Faso,BFA,Household Income and Expenditure Survey,5,100,2
 Burkina Faso,BFA,Labour Force Survey,4,40,10
@@ -227,15 +227,15 @@ Burundi,BDI,Household Income and Expenditure Survey,2,100,2
 Burundi,BDI,Labour Force Survey,0,0,10
 Burundi,BDI,Population Census,1,100,1
 Burundi,BDI,Time Use Survey,0,0,2
-Cambodia,KHM,Agricultural Survey/Census,8,100,2
+Cambodia,KHM,Agricultural Survey/Census,7,100,2
 Cambodia,KHM,Household Health Survey,1,25,4
 Cambodia,KHM,Household Income and Expenditure Survey,7,100,2
 Cambodia,KHM,Labour Force Survey,2,20,10
 Cambodia,KHM,Population Census,1,100,1
 Cambodia,KHM,Time Use Survey,0,0,2
-Cameroon,CMR,Agricultural Survey/Census,3,100,2
+Cameroon,CMR,Agricultural Survey/Census,0,0,2
 Cameroon,CMR,Household Health Survey,2,50,4
-Cameroon,CMR,Household Income and Expenditure Survey,1,50,2
+Cameroon,CMR,Household Income and Expenditure Survey,0,0,2
 Cameroon,CMR,Labour Force Survey,0,0,10
 Cameroon,CMR,Population Census,0,0,1
 Cameroon,CMR,Time Use Survey,0,0,2
@@ -263,13 +263,13 @@ Cayman Islands,CYM,Household Income and Expenditure Survey,0,0,2
 Cayman Islands,CYM,Labour Force Survey,0,0,10
 Cayman Islands,CYM,Population Census,1,100,1
 Cayman Islands,CYM,Time Use Survey,0,0,2
-Central African Republic,CAF,Agricultural Survey/Census,3,100,2
+Central African Republic,CAF,Agricultural Survey/Census,0,0,2
 Central African Republic,CAF,Household Health Survey,2,50,4
 Central African Republic,CAF,Household Income and Expenditure Survey,0,0,2
 Central African Republic,CAF,Labour Force Survey,0,0,10
 Central African Republic,CAF,Population Census,0,0,1
 Central African Republic,CAF,Time Use Survey,0,0,2
-Chad,TCD,Agricultural Survey/Census,5,100,2
+Chad,TCD,Agricultural Survey/Census,1,50,2
 Chad,TCD,Household Health Survey,2,50,4
 Chad,TCD,Household Income and Expenditure Survey,2,100,2
 Chad,TCD,Labour Force Survey,0,0,10
@@ -283,7 +283,7 @@ Chile,CHL,Population Census,2,100,1
 Chile,CHL,Time Use Survey,1,50,2
 China,CHN,Agricultural Survey/Census,1,50,2
 China,CHN,Household Health Survey,0,0,4
-China,CHN,Household Income and Expenditure Survey,1,50,2
+China,CHN,Household Income and Expenditure Survey,0,0,2
 China,CHN,Labour Force Survey,8,80,10
 China,CHN,Population Census,1,100,1
 China,CHN,Time Use Survey,1,50,2
@@ -299,7 +299,7 @@ Cocos (Keeling) Islands,CCK,Household Income and Expenditure Survey,0,0,2
 Cocos (Keeling) Islands,CCK,Labour Force Survey,0,0,10
 Cocos (Keeling) Islands,CCK,Population Census,0,0,1
 Cocos (Keeling) Islands,CCK,Time Use Survey,0,0,2
-Colombia,COL,Agricultural Survey/Census,3,100,2
+Colombia,COL,Agricultural Survey/Census,0,0,2
 Colombia,COL,Household Health Survey,0,0,4
 Colombia,COL,Household Income and Expenditure Survey,8,100,2
 Colombia,COL,Labour Force Survey,10,100,10
@@ -317,7 +317,7 @@ Congo - Brazzaville,COG,Household Income and Expenditure Survey,0,0,2
 Congo - Brazzaville,COG,Labour Force Survey,0,0,10
 Congo - Brazzaville,COG,Population Census,1,100,1
 Congo - Brazzaville,COG,Time Use Survey,0,0,2
-Congo - Kinshasa,COD,Agricultural Survey/Census,5,100,2
+Congo - Kinshasa,COD,Agricultural Survey/Census,0,0,2
 Congo - Kinshasa,COD,Household Health Survey,2,50,4
 Congo - Kinshasa,COD,Household Income and Expenditure Survey,1,50,2
 Congo - Kinshasa,COD,Labour Force Survey,0,0,10
@@ -367,7 +367,7 @@ Czechia,CZE,Population Census,1,100,1
 Czechia,CZE,Time Use Survey,0,0,2
 Côte d’Ivoire,CIV,Agricultural Survey/Census,2,100,2
 Côte d’Ivoire,CIV,Household Health Survey,2,50,4
-Côte d’Ivoire,CIV,Household Income and Expenditure Survey,7,100,2
+Côte d’Ivoire,CIV,Household Income and Expenditure Survey,6,100,2
 Côte d’Ivoire,CIV,Labour Force Survey,3,30,10
 Côte d’Ivoire,CIV,Population Census,1,100,1
 Côte d’Ivoire,CIV,Time Use Survey,0,0,2
@@ -438,7 +438,7 @@ Eswatini,SWZ,Labour Force Survey,4,40,10
 Eswatini,SWZ,Population Census,1,100,1
 Eswatini,SWZ,Time Use Survey,0,0,2
 Ethiopia,ETH,Agricultural Survey/Census,1,50,2
-Ethiopia,ETH,Household Health Survey,5,100,4
+Ethiopia,ETH,Household Health Survey,4,100,4
 Ethiopia,ETH,Household Income and Expenditure Survey,5,100,2
 Ethiopia,ETH,Labour Force Survey,1,10,10
 Ethiopia,ETH,Population Census,0,0,1
@@ -523,7 +523,7 @@ Germany,DEU,Population Census,1,100,1
 Germany,DEU,Time Use Survey,1,50,2
 Ghana,GHA,Agricultural Survey/Census,5,100,2
 Ghana,GHA,Household Health Survey,5,100,4
-Ghana,GHA,Household Income and Expenditure Survey,5,100,2
+Ghana,GHA,Household Income and Expenditure Survey,4,100,2
 Ghana,GHA,Labour Force Survey,1,10,10
 Ghana,GHA,Population Census,1,100,1
 Ghana,GHA,Time Use Survey,0,0,2
@@ -563,7 +563,7 @@ Guam,GUM,Household Income and Expenditure Survey,0,0,2
 Guam,GUM,Labour Force Survey,1,10,10
 Guam,GUM,Population Census,1,100,1
 Guam,GUM,Time Use Survey,0,0,2
-Guatemala,GTM,Agricultural Survey/Census,4,100,2
+Guatemala,GTM,Agricultural Survey/Census,0,0,2
 Guatemala,GTM,Household Health Survey,0,0,4
 Guatemala,GTM,Household Income and Expenditure Survey,1,50,2
 Guatemala,GTM,Labour Force Survey,8,80,10
@@ -593,7 +593,7 @@ Guyana,GUY,Household Income and Expenditure Survey,0,0,2
 Guyana,GUY,Labour Force Survey,5,50,10
 Guyana,GUY,Population Census,1,100,1
 Guyana,GUY,Time Use Survey,0,0,2
-Haiti,HTI,Agricultural Survey/Census,4,100,2
+Haiti,HTI,Agricultural Survey/Census,0,0,2
 Haiti,HTI,Household Health Survey,1,25,4
 Haiti,HTI,Household Income and Expenditure Survey,2,100,2
 Haiti,HTI,Labour Force Survey,0,0,10
@@ -605,7 +605,7 @@ Heard & McDonald Islands,HMD,Household Income and Expenditure Survey,0,0,2
 Heard & McDonald Islands,HMD,Labour Force Survey,0,0,10
 Heard & McDonald Islands,HMD,Population Census,0,0,1
 Heard & McDonald Islands,HMD,Time Use Survey,0,0,2
-Honduras,HND,Agricultural Survey/Census,3,100,2
+Honduras,HND,Agricultural Survey/Census,1,50,2
 Honduras,HND,Household Health Survey,1,25,4
 Honduras,HND,Household Income and Expenditure Survey,0,0,2
 Honduras,HND,Labour Force Survey,0,0,10
@@ -630,14 +630,14 @@ Iceland,ISL,Labour Force Survey,10,100,10
 Iceland,ISL,Population Census,1,100,1
 Iceland,ISL,Time Use Survey,0,0,2
 India,IND,Agricultural Survey/Census,2,100,2
-India,IND,Household Health Survey,2,50,4
-India,IND,Household Income and Expenditure Survey,7,100,2
+India,IND,Household Health Survey,1,25,4
+India,IND,Household Income and Expenditure Survey,3,100,2
 India,IND,Labour Force Survey,8,80,10
 India,IND,Population Census,0,0,1
 India,IND,Time Use Survey,2,100,2
 Indonesia,IDN,Agricultural Survey/Census,3,100,2
 Indonesia,IDN,Household Health Survey,2,50,4
-Indonesia,IDN,Household Income and Expenditure Survey,2,100,2
+Indonesia,IDN,Household Income and Expenditure Survey,1,50,2
 Indonesia,IDN,Labour Force Survey,9,90,10
 Indonesia,IDN,Population Census,1,100,1
 Indonesia,IDN,Time Use Survey,1,50,2
@@ -647,7 +647,7 @@ Iran,IRN,Household Income and Expenditure Survey,4,100,2
 Iran,IRN,Labour Force Survey,9,90,10
 Iran,IRN,Population Census,1,100,1
 Iran,IRN,Time Use Survey,1,50,2
-Iraq,IRQ,Agricultural Survey/Census,4,100,2
+Iraq,IRQ,Agricultural Survey/Census,0,0,2
 Iraq,IRQ,Household Health Survey,1,25,4
 Iraq,IRQ,Household Income and Expenditure Survey,2,100,2
 Iraq,IRQ,Labour Force Survey,1,10,10
@@ -733,7 +733,7 @@ Kuwait,KWT,Population Census,1,100,1
 Kuwait,KWT,Time Use Survey,0,0,2
 Kyrgyzstan,KGZ,Agricultural Survey/Census,0,0,2
 Kyrgyzstan,KGZ,Household Health Survey,2,50,4
-Kyrgyzstan,KGZ,Household Income and Expenditure Survey,4,100,2
+Kyrgyzstan,KGZ,Household Income and Expenditure Survey,3,100,2
 Kyrgyzstan,KGZ,Labour Force Survey,8,80,10
 Kyrgyzstan,KGZ,Population Census,1,100,1
 Kyrgyzstan,KGZ,Time Use Survey,1,50,2
@@ -749,7 +749,7 @@ Latvia,LVA,Household Income and Expenditure Survey,0,0,2
 Latvia,LVA,Labour Force Survey,10,100,10
 Latvia,LVA,Population Census,1,100,1
 Latvia,LVA,Time Use Survey,0,0,2
-Lebanon,LBN,Agricultural Survey/Census,2,100,2
+Lebanon,LBN,Agricultural Survey/Census,0,0,2
 Lebanon,LBN,Household Health Survey,1,25,4
 Lebanon,LBN,Household Income and Expenditure Survey,0,0,2
 Lebanon,LBN,Labour Force Survey,1,10,10
@@ -811,7 +811,7 @@ Malawi,MWI,Population Census,1,100,1
 Malawi,MWI,Time Use Survey,0,0,2
 Malaysia,MYS,Agricultural Survey/Census,1,50,2
 Malaysia,MYS,Household Health Survey,0,0,4
-Malaysia,MYS,Household Income and Expenditure Survey,3,100,2
+Malaysia,MYS,Household Income and Expenditure Survey,2,100,2
 Malaysia,MYS,Labour Force Survey,7,70,10
 Malaysia,MYS,Population Census,1,100,1
 Malaysia,MYS,Time Use Survey,0,0,2
@@ -821,8 +821,8 @@ Maldives,MDV,Household Income and Expenditure Survey,2,100,2
 Maldives,MDV,Labour Force Survey,0,0,10
 Maldives,MDV,Population Census,1,100,1
 Maldives,MDV,Time Use Survey,0,0,2
-Mali,MLI,Agricultural Survey/Census,8,100,2
-Mali,MLI,Household Health Survey,5,100,4
+Mali,MLI,Agricultural Survey/Census,2,100,2
+Mali,MLI,Household Health Survey,3,75,4
 Mali,MLI,Household Income and Expenditure Survey,7,100,2
 Mali,MLI,Labour Force Survey,7,70,10
 Mali,MLI,Population Census,1,100,1
@@ -847,7 +847,7 @@ Martinique,MTQ,Population Census,1,100,1
 Martinique,MTQ,Time Use Survey,0,0,2
 Mauritania,MRT,Agricultural Survey/Census,0,0,2
 Mauritania,MRT,Household Health Survey,1,25,4
-Mauritania,MRT,Household Income and Expenditure Survey,2,100,2
+Mauritania,MRT,Household Income and Expenditure Survey,1,50,2
 Mauritania,MRT,Labour Force Survey,2,20,10
 Mauritania,MRT,Population Census,1,100,1
 Mauritania,MRT,Time Use Survey,0,0,2
@@ -911,13 +911,13 @@ Morocco,MAR,Household Income and Expenditure Survey,0,0,2
 Morocco,MAR,Labour Force Survey,3,30,10
 Morocco,MAR,Population Census,1,100,1
 Morocco,MAR,Time Use Survey,0,0,2
-Mozambique,MOZ,Agricultural Survey/Census,5,100,2
+Mozambique,MOZ,Agricultural Survey/Census,0,0,2
 Mozambique,MOZ,Household Health Survey,2,50,4
-Mozambique,MOZ,Household Income and Expenditure Survey,7,100,2
+Mozambique,MOZ,Household Income and Expenditure Survey,2,100,2
 Mozambique,MOZ,Labour Force Survey,0,0,10
 Mozambique,MOZ,Population Census,1,100,1
 Mozambique,MOZ,Time Use Survey,0,0,2
-Myanmar (Burma),MMR,Agricultural Survey/Census,9,100,2
+Myanmar (Burma),MMR,Agricultural Survey/Census,1,50,2
 Myanmar (Burma),MMR,Household Health Survey,1,25,4
 Myanmar (Burma),MMR,Household Income and Expenditure Survey,0,0,2
 Myanmar (Burma),MMR,Labour Force Survey,4,40,10
@@ -937,7 +937,7 @@ Nauru,NRU,Population Census,1,100,1
 Nauru,NRU,Time Use Survey,0,0,2
 Nepal,NPL,Agricultural Survey/Census,3,100,2
 Nepal,NPL,Household Health Survey,4,100,4
-Nepal,NPL,Household Income and Expenditure Survey,3,100,2
+Nepal,NPL,Household Income and Expenditure Survey,2,100,2
 Nepal,NPL,Labour Force Survey,1,10,10
 Nepal,NPL,Population Census,1,100,1
 Nepal,NPL,Time Use Survey,0,0,2
@@ -965,15 +965,15 @@ Nicaragua,NIC,Household Income and Expenditure Survey,0,0,2
 Nicaragua,NIC,Labour Force Survey,3,30,10
 Nicaragua,NIC,Population Census,1,100,1
 Nicaragua,NIC,Time Use Survey,0,0,2
-Niger,NER,Agricultural Survey/Census,6,100,2
+Niger,NER,Agricultural Survey/Census,1,50,2
 Niger,NER,Household Health Survey,1,25,4
-Niger,NER,Household Income and Expenditure Survey,5,100,2
+Niger,NER,Household Income and Expenditure Survey,4,100,2
 Niger,NER,Labour Force Survey,1,10,10
 Niger,NER,Population Census,0,0,1
 Niger,NER,Time Use Survey,0,0,2
-Nigeria,NGA,Agricultural Survey/Census,4,100,2
+Nigeria,NGA,Agricultural Survey/Census,2,100,2
 Nigeria,NGA,Household Health Survey,9,100,4
-Nigeria,NGA,Household Income and Expenditure Survey,8,100,2
+Nigeria,NGA,Household Income and Expenditure Survey,7,100,2
 Nigeria,NGA,Labour Force Survey,6,60,10
 Nigeria,NGA,Population Census,0,0,1
 Nigeria,NGA,Time Use Survey,0,0,2
@@ -1025,9 +1025,9 @@ Oman,OMN,Household Income and Expenditure Survey,0,0,2
 Oman,OMN,Labour Force Survey,0,0,10
 Oman,OMN,Population Census,1,100,1
 Oman,OMN,Time Use Survey,0,0,2
-Pakistan,PAK,Agricultural Survey/Census,5,100,2
+Pakistan,PAK,Agricultural Survey/Census,1,50,2
 Pakistan,PAK,Household Health Survey,3,75,4
-Pakistan,PAK,Household Income and Expenditure Survey,6,100,2
+Pakistan,PAK,Household Income and Expenditure Survey,5,100,2
 Pakistan,PAK,Labour Force Survey,4,40,10
 Pakistan,PAK,Population Census,2,100,1
 Pakistan,PAK,Time Use Survey,0,0,2
@@ -1037,7 +1037,7 @@ Palau,PLW,Household Income and Expenditure Survey,1,50,2
 Palau,PLW,Labour Force Survey,0,0,10
 Palau,PLW,Population Census,2,100,1
 Palau,PLW,Time Use Survey,0,0,2
-Palestinian Territories,PSE,Agricultural Survey/Census,2,100,2
+Palestinian Territories,PSE,Agricultural Survey/Census,1,50,2
 Palestinian Territories,PSE,Household Health Survey,1,25,4
 Palestinian Territories,PSE,Household Income and Expenditure Survey,4,100,2
 Palestinian Territories,PSE,Labour Force Survey,9,90,10
@@ -1062,12 +1062,12 @@ Paraguay,PRY,Labour Force Survey,0,0,10
 Paraguay,PRY,Population Census,1,100,1
 Paraguay,PRY,Time Use Survey,1,50,2
 Peru,PER,Agricultural Survey/Census,3,100,2
-Peru,PER,Household Health Survey,3,75,4
+Peru,PER,Household Health Survey,0,0,4
 Peru,PER,Household Income and Expenditure Survey,2,100,2
 Peru,PER,Labour Force Survey,4,40,10
 Peru,PER,Population Census,1,100,1
 Peru,PER,Time Use Survey,0,0,2
-Philippines,PHL,Agricultural Survey/Census,3,100,2
+Philippines,PHL,Agricultural Survey/Census,2,100,2
 Philippines,PHL,Household Health Survey,2,50,4
 Philippines,PHL,Household Income and Expenditure Survey,1,50,2
 Philippines,PHL,Labour Force Survey,10,100,10
@@ -1169,7 +1169,7 @@ Seychelles,SYC,Household Income and Expenditure Survey,0,0,2
 Seychelles,SYC,Labour Force Survey,8,80,10
 Seychelles,SYC,Population Census,1,100,1
 Seychelles,SYC,Time Use Survey,0,0,2
-Sierra Leone,SLE,Agricultural Survey/Census,10,100,2
+Sierra Leone,SLE,Agricultural Survey/Census,5,100,2
 Sierra Leone,SLE,Household Health Survey,3,75,4
 Sierra Leone,SLE,Household Income and Expenditure Survey,0,0,2
 Sierra Leone,SLE,Labour Force Survey,0,0,10
@@ -1205,7 +1205,7 @@ Solomon Islands,SLB,Household Income and Expenditure Survey,0,0,2
 Solomon Islands,SLB,Labour Force Survey,0,0,10
 Solomon Islands,SLB,Population Census,1,100,1
 Solomon Islands,SLB,Time Use Survey,0,0,2
-Somalia,SOM,Agricultural Survey/Census,3,100,2
+Somalia,SOM,Agricultural Survey/Census,0,0,2
 Somalia,SOM,Household Health Survey,0,0,4
 Somalia,SOM,Household Income and Expenditure Survey,1,50,2
 Somalia,SOM,Labour Force Survey,1,10,10
@@ -1229,7 +1229,7 @@ South Korea,KOR,Household Income and Expenditure Survey,1,50,2
 South Korea,KOR,Labour Force Survey,10,100,10
 South Korea,KOR,Population Census,2,100,1
 South Korea,KOR,Time Use Survey,2,100,2
-South Sudan,SSD,Agricultural Survey/Census,1,50,2
+South Sudan,SSD,Agricultural Survey/Census,0,0,2
 South Sudan,SSD,Household Health Survey,0,0,4
 South Sudan,SSD,Household Income and Expenditure Survey,0,0,2
 South Sudan,SSD,Labour Force Survey,0,0,10
@@ -1241,7 +1241,7 @@ Spain,ESP,Household Income and Expenditure Survey,0,0,2
 Spain,ESP,Labour Force Survey,10,100,10
 Spain,ESP,Population Census,1,100,1
 Spain,ESP,Time Use Survey,0,0,2
-Sri Lanka,LKA,Agricultural Survey/Census,6,100,2
+Sri Lanka,LKA,Agricultural Survey/Census,5,100,2
 Sri Lanka,LKA,Household Health Survey,1,25,4
 Sri Lanka,LKA,Household Income and Expenditure Survey,2,100,2
 Sri Lanka,LKA,Labour Force Survey,9,90,10
@@ -1283,7 +1283,7 @@ St. Vincent & Grenadines,VCT,Household Income and Expenditure Survey,0,0,2
 St. Vincent & Grenadines,VCT,Labour Force Survey,0,0,10
 St. Vincent & Grenadines,VCT,Population Census,1,100,1
 St. Vincent & Grenadines,VCT,Time Use Survey,0,0,2
-Sudan,SDN,Agricultural Survey/Census,1,50,2
+Sudan,SDN,Agricultural Survey/Census,0,0,2
 Sudan,SDN,Household Health Survey,1,25,4
 Sudan,SDN,Household Income and Expenditure Survey,0,0,2
 Sudan,SDN,Labour Force Survey,1,10,10
@@ -1339,7 +1339,7 @@ Tajikistan,TJK,Population Census,1,100,1
 Tajikistan,TJK,Time Use Survey,0,0,2
 Tanzania,TZA,Agricultural Survey/Census,6,100,2
 Tanzania,TZA,Household Health Survey,2,50,4
-Tanzania,TZA,Household Income and Expenditure Survey,6,100,2
+Tanzania,TZA,Household Income and Expenditure Survey,5,100,2
 Tanzania,TZA,Labour Force Survey,3,30,10
 Tanzania,TZA,Population Census,1,100,1
 Tanzania,TZA,Time Use Survey,1,50,2
@@ -1417,7 +1417,7 @@ U.S. Virgin Islands,VIR,Population Census,1,100,1
 U.S. Virgin Islands,VIR,Time Use Survey,0,0,2
 Uganda,UGA,Agricultural Survey/Census,4,100,2
 Uganda,UGA,Household Health Survey,3,75,4
-Uganda,UGA,Household Income and Expenditure Survey,5,100,2
+Uganda,UGA,Household Income and Expenditure Survey,4,100,2
 Uganda,UGA,Labour Force Survey,2,20,10
 Uganda,UGA,Population Census,1,100,1
 Uganda,UGA,Time Use Survey,1,50,2
@@ -1499,7 +1499,7 @@ Western Sahara,ESH,Household Income and Expenditure Survey,0,0,2
 Western Sahara,ESH,Labour Force Survey,0,0,10
 Western Sahara,ESH,Population Census,0,0,1
 Western Sahara,ESH,Time Use Survey,0,0,2
-Yemen,YEM,Agricultural Survey/Census,10,100,2
+Yemen,YEM,Agricultural Survey/Census,0,0,2
 Yemen,YEM,Household Health Survey,1,25,4
 Yemen,YEM,Household Income and Expenditure Survey,0,0,2
 Yemen,YEM,Labour Force Survey,0,0,10
@@ -1511,7 +1511,7 @@ Zambia,ZMB,Household Income and Expenditure Survey,0,0,2
 Zambia,ZMB,Labour Force Survey,8,80,10
 Zambia,ZMB,Population Census,1,100,1
 Zambia,ZMB,Time Use Survey,0,0,2
-Zimbabwe,ZWE,Agricultural Survey/Census,6,100,2
+Zimbabwe,ZWE,Agricultural Survey/Census,1,50,2
 Zimbabwe,ZWE,Household Health Survey,1,25,4
 Zimbabwe,ZWE,Household Income and Expenditure Survey,2,100,2
 Zimbabwe,ZWE,Labour Force Survey,6,60,10
