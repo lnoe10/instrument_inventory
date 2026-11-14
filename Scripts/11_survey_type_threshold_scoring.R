@@ -86,21 +86,36 @@ survey_country <- survey_scores |>
   select(country, country_code, indicator_name, number_of_surveys = indicator_value_raw, percent_complete = indicator_score, standard, region)
 
 # Country cuts: the only place countries are removed (COUNTRY_EXCLUDE in 00_settings.R).
-# Done before the region averages so they cover the same countries as the published table.
 survey_country <- survey_country |>
   filter(!country_code %in% COUNTRY_EXCLUDE)
 
-# Export data for clearinghouse - Region level
-survey_region <- survey_country |>
+# Country groups (lists set in 00_settings.R)
+ida_codes <- ida_countries()
+odin_codes <- odin_countries()
+message(length(ida_codes), " IDA countries; ",
+        if (is.null(odin_codes)) "no ODIN list found, full table covers all countries" else paste(length(odin_codes), "ODIN countries"))
+survey_country <- survey_country |> mutate(ida = country_code %in% ida_codes)
+date_label <- format(Sys.Date(), "%b %d %Y")
+
+# 1. Full table: all ODIN countries (all countries if no ODIN list), country rows only, no regional averages
+survey_country |>
+  filter(is.null(odin_codes) | country_code %in% odin_codes) |>
+  arrange(country, indicator_name) |>
+  select(country, country_code, indicator_name, number_of_surveys, percent_complete, standard, region, ida) |>
+  write_csv(str_c("Output/survey counts all countries ", date_label, ".csv"), na = "")
+
+# 2. Clearinghouse table: IDA countries, plus regional averages over IDA countries only
+survey_ida <- survey_country |> filter(ida)
+
+survey_region <- survey_ida |>
   group_by(indicator_name, region, standard) |>
   summarize(number_of_surveys = round(mean(number_of_surveys, na.rm = TRUE), 0), .groups = "drop") |>
   mutate(percent_complete = pmin(number_of_surveys / standard * 100, 100)) |>
   select(country = region, indicator_name, number_of_surveys, percent_complete, standard)
 
-# Export
-survey_country |>
-  select(-region) |>
+survey_ida |>
+  select(-region, -ida) |>
   bind_rows(survey_region) |>
   arrange(country, indicator_name) |>
   select(country, country_code, indicator_name, number_of_surveys, percent_complete, standard) |>
-  write_csv(str_c("Output/survey counts for clearinghouse ", format(Sys.Date(), "%b %d %Y"), ".csv"), na = "")
+  write_csv(str_c("Output/survey counts for clearinghouse ", date_label, ".csv"), na = "")

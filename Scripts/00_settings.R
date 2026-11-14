@@ -30,6 +30,22 @@ STANDARDS <- c(
 # 11_survey_type_threshold_scoring.R. Add ISO3 codes here once the cuts are decided.
 COUNTRY_EXCLUDE <- c("ATA")  # Antarctica
 
+# Country groups for the outputs of 11_survey_type_threshold_scoring.R
+# IDA: World Bank lending category IDA or Blend (78 countries in FY26). Update the file when the
+# World Bank publishes a new classification (July each year).
+WB_CLASSIFICATION_FILE <- "Input/wb_countries_fy26.csv"
+ida_countries <- function(file = WB_CLASSIFICATION_FILE) {
+  wb <- janitor::clean_names(readr::read_csv(file, show_col_types = FALSE))
+  sort(unique(wb$code[wb$lending_category %in% c("IDA", "Blend")]))
+}
+# ODIN: countries covered by the Open Data Inventory. Put a CSV with an iso3c column in this location;
+# without it the full table covers all countries.
+ODIN_COUNTRY_FILE <- "Input/odin_countries.csv"
+odin_countries <- function(file = ODIN_COUNTRY_FILE) {
+  if (!file.exists(file)) return(NULL)
+  sort(unique(readr::read_csv(file, show_col_types = FALSE)$iso3c))
+}
+
 # End year of a year string such as "2019", "2018-2019" or "2014-2016"
 end_year <- function(year) {
   suppressWarnings(as.numeric(sub(".*([0-9]{4})$", "\\1", as.character(year))))
