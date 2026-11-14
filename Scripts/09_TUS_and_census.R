@@ -69,24 +69,20 @@ tus_final <- readxl::read_excel("Input/tus_all_countries_2013-2022.xlsx", sheet 
 #### 2025 update, keeping old data and using to fill in new data where necessary ####
 # From https://unstats.un.org/UNSDWebsite/demographic-social/time-use/data-and-metadata
 # have to load in via tempfile because we don't have a direct link
-temp_file <- tempfile(fileext = ".xlsx")
-download.file(
-  url = "https://undesa.maps.arcgis.com/sharing/rest/content/items/3182e4041ff3411990c14b2213b9ada6/data",
-  destfile = temp_file,
-  mode = "wb"
-)
-
-# Read new df from tempfile
-tus_2025 <- readxl::read_excel(temp_file) |>
+# The UN DESA ArcGIS download used until 2025 no longer works (subscription disabled, 403).
+# UNSD time use survey catalogue, June 2026 version (TUSurveyInfo202606_web.xlsx), saved in Input/.
+# Replace the file with a newer version from UNSD when available.
+tus_2025 <- readxl::read_excel("Input/TUSurveyInfo202606_web.xlsx", sheet = "Survey", col_types = "text") |>
   janitor::clean_names()
-
-#Clean up
-unlink(temp_file)
 
 # Further work on df
 tus_2025_clean <- tus_2025 |>
-  mutate(year = as.numeric(year_of_the_survey),
-         iso3c = countrycode::countrycode(country, "country.name", "iso3c"),
+  # surveys spanning years are placed in their end year, as elsewhere in the inventory
+  mutate(year = as.numeric(str_extract(year_of_the_survey, "[0-9]{4}$")),
+         # match on M49 code; country names as fallback (e.g. Kosovo)
+         iso3c = coalesce(countrycode::countrycode(as.numeric(m49_code), "un", "iso3c", warn = FALSE),
+                          countrycode::countrycode(country, "country.name", "iso3c", warn = FALSE)),
+         iso3c = case_when(str_detect(country, "Kosovo") ~ "XKX", TRUE ~ iso3c),
          status = "Completed",
          source = "https://unstats.un.org/UNSDWebsite/demographic-social/time-use/data-and-metadata",
          instrument_type = "Time Use Survey") |>
@@ -110,8 +106,21 @@ tus_full <- tus_full |>
                      year = as.numeric(year))) |>
   arrange(iso3c, year)
 
+# Older lists sometimes date a survey by its start year while UNSD uses the end year
+# (e.g. Serbia 2021/22 as 2021 and 2022). Drop non-UNSD rows within a year of a UNSD survey.
+unsd_source <- "https://unstats.un.org/UNSDWebsite/demographic-social/time-use/data-and-metadata"
+unsd_years <- tus_full |> filter(source == unsd_source) |> distinct(iso3c, unsd_year = year)
+tus_full <- tus_full |>
+  left_join(unsd_years, by = "iso3c", relationship = "many-to-many") |>
+  mutate(near_unsd = source != unsd_source & !is.na(unsd_year) & abs(year - unsd_year) <= 1) |>
+  group_by(across(c(country, iso3c, year, instrument_name, instrument_type, source, status))) |>
+  summarise(near_unsd = any(near_unsd), .groups = "drop") |>
+  filter(!near_unsd) |>
+  select(-near_unsd) |>
+  arrange(iso3c, year)
+
 # export clean dataset
-xlsx::write.xlsx(tus_full, "Output/instrument_data_all_years/tus.xlsx")
+writexl::write_xlsx(tus_full, "Output/instrument_data_all_years/tus.xlsx")
 
 # Census - UNSD -----------------------------------------------------------
 
@@ -156,5 +165,16 @@ census <- readRDS("Input/census_dates_df.rds") |>
 #census_final <- census_final |> mutate(updated_status = ifelse(is.na(updated_status) & !is.na(status), status, updated_status)) |> 
 #  select(-status) |> rename(status = updated_status, status_note = updated_status_note)
 
+# Manual additions: censuses missing from the UNSD census dates list
+# Kosovo is not a UN member and not listed by UNSD; its Population and Housing Census was held in 2024
+# (Kosovo Agency of Statistics), in the 2020 round.
+census_manual <- tibble(country = "Kosovo", iso3c = "XKX", year = 2024, status = "Complete",
+                        instrument_name = "Population Census", instrument_type = "Census",
+                        source = "https://ask.rks-gov.net/ (manual addition, not in UNSD census dates)",
+                        census_round = "2020", date = "2024") |>
+  mutate(year = as(year, class(census$year)), census_round = as(census_round, class(census$census_round)))
+census <- census |>
+  bind_rows(census_manual |> anti_join(census, by = c("iso3c", "census_round")))
+
 # export census dataset
-xlsx::write.xlsx(census, "Output/instrument_data_all_years/census.xlsx")
+writexl::write_xlsx(census, "Output/instrument_data_all_years/census.xlsx")

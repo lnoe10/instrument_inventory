@@ -2,106 +2,129 @@ library(tidyverse)
 
 setwd("C:/Users/loren/Documents/Github/instrument_inventory")
 
-# Instrument inventory from Github repository instrument inventory
-instrument_inventory <- readxl::read_excel("Output/instrument_inventory_final_2015_2024.xlsx")
+# Reference window, census rounds, STANDARDS and in_window() live in 00_settings.R
+source("Scripts/00_settings.R")
 
-# Compute instrument threshold achievement per country per surveytype
-survey_scores <- instrument_inventory |>
-  filter(instrument_type != "Census") |>
-  group_by(iso3c, instrument_type) |>
-  summarize(count_surveys = n()) |>
-  ungroup() %>%
-  full_join(instrument_inventory |>
-              filter(!instrument_type %in% c("Census", "Gender-based violence survey", "Other household survey")) |> 
-              filter(!is.na(iso3c)) |> 
-              expand(iso3c, instrument_type)) |>
-  mutate(count_surveys = case_when(
-    is.na(count_surveys) ~ 0,
-    TRUE ~ count_surveys
-  ),
-  indicator_score = case_when(
-    instrument_type == "Household Health Survey" ~ count_surveys/4*100,
-    instrument_type == "Household Income and Expenditure Survey" ~ count_surveys/2*100,
-    instrument_type == "Labour Force Survey" ~ count_surveys/10*100,
-    instrument_type == "Time Use Survey" ~ count_surveys/2*100,
-    instrument_type == "Agricultural Survey/Census" ~ count_surveys/2*100,
-    TRUE ~ NA_real_
-  ),
-  # Top code scores
-  indicator_score = case_when(
-    indicator_score > 100 ~ 100,
-    TRUE ~ indicator_score
-  ),
-  indicator_name = instrument_type,
-  sub_category_name = "Survey systems",
-  category_name = "Capacity",
-  indicator_value_raw = count_surveys,
-  indicator_notes = case_when(
-    instrument_type == "Household Health Survey" ~ str_c("Raw value is sum of ", instrument_type, " over 2013-2022. Transformed to indicator score (100 or 0) by checking if sum is greater than or equal to 8."),
-    instrument_type == "Household Income and Expenditure Survey" ~ str_c("Raw value is sum of ", instrument_type, " over 2013-2022. Transformed to indicator score (100 or 0) by checking if sum is greater than or equal to 2."),
-    instrument_type == "Labour Force Survey" ~ str_c("Raw value is sum of ", instrument_type, " over 2013-2022. Transformed to indicator score (100 or 0) by checking if sum is greater than or equal to 10."),
-    instrument_type == "Time Use Survey" ~ str_c("Raw value is sum of ", instrument_type, " over 2013-2022. Transformed to indicator score (100 or 0) by checking if sum is greater than or equal to 1."),
-    instrument_type == "Agricultural Survey/Census" ~ str_c("Raw value is sum of ", instrument_type, " over 2013-2022. Transformed to indicator score (100 or 0) by checking if sum is greater than or equal to 2."),
-  ),
-  display_value = as.character(indicator_score)) |>
-  filter(!instrument_type %in% c("Gender-based violence survey", "Other household survey")) |>
+# Instrument inventory from Github repository instrument inventory (written by 10_combine_instruments.R)
+instrument_inventory <- readxl::read_excel(str_c("Output/instrument_inventory_final_", str_replace(WINDOW_LABEL, "-", "_"), ".xlsx"))
+
+# UNSD M49 country list and regions
+unsd_codes <- readxl::read_excel("Input/unsd_codes.xlsx") |>
+  janitor::clean_names() |>
+  filter(!is.na(iso_alpha3_code))
+
+# Instruments that count towards the scores
+counted_instruments <- instrument_inventory |>
   filter(!is.na(iso3c)) |>
-  select(country_code = iso3c, indicator_name, sub_category_name, category_name, indicator_value_raw, indicator_notes, indicator_score, display_value) |>
-  group_by(country_code) %>%
+  # Only completed instruments count. A blank status is treated as completed: catalogue
+  # sources (IHSN, ILO, FAO, World Bank) only list surveys that were conducted and do not
+  # record a status. Ongoing, Data processing / analysis and Planned are excluded.
+  filter(is.na(status) | status == "Completed") |>
+  mutate(instrument_type = if_else(instrument_type == "Census", "Population Census", instrument_type)) |>
+  # Population censuses count by UNSD census round, all other instruments by reference window
+  filter(case_when(
+    instrument_type == "Population Census" ~ as.character(census_round) == as.character(CENSUS_ROUND),
+    TRUE ~ in_window(year)
+  )) |>
+  filter(instrument_type %in% names(STANDARDS))
+
+# Notes describing each indicator
+indicator_notes <- tibble(instrument_type = names(STANDARDS), standard = unname(STANDARDS)) |>
+  mutate(indicator_notes = case_when(
+    instrument_type == "Population Census" ~ str_c(
+      "Raw value is the number of completed population censuses in the UNSD ", CENSUS_ROUND,
+      " census round (", CENSUS_ROUND - 5, "-", CENSUS_ROUND + 4, "). ",
+      "Score is 100 if at least ", standard, " census was conducted, 0 otherwise."),
+    TRUE ~ str_c(
+      "Raw value is the number of completed ", instrument_type, "s with a reference year in ", WINDOW_LABEL,
+      " (multi-year surveys placed in their end year). ",
+      "Score is the raw value divided by the standard of ", standard, ", times 100, capped at 100.")
+  ))
+
+# Compute instrument threshold achievement per country per survey type
+survey_scores <- counted_instruments |>
+  count(iso3c, instrument_type, name = "count_surveys") |>
+  # full country list (see 00_settings.R): every country gets a row for every indicator,
+  # 0 where nothing counted. Country cuts happen at the end of this script.
+  right_join(expand_grid(iso3c = sort(union(unsd_codes$iso_alpha3_code,
+                                            c("XKX", "TWN", na.omit(instrument_inventory$iso3c)))),
+                         instrument_type = names(STANDARDS)),
+             by = c("iso3c", "instrument_type")) |>
+  left_join(indicator_notes, by = "instrument_type") |>
+  mutate(count_surveys = replace_na(count_surveys, 0),
+         # Top coded at 100
+         indicator_score = pmin(count_surveys / standard * 100, 100),
+         indicator_name = instrument_type,
+         sub_category_name = "Survey systems",
+         category_name = "Capacity",
+         indicator_value_raw = count_surveys,
+         display_value = as.character(indicator_score)) |>
+  select(country_code = iso3c, indicator_name, sub_category_name, category_name, indicator_value_raw, indicator_notes, indicator_score, display_value, standard) |>
+  group_by(country_code) |>
   mutate(sub_category_value = mean(indicator_score, na.rm = TRUE),
          sub_category_display = as.character(sub_category_value)) |>
-  ungroup() %>%
+  ungroup() |>
   arrange(country_code, indicator_name)
 
 # Export data for clearinghouse - Country level
 survey_country <- survey_scores |>
-  mutate(indicator_value_raw = case_when(
-    indicator_value_raw > 10 ~ 10,
-    TRUE ~ indicator_value_raw
-  )) |>
-  left_join(readxl::read_excel("Input/unsd_codes.xlsx") |>
-              janitor::clean_names() |>
-              select(country_code = iso_alpha3_code, region = region_name)) |>
+  mutate(indicator_value_raw = pmin(indicator_value_raw, 10)) |>
+  # UN M49 regions (Africa, Americas, Asia, Europe, Oceania); used for the IDA regional averages.
+  # Kosovo, Taiwan and the Netherlands Antilles have no M49 code and are assigned by hand.
+  left_join(unsd_codes |> select(country_code = iso_alpha3_code, region = region_name),
+            by = "country_code") |>
   mutate(region = case_when(
     country_code == "ANT" ~ "Americas",
     country_code == "TWN" ~ "Asia",
     country_code == "XKX" ~ "Europe",
     TRUE ~ region
-  ),
-  country = countrycode::countrycode(country_code, "iso3c", "country.name"),
+  )) |>
+  # World Bank regions, for reference in the ODIN table
+  left_join(readr::read_csv(WB_CLASSIFICATION_FILE, show_col_types = FALSE) |>
+              janitor::clean_names() |>
+              filter(!is.na(region)) |>
+              select(country_code = code, wb_region = region),
+            by = "country_code") |>
+  mutate(country = countrycode::countrycode(country_code, "iso3c", "country.name"),
   country = case_when(
     country_code == "XKX" ~ "Kosovo",
     country_code == "ANT" ~ "Netherlands Antilles",
     TRUE ~ country
   )) |>
-  select(country, country_code, indicator_name, number_of_surveys = indicator_value_raw, percent_complete = indicator_score, region)
+  select(country, country_code, indicator_name, number_of_surveys = indicator_value_raw, percent_complete = indicator_score, standard, region, wb_region)
 
-# Export data for clearinghouse - Region level
-survey_region <- survey_country |>
-  group_by(indicator_name, region) |>
-  summarize(number_of_surveys = round(mean(number_of_surveys, na.rm = TRUE), 0)) |>
-  ungroup() |>
-  mutate(percent_complete = case_when(
-    indicator_name == "Household Health Survey" ~ pmin(number_of_surveys/4*100, 100),
-    indicator_name == "Household Income and Expenditure Survey" ~ pmin(number_of_surveys/2*100, 100),
-    indicator_name == "Labour Force Survey" ~ pmin(number_of_surveys/10*100, 100),
-    indicator_name == "Time Use Survey" ~ pmin(number_of_surveys/2*100, 100),
-    indicator_name == "Agricultural Survey/Census" ~ pmin(number_of_surveys/2*100, 100),
-    TRUE ~ NA_real_
-  )) |>
-  select(country = region, indicator_name, number_of_surveys, percent_complete)
+# Country cuts: the only place countries are removed (COUNTRY_EXCLUDE in 00_settings.R).
+survey_country <- survey_country |>
+  filter(!country_code %in% COUNTRY_EXCLUDE)
 
-# Export
+# Country groups (lists set in 00_settings.R)
+ida_codes <- ida_countries()
+odin_codes <- odin_countries()
+message(length(ida_codes), " IDA countries; ",
+        if (is.null(odin_codes)) "no ODIN list found, full table covers all countries" else paste(length(odin_codes), "ODIN countries"))
+survey_country <- survey_country |> mutate(ida = country_code %in% ida_codes)
+date_label <- format(Sys.Date(), "%b %d %Y")
+
+# 1. Full table: all ODIN countries (all countries if no ODIN list), country rows only, no regional averages
 survey_country |>
-  select(-region) |>
+  filter(is.null(odin_codes) | country_code %in% odin_codes) |>
+  arrange(country, indicator_name) |>
+  select(country, country_code, indicator_name, number_of_surveys, percent_complete, standard, region, wb_region, ida) |>
+  write_csv(str_c("Output/survey counts ", if (is.null(odin_codes)) "all countries " else "ODIN countries ", date_label, ".csv"), na = "")
+
+# 2. Clearinghouse table: IDA countries, plus regional averages over IDA countries only
+survey_ida <- survey_country |> filter(ida)
+
+survey_region <- survey_ida |>
+  group_by(indicator_name, region, standard) |>
+  # round halves up (R's round() rounds 0.5 to 0 and 2.5 to 2)
+  summarize(number_of_surveys = floor(mean(number_of_surveys, na.rm = TRUE) + 0.5), .groups = "drop") |>
+  mutate(percent_complete = pmin(number_of_surveys / standard * 100, 100)) |>
+  select(country = region, indicator_name, number_of_surveys, percent_complete, standard)
+
+survey_ida |>
+  select(-region, -wb_region, -ida) |>
   bind_rows(survey_region) |>
   arrange(country, indicator_name) |>
-  mutate(standard = case_when(
-    indicator_name == "Household Health Survey" ~ 4,
-    indicator_name == "Household Income and Expenditure Survey" ~ 2,
-    indicator_name == "Labour Force Survey" ~ 10,
-    indicator_name == "Time Use Survey" ~ 2,
-    indicator_name == "Agricultural Survey/Census" ~ 2,
-    TRUE ~ NA_real_
-  )) |>
-  write_csv("Output/survey counts for clearinghouse Nov 18 2025.csv", na = "")
+  select(country, country_code, indicator_name, number_of_surveys, percent_complete, standard) |>
+  write_csv(str_c("Output/survey counts for clearinghouse ", date_label, ".csv"), na = "")

@@ -13,30 +13,33 @@ census <- readxl::read_xlsx("Output/instrument_data_all_years/census.xlsx") |> m
 
 ######### FILTER FOR OGDI / CENSUS YEARS #########
 
-# 2015-2024 / 2014/15-2023/24 for non-calendar years, 2020 census rounds
-dhs_clean <- dhs |> filter(year>=2015 & year<=2024)
-mics_clean <- mics |> filter(year>=2015 & year<=2024)
-hies_clean <- hies |> filter(year>=2015 & year<=2024)
-lfs_clean <- lfs |> filter(year>=2015 & year<=2024)
-ag_survey_clean <- ag_survey |> filter(year>=2015 & year<=2024)
-tus_clean <- tus |> filter(year>=2015 & year<=2024) |> select(-`...1`)
-dhs_clean <- dhs |> filter(year>=2015 & year<=2024)
-ag_census_clean <- ag_census |> 
-  filter(census_round==2020) |> select(-`...1`)
-census_clean <- census |> 
-  filter(census_round==2020) |> select(-`...1`)
+# Reference window, census rounds and in_window() helper live in 00_settings.R
+source("Scripts/00_settings.R")
+
+# Surveys: (end) year inside WINDOW_START-WINDOW_END. Censuses: by census round.
+dhs_clean <- dhs |> filter(in_window(year))
+mics_clean <- mics |> filter(in_window(year))
+hies_clean <- hies |> filter(in_window(year))
+lfs_clean <- lfs |> filter(in_window(year))
+ag_survey_clean <- ag_survey |> filter(in_window(year))
+tus_clean <- tus |> filter(in_window(year)) |> select(-any_of("...1"))
+ag_census_clean <- ag_census |>
+  filter(census_round==AG_CENSUS_ROUND) |> select(-any_of("...1"))
+census_clean <- census |>
+  filter(census_round==CENSUS_ROUND) |> select(-any_of("...1"))
 
 ##################################################
 
 ###### Export filtered individual datasets ######
-xlsx::write.xlsx(as.data.frame(dhs_clean), "Output/instrument_data_ogdi_years/dhs_2015-2024.xlsx", row.names = FALSE)
-xlsx::write.xlsx(as.data.frame(mics_clean), "Output/instrument_data_ogdi_years/mics_2015-2024.xlsx", row.names = FALSE)
-xlsx::write.xlsx(as.data.frame(hies_clean), "Output/instrument_data_ogdi_years/hies_2015-2024.xlsx", row.names = FALSE)
-xlsx::write.xlsx(as.data.frame(lfs_clean), "Output/instrument_data_ogdi_years/lfs_2015-2024.xlsx", row.names = FALSE)
-xlsx::write.xlsx(as.data.frame(ag_survey_clean), "Output/instrument_data_ogdi_years/ag_survey_2015-2024.xlsx", row.names = FALSE)
-xlsx::write.xlsx(as.data.frame(tus_clean), "Output/instrument_data_ogdi_years/tus_2015-2024.xlsx", row.names = FALSE)
-xlsx::write.xlsx(as.data.frame(ag_census_clean), "Output/instrument_data_ogdi_years/ag_census_2015-2024.xlsx", row.names = FALSE)
-xlsx::write.xlsx(as.data.frame(census_clean), "Output/instrument_data_ogdi_years/census_2015-2024.xlsx", row.names = FALSE)
+ogdi_file <- function(name) str_c("Output/instrument_data_ogdi_years/", name, "_", WINDOW_LABEL, ".xlsx")
+writexl::write_xlsx(dhs_clean, ogdi_file("dhs"))
+writexl::write_xlsx(mics_clean, ogdi_file("mics"))
+writexl::write_xlsx(hies_clean, ogdi_file("hies"))
+writexl::write_xlsx(lfs_clean, ogdi_file("lfs"))
+writexl::write_xlsx(ag_survey_clean, ogdi_file("ag_survey"))
+writexl::write_xlsx(tus_clean, ogdi_file("tus"))
+writexl::write_xlsx(ag_census_clean, ogdi_file("ag_census"))
+writexl::write_xlsx(census_clean, ogdi_file("census"))
 
 ##################################################
 
@@ -53,8 +56,8 @@ all_surveys_census_filtered <- list(dhs_clean, mics_clean, tus_clean) |>
 #################################################
 
 # incorporating IHSN data
-# import the 2015-2025 IHSN data
-ihsn <- readxl::read_xlsx("Output/instrument_data_ogdi_years/ihsn_2015-2024.xlsx")
+# import the IHSN data for the reference window (written by 07_IHSN.R)
+ihsn <- readxl::read_xlsx(ogdi_file("ihsn"))
 
 # drop "Good Growth Plan" rows as decided by Tawheeda and Lorenz
 ihsn <- ihsn |> filter(!(authoring_entity=="Syngenta" & str_detect(instrument_name, "Good Growth Plan")))
@@ -108,7 +111,20 @@ ihsn_clean <- ihsn_clean |>
                              "Encuesta de empleo [hh/lfs]",
                              "Labor Force Survey",
                              "Labor Force Survey [hh/lfs]",
-                             "Labour Force Survey [hh/lfs]")))
+                             "Labour Force Survey [hh/lfs]"))) |>
+  # labour force surveys now come only from ILOSTAT (04_LFS.R); drop IHSN studies classified as LFS
+  # (manually or by rule) so they are not counted twice
+  filter(!instrument_type %in% "LFS")
+
+# drop IHSN studies that duplicate an FAO ag survey or a World Bank/ILO income/expenditure survey listed
+# under a different title or year (same identifier core, or same country/type/end year and near-identical
+# title; find_cross_source_duplicates() in 00_settings.R). E.g. IHSN "Agriculture Survey 2023" =
+# FAO "Cambodia Agriculture Survey 2023". Matches are exported for checking.
+cross_source_ref <- bind_rows(ag_survey_clean |> select(iso3c, year, instrument_type, instrument_name, idno),
+                              hies_clean |> mutate(idno = as.character(idno)) |> select(iso3c, year, instrument_type, instrument_name, idno))
+ihsn_cross_dups <- find_cross_source_duplicates(ihsn_clean, cross_source_ref)
+writexl::write_xlsx(ihsn_cross_dups |> select(-.row), str_c("Output/misc_data/ihsn_cross_source_duplicates_", WINDOW_LABEL, ".xlsx"))
+ihsn_clean <- ihsn_clean |> filter(!row_number() %in% ihsn_cross_dups$.row)
 
 # export clean ihsn data
 # xlsx::write.xlsx(as.data.frame(ihsn_clean), "Output/instrument_data_ogdi_years/ihsn_2013-2022.xlsx", row.names = FALSE)
@@ -124,13 +140,17 @@ full_instruments_df <- bind_rows(dhs_clean, mics_clean, tus_clean, hies_clean |>
   select(-c(keep, notes, country_original)) |> arrange(country)
 
 # export this dataframe for later use
-# xlsx::write.xlsx(as.data.frame(full_instruments_df), "Output/instrument_data_ogdi_years/full_instruments_df.xlsx", row.names = FALSE)
+# NOTE: this export used to be commented out, so the read below picked up the
+# Oct 2023 full_instruments_df.xlsx instead of the data built above. The file
+# name now carries the window so each update writes and reads its own copy.
+full_instruments_file <- str_c("Output/instrument_data_ogdi_years/full_instruments_df_", WINDOW_LABEL, ".xlsx")
+writexl::write_xlsx(full_instruments_df, full_instruments_file)
 
 #########################################################
 ######### filtering out irrelevant instruments ##########
 
-# read in full instruments df
-full_instruments_df <- readxl::read_xlsx("Output/instrument_data_ogdi_years/full_instruments_df.xlsx")
+# read in full instruments df (round trip through xlsx keeps column types as before)
+full_instruments_df <- readxl::read_xlsx(full_instruments_file)
 
 # filter out all food insecurity experience scale surveys and IFAD impact assessment surveys
 filtered_instruments_df <- full_instruments_df |> 
@@ -155,14 +175,33 @@ filtered_instruments_df <- filtered_instruments_df |> mutate(keyword_flag = ifel
 keyword_matches <- readxl::read_xlsx("Output/misc_data/keyword_matches.xlsx") |> select(-`...1`)
 
 # left join w/ filtered_instruments_df on all vars and filter for keep==TRUE, then drop the keep variable and the keyword variable
-filtered_instruments_df <- left_join(filtered_instruments_df, keyword_matches, by=c("country", "year", "instrument_name", "instrument_type", "keyword_flag")) |> 
-  filter(keep!=FALSE | is.na(keep)) |> 
-  select(-c(keep, keyword_flag))
+filtered_instruments_df <- left_join(filtered_instruments_df, keyword_matches, by=c("country", "year", "instrument_name", "instrument_type", "keyword_flag"))
+
+# Keyword-flagged rows without a manual decision (new since the 2023 review) are decided by the shared
+# drop rules (classify_by_rules() in 00_settings.R): dropped when the title matches an "A drop" rule
+# (monitoring, evaluation, phone, project, refugee etc.), otherwise kept. Exceptions are national
+# surveys that only match because of a word in the title. Decisions are exported for checking.
+keyword_rule_exceptions <- "Situation Assessment of Agricultural Households"
+keyword_rule_rows <- filtered_instruments_df |>
+  filter(keyword_flag == 1, is.na(keep)) |>
+  mutate(rule = classify_by_rules(instrument_name, NA_character_, NA_character_)$rule,
+         exception = str_detect(instrument_name, keyword_rule_exceptions),
+         keep_rule = !startsWith(rule, "A") | exception)
+writexl::write_xlsx(keyword_rule_rows |> select(country, iso3c, year, instrument_name, instrument_type, source, rule, exception, keep_rule) |>
+                      arrange(keep_rule, country, year),
+                    str_c("Output/misc_data/keyword_matches_rules_", WINDOW_LABEL, ".xlsx"))
+
+filtered_instruments_df <- filtered_instruments_df |>
+  left_join(keyword_rule_rows |> select(country, year, instrument_name, instrument_type, keep_rule) |> distinct(),
+            by = c("country", "year", "instrument_name", "instrument_type")) |>
+  mutate(keep = coalesce(keep, keep_rule)) |>
+  filter(keep!=FALSE | is.na(keep)) |>
+  select(-c(keep, keep_rule, keyword_flag))
 
 # we need to drop rows with possible duplicates that weren't previously identified
 # grab # of rows of distinct country/year/instrument_name combos by counting # of rows where index for that group == 1
 # this is the # of rows we want to have after we do our filtering for duplicates, so save it and we will check against this after filtering
-nrow_distinct <- filtered_instruments_df |> group_by(country, year, instrument_name) |> mutate(index = 1:n()) |> filter(index==1) |> nrow()
+nrow_distinct <- filtered_instruments_df |> group_by(country, year, instrument_name) |> mutate(index = seq_len(n())) |> filter(index==1) |> nrow()
 
 # there are duplicate Ag Censuses for Congo and Cote d'Ivoire we identified (rows have diff census rounds, correct one is 2020) - let's fix those manually here
 filtered_instruments_df <- filtered_instruments_df |> 
@@ -172,7 +211,7 @@ filtered_instruments_df <- filtered_instruments_df |>
 
 # group by country, year and instrument name, and choose the first available - where IHSN is one of the entries, choose the row from the other source
 filtered_instruments_df_new <- filtered_instruments_df |> group_by(country, year, instrument_name) |>
-  mutate(index = 1:n()) |> 
+  mutate(index = seq_len(n())) |> 
   mutate(both_ihsn = ifelse(all(str_detect(source, "ihsn")), 1, 0),
          one_ihsn = ifelse(both_ihsn==0 & any(str_detect(source, "ihsn")), 1, 0)) |> 
   select(country:id, authoring_entity, study_type:authoring_entity_detail, census_round, date, index, both_ihsn, one_ihsn, rationale) |> 
@@ -211,7 +250,11 @@ waves <- readxl::read_xlsx("Output/misc_data/waves.xlsx", sheet=1)
 
 # after merging and filtering out extra wave rows, we expect the number of rows to equal the current # minus the number of rows
 # which have been combined with other instruments of the same survey/country group that are not the very first row of that grouping
-nrows_waves_collapsed <- nrow(filtered_instruments_df_new)-(waves |> filter(`combined?`=="yes") |> group_by(iso3c, combined_title) |> mutate(index=1:n()) |> filter(index!=1) |> nrow())
+# waves.xlsx can contain rows that are not in the current data (other years, or reviewed in an earlier
+# update), so only rows that match the current data enter the expected count
+nrows_waves_collapsed <- nrow(filtered_instruments_df_new)-(waves |> filter(`combined?`=="yes") |>
+                                                              semi_join(filtered_instruments_df_new, by=c("country", "iso3c", "year", "status", "instrument_name", "instrument_type")) |>
+                                                              group_by(country, combined_title) |> mutate(index = seq_len(n())) |> filter(index!=1) |> nrow())
 
 # we want to keep the rows where combined?==no, and then keep one of the rows from each country/year/combined_title grouping when combined?==yes
 filtered_instruments_df_new <- left_join(filtered_instruments_df_new, waves, 
@@ -220,7 +263,7 @@ filtered_instruments_df_new <- left_join(filtered_instruments_df_new, waves,
   mutate(instrument_name = ifelse(!is.na(wave_or_round) & `combined?`=="yes", combined_title, instrument_name)) |>
   group_by(country, instrument_name, combined_title, `combined?`) |> 
   # create index for groupings
-  mutate(index = 1:n()) |> 
+  mutate(index = seq_len(n())) |> 
   # create boolean keep variable to maintain rows where wave/round wasn't detected in the name, rows where wave/round was detected but we do not want to collapse,
   # and the first instrument belonging to each group of rows which we want to collapse together (we do this to maintain metadata for that instrument)
   mutate(keep = case_when(`combined?`=="no" ~ TRUE,
@@ -271,34 +314,38 @@ filtered_instruments_df_new <- filtered_instruments_df_new |>
 filtered_instruments_df_new  <- filtered_instruments_df_new |> mutate(status = ifelse(str_detect(status, "completed|Complete"), "Completed", status))
 
 ###### export dataframe before doing more filtering ######
-xlsx::write.xlsx(filtered_instruments_df_new |> arrange(country, instrument_name, year), "Output/instrument_inventory_filtered_2015_2024.xlsx")
+writexl::write_xlsx(filtered_instruments_df_new |> arrange(country, instrument_name, year),
+                    str_c("Output/instrument_inventory_filtered_", str_replace(WINDOW_LABEL, "-", "_"), ".xlsx"))
 ##########################################################
 
-################## read in the dataframe with added "drop" column ##################
-# this was to check for duplicates manually
-df <- readxl::read_xlsx("Output/instrument_inventory_filtered_deduped.xlsx") |>
-  # remove status variable, since deduped file has wrong information from coding error that has since been fixed.
-  # If deduped is redone in the future (manual checks resulting in drop column), this will not be necessary
-  select(-status) |>
-  # bring previous dataframe (same dimension, just without drop column), will merge on all variables
-  # and add just corrected status variable
-  full_join(filtered_instruments_df_new) |>
+################## bring in manual "drop" decisions ##################
+# instrument_inventory_filtered_deduped.xlsx holds the manual duplicate checks (drop column).
+# Only the drop decisions are joined onto the current data. Previously this file was
+# full_joined, which pulled in every row it contained (including surveys outside the
+# reference window and from the 2010 census round) on top of the current data.
+manual_drop <- readxl::read_xlsx("Output/instrument_inventory_filtered_deduped.xlsx") |>
+  select(country, iso3c, year, instrument_name, instrument_type, drop) |>
+  mutate(year = as.character(year), drop = as.character(drop)) |>
+  filter(!is.na(drop)) |>
+  # LFS now comes from ILOSTAT (one row per country, survey and year). The 2023 decisions dropped
+  # "Labour Force Survey <year>" where the ILO catalogue also had "EU Labour Force Survey <year>";
+  # applied to ILOSTAT names they would delete the only row (e.g. Poland, Switzerland 2016-2021).
+  filter(instrument_type != "Labour Force Survey") |>
+  distinct(country, iso3c, year, instrument_name, instrument_type, .keep_all = TRUE)
+
+df <- filtered_instruments_df_new |>
+  left_join(manual_drop, by = c("country", "iso3c", "year", "instrument_name", "instrument_type")) |>
   distinct(country, iso3c, year, instrument_name, instrument_type,  .keep_all = TRUE)
 
 # clean up year based on remaining comments left by Tawheeda and Lorenz
-df_final <- df |> mutate(year = case_when(drop=="This should be 2013" ~ "2013",
-                                          drop=="This should be 2014" ~ "2014",
-                                          drop=="This should be 2015" ~ "2015",
-                                          drop=="This should be 2016" ~ "2016",
-                                          drop=="This should be 2017" ~ "2017",
-                                          drop=="Change to 2018 for year" ~ "2018",
-                                          .default = year)) |> 
+# comments like "This should be 2016" or "Change to 2018 for year" correct the year and keep the row
+# (previously only some years were listed, so e.g. "This should be 2016" turned into NA and the row was dropped)
+year_fix <- "^(This should be|Change to) [0-9]{4}"
+df_final <- df |> mutate(year = case_when(str_detect(coalesce(drop, ""), year_fix) ~ str_extract(drop, "[0-9]{4}"),
+                                          .default = year)) |>
   # convert drop to all binary 0/1 for filtering
   mutate(drop = case_when(is.na(drop) ~ "0",
-                          drop=="This should be 2017" ~ "0",
-                          drop=="This should be 2013" ~ "0",
-                          drop=="This should be 2014" ~ "0",
-                          drop=="Change to 2018 for year" ~ "0",
+                          str_detect(drop, year_fix) ~ "0",
                           .default = drop),
          drop = as.numeric(drop),
          drop = case_when(
@@ -310,8 +357,18 @@ df_final <- df |> mutate(year = case_when(drop=="This should be 2013" ~ "2013",
            instrument_type == "Time Use Survey" & iso3c == "TZA" & instrument_name =="Integrated Labour Force Survey - Time Use Survey Module 2014" ~ 1,
            TRUE ~ drop
          )) |> 
-  filter(drop==0) |> 
-  select(-drop)
+  filter(drop==0) |>
+  select(-drop) |>
+  # year corrections above can move a survey out of the window; censuses are kept by round
+  filter(instrument_type == "Census" | !is.na(census_round) | in_window(year))
+
+# Phone, COVID and high-frequency surveys are not counted, whatever the source or earlier manual
+# classification (2026 review: 17 such surveys were counted as HIES or health surveys).
+phone_covid <- regex("phone survey|high[- ]frequency|covid", ignore_case = TRUE)
+phone_covid_dropped <- df_final |> filter(instrument_type != "Census", str_detect(instrument_name, phone_covid))
+writexl::write_xlsx(phone_covid_dropped |> select(country, iso3c, year, instrument_name, instrument_type, source),
+                    str_c("Output/misc_data/phone_covid_surveys_dropped_", WINDOW_LABEL, ".xlsx"))
+df_final <- df_final |> filter(instrument_type == "Census" | !str_detect(instrument_name, phone_covid))
 
 df_final |>
-  writexl::write_xlsx("Output/instrument_inventory_final_2015_2024.xlsx", format_headers = FALSE)
+  writexl::write_xlsx(str_c("Output/instrument_inventory_final_", str_replace(WINDOW_LABEL, "-", "_"), ".xlsx"), format_headers = FALSE)

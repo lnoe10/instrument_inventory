@@ -5,11 +5,13 @@ library(jsonlite)
 library(tidyverse)
 library(openxlsx)
 
+# nada_search() and ilostat_sources() helpers
+source("Scripts/00_settings.R")
+
 ############ LSMS - WORLD BANK ############
 
-# scrape data from API
-lsms_raw <- fromJSON(content(GET("https://microdata.worldbank.org/index.php/api/catalog/search?ps=10000"), "text"))$result$rows %>%
-  as_tibble() %>%
+# scrape data from API (paged: the catalogue returns at most 100 studies per request)
+lsms_raw <- nada_search("https://microdata.worldbank.org") %>%
   mutate(api_call = str_c("https://microdata.worldbank.org/index.php/api/catalog/", id, "?id_format=id"))
 
 # First acquire more information on surveytypes from metadata - series name and data kind
@@ -97,58 +99,14 @@ all_wb_metadata <- readRDS("Input/all_wb_metadata.rds")
 # create list of newly scraped instruments
 new_lsms <- lsms_raw |> filter(!(id %in% all_wb_metadata$id))
 
-for (i in 1:nrow(new_lsms)){
-  # Set up tibble with basic info
-  study <- tibble(id = new_lsms$id[i], study_type = NA_character_)
-  # Determine length of list generated from API call to filter out
-  # Where we hit error otherwise of subscript being out of bounds
-  study <- study %>%
-    mutate(length = case_when(
-      !is_empty(fromJSON(content(GET(new_lsms$api_call[i]), "text"), flatten = TRUE)) ~ vec_depth(fromJSON(content(GET(new_lsms$api_call[i]), "text"), flatten = TRUE)),
-      TRUE ~ NA_integer_))
-  # If list is deep enough, proceed to extract data
-  if(study$length > 3){
-    study <- study %>%
-      # Test first whether response is valid based on tunneling into list
-      mutate(study_type = ifelse(is_empty(fromJSON(content(GET(new_lsms$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name), NA_character_,
-                                 fromJSON(content(GET(new_lsms$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$series_statement$series_name),
-             data_kind = ifelse(is_empty(fromJSON(content(GET(new_lsms$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$data_kind), NA_character_,
-                                fromJSON(content(GET(new_lsms$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$data_kind),
-             unit_of_analysis = ifelse(is_empty(fromJSON(content(GET(new_lsms$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$analysis_unit), NA_character_,
-                                       fromJSON(content(GET(new_lsms$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$study_info$analysis_unit))
-    
-    ### authoring entity detail - special case b/c sometimes there are two variables in the metadata, and sometimes just one
-    if (is_empty(fromJSON(content(GET(new_lsms$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$authoring_entity)==TRUE) {
-      # case when metadata field is empty
-      study <- study |> mutate(authoring_entity_detail = NA)
-      
-    } else if ("affiliation" %in% names(as_tibble(fromJSON(content(GET(new_lsms$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$authoring_entity))==FALSE) {
-      # case when there is only a "name" available
-      study <- study |> mutate(authoring_entity_detail = fromJSON(content(GET(new_lsms$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$authoring_entity |> 
-                                 as_tibble() %>%
-                                 # need to use magrittr pipe for the period syntax to work
-                                 mutate(across(everything(), ~str_squish(.))) |> 
-                                 summarise(authoring_entity_detail = paste0(name, collapse = ", ")) |> 
-                                 pull())
-    } else {
-      study <- study |> mutate(authoring_entity_detail = ifelse(is_empty(fromJSON(content(GET(new_lsms$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$authoring_entity),
-                                                                NA_character_,
-                                                                fromJSON(content(GET(new_lsms$api_call[i]), "text"), flatten = TRUE)$dataset$metadata$study_desc$authoring_entity |> 
-                                                                  as_tibble() %>%
-                                                                  # need to use magrittr pipe for the period syntax to work
-                                                                  mutate(across(everything(), ~str_squish(.)))  %>%
-                                                                  mutate(authoring_entity = ifelse("affiliation" %in% names(.) & affiliation!="", paste0(name, " (", affiliation, ")"), name)) |> 
-                                                                  # remove empty rows
-                                                                  filter(authoring_entity!="") |> 
-                                                                  summarise(authoring_entity = paste0(authoring_entity, collapse = ", ")) |> 
-                                                                  pull()))
-    }
-  }
-  
-  # Append to dataset
-  all_wb_metadata_new <- all_wb_metadata %>%
-    bind_rows(study |> select(-length))
-}
+# metadata for new studies is appended to the cache. Each study's metadata is fetched once.
+# (Previously every field made its own API call, each iteration overwrote the result so only the
+# last new study was kept, and an empty new_lsms made 1:nrow() loop over 1 and 0.)
+# one API call per study: nada_metadata_for() in 00_settings.R (shared with 07_IHSN.R)
+new_wb_metadata <- nada_metadata_for(new_lsms$id, new_lsms$api_call)
+
+all_wb_metadata_new <- all_wb_metadata |>
+  bind_rows(new_wb_metadata)
 
 # export updated metadata
 saveRDS(all_wb_metadata_new, file = "Input/all_wb_metadata.rds")
@@ -193,97 +151,52 @@ lsms <- lsms_raw %>%
   # Keep relevant variables
   select(id, idno, country = nation, iso3c, year, instrument_name = title, instrument_type, status, source, study_type, authoring_entity, repositoryid, data_kind, unit_of_analysis, authoring_entity_detail)
 
+# Drop phone, refugee and impact evaluation collections, and studies that the shared drop rules
+# (classify_by_rules() in 00_settings.R, rules "A") identify as monitoring/evaluation/opinion/project etc.
+# Studies in the LSMS collection itself are always kept.
+lsms <- lsms |>
+  mutate(wb_rule = classify_by_rules(instrument_name, study_type, data_kind)$rule) |>
+  filter(!repositoryid %in% c("hfps", "unhcr", "impact_evaluation"),
+         repositoryid == "lsms" | !startsWith(wb_rule, "A")) |>
+  select(-wb_rule)
+
 # export the clean dataset
 openxlsx::write.xlsx(lsms, "Output/instrument_data_all_years/lsms.xlsx")
 
+
 ################ ILO HIES data ################
 
-# API call, add additional variables
-ilo_hies <- fromJSON(content(GET("https://www.ilo.org/surveyLib/index.php/api/catalog",
-                                 query = list(ps=10000, repo="HIES")), "text"))$result$rows |>
-  as_tibble() |> 
-  mutate(iso3c = countrycode::countrycode(nation, "country.name", "iso3c"),
-         iso3c = case_when(nation == "Kosovo" ~ "XKX", TRUE ~ iso3c),
-         status="completed",
-         source="https://www.ilo.org/surveyLib/index.php/api/catalog",
-         instrument_type = "HIES") |> 
-  # filter for OGDI years (2012/13-present)
-  rename(year = year_end) |> 
-  filter(year >= 2013) |> 
-  mutate(year = as.numeric(year)) |> 
-  select(id, idno, instrument_name = title, country=nation, iso3c, instrument_type, year, repo_title, repositoryid, type, authoring_entity, status, source)
+# The ILO Survey Catalogue (www.ilo.org/surveyLib) was retired in 2026 ("410 Gone").
+# 1. Snapshot: the ILO HIES surveys that were kept in hies.xlsx in Oct 2025, i.e. after the manual
+#    duplicate checks against LSMS (Output/misc_data/hies_additional_ilo_data*.xlsx/csv).
+# 2. ILOSTAT: surveys ILOSTAT tags as "HIES - ..." for any country-year not already covered.
 
-################ checking for duplicates and combining ILO and LSMS data ################
-
-# extract beginning of IDNO for both to merge on
+# extract beginning of IDNO to compare LSMS and ILO studies
 lsms <- lsms |> mutate(short_idno = str_extract(idno, ".+?(?=_(v|V)\\d)"))
-ilo_hies <- ilo_hies |> mutate(short_idno = str_extract(idno, ".+(?=_(v|V)\\d)"))
 
-# look at overlap by short id
-lsms |> select(id, short_idno, instrument_name, country, year, authoring_entity) |>
-  left_join(ilo_hies |> select(id, instrument_name, country, short_idno, year, authoring_entity), by=c("short_idno", "year", "country")) |> 
-  filter(!is.na(id.y) & instrument_name.x!=instrument_name.y) |> 
-  select(country, year, instrument_name_lsms = instrument_name.x, instrument_name_ilo = instrument_name.y, authoring_entity_lsms = authoring_entity.x, authoring_entity_ilo=authoring_entity.y)
+ilo_hies <- read_csv("Input/ilo_hies_snapshot_2025.csv", show_col_types = FALSE,
+                     col_types = cols(.default = "c", id = "d", year = "d")) |>
+  # an LSMS study added since Oct 2025 may be the same survey: drop the ILO row (same short IDNO and year)
+  anti_join(lsms |> filter(!is.na(short_idno)) |> select(short_idno, year), by = c("short_idno", "year"))
 
-# overlap by shortid with same instrument name
-shortidno_overlap <- lsms |> select(id, short_idno, instrument_name, country, year) |>
-  left_join(ilo_hies |> select(id, instrument_name, country, short_idno, year), by=c("short_idno", "year", "country")) |> 
-  filter(!is.na(id.y) & instrument_name.x==instrument_name.y) |> 
-  pull(short_idno)
+hies_all <- lsms |>
+  bind_rows(ilo_hies)
 
-# look at countries that have data in ILO but not LSMS
-ilo_countries <- setdiff(ilo_hies$iso3c, lsms$iso3c)
+# ILOSTAT HIES sources, one row per country, survey and year
+ilostat_hies <- ilostat_sources() |>
+  filter(source_type == "HIES", !is.na(iso3c)) |>
+  distinct(country = ref_area.label, iso3c, survey = str_remove(source.label, "^HIES - "), year = as.numeric(time)) |>
+  # only add country-years that LSMS or the ILO snapshot do not already have
+  anti_join(hies_all |> distinct(iso3c, year), by = c("iso3c", "year")) |>
+  mutate(instrument_name = str_c(survey, " ", year),
+         instrument_type = "HIES",
+         status = "completed",
+         source = "https://ilostat.ilo.org/data/",
+         type = "ILOSTAT source") |>
+  select(-survey)
 
-# grab ILO data for those countries not in LSMS, and bind together in new HIES dataset
-hies_all <- ilo_hies |> filter(iso3c %in% ilo_countries) |> 
-  mutate(id = as.numeric(id)) |> 
-  bind_rows(lsms)
-
-# filter ilo dataframe for those remaining for manual checking
-ilo_hies_filtered <- ilo_hies |> filter(!(iso3c %in% ilo_countries) & !(short_idno %in% shortidno_overlap))
-
-######################
-# export the remaining ILO data to do assessment of duplicates manually on google sheets
-# xlsx::write.xlsx(ilo_hies_filtered |> select(id, idno, country, year, instrument_name, 
-#                                              instrument_type, repositoryid, authoring_entity), 
-#                  "Output/misc_data/hies_additional_ilo_data.xlsx")
-
-# # create dataframe with ILO and LSMS data, with country year matches specified
-# ilo_hies_filtered_new <- ilo_hies_filtered |> select(id_ilo=id, country, year, instrument_name_ilo=instrument_name, instrument_type_ilo=instrument_type, authoring_entity_ilo=authoring_entity) %>%
-#   left_join(lsms |> select(id_lsms=id, country, year, instrument_name_lsms=instrument_name, instrument_type_lsms=instrument_type, authoring_entity_lsms=authoring_entity), ., by=c("year", "country")) |>
-#   select(id_ilo, id_lsms, country, year, instrument_name_ilo, instrument_name_lsms,
-#          instrument_type_ilo, instrument_type_lsms, authoring_entity_ilo, authoring_entity_lsms) |>
-#   mutate(country_yr_match = ifelse(!is.na(id_lsms) & !is.na(id_ilo), 1, 0))
-
-# read in checked dataframe with my classification/notes, merge with above dataframe so we have LSMS and ILO data
-# this exports the country-year matches to a CSV file
-# readxl::read_xlsx("Output/misc_data/hies_additional_ilo_data_checked.xlsx") |>
-#   select(id, instrument_name, `name diff from LSMS data?`:possible_duplicate) %>%
-#   left_join(ilo_hies_filtered_new, ., by=c("id_ilo" = "id", "instrument_name_ilo" = "instrument_name")) |>
-#   filter(!is.na(`name diff from LSMS data?`)) |>
-#   write_csv("Output/misc_data/hies_country_yr_matches.csv")
-######################
-
-# read in country year matches between ILO and LSMS data that has been checked for duplicates
-ilo_country_yr_matches_checked <- read_csv("Output/misc_data/hies_additional_ilo_data.xlsx - country_yr_matches.csv", show_col_types = F)
-
-# filter above to only include non-duplicates, grab distinct ILO IDs to bind onto hies_all dataframe
-ilo_not_duplicate_ids <- ilo_country_yr_matches_checked |> filter(final_duplicate_flag==0) |> select(id_ilo) |> distinct() |> pull()
-
-# bind those rows that are not duplicates onto the hies_all dataframe
-hies_all <- ilo_hies_filtered |> filter(id %in% ilo_not_duplicate_ids) |> 
-  mutate(id = as.numeric(id)) %>% 
-  bind_rows(hies_all, .)
-
-# update ilo dataframe for those remaining that didn't have a country-yr match / haven't added to the hies_all dataframe
-ilo_hies_filtered <- ilo_hies_filtered |> filter(!(id %in% ilo_country_yr_matches_checked$id_ilo))
-
-# checked manually in Google sheets, none are suspected duplicates, so we can add them into the hies_all df
-# see sheet 3 of https://docs.google.com/spreadsheets/d/1WxHgcohiy6EWjeBoIpAxj4xHq-FkA3NP/edit#gid=262908178&fvid=1823687230
-# sheet is titled "not_country_yr_matches"
-hies_all <- ilo_hies_filtered |> 
-  mutate(id = as.numeric(id)) %>% 
-  bind_rows(hies_all, .)
+hies_all <- hies_all |>
+  bind_rows(ilostat_hies)
 
 # export combined data to excel
-openxlsx::write.xlsx(hies_all, "Output/instrument_data_all_years/hies.xlsx")
+writexl::write_xlsx(hies_all, "Output/instrument_data_all_years/hies.xlsx")

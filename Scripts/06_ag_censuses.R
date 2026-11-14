@@ -89,11 +89,13 @@ df_clean <- df |>
          ),
   # Create iso code. Netherlands Antilles will be without code (no longer exists)
   # And therefore will not have any info on lending groups and regions
-  iso3c = countrycode::countrycode(countryname, "country.name", "iso3c"),
+  # drop " (USA)" etc. so territories like "Guam (USA)" match
+  iso3c = countrycode::countrycode(str_remove(countryname, " \\([A-Z]+\\)$"), "country.name", "iso3c"),
   iso3c = case_when(
     countryname == "Eswatini" ~ "SWZ",
     countryname == "Kosovo" ~ "XKX",
     countryname == "Saint-Martin" ~ "MAF",
+    countryname == "Naoero" ~ "NRU",
     TRUE ~ iso3c
   ),
   did_agcensus_take_place = case_when(
@@ -107,3 +109,69 @@ df_clean <- df |>
 
 # Save copy of census scrape to load into main instrument inventory
 saveRDS(df_clean, file = "Input/ag_census_df.rds")
+
+# Instrument inventory file for 10_combine_instruments.R ---------------------
+# Replaces the hand-made 2021 list (Input/wca_2020_2010_notes.csv) used in instrument_inventory_master.R.
+# One row per census: cells listing several censuses in a round ("2016 & 2020 & 2025",
+# "2005/06 & 2010/11") are split, and each census is placed in its end year
+# ("2024/25" -> 2025, "2022-2024" -> 2024), like multi-year surveys elsewhere.
+census_end_year <- function(x) {
+  start <- as.numeric(str_extract(x, "[0-9]{4}"))
+  # trailing year after "/" or "-": two digits ("/25") or four digits ("-2024")
+  end <- str_match(x, "[0-9]{4}\\s*[-/]\\s*([0-9]{2,4})(?![0-9])")[, 2]
+  case_when(
+    is.na(end) ~ start,
+    nchar(end) == 4 ~ as.numeric(end),
+    TRUE ~ floor(start / 100) * 100 + as.numeric(end)
+  )
+}
+
+# WCA 2020 round (2016-2025): use FAO's WCA 2020 page, which has more detail than the status page
+# (core vs supplementary modules, agricultural modules in population censuses, Kenya 2019).
+wca2020_url <- "https://www.fao.org/world-census-agriculture/wca-round/wca-round-2020/en"
+wca2020 <- httr::GET(wca2020_url, httr::user_agent("Mozilla/5.0")) |>
+  httr::content("text", encoding = "UTF-8") |>
+  read_html() |>
+  html_table(fill = TRUE) |>
+  map_dfr(\(t) t |> select(country = 1, date = 2) |> mutate(across(everything(), as.character))) |>
+  mutate(date = str_squish(date)) |>
+  filter(date != "") |>
+  mutate(iso3c = countrycode::countrycode(str_remove(country, " \\([A-Z]+\\)$"), "country.name", "iso3c", warn = FALSE),
+         iso3c = case_when(country == "Kosovo" ~ "XKX", country == "Saint-Martin" ~ "MAF", country == "Naoero" ~ "NRU", TRUE ~ iso3c),
+         ag_census_round = "2020")
+stopifnot(nrow(wca2020) > 100, !anyNA(wca2020$iso3c))
+
+# Counting rules for the 2020 round:
+# - core module + supplementary module(s) = one census, dated by the core module
+# - agricultural module in a population and housing census counts as the census
+# - several full censuses in the round count separately (e.g. Viet Nam 2016, 2020 mid-term, 2025)
+year_token <- "[0-9]{4}(\\s*[-/]\\s*[0-9]{2,4}(?![0-9]))?"
+wca2020_censuses <- wca2020 |>
+  mutate(clean = date |>
+           str_remove_all("Supplementary module\\(s\\)\\s*[0-9/\\- ]+") |>
+           str_remove_all("\\([^)]*\\)"),
+         census_date = str_extract_all(clean, year_token)) |>
+  select(-clean) |>
+  unnest_longer(census_date) |>
+  filter(!is.na(census_date))
+
+ag_census_inventory <- df_clean |>
+  # status page for the other rounds
+  filter(ag_census_round %in% c("2010", "2030"), !is.na(date), date != "") |>
+  separate_longer_delim(date, delim = "&") |>
+  mutate(census_date = str_squish(date)) |>
+  bind_rows(wca2020_censuses) |>
+  mutate(year = census_end_year(census_date)) |>
+  filter(!is.na(year)) |>
+  mutate(instrument_name = "Agriculture Census",
+         instrument_type = "Agricultural Survey/Census",
+         # the FAO page lists conducted and scheduled censuses together
+         status = if_else(year < as.numeric(format(Sys.Date(), "%Y")), "Completed", "Planned"),
+         source = if_else(ag_census_round == "2020", wca2020_url, ag_census),
+         census_round = ag_census_round) |>
+  # date keeps FAO's full text, census_date the part this row counts
+  select(country, iso3c, year, census_date, date, status, instrument_name, instrument_type, source, census_round) |>
+  distinct() |>
+  arrange(country, year)
+
+writexl::write_xlsx(ag_census_inventory, "Output/instrument_data_all_years/ag_census.xlsx")
