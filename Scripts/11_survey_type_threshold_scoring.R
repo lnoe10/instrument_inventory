@@ -100,7 +100,7 @@ survey_country |>
   filter(is.null(odin_codes) | country_code %in% odin_codes) |>
   arrange(country, indicator_name) |>
   select(country, country_code, indicator_name, number_of_surveys, percent_complete, standard, region, ida) |>
-  write_csv(str_c("Output/survey counts all countries ", date_label, ".csv"), na = "")
+  write_csv(str_c("Output/survey counts ", if (is.null(odin_codes)) "all countries " else "ODIN countries ", date_label, ".csv"), na = "")
 
 # 2. Clearinghouse table: IDA countries, plus regional averages over IDA countries only
 survey_ida <- survey_country |> filter(ida)

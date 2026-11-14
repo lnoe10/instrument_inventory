@@ -165,5 +165,16 @@ census <- readRDS("Input/census_dates_df.rds") |>
 #census_final <- census_final |> mutate(updated_status = ifelse(is.na(updated_status) & !is.na(status), status, updated_status)) |> 
 #  select(-status) |> rename(status = updated_status, status_note = updated_status_note)
 
+# Manual additions: censuses missing from the UNSD census dates list
+# Kosovo is not a UN member and not listed by UNSD; its Population and Housing Census was held in 2024
+# (Kosovo Agency of Statistics), in the 2020 round.
+census_manual <- tibble(country = "Kosovo", iso3c = "XKX", year = 2024, status = "Complete",
+                        instrument_name = "Population Census", instrument_type = "Census",
+                        source = "https://ask.rks-gov.net/ (manual addition, not in UNSD census dates)",
+                        census_round = "2020", date = "2024") |>
+  mutate(year = as(year, class(census$year)), census_round = as(census_round, class(census$census_round)))
+census <- census |>
+  bind_rows(census_manual |> anti_join(census, by = c("iso3c", "census_round")))
+
 # export census dataset
 writexl::write_xlsx(census, "Output/instrument_data_all_years/census.xlsx")
