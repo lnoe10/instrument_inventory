@@ -69,11 +69,21 @@ survey_scores <- counted_instruments |>
 # Export data for clearinghouse - Country level
 survey_country <- survey_scores |>
   mutate(indicator_value_raw = pmin(indicator_value_raw, 10)) |>
-  # World Bank regions (same classification file as the IDA list); used for the IDA regional averages
+  # UN M49 regions (Africa, Americas, Asia, Europe, Oceania); used for the IDA regional averages.
+  # Kosovo, Taiwan and the Netherlands Antilles have no M49 code and are assigned by hand.
+  left_join(unsd_codes |> select(country_code = iso_alpha3_code, region = region_name),
+            by = "country_code") |>
+  mutate(region = case_when(
+    country_code == "ANT" ~ "Americas",
+    country_code == "TWN" ~ "Asia",
+    country_code == "XKX" ~ "Europe",
+    TRUE ~ region
+  )) |>
+  # World Bank regions, for reference in the ODIN table
   left_join(readr::read_csv(WB_CLASSIFICATION_FILE, show_col_types = FALSE) |>
               janitor::clean_names() |>
               filter(!is.na(region)) |>
-              select(country_code = code, region),
+              select(country_code = code, wb_region = region),
             by = "country_code") |>
   mutate(country = countrycode::countrycode(country_code, "iso3c", "country.name"),
   country = case_when(
@@ -81,7 +91,7 @@ survey_country <- survey_scores |>
     country_code == "ANT" ~ "Netherlands Antilles",
     TRUE ~ country
   )) |>
-  select(country, country_code, indicator_name, number_of_surveys = indicator_value_raw, percent_complete = indicator_score, standard, region)
+  select(country, country_code, indicator_name, number_of_surveys = indicator_value_raw, percent_complete = indicator_score, standard, region, wb_region)
 
 # Country cuts: the only place countries are removed (COUNTRY_EXCLUDE in 00_settings.R).
 survey_country <- survey_country |>
@@ -99,7 +109,7 @@ date_label <- format(Sys.Date(), "%b %d %Y")
 survey_country |>
   filter(is.null(odin_codes) | country_code %in% odin_codes) |>
   arrange(country, indicator_name) |>
-  select(country, country_code, indicator_name, number_of_surveys, percent_complete, standard, region, ida) |>
+  select(country, country_code, indicator_name, number_of_surveys, percent_complete, standard, region, wb_region, ida) |>
   write_csv(str_c("Output/survey counts ", if (is.null(odin_codes)) "all countries " else "ODIN countries ", date_label, ".csv"), na = "")
 
 # 2. Clearinghouse table: IDA countries, plus regional averages over IDA countries only
@@ -113,7 +123,7 @@ survey_region <- survey_ida |>
   select(country = region, indicator_name, number_of_surveys, percent_complete, standard)
 
 survey_ida |>
-  select(-region, -ida) |>
+  select(-region, -wb_region, -ida) |>
   bind_rows(survey_region) |>
   arrange(country, indicator_name) |>
   select(country, country_code, indicator_name, number_of_surveys, percent_complete, standard) |>
