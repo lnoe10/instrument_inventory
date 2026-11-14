@@ -5,24 +5,6 @@ Afghanistan,AFG,Household Income and Expenditure Survey,1,50,2
 Afghanistan,AFG,Labour Force Survey,2,20,10
 Afghanistan,AFG,Population Census,0,0,1
 Afghanistan,AFG,Time Use Survey,1,50,2
-Africa,,Agricultural Survey/Census,2,100,2
-Africa,,Household Health Survey,2,50,4
-Africa,,Household Income and Expenditure Survey,2,100,2
-Africa,,Labour Force Survey,2,20,10
-Africa,,Population Census,1,100,1
-Africa,,Time Use Survey,0,0,2
-Americas,,Agricultural Survey/Census,0,0,2
-Americas,,Household Health Survey,1,25,4
-Americas,,Household Income and Expenditure Survey,0,0,2
-Americas,,Labour Force Survey,3,30,10
-Americas,,Population Census,1,100,1
-Americas,,Time Use Survey,0,0,2
-Asia,,Agricultural Survey/Census,1,50,2
-Asia,,Household Health Survey,2,50,4
-Asia,,Household Income and Expenditure Survey,2,100,2
-Asia,,Labour Force Survey,3,30,10
-Asia,,Population Census,1,100,1
-Asia,,Time Use Survey,0,0,2
 Bangladesh,BGD,Agricultural Survey/Census,1,50,2
 Bangladesh,BGD,Household Health Survey,5,100,4
 Bangladesh,BGD,Household Income and Expenditure Survey,1,50,2
@@ -125,6 +107,12 @@ Dominica,DMA,Household Income and Expenditure Survey,0,0,2
 Dominica,DMA,Labour Force Survey,0,0,10
 Dominica,DMA,Population Census,1,100,1
 Dominica,DMA,Time Use Survey,0,0,2
+East Asia & Pacific,,Agricultural Survey/Census,1,50,2
+East Asia & Pacific,,Household Health Survey,1,25,4
+East Asia & Pacific,,Household Income and Expenditure Survey,1,50,2
+East Asia & Pacific,,Labour Force Survey,1,10,10
+East Asia & Pacific,,Population Census,1,100,1
+East Asia & Pacific,,Time Use Survey,0,0,2
 Eritrea,ERI,Agricultural Survey/Census,0,0,2
 Eritrea,ERI,Household Health Survey,0,0,4
 Eritrea,ERI,Household Income and Expenditure Survey,0,0,2
@@ -143,12 +131,12 @@ Ethiopia,ETH,Household Income and Expenditure Survey,3,100,2
 Ethiopia,ETH,Labour Force Survey,1,10,10
 Ethiopia,ETH,Population Census,0,0,1
 Ethiopia,ETH,Time Use Survey,0,0,2
-Europe,,Agricultural Survey/Census,0,0,2
-Europe,,Household Health Survey,1,25,4
-Europe,,Household Income and Expenditure Survey,0,0,2
-Europe,,Labour Force Survey,9,90,10
-Europe,,Population Census,0,0,1
-Europe,,Time Use Survey,0,0,2
+Europe & Central Asia,,Agricultural Survey/Census,0,0,2
+Europe & Central Asia,,Household Health Survey,2,50,4
+Europe & Central Asia,,Household Income and Expenditure Survey,2,100,2
+Europe & Central Asia,,Labour Force Survey,5,50,10
+Europe & Central Asia,,Population Census,1,100,1
+Europe & Central Asia,,Time Use Survey,0,0,2
 Fiji,FJI,Agricultural Survey/Census,1,50,2
 Fiji,FJI,Household Health Survey,1,25,4
 Fiji,FJI,Household Income and Expenditure Survey,0,0,2
@@ -233,6 +221,12 @@ Laos,LAO,Household Income and Expenditure Survey,1,50,2
 Laos,LAO,Labour Force Survey,2,20,10
 Laos,LAO,Population Census,1,100,1
 Laos,LAO,Time Use Survey,0,0,2
+Latin America & Caribbean,,Agricultural Survey/Census,1,50,2
+Latin America & Caribbean,,Household Health Survey,1,25,4
+Latin America & Caribbean,,Household Income and Expenditure Survey,0,0,2
+Latin America & Caribbean,,Labour Force Survey,3,30,10
+Latin America & Caribbean,,Population Census,1,100,1
+Latin America & Caribbean,,Time Use Survey,0,0,2
 Lesotho,LSO,Agricultural Survey/Census,2,100,2
 Lesotho,LSO,Household Health Survey,2,50,4
 Lesotho,LSO,Household Income and Expenditure Survey,1,50,2
@@ -287,6 +281,12 @@ Micronesia (Federated States of),FSM,Household Income and Expenditure Survey,0,0
 Micronesia (Federated States of),FSM,Labour Force Survey,0,0,10
 Micronesia (Federated States of),FSM,Population Census,1,100,1
 Micronesia (Federated States of),FSM,Time Use Survey,0,0,2
+"Middle East, North Africa, Afghanistan & Pakistan",,Agricultural Survey/Census,0,0,2
+"Middle East, North Africa, Afghanistan & Pakistan",,Household Health Survey,1,25,4
+"Middle East, North Africa, Afghanistan & Pakistan",,Household Income and Expenditure Survey,1,50,2
+"Middle East, North Africa, Afghanistan & Pakistan",,Labour Force Survey,1,10,10
+"Middle East, North Africa, Afghanistan & Pakistan",,Population Census,1,100,1
+"Middle East, North Africa, Afghanistan & Pakistan",,Time Use Survey,0,0,2
 Mozambique,MOZ,Agricultural Survey/Census,0,0,2
 Mozambique,MOZ,Household Health Survey,2,50,4
 Mozambique,MOZ,Household Income and Expenditure Survey,2,100,2
@@ -323,12 +323,6 @@ Nigeria,NGA,Household Income and Expenditure Survey,5,100,2
 Nigeria,NGA,Labour Force Survey,6,60,10
 Nigeria,NGA,Population Census,0,0,1
 Nigeria,NGA,Time Use Survey,0,0,2
-Oceania,,Agricultural Survey/Census,1,50,2
-Oceania,,Household Health Survey,1,25,4
-Oceania,,Household Income and Expenditure Survey,1,50,2
-Oceania,,Labour Force Survey,1,10,10
-Oceania,,Population Census,2,100,1
-Oceania,,Time Use Survey,0,0,2
 Pakistan,PAK,Agricultural Survey/Census,1,50,2
 Pakistan,PAK,Household Health Survey,3,75,4
 Pakistan,PAK,Household Income and Expenditure Survey,5,100,2
@@ -377,6 +371,12 @@ Somalia,SOM,Household Income and Expenditure Survey,1,50,2
 Somalia,SOM,Labour Force Survey,1,10,10
 Somalia,SOM,Population Census,0,0,1
 Somalia,SOM,Time Use Survey,0,0,2
+South Asia,,Agricultural Survey/Census,2,100,2
+South Asia,,Household Health Survey,2,50,4
+South Asia,,Household Income and Expenditure Survey,1,50,2
+South Asia,,Labour Force Survey,5,50,10
+South Asia,,Population Census,1,100,1
+South Asia,,Time Use Survey,1,50,2
 South Sudan,SSD,Agricultural Survey/Census,0,0,2
 South Sudan,SSD,Household Health Survey,0,0,4
 South Sudan,SSD,Household Income and Expenditure Survey,0,0,2
@@ -401,6 +401,12 @@ St. Vincent & Grenadines,VCT,Household Income and Expenditure Survey,0,0,2
 St. Vincent & Grenadines,VCT,Labour Force Survey,0,0,10
 St. Vincent & Grenadines,VCT,Population Census,1,100,1
 St. Vincent & Grenadines,VCT,Time Use Survey,0,0,2
+Sub-Saharan Africa,,Agricultural Survey/Census,2,100,2
+Sub-Saharan Africa,,Household Health Survey,2,50,4
+Sub-Saharan Africa,,Household Income and Expenditure Survey,2,100,2
+Sub-Saharan Africa,,Labour Force Survey,2,20,10
+Sub-Saharan Africa,,Population Census,1,100,1
+Sub-Saharan Africa,,Time Use Survey,0,0,2
 Sudan,SDN,Agricultural Survey/Census,0,0,2
 Sudan,SDN,Household Health Survey,1,25,4
 Sudan,SDN,Household Income and Expenditure Survey,0,0,2

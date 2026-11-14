@@ -69,15 +69,13 @@ survey_scores <- counted_instruments |>
 # Export data for clearinghouse - Country level
 survey_country <- survey_scores |>
   mutate(indicator_value_raw = pmin(indicator_value_raw, 10)) |>
-  left_join(unsd_codes |> select(country_code = iso_alpha3_code, region = region_name),
+  # World Bank regions (same classification file as the IDA list); used for the IDA regional averages
+  left_join(readr::read_csv(WB_CLASSIFICATION_FILE, show_col_types = FALSE) |>
+              janitor::clean_names() |>
+              filter(!is.na(region)) |>
+              select(country_code = code, region),
             by = "country_code") |>
-  mutate(region = case_when(
-    country_code == "ANT" ~ "Americas",
-    country_code == "TWN" ~ "Asia",
-    country_code == "XKX" ~ "Europe",
-    TRUE ~ region
-  ),
-  country = countrycode::countrycode(country_code, "iso3c", "country.name"),
+  mutate(country = countrycode::countrycode(country_code, "iso3c", "country.name"),
   country = case_when(
     country_code == "XKX" ~ "Kosovo",
     country_code == "ANT" ~ "Netherlands Antilles",
@@ -109,7 +107,8 @@ survey_ida <- survey_country |> filter(ida)
 
 survey_region <- survey_ida |>
   group_by(indicator_name, region, standard) |>
-  summarize(number_of_surveys = round(mean(number_of_surveys, na.rm = TRUE), 0), .groups = "drop") |>
+  # round halves up (R's round() rounds 0.5 to 0 and 2.5 to 2)
+  summarize(number_of_surveys = floor(mean(number_of_surveys, na.rm = TRUE) + 0.5), .groups = "drop") |>
   mutate(percent_complete = pmin(number_of_surveys / standard * 100, 100)) |>
   select(country = region, indicator_name, number_of_surveys, percent_complete, standard)
 
