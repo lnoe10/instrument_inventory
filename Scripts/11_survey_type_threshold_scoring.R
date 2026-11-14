@@ -125,6 +125,9 @@ survey_region <- survey_ida |>
 survey_ida |>
   select(-region, -wb_region, -ida) |>
   bind_rows(survey_region) |>
+  # clearinghouse display name; the label stays "Agricultural Survey/Census" everywhere else
+  mutate(indicator_name = if_else(indicator_name == "Agricultural Survey/Census",
+                                  "Agricultural Survey/Ag Census", indicator_name)) |>
   arrange(country, indicator_name) |>
   select(country, country_code, indicator_name, number_of_surveys, percent_complete, standard) |>
   write_csv(str_c("Output/survey counts for clearinghouse ", date_label, ".csv"), na = "")
